@@ -52,6 +52,48 @@ const plugins = [
       },
     },
   },
+  {
+    resolve: `medusa-file-spaces`,
+    options: {
+        spaces_url: process.env.SPACE_URL,
+        bucket: process.env.SPACE_BUCKET,
+        endpoint: process.env.SPACE_ENDPOINT,
+        access_key_id: process.env.SPACE_ACCESS_KEY_ID,
+        secret_access_key: process.env.SPACE_SECRET_ACCESS_KEY,
+    },
+  },
+  {
+    resolve: `medusa-plugin-meilisearch`,
+    options: {
+      config: {
+        host: process.env.MEILISEARCH_HOST,
+        apiKey: process.env.MEILISEARCH_API_KEY,
+      },
+      settings: {
+        products: {
+          indexSettings: {
+            searchableAttributes: [
+              "title",
+              "description",
+              "variant_sku",
+            ],
+            displayedAttributes: [
+              "title",
+              "description",
+              "variant_sku",
+              "thumbnail",
+              "handle",
+            ],
+          },
+          primaryKey: "id",
+          transform: (product) => ({
+            id: product.id,
+            // other attributes...
+          }),
+        },
+      },
+    },
+  },
 ];
 
 const modules = {
