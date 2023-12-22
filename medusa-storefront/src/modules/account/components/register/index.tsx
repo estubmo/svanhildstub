@@ -50,10 +50,10 @@ const Register = () => {
         </div>
       )}
       <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
+        Become a Member
       </h1>
       <p className="text-center text-base-regular text-ui-tag-neutral-text mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
+        Create your profile, and get access to an enhanced
         shopping experience.
       </p>
       <form className="w-full flex flex-col" onSubmit={onSubmit}>
@@ -100,7 +100,7 @@ const Register = () => {
           </div>
         )}
         <span className="text-center text-ui-tag-neutral-text text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
+          By creating an account, you agree to the website&apos;s{" "}
           <Link href="/content/privacy-policy" className="underline">
             Privacy Policy
           </Link>{" "}

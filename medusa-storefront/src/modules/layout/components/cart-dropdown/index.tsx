@@ -2,7 +2,8 @@ import { Popover, Transition } from "@headlessui/react"
 import { useCartDropdown } from "@lib/context/cart-dropdown-context"
 import { useStore } from "@lib/context/store-context"
 import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items"
-import { Button } from "@medusajs/ui"
+import { ShoppingCart } from "@medusajs/icons"
+import { Button, IconButton } from "@medusajs/ui"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import Trash from "@modules/common/icons/trash"
@@ -18,14 +19,23 @@ const CartDropdown = () => {
   const { state, open, close } = useCartDropdown()
 
   return (
-    <div className="h-full z-50" onMouseEnter={open} onMouseLeave={close}>
-      <Popover className="relative h-full">
-        <Popover.Button className="h-full">
-          <Link
-            className="hover:text-ui-fg-base"
-            href="/cart"
-          >{`Cart (${totalItems})`}</Link>
-        </Popover.Button>
+    <div className="z-50">
+      <Popover
+        className="relative h-full"
+        onMouseEnter={open}
+        onMouseLeave={close}
+      >
+        <IconButton className="overflow-visible">
+          <Link href="/cart">
+            <ShoppingCart />
+            {totalItems > 0 && (
+            <div className="absolute flex justify-center items-center right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white">
+              {totalItems <= 99 ? totalItems : <span className="text-[7px]">99+</span>}
+            </div>)}
+
+            {/* {`Cart (${totalItems})`} */}
+          </Link>
+        </IconButton>
         <Transition
           show={state}
           as={Fragment}
@@ -38,7 +48,7 @@ const CartDropdown = () => {
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-ui-bg-base border-x border-b w-[382px] text-ui-fg-base"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-ui-bg-base border w-[382px] text-ui-fg-base"
           >
             <div className="p-4 flex items-center justify-center">
               <h3 className="text-large-semi">Cart</h3>

@@ -84,7 +84,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
                 <Listbox.Option
                   key={address.id}
                   value={address.id}
-                  className="cursor-default select-none relative pl-6 pr-10 hover:bg-gray-50 py-4"
+                  className="cursor-default select-none relative pl-6 pr-10 hover:bg-ui-bg-field-hover py-4"
                 >
                   <div className="flex gap-x-4 items-start">
                     <Radio checked={selected === address.id} />

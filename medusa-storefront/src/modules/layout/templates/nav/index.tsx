@@ -35,7 +35,7 @@ const Nav = () => {
               href="/"
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
             >
-              Medusa Store
+             Svanhild Stub
             </Link>
           </div>
 
