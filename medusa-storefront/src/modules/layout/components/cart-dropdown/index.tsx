@@ -25,13 +25,18 @@ const CartDropdown = () => {
         onMouseEnter={open}
         onMouseLeave={close}
       >
-        <IconButton className="overflow-visible">
+        <IconButton asChild className="overflow-visible">
           <Link href="/cart">
             <ShoppingCart />
             {totalItems > 0 && (
-            <div className="absolute flex justify-center items-center right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white">
-              {totalItems <= 99 ? totalItems : <span className="text-[7px]">99+</span>}
-            </div>)}
+              <div className="absolute flex justify-center items-center right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white">
+                {totalItems <= 99 ? (
+                  totalItems
+                ) : (
+                  <span className="text-[7px]">99+</span>
+                )}
+              </div>
+            )}
 
             {/* {`Cart (${totalItems})`} */}
           </Link>
