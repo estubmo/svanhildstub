@@ -1,11 +1,10 @@
-import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
-import Modal from "@modules/common/components/modal"
-import Search from "@modules/common/icons/search"
+import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client"
 import { MagnifyingGlassMini } from "@medusajs/icons"
+import Modal from "@modules/common/components/modal"
 import DesktopHit from "@modules/search/components/desktop-hit"
 import DesktopHits from "@modules/search/components/desktop-hits"
 import SearchBox from "@modules/search/components/search-box"
-import { InstantSearch } from "react-instantsearch-hooks-web"
+import { InstantSearch } from "react-instantsearch"
 
 type DesktopSearchModalProps = {
   state: boolean

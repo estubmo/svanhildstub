@@ -1,15 +1,15 @@
+import { getProductsList } from "@lib/data"
 import usePreviews from "@lib/hooks/use-previews"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
 import { StoreGetProductsParams } from "@medusajs/medusa"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
 import { useMemo } from "react"
-import { useInfiniteQuery } from "@tanstack/react-query"
 import ProductPreview from "../product-preview"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import { getProductsList } from "@lib/data"
 
 type RelatedProductsProps = {
   product: PricedProduct
@@ -59,7 +59,9 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
         <span className="text-base-regular text-gray-600 mb-6">
           Related products
         </span>
-        <p className="text-2xl-regular text-gray-900 max-w-lg">
+        <p
+          className="text-2xl-regular text-ui-tag-blue-text max-w-lg"
+        >
           You might also want to check out these products.
         </p>
       </div>

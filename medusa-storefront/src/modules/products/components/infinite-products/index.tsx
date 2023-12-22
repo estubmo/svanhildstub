@@ -5,11 +5,11 @@ import repeat from "@lib/util/repeat"
 import { StoreGetProductsParams } from "@medusajs/medusa"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
+import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
+import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
 import { useEffect, useMemo } from "react"
 import { useInView } from "react-intersection-observer"
-import { useInfiniteQuery } from "@tanstack/react-query"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 export type InfiniteProductsType = {
   params: StoreGetProductsParams
@@ -85,7 +85,7 @@ const InfiniteProducts = ({ params, sortBy }: InfiniteProductsType) => {
           ))}
       </ul>
       <div
-        className="py-16 flex justify-center items-center text-small-regular text-gray-700"
+        className="py-16 flex justify-center items-center text-small-regular text-ui-fg-subtle"
         ref={ref}
       >
         <span ref={ref}></span>

@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server"
 import { notFound } from "next/navigation"
+import { NextRequest, NextResponse } from "next/server"
 
-import { MedusaApp, Modules } from "@medusajs/modules-sdk"
 import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id"
+import { MedusaApp, Modules } from "@medusajs/modules-sdk"
 import { IPricingModuleService } from "@medusajs/types"
 
 /**
@@ -11,47 +11,48 @@ import { IPricingModuleService } from "@medusajs/types"
  * Read more about the Product Module here: https://docs.medusajs.com/modules/products/serverless-module
  */
 export async function GET(request: NextRequest) {
-  const queryParams = Object.fromEntries(request.nextUrl.searchParams)
+    const queryParams = Object.fromEntries(request.nextUrl.searchParams)
 
-  const response = await getProducts(queryParams)
+    const response = await getProducts(queryParams)
 
-  if (!response) {
-    return notFound()
-  }
+    if (!response) {
+        return notFound()
+    }
 
-  return NextResponse.json(response)
+    return NextResponse.json(response)
 }
 
 async function getProducts(params: Record<string, any>) {
-  // Extract the query parameters
-  let { id, limit, offset, currency_code } = params
+    // Extract the query parameters
+    const { id } = params;
+    let { limit, offset, currency_code } = params;
 
-  offset = offset && parseInt(offset)
-  limit = limit && parseInt(limit)
-  currency_code = currency_code && currency_code.toUpperCase()
+    offset = offset && parseInt(offset);
+    limit = limit && parseInt(limit);
+    currency_code = currency_code && currency_code?.toUpperCase();
 
-  // Initialize Remote Query with the Product and Pricing Modules
-  const { query, modules } = await MedusaApp({
-    modulesConfig: {
-      [Modules.PRODUCT]: true,
-      [Modules.PRICING]: true,
-    },
-    sharedResourcesConfig: {
-      database: { clientUrl: process.env.POSTGRES_URL },
-    },
-    injectedDependencies: {},
-  })
+    // Initialize Remote Query with the Product and Pricing Modules
+    const { query, modules } = await MedusaApp({
+        modulesConfig: {
+            [Modules.PRODUCT]: true,
+            [Modules.PRICING]: true,
+        },
+        sharedResourcesConfig: {
+            database: { clientUrl: process.env.POSTGRES_URL },
+        },
+        injectedDependencies: {},
+    })
 
-  // Set the filters for the query
-  const filters = {
-    take: limit || 12,
-    skip: offset || 0,
-    id: id ? [id] : undefined,
-    context: { currency_code },
-  }
+    // Set the filters for the query
+    const filters = {
+        take: limit || 12,
+        skip: offset || 0,
+        id: id ? [id] : undefined,
+        context: { currency_code },
+    }
 
-  // Set the GraphQL query
-  const productsQuery = `#graphql
+    // Set the GraphQL query
+    const productsQuery = `#graphql
     query($filters: Record, $id: String, $take: Int, $skip: Int) {
       products(filters: $filters, id: $id, take: $take, skip: $skip) {
         id
@@ -98,25 +99,25 @@ async function getProducts(params: Record<string, any>) {
       }
     }`
 
-  const {
-    rows: products,
-    metadata: { count },
-  } = await query(productsQuery, filters)
+    const {
+        rows: products,
+        metadata: { count },
+    } = await query(productsQuery, filters)
 
-  // Calculate prices
-  const productsWithPrices = await getPricesByPriceSetId({
-    products,
-    currency_code,
-    pricingService: modules.pricingService as unknown as IPricingModuleService,
-  })
+    // Calculate prices
+    const productsWithPrices = await getPricesByPriceSetId({
+        products,
+        currency_code,
+        pricingService: modules.pricingService as unknown as IPricingModuleService,
+    })
 
-  // Calculate the next page
-  const nextPage = offset + limit
+    // Calculate the next page
+    const nextPage = offset + limit
 
-  // Return the response
-  return {
-    products: productsWithPrices,
-    count: count,
-    nextPage: count > nextPage ? nextPage : null,
-  }
+    // Return the response
+    return {
+        products: productsWithPrices,
+        count: count,
+        nextPage: count > nextPage ? nextPage : null,
+    }
 }

@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from "next/server"
-import { initialize as initializeProductModule } from "@medusajs/product"
-import { ProductDTO } from "@medusajs/types/dist/product"
-import { IPricingModuleService } from "@medusajs/types"
-import { notFound } from "next/navigation"
-import { MedusaApp, Modules } from "@medusajs/modules-sdk"
 import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id"
+import { MedusaApp, Modules } from "@medusajs/modules-sdk"
+import { initialize as initializeProductModule } from "@medusajs/product"
+import { IPricingModuleService } from "@medusajs/types"
+import { ProductDTO } from "@medusajs/types/dist/product"
+import { notFound } from "next/navigation"
+import { NextRequest, NextResponse } from "next/server"
 
 /**
  * This endpoint uses the serverless Product and Pricing Modules to retrieve a category and its products by handle.
@@ -22,7 +22,7 @@ export async function GET(
   const searchParams = Object.fromEntries(request.nextUrl.searchParams)
   const { page, limit } = searchParams
 
-  let { handle: categoryHandle } = params
+  const { handle: categoryHandle } = params
 
   const handle = categoryHandle.map((handle: string, index: number) =>
     categoryHandle.slice(0, index + 1).join("/")
@@ -40,7 +40,7 @@ export async function GET(
         take: handle.length,
       }
     )
-    .catch((e) => {
+    .catch(() => {
       return notFound()
     })
 

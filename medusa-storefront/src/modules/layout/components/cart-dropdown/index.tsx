@@ -38,7 +38,7 @@ const CartDropdown = () => {
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[382px] text-gray-900"
+            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-ui-bg-base border-x border-b w-[382px] text-ui-fg-base"
           >
             <div className="p-4 flex items-center justify-center">
               <h3 className="text-large-semi">Cart</h3>
@@ -88,7 +88,7 @@ const CartDropdown = () => {
                           <div className="flex items-end justify-between text-small-regular flex-1">
                             <div>
                               <button
-                                className="flex items-center gap-x-1 text-gray-500"
+                                className="flex items-center gap-x-1 text-ui-fg-subtle hover:text-ui-fg-base"
                                 onClick={() => deleteItem(item.id)}
                               >
                                 <Trash size={14} />
@@ -102,7 +102,7 @@ const CartDropdown = () => {
                 </div>
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-700 font-semibold">
+                    <span className="text-ui-fg-subtle font-semibold">
                       Subtotal{" "}
                       <span className="font-normal">(excl. taxes)</span>
                     </span>

@@ -23,7 +23,7 @@ const Collapsible: React.FC<{ label: string }> = ({ label, children }) => {
         {({ open }) => {
           return (
             <>
-              <Disclosure.Button className="text-gray-900 flex items-center justify-between w-full">
+              <Disclosure.Button className="text-ui-fg-base flex items-center justify-between w-full">
                 <span className="text-small-semi uppercase">{label}</span>
                 <AnimatedButton open={open} />
               </Disclosure.Button>

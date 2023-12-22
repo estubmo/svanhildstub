@@ -1,10 +1,10 @@
 import { useCheckout } from "@lib/context/checkout-context"
-import { Button, Heading, Text } from "@medusajs/ui"
 import { CheckCircleSolid } from "@medusajs/icons"
+import { Button, Heading, Text } from "@medusajs/ui"
+import Divider from "@modules/common/components/divider"
 import Spinner from "@modules/common/icons/spinner"
 import BillingAddress from "../billing_address"
 import ShippingAddress from "../shipping-address"
-import Divider from "@modules/common/components/divider"
 
 const Addresses = () => {
   const {
@@ -24,7 +24,7 @@ const Addresses = () => {
   }
 
   return (
-    <div className="bg-white px-4 small:px-8">
+    <div className="bg-ui-bg-base px-4 small:px-8">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"

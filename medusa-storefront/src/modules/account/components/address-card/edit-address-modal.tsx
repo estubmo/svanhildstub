@@ -1,13 +1,12 @@
 import { medusaClient } from "@lib/config"
 import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
-import { Address } from "@medusajs/medusa"
-import CountrySelect from "@modules/checkout/components/country-select"
-import { Button, Heading, Text } from "@medusajs/ui"
 import { PencilSquare as Edit, Trash } from "@medusajs/icons"
+import { Address } from "@medusajs/medusa"
+import { Button, Heading, Text } from "@medusajs/ui"
+import CountrySelect from "@modules/checkout/components/country-select"
 import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
-import Spinner from "@modules/common/icons/spinner"
 import clsx from "clsx"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -110,7 +109,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
             {address.first_name} {address.last_name}
           </Heading>
           {address.company && (
-            <Text className="txt-compact-small text-gray-700">
+            <Text className="txt-compact-small text-ui-fg-subtle">
               {address.company}
             </Text>
           )}
@@ -130,14 +129,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
         </div>
         <div className="flex items-center gap-x-4">
           <button
-            className="text-small-regular text-gray-700 flex items-center gap-x-2"
+            className="text-small-regular text-ui-fg-subtle hover:text-ui-fg-base flex items-center gap-x-2"
             onClick={open}
           >
             <Edit />
             Edit
           </button>
           <button
-            className="text-small-regular text-gray-700 flex items-center gap-x-2"
+            className="text-small-regular text-ui-fg-subtle hover:text-ui-fg-base flex items-center gap-x-2"
             onClick={removeAddress}
           >
             <Trash />

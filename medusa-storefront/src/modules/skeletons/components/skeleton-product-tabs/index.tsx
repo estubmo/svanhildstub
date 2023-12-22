@@ -7,7 +7,7 @@ const SkeletonProductTabs = () => {
         {repeat(2).map((index) => (
           <div
             key={index}
-            className="h-6 pb-2 w-12 bg-gray-100 flex-1 basis-0"
+            className="h-6 pb-2 w-12 bg-gray-200 flex-1 basis-0"
           ></div>
         ))}
       </div>
@@ -17,8 +17,8 @@ const SkeletonProductTabs = () => {
             <div className="flex flex-col gap-y-4" key={index}>
               {repeat(3).map((index) => (
                 <div className="flex flex-col gap-y-2" key={index}>
-                  <div className="bg-gray-100 h-4 w-32"></div>
-                  <div className="bg-gray-100 h-2 w-16"></div>
+                  <div className="bg-gray-200 h-4 w-32"></div>
+                  <div className="bg-gray-200 h-2 w-16"></div>
                 </div>
               ))}
             </div>

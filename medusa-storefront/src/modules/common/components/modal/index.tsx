@@ -59,7 +59,7 @@ const Modal: React.FC<ModalProps> & {
                     "max-w-xl": size === "medium",
                     "max-w-3xl": size === "large",
                     "bg-transparent shadow-none": search,
-                    "bg-white shadow-xl border rounded-rounded": !search,
+                    "bg-ui-bg-base shadow-xl border rounded-rounded": !search,
                   }
                 )}
               >
@@ -90,7 +90,7 @@ const Title: React.FC = ({ children }) => {
 
 const Description: React.FC = ({ children }) => {
   return (
-    <Dialog.Description className="flex text-small-regular text-gray-700 items-center justify-center pt-2 pb-4 h-full">
+    <Dialog.Description className="flex text-small-regular text-ui-fg-subtle items-center justify-center pt-2 pb-4 h-full">
       {children}
     </Dialog.Description>
   )

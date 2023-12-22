@@ -1,16 +1,14 @@
 "use client"
 
 import { Order } from "@medusajs/medusa"
+import { Heading } from "@medusajs/ui"
+import CartTotals from "@modules/common/components/cart-totals"
 import Help from "@modules/order/components/help"
 import Items from "@modules/order/components/items"
-import OrderDetails from "@modules/order/components/order-details"
-import OrderSummary from "@modules/order/components/order-summary"
-import ShippingDetails from "@modules/order/components/shipping-details"
 import OnboardingCta from "@modules/order/components/onboarding-cta"
+import OrderDetails from "@modules/order/components/order-details"
+import ShippingDetails from "@modules/order/components/shipping-details"
 import React, { useEffect, useState } from "react"
-import Divider from "@modules/common/components/divider"
-import CartTotals from "@modules/common/components/cart-totals"
-import { Heading } from "@medusajs/ui"
 import PaymentDetails from "../components/payment-details"
 
 type OrderCompletedTemplateProps = {
@@ -31,7 +29,7 @@ const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
     <div className="py-6 min-h-[calc(100vh-64px)]">
       <div className="content-container flex flex-col justify-center items-center gap-y-10 max-w-4xl h-full w-full">
         {isOnboarding && <OnboardingCta orderId={order.id} />}
-        <div className="flex flex-col gap-4 max-w-4xl h-full bg-white w-full p-10">
+        <div className="flex flex-col gap-4 max-w-4xl h-full bg-ui-bg-base w-full p-10">
           <Heading
             level="h1"
             className="flex flex-col gap-y-2 text-ui-fg-base text-3xl"

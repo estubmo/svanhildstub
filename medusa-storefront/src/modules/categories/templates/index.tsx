@@ -1,21 +1,21 @@
 "use client"
 
-import usePreviews from "@lib/hooks/use-previews"
 import {
-  ProductCategoryWithChildren,
-  getProductsByCategoryHandle,
+    ProductCategoryWithChildren,
+    getProductsByCategoryHandle,
 } from "@lib/data"
+import usePreviews from "@lib/hooks/use-previews"
 import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
 import repeat from "@lib/util/repeat"
+import UnderlineLink from "@modules/common/components/interactive-link"
 import ProductPreview from "@modules/products/components/product-preview"
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
 import { useInfiniteQuery } from "@tanstack/react-query"
 import { useCart } from "medusa-react"
+import Link from "next/link"
+import { notFound } from "next/navigation"
 import React, { useEffect } from "react"
 import { useInView } from "react-intersection-observer"
-import Link from "next/link"
-import UnderlineLink from "@modules/common/components/interactive-link"
-import { notFound } from "next/navigation"
 
 type CategoryTemplateProps = {
   categories: ProductCategoryWithChildren[]
@@ -115,7 +115,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
           ))}
       </ul>
       <div
-        className="py-16 flex justify-center items-center text-small-regular text-gray-700"
+        className="py-16 flex justify-center items-center text-small-regular text-ui-fg-subtle"
         ref={ref}
       >
         <span ref={ref}></span>

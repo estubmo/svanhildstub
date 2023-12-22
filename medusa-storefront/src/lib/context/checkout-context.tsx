@@ -3,27 +3,27 @@
 import { medusaClient } from "@lib/config"
 import useToggleState, { StateType } from "@lib/hooks/use-toggle-state"
 import {
-  Address,
-  Cart,
-  Customer,
-  StorePostCartsCartReq,
+    Address,
+    Cart,
+    Customer,
+    StorePostCartsCartReq,
 } from "@medusajs/medusa"
 import Wrapper from "@modules/checkout/components/payment-wrapper"
+import Spinner from "@modules/common/icons/spinner"
 import { isEqual } from "lodash"
 import {
-  formatAmount,
-  useCart,
-  useCartShippingOptions,
-  useMeCustomer,
-  useRegions,
-  useSetPaymentSession,
-  useUpdateCart,
+    formatAmount,
+    useCart,
+    useCartShippingOptions,
+    useMeCustomer,
+    useRegions,
+    useSetPaymentSession,
+    useUpdateCart,
 } from "medusa-react"
 import { useRouter } from "next/navigation"
-import React, { createContext, useContext, useEffect, useMemo } from "react"
+import React, { createContext, useCallback, useContext, useEffect, useMemo } from "react"
 import { FormProvider, useForm, useFormContext } from "react-hook-form"
 import { useStore } from "./store-context"
-import Spinner from "@modules/common/icons/spinner"
 
 type AddressValues = {
   first_name: string
@@ -218,7 +218,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   /**
    * Method to create the payment sessions available for the cart. Uses a idempotency key to prevent duplicate requests.
    */
-  const initPayment = async () => {
+  const initPayment = useCallback(async () => {
     if (cart?.id && !cart.payment_sessions?.length && cart?.items?.length) {
       return medusaClient.carts
         .createPaymentSessions(cart.id, {
@@ -227,7 +227,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
         .then(({ cart }) => cart && setCart(cart))
         .catch((err) => err)
     }
-  }
+  }, [cart?.id, cart?.payment_sessions, cart?.items, setCart])
 
   useEffect(() => {
     // initialize payment session
@@ -235,7 +235,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
       await initPayment()
     }
     start()
-  }, [cart?.region, cart?.id, cart?.items])
+  }, [ initPayment])
 
   /**
    * Method to set the selected payment session for the cart. This is called when the user selects a payment provider, such as Stripe, PayPal, etc.

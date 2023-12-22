@@ -1,12 +1,12 @@
+import { useMobileMenu } from "@lib/context/mobile-menu-context"
 import { ProductHit } from "@modules/search/components/hit"
 import React from "react"
 import {
-  useHits,
-  UseHitsProps,
-  useSearchBox,
-} from "react-instantsearch-hooks-web"
+    useHits,
+    UseHitsProps,
+    useSearchBox,
+} from "react-instantsearch"
 import ShowAll from "../show-all"
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
 
 type HitsProps<THit> = React.ComponentProps<"div"> &
   UseHitsProps & {
@@ -29,7 +29,7 @@ const MobileHits = ({
 
   return (
     <div className={className}>
-      <span className="text-small-regular uppercase text-gray-700">
+      <span className="text-small-regular uppercase text-ui-fg-subtle">
         Results
       </span>
       <div className="flex flex-col gap-6 py-4">

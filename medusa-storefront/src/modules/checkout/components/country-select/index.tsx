@@ -1,5 +1,5 @@
 import NativeSelect, {
-  NativeSelectProps,
+    NativeSelectProps,
 } from "@modules/common/components/native-select"
 import { useCart, useRegions } from "medusa-react"
 import { forwardRef, useImperativeHandle, useMemo, useRef } from "react"
@@ -32,7 +32,7 @@ const CountrySelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     return (
       <NativeSelect ref={innerRef} placeholder={placeholder} {...props}>
         {countryOptions.map(({ value, label }, index) => (
-          <option key={index} value={value}>
+          <option key={index} value={value} className="bg-ui-bg-field">
             {label}
           </option>
         ))}

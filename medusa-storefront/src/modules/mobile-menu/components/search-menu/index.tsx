@@ -1,10 +1,10 @@
 import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client"
+import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client"
 import { MagnifyingGlassMini } from "@medusajs/icons"
 import MobileHit from "@modules/search/components/mobile-hit"
 import MobileHits from "@modules/search/components/mobile-hits"
 import SearchBox from "@modules/search/components/search-box"
-import { InstantSearch } from "react-instantsearch-hooks-web"
+import { InstantSearch } from "react-instantsearch"
 
 const SearchMenu = () => {
   const {
@@ -25,7 +25,7 @@ const SearchMenu = () => {
           <div className="flex justify-end ml-4">
             <button
               onClick={() => setScreen("main")}
-              className="text-small-semi uppercase"
+              className="text-small-semi uppercase text-ui-fg-base"
             >
               Cancel
             </button>

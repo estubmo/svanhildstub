@@ -2,8 +2,8 @@ import { useAccount } from "@lib/context/account-context"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { emailRegex } from "@lib/util/regex"
 import { Customer } from "@medusajs/medusa"
-import EditButton from "@modules/account/components/edit-button"
 import { Button } from "@medusajs/ui"
+import EditButton from "@modules/account/components/edit-button"
 import Input from "@modules/common/components/input"
 import Modal from "@modules/common/components/modal"
 import Spinner from "@modules/common/icons/spinner"
@@ -89,7 +89,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className="!bg-gray-200 !text-gray-900 !border-gray-200 min-h-0"
+            className="!bg-gray-200 !text-ui-fg-base !border-gray-200 min-h-0"
             onClick={close}
           >
             Cancel

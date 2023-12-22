@@ -1,6 +1,5 @@
 import { Heading } from "@medusajs/ui"
 import Link from "next/link"
-import React from "react"
 
 const Help = () => {
   return (
@@ -12,7 +11,7 @@ const Help = () => {
             <Link href="/contact">Contact</Link>
           </li>
           <li>
-            <Link href="/contact">Returns & Exchanges</Link>
+            <Link href="/returns">Returns & Exchanges</Link>
           </li>
         </ul>
       </div>

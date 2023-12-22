@@ -1,15 +1,15 @@
-import { useCheckout } from "@lib/context/checkout-context"
-import { Button, Heading, Text, clx } from "@medusajs/ui"
-import { CheckCircleSolid } from "@medusajs/icons"
-import Spinner from "@modules/common/icons/spinner"
-import Divider from "@modules/common/components/divider"
-import { useForm } from "react-hook-form"
 import { RadioGroup } from "@headlessui/react"
-import Radio from "@modules/common/components/radio"
 import { ErrorMessage } from "@hookform/error-message"
+import { useCheckout } from "@lib/context/checkout-context"
+import { CheckCircleSolid } from "@medusajs/icons"
+import { Cart } from "@medusajs/medusa"
+import { Button, Heading, Text, clx } from "@medusajs/ui"
+import Divider from "@modules/common/components/divider"
+import Radio from "@modules/common/components/radio"
+import Spinner from "@modules/common/icons/spinner"
 import { formatAmount, useCart, useCartShippingOptions } from "medusa-react"
 import { useEffect, useMemo, useState } from "react"
-import { Cart } from "@medusajs/medusa"
+import { useForm } from "react-hook-form"
 
 type ShippingOption = {
   value?: string
@@ -114,7 +114,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
   }, [shipping_options, cart])
 
   return (
-    <div className="bg-white p-4 small:px-8">
+    <div className="bg-ui-bg-base p-4 small:px-8">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -166,14 +166,14 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                           {option.label}
                         </span>
                       </div>
-                      <span className="justify-self-end text-gray-700">
+                      <span className="justify-self-end text-ui-fg-subtle">
                         {option.price}
                       </span>
                     </RadioGroup.Option>
                   )
                 })
               ) : (
-                <div className="flex flex-col items-center justify-center px-4 py-8 text-gray-900">
+                <div className="flex flex-col items-center justify-center px-4 py-8 text-ui-fg-base">
                   <Spinner />
                 </div>
               )}

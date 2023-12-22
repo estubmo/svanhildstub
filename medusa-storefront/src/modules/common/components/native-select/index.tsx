@@ -2,12 +2,12 @@ import { ErrorMessage } from "@hookform/error-message"
 import { ChevronUpDown } from "@medusajs/icons"
 import clsx from "clsx"
 import {
-  forwardRef,
-  SelectHTMLAttributes,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
+    forwardRef,
+    SelectHTMLAttributes,
+    useEffect,
+    useImperativeHandle,
+    useRef,
+    useState,
 } from "react"
 import { get } from "react-hook-form"
 
@@ -55,7 +55,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
           className={clsx(
-            "relative flex items-center text-base-regular border border-ui-border-base bg-ui-bg-subtle rounded-md hover:bg-ui-bg-field-hover",
+            "relative flex items-center text-base-regular border border-ui-border-base bg-ui-bg-field rounded-md hover:bg-ui-bg-field-hover",
             className,
             {
               "text-ui-fg-muted": isPlaceholder,
@@ -67,12 +67,12 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             {...props}
             className="appearance-none flex-1 bg-transparent border-none px-4 py-2.5 transition-colors duration-150 outline-none "
           >
-            <option disabled value="">
+            <option disabled value="" className="bg-ui-bg-field hover:bg-ui-bg-field-hover">
               {placeholder}
             </option>
             {children}
           </select>
-          <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none ">
+          <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none">
             <ChevronUpDown />
           </span>
         </div>

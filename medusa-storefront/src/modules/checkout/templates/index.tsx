@@ -3,20 +3,20 @@ import ChevronDown from "@modules/common/icons/chevron-down"
 import MedusaCTA from "@modules/layout/components/medusa-cta"
 import Link from "next/link"
 import CheckoutLoader from "../components/checkout-loader"
+import SubmitSpinner from "../components/submit-spinner"
 import CheckoutForm from "./checkout-form"
 import CheckoutSummary from "./checkout-summary"
-import SubmitSpinner from "../components/submit-spinner"
 
 const CheckoutTemplate = () => {
   return (
     <CheckoutProvider>
-      <div className="bg-white relative small:min-h-screen">
+      <div className="bg-ui-bg-base relative small:min-h-screen">
         <SubmitSpinner />
-        <div className="h-16 bg-white">
+        <div className="h-16 bg-ui-bg-base">
           <nav className="flex items-center h-full justify-between content-container border-b">
             <Link
               href="/cart"
-              className="text-small-semi text-gray-700 flex items-center gap-x-2 uppercase flex-1 basis-0"
+              className="text-small-semi text-ui-fg-subtle flex items-center gap-x-2 uppercase flex-1 basis-0"
             >
               <>
                 <ChevronDown className="rotate-90" size={16} />

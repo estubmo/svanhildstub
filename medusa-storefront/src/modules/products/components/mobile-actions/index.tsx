@@ -2,13 +2,13 @@ import { Dialog, Transition } from "@headlessui/react"
 import { useProductActions } from "@lib/context/product-context"
 import useProductPrice from "@lib/hooks/use-product-price"
 import useToggleState from "@lib/hooks/use-toggle-state"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import X from "@modules/common/icons/x"
 import clsx from "clsx"
 import React, { Fragment, useMemo } from "react"
 import OptionSelect from "../option-select"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 
 type MobileActionsProps = {
   product: PricedProduct
@@ -45,12 +45,12 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="bg-white flex flex-col gap-y-3 justify-center items-center text-large-regular p-4 h-full w-full border-t border-gray-200">
+          <div className="bg-ui-bg-base flex flex-col gap-y-3 justify-center items-center text-large-regular p-4 h-full w-full border-t border-gray-200">
             <div className="flex items-center gap-x-2">
               <span>{product.title}</span>
               <span>—</span>
               {selectedPrice ? (
-                <div className="flex items-end gap-x-2 text-gray-700">
+                <div className="flex items-end gap-x-2 text-ui-fg-subtle">
                   {selectedPrice.price_type === "sale" && (
                     <p>
                       <span className="line-through text-small-regular">
@@ -118,12 +118,12 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                   <div className="w-full flex justify-end pr-6">
                     <button
                       onClick={close}
-                      className="bg-white w-12 h-12 rounded-full text-gray-900 flex justify-center items-center"
+                      className="bg-ui-bg-base w-12 h-12 rounded-full text-ui-fg-base flex justify-center items-center"
                     >
                       <X />
                     </button>
                   </div>
-                  <div className="bg-white px-6 py-12">
+                  <div className="bg-ui-bg-base px-6 py-12">
                     {product.variants.length > 1 && (
                       <div className="flex flex-col gap-y-6">
                         {(product.options || []).map((option) => {

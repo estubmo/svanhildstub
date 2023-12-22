@@ -1,8 +1,8 @@
 import { medusaClient } from "@lib/config"
 import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
+import { Spinner } from "@medusajs/icons"
 import { Button } from "@medusajs/ui"
 import Input from "@modules/common/components/input"
-import { Spinner } from "@medusajs/icons"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -45,14 +45,14 @@ const Register = () => {
   return (
     <div className="max-w-sm flex flex-col items-center mt-12">
       {isSubmitting && (
-        <div className="z-10 fixed inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+        <div className="z-10 fixed inset-0 bg-ui-bg-base bg-opacity-50 flex items-center justify-center">
           <Spinner />
         </div>
       )}
       <h1 className="text-large-semi uppercase mb-6">
         Become a Medusa Store Member
       </h1>
-      <p className="text-center text-base-regular text-gray-700 mb-4">
+      <p className="text-center text-base-regular text-ui-tag-neutral-text mb-4">
         Create your Medusa Store Member profile, and get access to an enhanced
         shopping experience.
       </p>
@@ -99,7 +99,7 @@ const Register = () => {
             </span>
           </div>
         )}
-        <span className="text-center text-gray-700 text-small-regular mt-6">
+        <span className="text-center text-ui-tag-neutral-text text-small-regular mt-6">
           By creating an account, you agree to Medusa Store&apos;s{" "}
           <Link href="/content/privacy-policy" className="underline">
             Privacy Policy
@@ -114,7 +114,7 @@ const Register = () => {
           Join
         </Button>
       </form>
-      <span className="text-center text-gray-700 text-small-regular mt-6">
+      <span className="text-center text-ui-tag-neutral-text text-small-regular mt-6">
         Already a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}

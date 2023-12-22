@@ -1,8 +1,8 @@
+import { Text } from "@medusajs/ui"
 import clsx from "clsx"
 import Link from "next/link"
 import { ProductPreviewType } from "types/global"
 import Thumbnail from "../thumbnail"
-import { Text } from "@medusajs/ui"
 
 const ProductPreview = ({
   title,
@@ -33,7 +33,7 @@ const ProductPreview = ({
               </Text>
             </>
           ) : (
-            <div className="w-20 h-6 animate-pulse bg-gray-100"></div>
+            <div className="w-20 h-6 animate-pulse bg-gray-200"></div>
           )}
         </div>
       </div>

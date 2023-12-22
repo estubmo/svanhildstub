@@ -27,13 +27,13 @@ const CountryMenu = () => {
             className="flex items-center gap-x-2"
             onClick={() => setScreen("main")}
           >
-            <ChevronDown className="rotate-90 text-gray-700" size={20} />
+            <ChevronDown className="rotate-90 text-ui-fg-base" size={20} />
           </button>
         </div>
         <div>
-          <h1 className="text-large-regular">Shipping To</h1>
+          <h1 className="text-large-regular text-ui-fg-base">Shipping To</h1>
         </div>
-        <div className="flex-1 basis-0 flex justify-end">
+        <div className="flex-1 basis-0 flex text-ui-fg-base justify-end">
           <button onClick={close}>
             <X size={20} />
           </button>
@@ -45,7 +45,7 @@ const CountryMenu = () => {
           {countryOptions?.map((option) => (
             <li key={option.country}>
               <button
-                className="px-8 py-4 flex items-center justify-between w-full border-b border-gray-200"
+                className="px-8 py-4 flex text-ui-fg-base items-center justify-between w-full border-b border-gray-200"
                 onClick={() =>
                   handleSelectCountry(option.region, option.country)
                 }

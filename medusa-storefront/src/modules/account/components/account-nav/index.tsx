@@ -74,9 +74,7 @@ const AccountNavLink = ({ href, route, children }: AccountNavLinkProps) => {
   return (
     <Link
       href={href}
-      className={clsx("text-gray-700", {
-        "text-gray-900 font-semibold": active,
-      })}
+      className={clsx(active ? "text-ui-fg-base font-semibold" : "text-ui-fg-muted")}
     >
       <>{children}</>
     </Link>

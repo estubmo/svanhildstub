@@ -1,9 +1,8 @@
 import { Listbox, Transition } from "@headlessui/react"
 import { useCheckout } from "@lib/context/checkout-context"
+import { ChevronUpDown } from "@medusajs/icons"
 import { Address } from "@medusajs/medusa"
 import Radio from "@modules/common/components/radio"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import { ChevronUpDown } from "@medusajs/icons"
 import clsx from "clsx"
 import { isEqual, omit } from "lodash"
 import { Fragment, useMemo, useState } from "react"
@@ -57,7 +56,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
   return (
     <Listbox onChange={handleSelect} value={selected}>
       <div className="relative">
-        <Listbox.Button className="relative w-full flex justify-between items-center px-4 py-[10px] text-left bg-white cursor-default focus:outline-none border rounded-rounded focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-gray-300 focus-visible:ring-offset-2 focus-visible:border-gray-300 text-base-regular">
+        <Listbox.Button className="relative w-full flex justify-between items-center px-4 py-[10px] text-left bg-ui-bg-base cursor-default focus:outline-none border rounded-rounded focus-visible:ring-2 focus-visible:ring-opacity-75 focus-visible:ring-white focus-visible:ring-offset-gray-300 focus-visible:ring-offset-2 focus-visible:border-gray-300 text-base-regular">
           {({ open }) => (
             <>
               <span className="block truncate">
@@ -79,7 +78,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute z-20 w-full overflow-auto text-small-regular bg-white border border-top-0 max-h-60 focus:outline-none sm:text-sm">
+          <Listbox.Options className="absolute z-20 w-full overflow-auto text-small-regular bg-ui-bg-base border border-top-0 max-h-60 focus:outline-none sm:text-sm">
             {addresses.map((address) => {
               return (
                 <Listbox.Option
@@ -94,7 +93,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
                         {address.first_name} {address.last_name}
                       </span>
                       {address.company && (
-                        <span className="text-small-regular text-gray-700">
+                        <span className="text-small-regular text-ui-fg-subtle">
                           {address.company}
                         </span>
                       )}

@@ -1,13 +1,13 @@
-import React, { useMemo } from "react"
 import { medusaClient } from "@lib/config"
-import { Cart } from "@medusajs/medusa"
-import { Button, Label, Tooltip, Text, Heading } from "@medusajs/ui"
 import { InformationCircleSolid } from "@medusajs/icons"
+import { Cart } from "@medusajs/medusa"
+import { Button, Heading, Label, Text, Tooltip } from "@medusajs/ui"
 import Input from "@modules/common/components/input"
 import Trash from "@modules/common/icons/trash"
-import { formatAmount, useCart, useUpdateCart } from "medusa-react"
-import { useForm } from "react-hook-form"
 import { useMutation } from "@tanstack/react-query"
+import { formatAmount, useCart, useUpdateCart } from "medusa-react"
+import React, { useMemo } from "react"
+import { useForm } from "react-hook-form"
 
 type DiscountFormValues = {
   discount_code: string
@@ -122,7 +122,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   }
 
   return (
-    <div className="w-full bg-white flex flex-col">
+    <div className="w-full bg-ui-bg-base flex flex-col">
       <div className="txt-medium">
         {gift_cards.length > 0 && (
           <div className="flex flex-col mb-4">

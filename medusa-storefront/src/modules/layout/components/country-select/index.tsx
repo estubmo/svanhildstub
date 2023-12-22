@@ -2,7 +2,7 @@
 
 import { Listbox, Transition } from "@headlessui/react"
 import { useStore } from "@lib/context/store-context"
-import useToggleState, { StateType } from "@lib/hooks/use-toggle-state"
+import { StateType } from "@lib/hooks/use-toggle-state"
 import { revalidateTags } from "app/actions"
 import { useRegions } from "medusa-react"
 import { Fragment, useEffect, useMemo, useState } from "react"
@@ -78,7 +78,7 @@ const CountrySelect = ({ toggleState }: CountrySelectProps) => {
             )}
           </div>
         </Listbox.Button>
-        <div className="flex relative w-full min-w-[320px]">
+        <div className="flex relative w-full">
           <Transition
             show={state}
             as={Fragment}
@@ -87,7 +87,7 @@ const CountrySelect = ({ toggleState }: CountrySelectProps) => {
             leaveTo="opacity-0"
           >
             <Listbox.Options
-              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-white drop-shadow-md text-small-regular uppercase text-black no-scrollbar rounded-rounded w-full"
+              className="absolute -bottom-[calc(100%-36px)] left-0 xsmall:left-auto xsmall:right-0 max-h-[442px] overflow-y-scroll z-[900] bg-ui-bg-base drop-shadow-md text-small-regular uppercase text-black no-scrollbar rounded-rounded w-full"
               static
             >
               {options?.map((o, index) => {

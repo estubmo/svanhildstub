@@ -1,10 +1,10 @@
 import clsx from "clsx"
 import React from "react"
 import {
-  useHits,
-  UseHitsProps,
-  useSearchBox,
-} from "react-instantsearch-hooks-web"
+    useHits,
+    UseHitsProps,
+    useSearchBox,
+} from "react-instantsearch"
 import { ProductHit } from "../hit"
 import ShowAll from "../show-all"
 

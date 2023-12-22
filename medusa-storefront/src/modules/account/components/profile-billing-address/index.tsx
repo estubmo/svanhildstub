@@ -204,10 +204,10 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({ customer }) => {
             {...register("billing_address.country_code", { required: true })}
             defaultValue={countryCode}
           >
-            <option value="">-</option>
+            <option value="" className="bg-ui-bg-field hover:bg-ui-bg-field-hover">-</option>
             {regionOptions.map((option, i) => {
               return (
-                <option key={i} value={option.value}>
+                <option key={i} value={option.value} className="bg-ui-bg-field hover:bg-ui-bg-field-hover">
                   {option.label}
                 </option>
               )

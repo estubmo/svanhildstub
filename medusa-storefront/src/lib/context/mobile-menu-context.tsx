@@ -4,13 +4,13 @@ import useCurrentWidth from "@lib/hooks/use-current-width"
 import useDebounce from "@lib/hooks/use-debounce"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
+    createContext,
+    Dispatch,
+    SetStateAction,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
 } from "react"
 
 type ScreenType = "main" | "country" | "search"

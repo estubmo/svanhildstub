@@ -18,7 +18,7 @@ const Review = () => {
   const editingOtherSteps = isEditAddresses || isEditShipping || isEditPayment
 
   return (
-    <div className="bg-white px-4 small:px-8">
+    <div className="bg-ui-bg-base px-4 small:px-8">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"

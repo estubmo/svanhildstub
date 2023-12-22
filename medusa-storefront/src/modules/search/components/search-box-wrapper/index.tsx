@@ -1,13 +1,13 @@
 import { useRouter } from "next/navigation"
 import {
-  ChangeEvent,
-  FormEvent,
-  RefObject,
-  useEffect,
-  useRef,
-  useState,
+    ChangeEvent,
+    FormEvent,
+    RefObject,
+    useEffect,
+    useRef,
+    useState,
 } from "react"
-import { useSearchBox, UseSearchBoxProps } from "react-instantsearch-hooks-web"
+import { UseSearchBoxProps, useSearchBox } from "react-instantsearch"
 
 export type ControlledSearchBoxProps = React.ComponentProps<"div"> & {
   inputRef: RefObject<HTMLInputElement>

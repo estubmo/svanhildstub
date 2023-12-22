@@ -1,6 +1,6 @@
 import {
-  ProductProvider,
-  useProductActions,
+    ProductProvider,
+    useProductActions,
 } from "@lib/context/product-context"
 import useProductPrice from "@lib/hooks/use-product-price"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"

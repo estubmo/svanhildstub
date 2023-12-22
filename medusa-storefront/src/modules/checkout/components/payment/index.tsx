@@ -1,18 +1,17 @@
-import { useCheckout } from "@lib/context/checkout-context"
-import PaymentContainer from "../payment-container"
-import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
 import { RadioGroup } from "@headlessui/react"
-import PaymentStripe from "../payment-stripe"
-import Divider from "@modules/common/components/divider"
-import { useForm } from "react-hook-form"
-import { useCart, useSetPaymentSession } from "medusa-react"
 import { ErrorMessage } from "@hookform/error-message"
-import { CreditCard, CheckCircleSolid } from "@medusajs/icons"
-import Spinner from "@modules/common/icons/spinner"
-import Ideal from "@modules/common/icons/ideal"
+import { useCheckout } from "@lib/context/checkout-context"
+import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
+import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
+import Divider from "@modules/common/components/divider"
 import Bancontact from "@modules/common/icons/bancontact"
-import { useElements } from "@stripe/react-stripe-js"
+import Ideal from "@modules/common/icons/ideal"
+import Spinner from "@modules/common/icons/spinner"
+import { useCart, useSetPaymentSession } from "medusa-react"
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import PaymentContainer from "../payment-container"
+import PaymentStripe from "../payment-stripe"
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
@@ -119,7 +118,7 @@ const Payment = () => {
   }
 
   return (
-    <div className="bg-white px-4 small:px-8">
+    <div className="bg-ui-bg-base px-4 small:px-8">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -202,7 +201,7 @@ const Payment = () => {
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center px-4 py-16 text-gray-900">
+          <div className="flex flex-col items-center justify-center px-4 py-16 text-ui-fg-base">
             <Spinner />
           </div>
         )}
