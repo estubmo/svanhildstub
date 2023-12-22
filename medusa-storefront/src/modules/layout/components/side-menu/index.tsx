@@ -82,7 +82,7 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                     </ul>
                     <div className="flex flex-col gap-y-6">
                       <div
-                        className="flex justify-between"
+                        className="flex justify-between items-center"
                         onMouseEnter={toggleState.open}
                         onMouseLeave={toggleState.close}
                       >
