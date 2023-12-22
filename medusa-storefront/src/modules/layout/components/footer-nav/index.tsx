@@ -1,8 +1,8 @@
 "use client"
 
+import { Text } from "@medusajs/ui"
 import clsx from "clsx"
 import { useCollections, useProductCategories } from "medusa-react"
-import { Text } from "@medusajs/ui"
 import Link from "next/link"
 import MedusaCTA from "../medusa-cta"
 
@@ -11,7 +11,7 @@ const FooterNav = () => {
   const { product_categories } = useProductCategories()
 
   return (
-    <div className="border-t border-ui-border-base w-screen">
+    <div className="border-t border-ui-border-base">
       <div className="content-container flex flex-col">
         <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
           <div>
