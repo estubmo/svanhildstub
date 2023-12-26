@@ -1,4 +1,5 @@
 import { Popover, Transition } from "@headlessui/react";
+import { chunk } from "@lib/chunk";
 import {
   useFeaturedProductsQuery,
   useNavigationCollections,
@@ -7,7 +8,6 @@ import repeat from "@lib/util/repeat";
 import ProductPreview from "@modules/products/components/product-preview";
 import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
 import clsx from "clsx";
-import { chunk } from "lodash";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";

@@ -1,10 +1,11 @@
 import { Listbox, Transition } from "@headlessui/react";
 import { useCheckout } from "@lib/context/checkout-context";
+import { isEqual } from "@lib/is-equal";
+import { omit } from "@lib/omit";
 import { ChevronUpDown } from "@medusajs/icons";
 import { Address } from "@medusajs/medusa";
 import Radio from "@modules/common/components/radio";
 import clsx from "clsx";
-import { isEqual, omit } from "lodash";
 import { Fragment, useMemo, useState } from "react";
 import { useWatch } from "react-hook-form";
 
@@ -41,6 +42,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
           "updated_at",
           "country",
           "deleted_at",
+          "customer",
           "metadata",
           "customer_id",
         ]),

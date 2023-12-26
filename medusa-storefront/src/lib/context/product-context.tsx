@@ -1,9 +1,9 @@
 "use client";
 
+import { isEqual } from "@lib/is-equal";
 import { canBuy } from "@lib/util/can-buy";
 import { findCheapestPrice } from "@lib/util/prices";
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
-import isEqual from "lodash/isEqual";
 import { formatVariantPrice, useCart } from "medusa-react";
 import React, {
   createContext,

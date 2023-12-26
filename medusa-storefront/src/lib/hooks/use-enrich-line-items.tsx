@@ -1,5 +1,5 @@
+import { omit } from "@lib/omit";
 import { LineItem } from "@medusajs/medusa";
-import omit from "lodash/omit";
 import { useCart, useProducts } from "medusa-react";
 import { useMemo } from "react";
 
@@ -60,7 +60,7 @@ const useEnrichedLineItems = (lineItems?: LineItem[], cartId?: string) => {
         variant: {
           ...variant,
           // @ts-expect-error Pick does not work with nested objects
-          product: omit(product, "variants"),
+          product: omit(product, ["variants"]),
         },
       });
     }

@@ -2,6 +2,7 @@
 
 import { medusaClient } from "@lib/config";
 import useToggleState, { StateType } from "@lib/hooks/use-toggle-state";
+import { isEqual } from "@lib/is-equal";
 import {
   Address,
   Cart,
@@ -10,7 +11,6 @@ import {
 } from "@medusajs/medusa";
 import Wrapper from "@modules/checkout/components/payment-wrapper";
 import Spinner from "@modules/common/icons/spinner";
-import { isEqual } from "lodash";
 import {
   formatAmount,
   useCart,
@@ -101,13 +101,13 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   const {
     mutate: setPaymentSessionMutation,
     isLoading: settingPaymentSession,
-  } = useSetPaymentSession(cart?.id);
+  } = useSetPaymentSession(cart?.id || "");
 
   const { mutate: updateCart, isLoading: updatingCart } = useUpdateCart(
-    cart?.id
+    cart?.id || ""
   );
 
-  const { shipping_options } = useCartShippingOptions(cart?.id, {
+  const { shipping_options } = useCartShippingOptions(cart?.id || "", {
     enabled: !!cart?.id,
   });
 
