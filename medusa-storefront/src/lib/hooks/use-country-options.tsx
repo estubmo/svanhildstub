@@ -1,5 +1,5 @@
-import { useRegions } from "medusa-react";
-import { useMemo } from "react";
+import { useRegions } from 'medusa-react';
+import { useMemo } from 'react';
 
 type CountryOption = {
   country: string;

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalculatedPriceSetDTO, IPricingModuleService } from "@medusajs/types";
+import { CalculatedPriceSetDTO, IPricingModuleService } from '@medusajs/types';
 
 type Props = {
   products: any[];
@@ -27,7 +27,7 @@ export async function getPricesByPriceSetId({
         { id: [priceSetId] },
         {
           context: { currency_code },
-        }
+        },
       )) as unknown as CalculatedPriceSetDTO[];
 
       delete variant.price;

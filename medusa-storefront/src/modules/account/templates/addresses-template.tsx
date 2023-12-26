@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { useAccount } from "@lib/context/account-context";
-import AddressBook from "../components/address-book";
+import { useAccount } from '@lib/context/account-context';
+
+import AddressBook from '../components/address-book';
 
 const AddressesTemplate = () => {
   const { customer, retrievingCustomer } = useAccount();

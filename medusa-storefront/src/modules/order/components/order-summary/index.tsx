@@ -1,5 +1,5 @@
-import { Order } from "@medusajs/medusa";
-import { formatAmount } from "medusa-react";
+import { Order } from '@medusajs/medusa';
+import { formatAmount } from 'medusa-react';
 
 type OrderSummaryProps = {
   order: Order;
@@ -17,8 +17,8 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
   return (
     <div>
       <h2 className="text-base-semi">Order Summary</h2>
-      <div className="text-small-regular text-ui-fg-subtle my-2">
-        <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
+      <div className="text-small-regular my-2 text-ui-fg-subtle">
+        <div className="text-base-regular mb-2 flex items-center justify-between text-ui-fg-base">
           <span>Subtotal</span>
           <span>{getAmount(order.subtotal)}</span>
         </div>
@@ -44,8 +44,8 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
             <span>{getAmount(order.tax_total)}</span>
           </div>
         </div>
-        <div className="h-px w-full border-b border-gray-200 border-dashed my-4" />
-        <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
+        <div className="my-4 h-px w-full border-b border-dashed border-gray-200" />
+        <div className="text-base-regular mb-2 flex items-center justify-between text-ui-fg-base">
           <span>Total</span>
           <span>{getAmount(order.total)}</span>
         </div>

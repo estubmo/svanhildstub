@@ -1,12 +1,12 @@
-import { medusaClient } from "@lib/config";
-import { LOGIN_VIEW, useAccount } from "@lib/context/account-context";
-import { Spinner } from "@medusajs/icons";
-import { Button } from "@medusajs/ui";
-import Input from "@modules/common/components/input";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { medusaClient } from '@lib/config';
+import { LOGIN_VIEW, useAccount } from '@lib/context/account-context';
+import { Spinner } from '@medusajs/icons';
+import { Button } from '@medusajs/ui';
+import Input from '@modules/common/components/input';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { FieldValues, useForm } from 'react-hook-form';
 
 interface RegisterCredentials extends FieldValues {
   first_name: string;
@@ -23,7 +23,7 @@ const Register = () => {
   const router = useRouter();
 
   const handleError = () => {
-    setAuthError("An error occured. Please try again.");
+    setAuthError('An error occured. Please try again.');
   };
 
   const {
@@ -37,52 +37,52 @@ const Register = () => {
       .create(credentials)
       .then(() => {
         refetchCustomer();
-        router.push("/account");
+        router.push('/account');
       })
       .catch(handleError);
   });
 
   return (
-    <div className="max-w-sm flex flex-col items-center mt-12">
+    <div className="mt-12 flex max-w-sm flex-col items-center">
       {isSubmitting && (
-        <div className="z-10 fixed inset-0 bg-ui-bg-base bg-opacity-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-10 flex items-center justify-center bg-ui-bg-base bg-opacity-50">
           <Spinner />
         </div>
       )}
-      <h1 className="text-large-semi uppercase mb-6">Become a Member</h1>
-      <p className="text-center text-base-regular text-ui-tag-neutral-text mb-4">
+      <h1 className="text-large-semi mb-6 uppercase">Become a Member</h1>
+      <p className="text-base-regular mb-4 text-center text-ui-tag-neutral-text">
         Create your profile, and get access to an enhanced shopping experience.
       </p>
-      <form className="w-full flex flex-col" onSubmit={onSubmit}>
-        <div className="flex flex-col w-full gap-y-2">
+      <form className="flex w-full flex-col" onSubmit={onSubmit}>
+        <div className="flex w-full flex-col gap-y-2">
           <Input
             label="First name"
-            {...register("first_name", { required: "First name is required" })}
+            {...register('first_name', { required: 'First name is required' })}
             autoComplete="given-name"
             errors={errors}
           />
           <Input
             label="Last name"
-            {...register("last_name", { required: "Last name is required" })}
+            {...register('last_name', { required: 'Last name is required' })}
             autoComplete="family-name"
             errors={errors}
           />
           <Input
             label="Email"
-            {...register("email", { required: "Email is required" })}
+            {...register('email', { required: 'Email is required' })}
             autoComplete="email"
             errors={errors}
           />
           <Input
             label="Phone"
-            {...register("phone")}
+            {...register('phone')}
             autoComplete="tel"
             errors={errors}
           />
           <Input
             label="Password"
-            {...register("password", {
-              required: "Password is required",
+            {...register('password', {
+              required: 'Password is required',
             })}
             type="password"
             autoComplete="new-password"
@@ -91,17 +91,17 @@ const Register = () => {
         </div>
         {authError && (
           <div>
-            <span className="text-rose-500 w-full text-small-regular">
+            <span className="text-small-regular w-full text-rose-500">
               These credentials do not match our records
             </span>
           </div>
         )}
-        <span className="text-center text-ui-tag-neutral-text text-small-regular mt-6">
-          By creating an account, you agree to the website&apos;s{" "}
+        <span className="text-small-regular mt-6 text-center text-ui-tag-neutral-text">
+          By creating an account, you agree to the website&apos;s{' '}
           <Link href="/content/privacy-policy" className="underline">
             Privacy Policy
-          </Link>{" "}
-          and{" "}
+          </Link>{' '}
+          and{' '}
           <Link href="/content/terms-of-use" className="underline">
             Terms of Use
           </Link>
@@ -111,8 +111,8 @@ const Register = () => {
           Join
         </Button>
       </form>
-      <span className="text-center text-ui-tag-neutral-text text-small-regular mt-6">
-        Already a member?{" "}
+      <span className="text-small-regular mt-6 text-center text-ui-tag-neutral-text">
+        Already a member?{' '}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"

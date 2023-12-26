@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ErrorMessage } from "@hookform/error-message";
-import { CheckCircleMiniSolid } from "@medusajs/icons";
+import { ErrorMessage } from '@hookform/error-message';
+import { CheckCircleMiniSolid } from '@medusajs/icons';
 import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
-} from "@stripe/react-stripe-js";
+} from '@stripe/react-stripe-js';
 import {
   StripeCardCvcElementOptions,
   StripeCardExpiryElementOptions,
   StripeCardNumberElementOptions,
-} from "@stripe/stripe-js";
-import React, { useMemo } from "react";
-import { FieldValues, UseFormReturn } from "react-hook-form";
+} from '@stripe/stripe-js';
+import React, { useMemo } from 'react';
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 
 type PaymentStripeProps = StateProps & {
   useFormState: UseFormReturn<FieldValues, any, undefined>;
@@ -24,7 +24,7 @@ type StateProps = {
     cardExpiryComplete: boolean;
     cardCvcComplete: boolean;
   };
-  setState: (state: PaymentStripeProps["state"]) => void;
+  setState: (state: PaymentStripeProps['state']) => void;
 };
 
 const PaymentStripe: React.FC<PaymentStripeProps> = ({
@@ -39,28 +39,28 @@ const PaymentStripe: React.FC<PaymentStripeProps> = ({
     return {
       style: {
         base: {
-          fontFamily: "Inter, sans-serif",
-          color: "#424270",
-          "::placeholder": {
-            color: "#CFD7E0",
+          fontFamily: 'Inter, sans-serif',
+          color: '#424270',
+          '::placeholder': {
+            color: '#CFD7E0',
           },
         },
       },
       classes: {
-        base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover",
+        base: 'pt-3 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover',
       },
     };
   }, []);
 
   return (
-    <div className="flex flex-col relative w-full pb-6">
+    <div className="relative flex w-full flex-col pb-6">
       <CardNumber
         options={useOptions as StripeCardNumberElementOptions}
         useFormState={useFormState}
         setState={setState}
         state={state}
       />
-      <div className="flex items-start mt-12 relative gap-x-4">
+      <div className="relative mt-12 flex items-start gap-x-4">
         <CardExpiry
           options={useOptions as StripeCardExpiryElementOptions}
           useFormState={useFormState}
@@ -86,8 +86,8 @@ const CardNumber = ({
 }: {
   useFormState: UseFormReturn<FieldValues, any, undefined>;
   options: StripeCardNumberElementOptions;
-  state: StateProps["state"];
-  setState: StateProps["setState"];
+  state: StateProps['state'];
+  setState: StateProps['setState'];
 }) => {
   const {
     setError,
@@ -96,7 +96,7 @@ const CardNumber = ({
   } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardNumber");
+    clearErrors('cardNumber');
     setState({ ...state, cardNumberComplete: false });
 
     if (event.complete) {
@@ -104,16 +104,16 @@ const CardNumber = ({
     }
 
     if (event.error) {
-      setError("cardNumber", {
-        type: "stripe",
+      setError('cardNumber', {
+        type: 'stripe',
         message: event.error.message,
       });
     }
   };
 
   return (
-    <div className="py-2 relative">
-      <span className="flex items-center gap-x-1 absolute -top-6 txt-medium text-ui-fg-base">
+    <div className="relative py-2">
+      <span className="txt-medium absolute -top-6 flex items-center gap-x-1 text-ui-fg-base">
         Card number
         {state.cardNumberComplete && <CheckCircleMiniSolid />}
       </span>
@@ -123,7 +123,7 @@ const CardNumber = ({
         name="cardNumber"
         render={({ message }) => {
           return (
-            <div className="pt-2 text-rose-500 txt-compact-small">
+            <div className="txt-compact-small pt-2 text-rose-500">
               <span>{message}</span>
             </div>
           );
@@ -141,8 +141,8 @@ const CardExpiry = ({
 }: {
   useFormState: UseFormReturn<FieldValues, any, undefined>;
   options: StripeCardExpiryElementOptions;
-  state: StateProps["state"];
-  setState: StateProps["setState"];
+  state: StateProps['state'];
+  setState: StateProps['setState'];
 }) => {
   const {
     setError,
@@ -151,7 +151,7 @@ const CardExpiry = ({
   } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardExpiry");
+    clearErrors('cardExpiry');
     setState({ ...state, cardExpiryComplete: false });
 
     if (event.complete) {
@@ -159,16 +159,16 @@ const CardExpiry = ({
     }
 
     if (event.error) {
-      setError("cardExpiry", {
-        type: "stripe",
+      setError('cardExpiry', {
+        type: 'stripe',
         message: event.error.message,
       });
     }
   };
 
   return (
-    <div className="w-full py-2 relative">
-      <span className="flex items-center gap-x-1 absolute -top-6 txt-medium text-ui-fg-base">
+    <div className="relative w-full py-2">
+      <span className="txt-medium absolute -top-6 flex items-center gap-x-1 text-ui-fg-base">
         Expiration date
         {state.cardExpiryComplete && <CheckCircleMiniSolid />}
       </span>
@@ -178,7 +178,7 @@ const CardExpiry = ({
         name="cardExpiry"
         render={({ message }) => {
           return (
-            <div className="pt-2 text-rose-500 txt-compact-small">
+            <div className="txt-compact-small pt-2 text-rose-500">
               <span>{message}</span>
             </div>
           );
@@ -196,8 +196,8 @@ const CardCVC = ({
 }: {
   useFormState: UseFormReturn<FieldValues, any, undefined>;
   options: StripeCardCvcElementOptions;
-  state: StateProps["state"];
-  setState: StateProps["setState"];
+  state: StateProps['state'];
+  setState: StateProps['setState'];
 }) => {
   const {
     setError,
@@ -206,7 +206,7 @@ const CardCVC = ({
   } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardCvc");
+    clearErrors('cardCvc');
     setState({ ...state, cardCvcComplete: false });
 
     if (event.complete) {
@@ -214,21 +214,21 @@ const CardCVC = ({
     }
 
     if (event.error) {
-      setError("cardCvc", {
-        type: "stripe",
+      setError('cardCvc', {
+        type: 'stripe',
         message: event.error.message,
       });
     }
   };
 
   return (
-    <div className="w-full py-2 relative">
-      <span className="flex items-center gap-x-1 absolute -top-6 txt-medium text-ui-fg-base">
+    <div className="relative w-full py-2">
+      <span className="txt-medium absolute -top-6 flex items-center gap-x-1 text-ui-fg-base">
         CVC
         {state.cardCvcComplete && <CheckCircleMiniSolid />}
       </span>
       <CardCvcElement
-        options={{ ...options, placeholder: "123" }}
+        options={{ ...options, placeholder: '123' }}
         onChange={handleChange}
       />
       <ErrorMessage
@@ -236,7 +236,7 @@ const CardCVC = ({
         name="cardCvc"
         render={({ message }) => {
           return (
-            <div className="pt-2 text-rose-500 txt-compact-small">
+            <div className="txt-compact-small pt-2 text-rose-500">
               <span>{message}</span>
             </div>
           );

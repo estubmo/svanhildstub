@@ -1,17 +1,17 @@
-import { Button, Container, Text } from "@medusajs/ui";
+import { Button, Container, Text } from '@medusajs/ui';
 
 const OnboardingCta = ({ orderId }: { orderId: string }) => {
   const resetOnboarding = () => {
-    window.sessionStorage.setItem("onboarding", "false");
+    window.sessionStorage.setItem('onboarding', 'false');
   };
 
   return (
-    <Container className="max-w-4xl h-full bg-ui-bg-subtle w-full">
-      <div className="flex flex-col gap-y-4 center p-4 md:items-center">
-        <Text className="text-ui-fg-base text-xl">
+    <Container className="h-full w-full max-w-4xl bg-ui-bg-subtle">
+      <div className="center flex flex-col gap-y-4 p-4 md:items-center">
+        <Text className="text-xl text-ui-fg-base">
           Your test order was successfully created! 🎉
         </Text>
-        <Text className="text-ui-fg-subtle text-small-regular">
+        <Text className="text-small-regular text-ui-fg-subtle">
           You can now complete setting up your store in the admin.
         </Text>
         <a

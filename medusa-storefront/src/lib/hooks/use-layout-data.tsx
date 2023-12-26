@@ -1,11 +1,11 @@
-import { getCollectionsList, getProductsList } from "@lib/data";
-import { getPercentageDiff } from "@lib/util/get-precentage-diff";
-import { ProductCollection, Region } from "@medusajs/medusa";
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
-import { useQuery } from "@tanstack/react-query";
-import { formatAmount, useCart } from "medusa-react";
-import { ProductPreviewType } from "types/global";
-import { CalculatedVariant } from "types/medusa";
+import { getCollectionsList, getProductsList } from '@lib/data';
+import { getPercentageDiff } from '@lib/util/get-precentage-diff';
+import { ProductCollection, Region } from '@medusajs/medusa';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { useQuery } from '@tanstack/react-query';
+import { formatAmount, useCart } from 'medusa-react';
+import { ProductPreviewType } from 'types/global';
+import { CalculatedVariant } from 'types/medusa';
 
 type LayoutCollection = {
   handle: string;
@@ -39,7 +39,7 @@ const fetchCollectionData = async (): Promise<LayoutCollection[]> => {
 export const useNavigationCollections = () => {
   const queryResults = useQuery({
     queryFn: fetchCollectionData,
-    queryKey: ["navigation_collections"],
+    queryKey: ['navigation_collections'],
     staleTime: Infinity,
     refetchOnWindowFocus: false,
   });
@@ -50,7 +50,7 @@ export const useNavigationCollections = () => {
 const fetchFeaturedProducts = async (
   cartId: string,
   region: Region,
-  collectionId?: string
+  collectionId?: string,
 ): Promise<ProductPreviewType[]> => {
   const products: PricedProduct[] = await getProductsList({
     pageParam: 0,
@@ -97,15 +97,15 @@ const fetchFeaturedProducts = async (
               }),
               difference: getPercentageDiff(
                 cheapestVariant.original_price,
-                cheapestVariant.calculated_price
+                cheapestVariant.calculated_price,
               ),
               price_type: cheapestVariant.calculated_price_type,
             }
           : {
-              calculated_price: "N/A",
-              original_price: "N/A",
-              difference: "N/A",
-              price_type: "default",
+              calculated_price: 'N/A',
+              original_price: 'N/A',
+              difference: 'N/A',
+              price_type: 'default',
             },
       };
     });
@@ -115,19 +115,19 @@ export const useFeaturedProductsQuery = (collectionId?: string) => {
   const { cart } = useCart();
 
   const queryResults = useQuery(
-    ["layout_featured_products", cart?.id, cart?.region, collectionId],
+    ['layout_featured_products', cart?.id, cart?.region, collectionId],
     () =>
       fetchFeaturedProducts(
         // @ts-expect-error TODO: Fix this
         cart?.id,
         cart?.region,
-        collectionId && collectionId
+        collectionId && collectionId,
       ),
     {
       enabled: !!cart?.id && !!cart?.region,
       staleTime: Infinity,
       refetchOnWindowFocus: false,
-    }
+    },
   );
 
   return queryResults;

@@ -1,15 +1,15 @@
-import { Customer, Order } from "@medusajs/medusa";
-import { Container } from "@medusajs/ui";
-import ChevronDown from "@modules/common/icons/chevron-down";
-import MapPin from "@modules/common/icons/map-pin";
-import Package from "@modules/common/icons/package";
-import User from "@modules/common/icons/user";
-import { formatAmount } from "medusa-react";
-import Link from "next/link";
+import { Customer, Order } from '@medusajs/medusa';
+import { Container } from '@medusajs/ui';
+import ChevronDown from '@modules/common/icons/chevron-down';
+import MapPin from '@modules/common/icons/map-pin';
+import Package from '@modules/common/icons/package';
+import User from '@modules/common/icons/user';
+import { formatAmount } from 'medusa-react';
+import Link from 'next/link';
 
 type OverviewProps = {
   orders?: Order[];
-  customer?: Omit<Customer, "password_hash">;
+  customer?: Omit<Customer, 'password_hash'>;
 };
 
 const Overview = ({ orders, customer }: OverviewProps) => {
@@ -24,42 +24,42 @@ const Overview = ({ orders, customer }: OverviewProps) => {
             <li>
               <Link
                 href="/account/profile"
-                className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
+                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
               >
                 <>
                   <div className="flex items-center gap-x-2">
                     <User size={16} />
                     <span>Profile</span>
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
+                  <ChevronDown className="-rotate-90 transform" />
                 </>
               </Link>
             </li>
             <li>
               <Link
                 href="/account/addresses"
-                className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
+                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
               >
                 <>
                   <div className="flex items-center gap-x-2">
                     <MapPin size={16} />
                     <span>Addresses</span>
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
+                  <ChevronDown className="-rotate-90 transform" />
                 </>
               </Link>
             </li>
             <li>
               <Link
                 href="/account/orders"
-                className="flex items-center justify-between py-4 border-b border-gray-200 px-8"
+                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
               >
                 <>
                   <div className="flex items-center gap-x-2">
                     <Package size={16} />
                     <span>Orders</span>
                   </div>
-                  <ChevronDown className="transform -rotate-90" />
+                  <ChevronDown className="-rotate-90 transform" />
                 </>
               </Link>
             </li>
@@ -68,23 +68,23 @@ const Overview = ({ orders, customer }: OverviewProps) => {
       </div>
 
       <div className="hidden small:block">
-        <div className="text-xl-semi flex justify-between items-start mb-4">
+        <div className="text-xl-semi mb-4 flex items-start justify-between">
           <span>Hello {customer?.first_name}</span>
           <span className="text-small-regular text-ui-fg-muted">
-            Signed in as:{" "}
+            Signed in as:{' '}
             <span className="font-semibold">{customer?.email}</span>
           </span>
         </div>
-        <div className="flex flex-col py-8 border-t border-gray-200">
-          <div className="flex flex-col gap-y-4 h-full col-span-1 row-span-2 flex-1">
-            <div className="flex items-start gap-x-16 mb-6">
+        <div className="flex flex-col border-t border-gray-200 py-8">
+          <div className="col-span-1 row-span-2 flex h-full flex-1 flex-col gap-y-4">
+            <div className="mb-6 flex items-start gap-x-16">
               <div className="flex flex-col gap-y-4">
                 <h3 className="text-large-semi">Profile</h3>
                 <div className="flex items-end gap-x-2">
                   <span className="text-3xl-semi leading-none">
                     {getProfileCompletion(customer)}%
                   </span>
-                  <span className="uppercase text-base-regular text-gray-500">
+                  <span className="text-base-regular uppercase text-gray-500">
                     Completed
                   </span>
                 </div>
@@ -96,7 +96,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                   <span className="text-3xl-semi leading-none">
                     {customer?.shipping_addresses?.length || 0}
                   </span>
-                  <span className="uppercase text-base-regular text-gray-500">
+                  <span className="text-base-regular uppercase text-gray-500">
                     Saved
                   </span>
                 </div>
@@ -113,8 +113,8 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                     return (
                       <li key={order.id}>
                         <Link href={`/order/details/${order.id}`}>
-                          <Container className="bg-ui-bg-base flex justify-between items-center p-4">
-                            <div className="grid grid-cols-3 grid-rows-2 text-small-regular gap-x-4 flex-1">
+                          <Container className="flex items-center justify-between bg-ui-bg-base p-4">
+                            <div className="text-small-regular grid flex-1 grid-cols-3 grid-rows-2 gap-x-4">
                               <span className="font-semibold">Date placed</span>
                               <span className="font-semibold">
                                 Order number
@@ -160,7 +160,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
   );
 };
 
-const getProfileCompletion = (customer?: Omit<Customer, "password_hash">) => {
+const getProfileCompletion = (customer?: Omit<Customer, 'password_hash'>) => {
   let count = 0;
 
   if (!customer) {

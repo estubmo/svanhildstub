@@ -1,5 +1,5 @@
-import React from "react";
-import { Checkbox, Label } from "@medusajs/ui";
+import { Checkbox, Label } from '@medusajs/ui';
+import React from 'react';
 
 type CheckboxProps = {
   checked?: boolean;

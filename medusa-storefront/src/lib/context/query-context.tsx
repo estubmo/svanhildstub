@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 type QueryContextType = {
   value: string;
@@ -14,7 +14,7 @@ interface QueryProviderProps {
 }
 
 export const QueryProvider = ({ children }: QueryProviderProps) => {
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   return (
     <QueryContext.Provider
       value={{
@@ -30,7 +30,7 @@ export const QueryProvider = ({ children }: QueryProviderProps) => {
 export const useQuery = () => {
   const context = useContext(QueryContext);
   if (context === null) {
-    throw new Error("useQuery must be used within a QueryProvider");
+    throw new Error('useQuery must be used within a QueryProvider');
   }
   return context;
 };

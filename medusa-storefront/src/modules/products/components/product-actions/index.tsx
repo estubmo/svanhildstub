@@ -1,14 +1,14 @@
 import {
   ProductProvider,
   useProductActions,
-} from "@lib/context/product-context";
-import useProductPrice from "@lib/hooks/use-product-price";
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
-import { Button } from "@medusajs/ui";
-import Divider from "@modules/common/components/divider";
-import OptionSelect from "@modules/products/components/option-select";
-import clsx from "clsx";
-import React, { useMemo } from "react";
+} from '@lib/context/product-context';
+import useProductPrice from '@lib/hooks/use-product-price';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { Button } from '@medusajs/ui';
+import Divider from '@modules/common/components/divider';
+import OptionSelect from '@modules/products/components/option-select';
+import clsx from 'clsx';
+import React, { useMemo } from 'react';
 
 type ProductActionsProps = {
   product: PricedProduct;
@@ -51,13 +51,13 @@ const ProductActionsInner: React.FC<ProductActionsProps> = ({ product }) => {
       {selectedPrice ? (
         <div className="flex flex-col text-ui-fg-base">
           <span
-            className={clsx("text-xl-semi", {
-              "text-ui-fg-interactive": selectedPrice.price_type === "sale",
+            className={clsx('text-xl-semi', {
+              'text-ui-fg-interactive': selectedPrice.price_type === 'sale',
             })}
           >
             {selectedPrice.calculated_price}
           </span>
-          {selectedPrice.price_type === "sale" && (
+          {selectedPrice.price_type === 'sale' && (
             <>
               <p>
                 <span className="text-ui-fg-subtle">Original: </span>
@@ -79,13 +79,13 @@ const ProductActionsInner: React.FC<ProductActionsProps> = ({ product }) => {
         onClick={addToCart}
         disabled={!inStock || !variant}
         variant="primary"
-        className="w-full h-10"
+        className="h-10 w-full"
       >
         {!inStock
-          ? "Out of stock"
+          ? 'Out of stock'
           : !variant
-            ? "Select variant"
-            : "Add to cart"}
+            ? 'Select variant'
+            : 'Add to cart'}
       </Button>
     </div>
   );

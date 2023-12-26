@@ -1,18 +1,18 @@
-import { useAccount } from "@lib/context/account-context";
-import useToggleState from "@lib/hooks/use-toggle-state";
-import { emailRegex } from "@lib/util/regex";
-import { Customer } from "@medusajs/medusa";
-import { Button } from "@medusajs/ui";
-import EditButton from "@modules/account/components/edit-button";
-import Input from "@modules/common/components/input";
-import Modal from "@modules/common/components/modal";
-import Spinner from "@modules/common/icons/spinner";
-import { useUpdateMe } from "medusa-react";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useAccount } from '@lib/context/account-context';
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { emailRegex } from '@lib/util/regex';
+import { Customer } from '@medusajs/medusa';
+import { Button } from '@medusajs/ui';
+import EditButton from '@modules/account/components/edit-button';
+import Input from '@modules/common/components/input';
+import Modal from '@modules/common/components/modal';
+import Spinner from '@modules/common/icons/spinner';
+import { useUpdateMe } from 'medusa-react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 type EditEmailModalProps = {
-  customer: Omit<Customer, "password_hash">;
+  customer: Omit<Customer, 'password_hash'>;
 };
 
 type FormValues = {
@@ -44,7 +44,7 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
 
     if (data.email === customer.email) {
       setSubmitting(false);
-      setError("You must enter a new email.");
+      setError('You must enter a new email.');
       return;
     }
 
@@ -58,9 +58,9 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
         },
         onError: () => {
           setSubmitting(false);
-          setError("Unable to update email, try again later.");
+          setError('Unable to update email, try again later.');
         },
-      }
+      },
     );
   });
 
@@ -70,26 +70,26 @@ const EditEmailModal: React.FC<EditEmailModalProps> = ({ customer }) => {
       <Modal isOpen={state} close={close}>
         <Modal.Title>Edit your email</Modal.Title>
         <Modal.Body>
-          <div className="flex flex-col w-full">
+          <div className="flex w-full flex-col">
             <Input
               label="Email"
-              {...register("email", {
-                required: "Email is required",
+              {...register('email', {
+                required: 'Email is required',
                 pattern: {
                   value: emailRegex,
-                  message: "Must be a valid email",
+                  message: 'Must be a valid email',
                 },
               })}
               errors={errors}
             />
           </div>
           {error && (
-            <div className="text-rose-500 text-small-regular py-2">{error}</div>
+            <div className="text-small-regular py-2 text-rose-500">{error}</div>
           )}
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className="!bg-gray-200 !text-ui-fg-base !border-gray-200 min-h-0"
+            className="min-h-0 !border-gray-200 !bg-gray-200 !text-ui-fg-base"
             onClick={close}
           >
             Cancel

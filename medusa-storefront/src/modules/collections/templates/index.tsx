@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { getProductsByCollectionHandle } from "@lib/data";
-import usePreviews from "@lib/hooks/use-previews";
-import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons";
-import repeat from "@lib/util/repeat";
-import { ProductCollection } from "@medusajs/medusa";
-import ProductPreview from "@modules/products/components/product-preview";
-import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useCart } from "medusa-react";
-import React, { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { getProductsByCollectionHandle } from '@lib/data';
+import usePreviews from '@lib/hooks/use-previews';
+import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons';
+import repeat from '@lib/util/repeat';
+import { ProductCollection } from '@medusajs/medusa';
+import ProductPreview from '@modules/products/components/product-preview';
+import SkeletonProductPreview from '@modules/skeletons/components/skeleton-product-preview';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useCart } from 'medusa-react';
+import React, { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
   collection,
@@ -35,7 +35,7 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
       }),
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
-    }
+    },
   );
 
   useEffect(() => {
@@ -58,10 +58,10 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
 
   return (
     <div className="content-container py-6">
-      <div className="mb-8 text-2xl-semi">
+      <div className="text-2xl-semi mb-8">
         <h1>{collection.title}</h1>
       </div>
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
+      <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
         {previews.map((p) => (
           <li key={p.id}>
             <ProductPreview {...p} />
@@ -75,7 +75,7 @@ const CollectionTemplate: React.FC<{ collection: ProductCollection }> = ({
           ))}
       </ul>
       <div
-        className="py-16 flex justify-center items-center text-small-regular text-ui-fg-subtle"
+        className="text-small-regular flex items-center justify-center py-16 text-ui-fg-subtle"
         ref={ref}
       >
         <span ref={ref}></span>

@@ -2,28 +2,28 @@ const SkeletonCartTotals = ({ header = true }) => {
   return (
     <div className="flex flex-col">
       {header && (
-        <div className="w-32 h-4 bg-gray-200 mb-4 animate-pulse"></div>
+        <div className="mb-4 h-4 w-32 animate-pulse bg-gray-200"></div>
       )}
       <div className="flex items-center justify-between">
-        <div className="w-32 h-3 bg-gray-200 animate-pulse"></div>
-        <div className="w-32 h-3 bg-gray-200 animate-pulse"></div>
+        <div className="h-3 w-32 animate-pulse bg-gray-200"></div>
+        <div className="h-3 w-32 animate-pulse bg-gray-200"></div>
       </div>
 
-      <div className="flex items-center justify-between my-4">
-        <div className="w-24 h-3 bg-gray-200 animate-pulse"></div>
-        <div className="w-24 h-3 bg-gray-200 animate-pulse"></div>
+      <div className="my-4 flex items-center justify-between">
+        <div className="h-3 w-24 animate-pulse bg-gray-200"></div>
+        <div className="h-3 w-24 animate-pulse bg-gray-200"></div>
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="w-28 h-3 bg-gray-200 animate-pulse"></div>
-        <div className="w-20 h-3 bg-gray-200 animate-pulse"></div>
+        <div className="h-3 w-28 animate-pulse bg-gray-200"></div>
+        <div className="h-3 w-20 animate-pulse bg-gray-200"></div>
       </div>
 
-      <div className="w-full border-b border-gray-200 border-dashed my-4"></div>
+      <div className="my-4 w-full border-b border-dashed border-gray-200"></div>
 
       <div className="flex items-center justify-between">
-        <div className="w-32 h-6 bg-gray-200 animate-pulse mb-4"></div>
-        <div className="w-24 h-6 bg-gray-200 animate-pulse mb-4"></div>
+        <div className="mb-4 h-6 w-32 animate-pulse bg-gray-200"></div>
+        <div className="mb-4 h-6 w-24 animate-pulse bg-gray-200"></div>
       </div>
     </div>
   );

@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { medusaClient } from "@lib/config";
-import useToggleState, { StateType } from "@lib/hooks/use-toggle-state";
-import { isEqual } from "@lib/is-equal";
+import { medusaClient } from '@lib/config';
+import useToggleState, { StateType } from '@lib/hooks/use-toggle-state';
+import { isEqual } from '@lib/is-equal';
 import {
   Address,
   Cart,
   Customer,
   StorePostCartsCartReq,
-} from "@medusajs/medusa";
-import Wrapper from "@modules/checkout/components/payment-wrapper";
-import Spinner from "@modules/common/icons/spinner";
+} from '@medusajs/medusa';
+import Wrapper from '@modules/checkout/components/payment-wrapper';
+import Spinner from '@modules/common/icons/spinner';
 import {
   formatAmount,
   useCart,
@@ -19,17 +19,18 @@ import {
   useRegions,
   useSetPaymentSession,
   useUpdateCart,
-} from "medusa-react";
-import { useRouter } from "next/navigation";
+} from 'medusa-react';
+import { useRouter } from 'next/navigation';
 import React, {
   createContext,
   useCallback,
   useContext,
   useEffect,
   useMemo,
-} from "react";
-import { FormProvider, useForm, useFormContext } from "react-hook-form";
-import { useStore } from "./store-context";
+} from 'react';
+import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+
+import { useStore } from './store-context';
 
 type AddressValues = {
   first_name: string;
@@ -51,7 +52,7 @@ export type CheckoutFormValues = {
 };
 
 interface CheckoutContext {
-  cart?: Omit<Cart, "refundable_amount" | "refunded_total">;
+  cart?: Omit<Cart, 'refundable_amount' | 'refunded_total'>;
   shippingMethods: { label?: string; value?: string; price: string }[];
   isLoading: boolean;
   addressReady: boolean;
@@ -77,7 +78,7 @@ interface CheckoutProviderProps {
   children?: React.ReactNode;
 }
 
-const IDEMPOTENCY_KEY = "create_payment_session_key";
+const IDEMPOTENCY_KEY = 'create_payment_session_key';
 
 export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   const {
@@ -95,19 +96,19 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
 
   const methods = useForm<CheckoutFormValues>({
     defaultValues: mapFormValues(customer, cart, countryCode),
-    reValidateMode: "onChange",
+    reValidateMode: 'onChange',
   });
 
   const {
     mutate: setPaymentSessionMutation,
     isLoading: settingPaymentSession,
-  } = useSetPaymentSession(cart?.id || "");
+  } = useSetPaymentSession(cart?.id || '');
 
   const { mutate: updateCart, isLoading: updatingCart } = useUpdateCart(
-    cart?.id || ""
+    cart?.id || '',
   );
 
-  const { shipping_options } = useCartShippingOptions(cart?.id || "", {
+  const { shipping_options } = useCartShippingOptions(cart?.id || '', {
     enabled: !!cart?.id,
   });
 
@@ -120,7 +121,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   const sameAsBilling = useToggleState(
     cart?.billing_address && cart?.shipping_address
       ? isEqual(cart.billing_address, cart.shipping_address)
-      : true
+      : true,
   );
 
   const editShipping = useToggleState();
@@ -216,7 +217,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
         { option_id: soId },
         {
           onSuccess: ({ cart }) => setCart(cart),
-        }
+        },
       );
     }
   };
@@ -228,7 +229,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
     if (cart?.id && !cart.payment_sessions?.length && cart?.items?.length) {
       return medusaClient.carts
         .createPaymentSessions(cart.id, {
-          "Idempotency-Key": IDEMPOTENCY_KEY,
+          'Idempotency-Key': IDEMPOTENCY_KEY,
         })
         .then(({ cart }) => cart && setCart(cart))
         .catch((err) => err);
@@ -256,7 +257,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
           onSuccess: ({ cart }) => {
             setCart(cart);
           },
-        }
+        },
       );
     }
   };
@@ -264,17 +265,17 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   const setSavedAddress = (address: Address) => {
     const setValue = methods.setValue;
 
-    setValue("shipping_address", {
-      address_1: address.address_1 || "",
-      address_2: address.address_2 || "",
-      city: address.city || "",
-      country_code: address.country_code || "",
-      first_name: address.first_name || "",
-      last_name: address.last_name || "",
-      phone: address.phone || "",
-      postal_code: address.postal_code || "",
-      province: address.province || "",
-      company: address.company || "",
+    setValue('shipping_address', {
+      address_1: address.address_1 || '',
+      address_2: address.address_2 || '',
+      city: address.city || '',
+      country_code: address.country_code || '',
+      first_name: address.first_name || '',
+      last_name: address.last_name || '',
+      phone: address.phone || '',
+      postal_code: address.postal_code || '',
+      province: address.province || '',
+      company: address.company || '',
     });
   };
 
@@ -284,7 +285,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
   const validateRegion = (countryCode: string) => {
     if (regions && cart) {
       const region = regions.find((r) =>
-        r.countries.map((c) => c.iso_2).includes(countryCode)
+        r.countries.map((c) => c.iso_2).includes(countryCode),
       );
 
       if (region && region.id !== cart.region.id) {
@@ -361,8 +362,8 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
           onPaymentCompleted,
         }}
       >
-        {isLoading && cart?.id === "" ? (
-          <div className="flex justify-center items-center h-screen">
+        {isLoading && cart?.id === '' ? (
+          <div className="flex h-screen items-center justify-center">
             <div className="w-auto">
               <Spinner size={40} />
             </div>
@@ -380,7 +381,7 @@ export const useCheckout = () => {
   const form = useFormContext<CheckoutFormValues>();
   if (context === null) {
     throw new Error(
-      "useProductActionContext must be used within a ProductActionProvider"
+      'useProductActionContext must be used within a ProductActionProvider',
     );
   }
   return { ...context, ...form };
@@ -393,9 +394,9 @@ export const useCheckout = () => {
  * 3. Default values - null
  */
 const mapFormValues = (
-  customer?: Omit<Customer, "password_hash">,
-  cart?: Omit<Cart, "refundable_amount" | "refunded_total">,
-  currentCountry?: string
+  customer?: Omit<Customer, 'password_hash'>,
+  cart?: Omit<Cart, 'refundable_amount' | 'refunded_total'>,
+  currentCountry?: string,
 ): CheckoutFormValues => {
   const customerShippingAddress = customer?.shipping_addresses?.[0];
   const customerBillingAddress = customer?.billing_address;
@@ -405,75 +406,75 @@ const mapFormValues = (
       first_name:
         cart?.shipping_address?.first_name ||
         customerShippingAddress?.first_name ||
-        "",
+        '',
       last_name:
         cart?.shipping_address?.last_name ||
         customerShippingAddress?.last_name ||
-        "",
+        '',
       address_1:
         cart?.shipping_address?.address_1 ||
         customerShippingAddress?.address_1 ||
-        "",
+        '',
       address_2:
         cart?.shipping_address?.address_2 ||
         customerShippingAddress?.address_2 ||
-        "",
-      city: cart?.shipping_address?.city || customerShippingAddress?.city || "",
+        '',
+      city: cart?.shipping_address?.city || customerShippingAddress?.city || '',
       country_code:
         currentCountry ||
         cart?.shipping_address?.country_code ||
         customerShippingAddress?.country_code ||
-        "",
+        '',
       province:
         cart?.shipping_address?.province ||
         customerShippingAddress?.province ||
-        "",
+        '',
       company:
         cart?.shipping_address?.company ||
         customerShippingAddress?.company ||
-        "",
+        '',
       postal_code:
         cart?.shipping_address?.postal_code ||
         customerShippingAddress?.postal_code ||
-        "",
+        '',
       phone:
-        cart?.shipping_address?.phone || customerShippingAddress?.phone || "",
+        cart?.shipping_address?.phone || customerShippingAddress?.phone || '',
     },
     billing_address: {
       first_name:
         cart?.billing_address?.first_name ||
         customerBillingAddress?.first_name ||
-        "",
+        '',
       last_name:
         cart?.billing_address?.last_name ||
         customerBillingAddress?.last_name ||
-        "",
+        '',
       address_1:
         cart?.billing_address?.address_1 ||
         customerBillingAddress?.address_1 ||
-        "",
+        '',
       address_2:
         cart?.billing_address?.address_2 ||
         customerBillingAddress?.address_2 ||
-        "",
-      city: cart?.billing_address?.city || customerBillingAddress?.city || "",
+        '',
+      city: cart?.billing_address?.city || customerBillingAddress?.city || '',
       country_code:
         cart?.shipping_address?.country_code ||
         customerBillingAddress?.country_code ||
-        "",
+        '',
       province:
         cart?.shipping_address?.province ||
         customerBillingAddress?.province ||
-        "",
+        '',
       company:
-        cart?.billing_address?.company || customerBillingAddress?.company || "",
+        cart?.billing_address?.company || customerBillingAddress?.company || '',
       postal_code:
         cart?.billing_address?.postal_code ||
         customerBillingAddress?.postal_code ||
-        "",
+        '',
       phone:
-        cart?.billing_address?.phone || customerBillingAddress?.phone || "",
+        cart?.billing_address?.phone || customerBillingAddress?.phone || '',
     },
-    email: cart?.email || customer?.email || "",
+    email: cart?.email || customer?.email || '',
   };
 };

@@ -1,7 +1,8 @@
-import { CheckoutFormValues } from "@lib/context/checkout-context";
-import ConnectForm from "@modules/common/components/connect-form";
-import Input from "@modules/common/components/input";
-import CountrySelect from "../country-select";
+import { CheckoutFormValues } from '@lib/context/checkout-context';
+import ConnectForm from '@modules/common/components/connect-form';
+import Input from '@modules/common/components/input';
+
+import CountrySelect from '../country-select';
 
 const BillingAddress = () => {
   return (
@@ -10,8 +11,8 @@ const BillingAddress = () => {
         <div className="grid grid-cols-2 gap-4">
           <Input
             label="First name"
-            {...register("billing_address.first_name", {
-              required: "First name is required",
+            {...register('billing_address.first_name', {
+              required: 'First name is required',
             })}
             autoComplete="given-name"
             errors={errors}
@@ -20,8 +21,8 @@ const BillingAddress = () => {
           />
           <Input
             label="Last name"
-            {...register("billing_address.last_name", {
-              required: "Last name is required",
+            {...register('billing_address.last_name', {
+              required: 'Last name is required',
             })}
             autoComplete="family-name"
             errors={errors}
@@ -30,8 +31,8 @@ const BillingAddress = () => {
           />
           <Input
             label="Address"
-            {...register("billing_address.address_1", {
-              required: "Address is required",
+            {...register('billing_address.address_1', {
+              required: 'Address is required',
             })}
             autoComplete="address-line1"
             errors={errors}
@@ -40,15 +41,15 @@ const BillingAddress = () => {
           />
           <Input
             label="Company"
-            {...register("billing_address.company")}
+            {...register('billing_address.company')}
             autoComplete="organization"
             errors={errors}
             touched={touchedFields}
           />
           <Input
             label="Postal code"
-            {...register("billing_address.postal_code", {
-              required: "Postal code is required",
+            {...register('billing_address.postal_code', {
+              required: 'Postal code is required',
             })}
             autoComplete="postal-code"
             errors={errors}
@@ -57,8 +58,8 @@ const BillingAddress = () => {
           />
           <Input
             label="City"
-            {...register("billing_address.city", {
-              required: "City is required",
+            {...register('billing_address.city', {
+              required: 'City is required',
             })}
             autoComplete="address-level2"
             errors={errors}
@@ -66,8 +67,8 @@ const BillingAddress = () => {
             required
           />
           <CountrySelect
-            {...register("billing_address.country_code", {
-              required: "Country is required",
+            {...register('billing_address.country_code', {
+              required: 'Country is required',
             })}
             autoComplete="country"
             errors={errors}
@@ -76,14 +77,14 @@ const BillingAddress = () => {
           />
           <Input
             label="State / Province"
-            {...register("billing_address.province")}
+            {...register('billing_address.province')}
             autoComplete="address-level1"
             errors={errors}
             touched={touchedFields}
           />
           <Input
             label="Phone"
-            {...register("billing_address.phone")}
+            {...register('billing_address.phone')}
             autoComplete="tel"
             errors={errors}
             touched={touchedFields}

@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { StoreGetProductsParams } from "@medusajs/medusa";
-import CollectionFilter from "./collection-filter";
-import SortProducts, { SortOptions } from "./sort-products";
+import { StoreGetProductsParams } from '@medusajs/medusa';
+
+import CollectionFilter from './collection-filter';
+import SortProducts, { SortOptions } from './sort-products';
 
 type RefinementListProps = {
   refinementList: StoreGetProductsParams;
@@ -19,7 +20,7 @@ const RefinementList = ({
   search = false,
 }: RefinementListProps) => {
   return (
-    <div className="flex small:flex-col gap-12 px-8 py-4 mb-8 small:pr-0 small:pl-8 small:min-w-[250px] small:ml-[1.675rem]">
+    <div className="mb-8 flex gap-12 px-8 py-4 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:pl-8 small:pr-0">
       <SortProducts sortBy={sortBy} setSortBy={setSortBy} />
       {!search && (
         <CollectionFilter

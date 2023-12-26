@@ -1,14 +1,13 @@
-import medusaRequest from "@lib/medusa-fetch";
-import OrderDetailsTemplate from "@modules/order/templates/order-details-template";
-
-import { Metadata } from "next";
+import medusaRequest from '@lib/medusa-fetch';
+import OrderDetailsTemplate from '@modules/order/templates/order-details-template';
+import { Metadata } from 'next';
 
 type Props = {
   params: { id: string };
 };
 
 async function getOrder(id: string) {
-  const res = await medusaRequest("GET", `/orders/${id}`);
+  const res = await medusaRequest('GET', `/orders/${id}`);
 
   if (!res.ok) {
     throw new Error(`Failed to fetch order: ${id}`);

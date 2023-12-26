@@ -1,17 +1,18 @@
-"use client";
+'use client';
 
-import { medusaClient } from "@lib/config";
-import { handleError } from "@lib/util/handle-error";
-import { Region } from "@medusajs/medusa";
+import { medusaClient } from '@lib/config';
+import { handleError } from '@lib/util/handle-error';
+import { Region } from '@medusajs/medusa';
 import {
   useCart,
   useCreateLineItem,
   useDeleteLineItem,
   useUpdateLineItem,
-} from "medusa-react";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { useCartDropdown } from "./cart-dropdown-context";
+} from 'medusa-react';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+
+import { useCartDropdown } from './cart-dropdown-context';
 
 interface VariantInfoProps {
   variantId: string;
@@ -37,7 +38,7 @@ const StoreContext = React.createContext<StoreContext | null>(null);
 export const useStore = () => {
   const context = React.useContext(StoreContext);
   if (context === null) {
-    throw new Error("useStore must be used within a StoreProvider");
+    throw new Error('useStore must be used within a StoreProvider');
   }
   return context;
 };
@@ -46,27 +47,27 @@ interface StoreProps {
   children: React.ReactNode;
 }
 
-const IS_SERVER = typeof window === "undefined";
-const CART_KEY = "medusa_cart_id";
-const REGION_KEY = "medusa_region";
+const IS_SERVER = typeof window === 'undefined';
+const CART_KEY = 'medusa_cart_id';
+const REGION_KEY = 'medusa_region';
 
 export const StoreProvider = ({ children }: StoreProps) => {
   const { cart, setCart, createCart, updateCart } = useCart();
   const [countryCode, setCountryCode] = useState<string | undefined>(undefined);
   const { timedOpen } = useCartDropdown();
 
-  const addLineItem = useCreateLineItem(cart?.id || "");
-  const removeLineItem = useDeleteLineItem(cart?.id || "");
-  const adjustLineItem = useUpdateLineItem(cart?.id || "");
+  const addLineItem = useCreateLineItem(cart?.id || '');
+  const removeLineItem = useDeleteLineItem(cart?.id || '');
+  const adjustLineItem = useUpdateLineItem(cart?.id || '');
 
   // check if the user is onboarding and sets the onboarding session storage
   const searchParams = useSearchParams();
-  const onboardingCartId = searchParams.get("cart_id");
-  const isOnboarding = searchParams.get("onboarding");
+  const onboardingCartId = searchParams.get('cart_id');
+  const isOnboarding = searchParams.get('onboarding');
 
   useEffect(() => {
-    if (isOnboarding === "true") {
-      sessionStorage.setItem("onboarding", "true");
+    if (isOnboarding === 'true') {
+      sessionStorage.setItem('onboarding', 'true');
     }
   }, [isOnboarding]);
 
@@ -74,7 +75,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
     if (!IS_SERVER) {
       localStorage.setItem(
         REGION_KEY,
-        JSON.stringify({ regionId, countryCode })
+        JSON.stringify({ regionId, countryCode }),
       );
 
       setCountryCode(countryCode);
@@ -113,11 +114,11 @@ export const StoreProvider = ({ children }: StoreProps) => {
           storeRegion(regionId, countryCode);
         },
         onError: (error) => {
-          if (process.env.NODE_ENV === "development") {
+          if (process.env.NODE_ENV === 'development') {
             console.error(error);
           }
         },
-      }
+      },
     );
   };
 
@@ -174,11 +175,11 @@ export const StoreProvider = ({ children }: StoreProps) => {
           ensureRegion(cart.region, cart.shipping_address?.country_code);
         },
         onError: (error) => {
-          if (process.env.NODE_ENV === "development") {
+          if (process.env.NODE_ENV === 'development') {
             console.error(error);
           }
         },
-      }
+      },
     );
   };
 
@@ -198,11 +199,11 @@ export const StoreProvider = ({ children }: StoreProps) => {
           ensureRegion(cart.region, cart.shipping_address?.country_code);
         },
         onError: (error) => {
-          if (process.env.NODE_ENV === "development") {
+          if (process.env.NODE_ENV === 'development') {
             console.error(error);
           }
         },
-      }
+      },
     );
   };
 
@@ -262,7 +263,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
         onError: (error) => {
           handleError(error);
         },
-      }
+      },
     );
   };
 
@@ -279,7 +280,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
         onError: (error) => {
           handleError(error);
         },
-      }
+      },
     );
   };
 
@@ -303,7 +304,7 @@ export const StoreProvider = ({ children }: StoreProps) => {
         onError: (error) => {
           handleError(error);
         },
-      }
+      },
     );
   };
 

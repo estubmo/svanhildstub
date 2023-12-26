@@ -1,5 +1,6 @@
-import { ProductCollection } from "@medusajs/medusa";
-import ProductRail from "./product-rail";
+import { ProductCollection } from '@medusajs/medusa';
+
+import ProductRail from './product-rail';
 
 const FeaturedProducts = ({
   collections,

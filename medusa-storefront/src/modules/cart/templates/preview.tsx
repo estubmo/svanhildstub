@@ -1,10 +1,10 @@
-import { LineItem, Region } from "@medusajs/medusa";
-import { Table, clx } from "@medusajs/ui";
-import Item from "@modules/cart/components/item";
-import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item";
+import { LineItem, Region } from '@medusajs/medusa';
+import { clx, Table } from '@medusajs/ui';
+import Item from '@modules/cart/components/item';
+import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item';
 
 type ItemsTemplateProps = {
-  items?: Omit<LineItem, "beforeInsert">[];
+  items?: Omit<LineItem, 'beforeInsert'>[];
   region?: Region;
 };
 
@@ -14,7 +14,7 @@ const ItemsPreviewTemplate = ({ items, region }: ItemsTemplateProps) => {
   return (
     <div
       className={clx({
-        "pl-[1px] overflow-y-scroll overflow-x-hidden no-scrollbar max-h-[420px]":
+        'no-scrollbar max-h-[420px] overflow-x-hidden overflow-y-scroll pl-[1px]':
           hasOverflow,
       })}
     >

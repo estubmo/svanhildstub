@@ -1,10 +1,11 @@
-import SearchResultsTemplate from "@modules/search/templates/search-results-template";
-import { Metadata } from "next";
-import { search } from "../actions";
+import SearchResultsTemplate from '@modules/search/templates/search-results-template';
+import { Metadata } from 'next';
+
+import { search } from '../actions';
 
 export const metadata: Metadata = {
-  title: "Search",
-  description: "Explore all of our products.",
+  title: 'Search',
+  description: 'Explore all of our products.',
 };
 
 export default async function StorePage({

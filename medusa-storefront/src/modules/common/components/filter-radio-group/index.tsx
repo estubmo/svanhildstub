@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { EllipseMiniSolid } from "@medusajs/icons";
-import { Label, RadioGroup, Text, clx } from "@medusajs/ui";
-import { ChangeEvent } from "react";
+import { EllipseMiniSolid } from '@medusajs/icons';
+import { clx, Label, RadioGroup, Text } from '@medusajs/ui';
+import { ChangeEvent } from 'react';
 
 type FilterRadioGroupProps = {
   title: string;
@@ -20,14 +20,14 @@ const FilterRadioGroup = ({
   handleChange,
 }: FilterRadioGroupProps) => {
   return (
-    <div className="flex gap-x-3 flex-col gap-y-3">
+    <div className="flex flex-col gap-x-3 gap-y-3">
       <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
       <RadioGroup>
         {items?.map((i) => (
           <div
             key={i.value}
-            className={clx("flex gap-x-2 items-center", {
-              "ml-[-1.75rem]": i.value === value,
+            className={clx('flex items-center gap-x-2', {
+              'ml-[-1.75rem]': i.value === value,
             })}
           >
             {i.value === value && <EllipseMiniSolid />}
@@ -36,20 +36,20 @@ const FilterRadioGroup = ({
               onClick={(e) =>
                 handleChange(
                   e as unknown as ChangeEvent<HTMLButtonElement>,
-                  i.value
+                  i.value,
                 )
               }
-              className="hidden peer"
+              className="peer hidden"
               id={i.value}
               value={i.value}
             />
             <Label
               htmlFor={i.value}
               className={clx(
-                "text-ui-fg-subtle txt-compact-small-plus hover:cursor-pointer",
+                'txt-compact-small-plus text-ui-fg-subtle hover:cursor-pointer',
                 {
-                  "text-ui-fg-base": i.value === value,
-                }
+                  'text-ui-fg-base': i.value === value,
+                },
               )}
             >
               {i.label}

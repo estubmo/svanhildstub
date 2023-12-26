@@ -1,10 +1,9 @@
-import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items";
-import { LineItem, Region } from "@medusajs/medusa";
-import { Table } from "@medusajs/ui";
-import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item";
-
-import Item from "@modules/order/components/item";
-import Divider from "@modules/common/components/divider";
+import useEnrichedLineItems from '@lib/hooks/use-enrich-line-items';
+import { LineItem, Region } from '@medusajs/medusa';
+import { Table } from '@medusajs/ui';
+import Divider from '@modules/common/components/divider';
+import Item from '@modules/order/components/item';
+import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item';
 
 type ItemsProps = {
   items: LineItem[];

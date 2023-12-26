@@ -1,10 +1,11 @@
-import { RadioGroup } from "@headlessui/react";
-import { InformationCircleSolid } from "@medusajs/icons";
-import { PaymentSession } from "@medusajs/medusa";
-import { Text, Tooltip, clx } from "@medusajs/ui";
-import Radio from "@modules/common/components/radio";
-import React from "react";
-import PaymentTest from "../payment-test";
+import { RadioGroup } from '@headlessui/react';
+import { InformationCircleSolid } from '@medusajs/icons';
+import { PaymentSession } from '@medusajs/medusa';
+import { clx, Text, Tooltip } from '@medusajs/ui';
+import Radio from '@modules/common/components/radio';
+import React from 'react';
+
+import PaymentTest from '../payment-test';
 
 type PaymentContainerProps = {
   paymentSession: PaymentSession;
@@ -19,7 +20,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
   paymentInfoMap,
   disabled = false,
 }) => {
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   return (
     <>
@@ -28,11 +29,11 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
         value={paymentSession.provider_id}
         disabled={disabled}
         className={clx(
-          "flex flex-col gap-y-2 text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+          'text-small-regular mb-2 flex cursor-pointer flex-col gap-y-2 rounded-rounded border px-8 py-4 hover:shadow-borders-interactive-with-active',
           {
-            "border-ui-border-interactive":
+            'border-ui-border-interactive':
               selectedPaymentOptionId === paymentSession.provider_id,
-          }
+          },
         )}
       >
         <div className="flex items-center justify-between ">
@@ -44,7 +45,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
               {paymentInfoMap[paymentSession.provider_id]?.title ||
                 paymentSession.provider_id}
             </Text>
-            {process.env.NODE_ENV === "development" &&
+            {process.env.NODE_ENV === 'development' &&
               !Object.hasOwn(paymentInfoMap, paymentSession.provider_id) && (
                 <Tooltip
                   content="You can add a user-friendly name and icon for this payment provider in 'src/modules/checkout/components/payment/index.tsx'"
@@ -54,7 +55,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
                 </Tooltip>
               )}
 
-            {paymentSession.provider_id === "manual" && isDevelopment && (
+            {paymentSession.provider_id === 'manual' && isDevelopment && (
               <PaymentTest className="hidden small:block" />
             )}
           </div>
@@ -62,8 +63,8 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
             {paymentInfoMap[paymentSession.provider_id]?.icon}
           </span>
         </div>
-        {paymentSession.provider_id === "manual" && isDevelopment && (
-          <PaymentTest className="small:hidden text-[10px]" />
+        {paymentSession.provider_id === 'manual' && isDevelopment && (
+          <PaymentTest className="text-[10px] small:hidden" />
         )}
       </RadioGroup.Option>
     </>

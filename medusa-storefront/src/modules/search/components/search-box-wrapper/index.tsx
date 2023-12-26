@@ -1,10 +1,10 @@
-import { useQuery } from "@lib/context/query-context";
-import { useDebounce } from "@lib/hooks/use-debounce";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from "react";
-import { UseSearchBoxProps, useSearchBox } from "react-instantsearch";
+import { useQuery } from '@lib/context/query-context';
+import { useDebounce } from '@lib/hooks/use-debounce';
+import { useRouter } from 'next/navigation';
+import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from 'react';
+import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch';
 
-export type ControlledSearchBoxProps = React.ComponentProps<"div"> & {
+export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
   onChange(_event: ChangeEvent): void;
   onReset(_event: FormEvent): void;
@@ -28,7 +28,7 @@ type SearchBoxProps = {
 
 const SearchBoxWrapper = ({
   children,
-  placeholder = "Search products...",
+  placeholder = 'Search products...',
   shouldFocus = false,
   ...rest
 }: SearchBoxProps) => {
@@ -47,7 +47,7 @@ const SearchBoxWrapper = ({
   const router = useRouter();
 
   const onReset = () => {
-    setValue("");
+    setValue('');
   };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {

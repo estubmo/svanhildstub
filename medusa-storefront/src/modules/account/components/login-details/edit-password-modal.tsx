@@ -1,18 +1,18 @@
-import { medusaClient } from "@lib/config";
-import { useAccount } from "@lib/context/account-context";
-import useToggleState from "@lib/hooks/use-toggle-state";
-import { Customer } from "@medusajs/medusa";
-import { Button } from "@medusajs/ui";
-import EditButton from "@modules/account/components/edit-button";
-import Input from "@modules/common/components/input";
-import Modal from "@modules/common/components/modal";
-import Spinner from "@modules/common/icons/spinner";
-import { useUpdateMe } from "medusa-react";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { medusaClient } from '@lib/config';
+import { useAccount } from '@lib/context/account-context';
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { Customer } from '@medusajs/medusa';
+import { Button } from '@medusajs/ui';
+import EditButton from '@modules/account/components/edit-button';
+import Input from '@modules/common/components/input';
+import Modal from '@modules/common/components/modal';
+import Spinner from '@modules/common/icons/spinner';
+import { useUpdateMe } from 'medusa-react';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 type EditPasswordModalProps = {
-  customer: Omit<Customer, "password_hash">;
+  customer: Omit<Customer, 'password_hash'>;
 };
 
 type FormValues = {
@@ -47,7 +47,7 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
 
     if (data.old_password === data.new_password) {
       setSubmitting(false);
-      setError("New password must be different from old password.");
+      setError('New password must be different from old password.');
       return;
     }
 
@@ -61,7 +61,7 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
       });
 
     if (!passwordMatches) {
-      setError("Old password does not match our records.");
+      setError('Old password does not match our records.');
       setSubmitting(false);
       return;
     }
@@ -80,9 +80,9 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
         },
         onError: () => {
           setSubmitting(false);
-          setError("Unable to update password, try again later.");
+          setError('Unable to update password, try again later.');
         },
-      }
+      },
     );
   });
 
@@ -95,8 +95,8 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
           <div className="flex flex-col gap-y-8">
             <Input
               label="Old password"
-              {...register("old_password", {
-                required: "Old password is required",
+              {...register('old_password', {
+                required: 'Old password is required',
               })}
               type="password"
               autoComplete="password"
@@ -104,8 +104,8 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
             />
             <Input
               label="New password"
-              {...register("new_password", {
-                required: "New password is required",
+              {...register('new_password', {
+                required: 'New password is required',
               })}
               type="password"
               autoComplete="new_password"
@@ -113,12 +113,12 @@ const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ customer }) => {
             />
           </div>
           {error && (
-            <div className="text-rose-500 text-small-regular py-2">{error}</div>
+            <div className="text-small-regular py-2 text-rose-500">{error}</div>
           )}
         </Modal.Body>
         <Modal.Footer>
           <Button
-            className="!bg-gray-200 !text-ui-fg-base !border-gray-200 min-h-0"
+            className="min-h-0 !border-gray-200 !bg-gray-200 !text-ui-fg-base"
             onClick={close}
           >
             Cancel

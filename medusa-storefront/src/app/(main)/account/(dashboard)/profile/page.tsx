@@ -1,9 +1,9 @@
-import ProfileTemplate from "@modules/account/templates/profile-template";
-import { Metadata } from "next";
+import ProfileTemplate from '@modules/account/templates/profile-template';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Profile",
-  description: "View and edit your profile.",
+  title: 'Profile',
+  description: 'View and edit your profile.',
 };
 
 export default function Profile() {

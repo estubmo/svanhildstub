@@ -1,7 +1,7 @@
-import { omit } from "@lib/omit";
-import { LineItem } from "@medusajs/medusa";
-import { useCart, useProducts } from "medusa-react";
-import { useMemo } from "react";
+import { omit } from '@lib/omit';
+import { LineItem } from '@medusajs/medusa';
+import { useCart, useProducts } from 'medusa-react';
+import { useMemo } from 'react';
 
 /**
  * A hook that returns an array of enriched line items.
@@ -38,7 +38,7 @@ const useEnrichedLineItems = (lineItems?: LineItem[], cartId?: string) => {
       return [];
     }
 
-    const enrichedItems: Omit<LineItem, "beforeInsert">[] = [];
+    const enrichedItems: Omit<LineItem, 'beforeInsert'>[] = [];
 
     for (const item of currItems) {
       const product = products.find((p) => p.id === item.variant.product_id);
@@ -60,7 +60,7 @@ const useEnrichedLineItems = (lineItems?: LineItem[], cartId?: string) => {
         variant: {
           ...variant,
           // @ts-expect-error Pick does not work with nested objects
-          product: omit(product, ["variants"]),
+          product: omit(product, ['variants']),
         },
       });
     }

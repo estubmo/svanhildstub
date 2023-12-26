@@ -7,9 +7,9 @@ export const isEqual = <TType>(x: TType, y: TType): boolean => {
     return x.toString() === y.toString();
   }
   if (
-    typeof x !== "object" ||
+    typeof x !== 'object' ||
     x === null ||
-    typeof y !== "object" ||
+    typeof y !== 'object' ||
     y === null
   ) {
     return false;

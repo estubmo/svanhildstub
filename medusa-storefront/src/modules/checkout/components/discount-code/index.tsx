@@ -1,20 +1,20 @@
-import { medusaClient } from "@lib/config";
-import { InformationCircleSolid } from "@medusajs/icons";
-import { Cart } from "@medusajs/medusa";
-import { Button, Heading, Label, Text, Tooltip } from "@medusajs/ui";
-import Input from "@modules/common/components/input";
-import Trash from "@modules/common/icons/trash";
-import { useMutation } from "@tanstack/react-query";
-import { formatAmount, useCart, useUpdateCart } from "medusa-react";
-import React, { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { medusaClient } from '@lib/config';
+import { InformationCircleSolid } from '@medusajs/icons';
+import { Cart } from '@medusajs/medusa';
+import { Button, Heading, Label, Text, Tooltip } from '@medusajs/ui';
+import Input from '@modules/common/components/input';
+import Trash from '@modules/common/icons/trash';
+import { useMutation } from '@tanstack/react-query';
+import { formatAmount, useCart, useUpdateCart } from 'medusa-react';
+import React, { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 
 type DiscountFormValues = {
   discount_code: string;
 };
 
 type DiscountCodeProps = {
-  cart: Omit<Cart, "refundable_amount" | "refunded_total">;
+  cart: Omit<Cart, 'refundable_amount' | 'refunded_total'>;
 };
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
@@ -25,7 +25,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const { mutate: removeDiscount } = useMutation(
     (payload: { cartId: string; code: string }) => {
       return medusaClient.carts.deleteDiscount(payload.cartId, payload.code);
-    }
+    },
   );
 
   const appliedDiscount = useMemo(() => {
@@ -34,16 +34,16 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
     }
 
     switch (discounts[0].rule.type) {
-      case "percentage":
+      case 'percentage':
         return `${discounts[0].rule.value}%`;
-      case "fixed":
+      case 'fixed':
         return `- ${formatAmount({
           amount: discounts[0].rule.value,
           region: region,
         })}`;
 
       default:
-        return "Free shipping";
+        return 'Free shipping';
     }
   }, [discounts, region]);
 
@@ -53,7 +53,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
     setError,
     formState: { errors },
   } = useForm<DiscountFormValues>({
-    mode: "onSubmit",
+    mode: 'onSubmit',
   });
 
   const onApply = (data: DiscountFormValues) => {
@@ -66,7 +66,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         onError: () => {
           checkGiftCard(data.discount_code);
         },
-      }
+      },
     );
   };
 
@@ -82,16 +82,16 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         onSuccess: ({ cart }) => setCart(cart),
         onError: () => {
           setError(
-            "discount_code",
+            'discount_code',
             {
-              message: "Code is invalid",
+              message: 'Code is invalid',
             },
             {
               shouldFocus: true,
-            }
+            },
           );
         },
-      }
+      },
     );
   };
 
@@ -106,7 +106,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         onSuccess: ({ cart }) => {
           setCart(cart);
         },
-      }
+      },
     );
   };
 
@@ -117,22 +117,22 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         onSuccess: ({ cart }) => {
           setCart(cart);
         },
-      }
+      },
     );
   };
 
   return (
-    <div className="w-full bg-ui-bg-base flex flex-col">
+    <div className="flex w-full flex-col bg-ui-bg-base">
       <div className="txt-medium">
         {gift_cards.length > 0 && (
-          <div className="flex flex-col mb-4">
+          <div className="mb-4 flex flex-col">
             <Heading className="txt-medium">Gift card(s) applied:</Heading>
             {gift_cards?.map((gc) => (
               <div
-                className="flex items-center justify-between txt-small-plus"
+                className="txt-small-plus flex items-center justify-between"
                 key={gc.id}
               >
-                <Text className="flex gap-x-1 items-baseline">
+                <Text className="flex items-baseline gap-x-1">
                   <span>Code: </span>
                   <span className="truncate">{gc.code}</span>
                 </Text>
@@ -140,7 +140,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                   {formatAmount({ region: region, amount: gc.balance })}
                 </Text>
                 <button
-                  className="flex items-center gap-x-2 !background-transparent !border-none"
+                  className="!background-transparent flex items-center gap-x-2 !border-none"
                   onClick={() => removeGiftCard(gc.code)}
                   disabled={isLoading}
                 >
@@ -153,11 +153,11 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
         )}
 
         {appliedDiscount ? (
-          <div className="w-full flex items-center">
-            <div className="flex flex-col w-full">
+          <div className="flex w-full items-center">
+            <div className="flex w-full flex-col">
               <Heading className="txt-medium">Discount applied:</Heading>
-              <div className="flex items-center justify-between w-full max-w-full">
-                <Text className="flex gap-x-1 items-baseline txt-small-plus w-4/5 pr-1">
+              <div className="flex w-full max-w-full items-center justify-between">
+                <Text className="txt-small-plus flex w-4/5 items-baseline gap-x-1 pr-1">
                   <span>Code:</span>
                   <span className="truncate">{discounts[0].code}</span>
                   <span className="min-w-fit">({appliedDiscount})</span>
@@ -177,17 +177,17 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
           </div>
         ) : (
           <form onSubmit={handleSubmit(onApply)} className="w-full">
-            <Label className="flex gap-x-1 mb-2">
+            <Label className="mb-2 flex gap-x-1">
               Gift card or discount code?
               <Tooltip content="You can add multiple gift cards, but only one discount code.">
                 <InformationCircleSolid color="var(--fg-muted)" />
               </Tooltip>
             </Label>
-            <div className="flex w-full gap-x-2 items-center">
+            <div className="flex w-full items-center gap-x-2">
               <Input
                 label="Please enter code"
-                {...register("discount_code", {
-                  required: "Code is required",
+                {...register('discount_code', {
+                  required: 'Code is required',
                 })}
                 errors={errors}
               />
@@ -195,7 +195,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
               <Button
                 type="submit"
                 variant="secondary"
-                className="!min-h-[0] h-10"
+                className="h-10 !min-h-[0]"
                 isLoading={isLoading}
               >
                 Apply

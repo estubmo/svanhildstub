@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { revalidateTag } from "next/cache";
+import { revalidateTag } from 'next/cache';
 
 /**
  * Revalidates each cache tag in the passed array

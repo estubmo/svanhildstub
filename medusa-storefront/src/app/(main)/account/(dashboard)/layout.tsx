@@ -1,4 +1,4 @@
-import AccountLayout from "@modules/account/templates/account-layout";
+import AccountLayout from '@modules/account/templates/account-layout';
 
 export default function AccountPageLayout({
   children,

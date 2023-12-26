@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { initialize as initializeProductModule } from "@medusajs/product";
-import { NextRequest, NextResponse } from "next/server";
+import { initialize as initializeProductModule } from '@medusajs/product';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * This endpoint uses the serverless Product Module to retrieve a product by handle.
@@ -9,7 +9,7 @@ import { NextRequest, NextResponse } from "next/server";
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: Record<string, any> }
+  { params }: { params: Record<string, any> },
 ) {
   // Extract the query parameters
   const { handle } = params;
@@ -22,18 +22,18 @@ export async function GET(
     { handle },
     {
       relations: [
-        "variants",
-        "variants.options",
-        "tags",
-        "options",
-        "options.values",
-        "images",
-        "description",
-        "collection",
-        "status",
+        'variants',
+        'variants.options',
+        'tags',
+        'options',
+        'options.values',
+        'images',
+        'description',
+        'collection',
+        'status',
       ],
       take: 1,
-    }
+    },
   );
 
   // Return the response

@@ -1,8 +1,8 @@
-import React from "react";
-import { IconProps } from "types/icon";
+import React from 'react';
+import { IconProps } from 'types/icon';
 
 const Ideal: React.FC<IconProps> = ({
-  color = "currentColor",
+  color = 'currentColor',
   ...attributes
 }) => {
   return (

@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
 const EditButton: React.FC<React.HTMLAttributes<HTMLButtonElement>> = (
-  props
+  props,
 ) => {
   return (
     <div>
       <button
-        className="underline text-small-regular text-ui-fg-subtle mt-2"
+        className="text-small-regular mt-2 text-ui-fg-subtle underline"
         {...props}
       >
         Edit

@@ -1,7 +1,7 @@
-import { getProductByHandle } from "@lib/data";
-import ProductTemplate from "@modules/products/templates";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { getProductByHandle } from '@lib/data';
+import ProductTemplate from '@modules/products/templates';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: { handle: string };

@@ -1,4 +1,4 @@
-import OrderOverview from "../components/order-overview";
+import OrderOverview from '../components/order-overview';
 
 const OrdersTemplate = () => {
   return (

@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const MEDUSA_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_API_KEY || "";
+const MEDUSA_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_API_KEY || '';
 const REVALIDATE_WINDOW = process.env.REVALIDATE_WINDOW || 60 * 30; // 30 minutes
 const ENDPOINT =
-  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000";
+  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000';
 
 export default async function medusaRequest(
   method: string,
-  path = "",
+  path = '',
   payload?: {
     query?: Record<string, any>;
     body?: Record<string, any>;
-  }
+  },
 ) {
   const options: RequestInit = {
     method,
     headers: {
-      "Content-Type": "application/json",
-      "x-publishable-key": MEDUSA_API_KEY,
+      'Content-Type': 'application/json',
+      'x-publishable-key': MEDUSA_API_KEY,
     },
     next: {
       revalidate: parseInt(REVALIDATE_WINDOW.toString()),
-      tags: ["medusa_request"],
+      tags: ['medusa_request'],
     },
   };
 

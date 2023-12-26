@@ -1,6 +1,6 @@
-"use server";
+'use server';
 
-import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client";
+import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
 
 /**
  * Uses MeiliSearch or Algolia to search for a query

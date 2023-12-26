@@ -1,17 +1,17 @@
-import { Cart } from "@medusajs/medusa";
-import { Button } from "@medusajs/ui";
-import Input from "@modules/common/components/input";
-import Trash from "@modules/common/icons/trash";
-import { useCart } from "medusa-react";
-import React, { useMemo } from "react";
-import { useForm } from "react-hook-form";
+import { Cart } from '@medusajs/medusa';
+import { Button } from '@medusajs/ui';
+import Input from '@modules/common/components/input';
+import Trash from '@modules/common/icons/trash';
+import { useCart } from 'medusa-react';
+import React, { useMemo } from 'react';
+import { useForm } from 'react-hook-form';
 
 type GiftCardFormValues = {
   gift_card_code: string;
 };
 
 type GiftCardProps = {
-  cart?: Omit<Cart, "refundable_amount" | "refunded_total">;
+  cart?: Omit<Cart, 'refundable_amount' | 'refunded_total'>;
 };
 
 const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
@@ -44,16 +44,16 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
         onSuccess: ({ cart }) => setCart(cart),
         onError: () => {
           setError(
-            "gift_card_code",
+            'gift_card_code',
             {
-              message: "Code is invalid",
+              message: 'Code is invalid',
             },
             {
               shouldFocus: true,
-            }
+            },
           );
         },
-      }
+      },
     );
   };
 
@@ -64,12 +64,12 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
       },
       {
         onSuccess: ({ cart }) => setCart(cart),
-      }
+      },
     );
   };
 
   return (
-    <div className="w-full bg-ui-bg-base p-6 flex flex-col">
+    <div className="flex w-full flex-col bg-ui-bg-base p-6">
       <div className="mb-4">
         <h3 className="text-base-semi">Gift Card</h3>
       </div>
@@ -96,15 +96,15 @@ const GiftCard: React.FC<GiftCardProps> = ({ cart }) => {
             <div className="grid grid-cols-[1fr_80px] gap-x-2">
               <Input
                 label="Code"
-                {...register("gift_card_code", {
-                  required: "Code is required",
+                {...register('gift_card_code', {
+                  required: 'Code is required',
                 })}
                 errors={errors}
                 touched={touchedFields}
               />
               <div>
                 <Button
-                  className="!min-h-[0] h-[46px] w-[80px]"
+                  className="h-[46px] !min-h-[0] w-[80px]"
                   disabled={isLoading}
                   isLoading={isLoading}
                 >

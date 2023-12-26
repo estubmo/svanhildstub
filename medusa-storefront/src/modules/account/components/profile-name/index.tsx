@@ -1,13 +1,14 @@
-import { useAccount } from "@lib/context/account-context";
-import { Customer } from "@medusajs/medusa";
-import Input from "@modules/common/components/input";
-import { useUpdateMe } from "medusa-react";
-import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import AccountInfo from "../account-info";
+import { useAccount } from '@lib/context/account-context';
+import { Customer } from '@medusajs/medusa';
+import Input from '@modules/common/components/input';
+import { useUpdateMe } from 'medusa-react';
+import React, { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+
+import AccountInfo from '../account-info';
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">;
+  customer: Omit<Customer, 'password_hash'>;
 };
 
 type UpdateCustomerNameFormData = {
@@ -48,11 +49,11 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
 
   const firstName = useWatch({
     control,
-    name: "first_name",
+    name: 'first_name',
   });
   const lastName = useWatch({
     control,
-    name: "last_name",
+    name: 'last_name',
   });
 
   const updateName = (data: UpdateCustomerNameFormData) => {
@@ -65,7 +66,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         onSuccess: () => {
           refetchCustomer();
         },
-      }
+      },
     );
   };
 
@@ -85,7 +86,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         <div className="grid grid-cols-2 gap-x-4">
           <Input
             label="First name"
-            {...register("first_name", {
+            {...register('first_name', {
               required: true,
             })}
             defaultValue={firstName}
@@ -93,7 +94,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
           />
           <Input
             label="Last name"
-            {...register("last_name", { required: true })}
+            {...register('last_name', { required: true })}
             defaultValue={lastName}
             errors={errors}
           />

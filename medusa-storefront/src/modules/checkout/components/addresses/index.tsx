@@ -1,10 +1,11 @@
-import { useCheckout } from "@lib/context/checkout-context";
-import { CheckCircleSolid } from "@medusajs/icons";
-import { Button, Heading, Text } from "@medusajs/ui";
-import Divider from "@modules/common/components/divider";
-import Spinner from "@modules/common/icons/spinner";
-import BillingAddress from "../billing_address";
-import ShippingAddress from "../shipping-address";
+import { useCheckout } from '@lib/context/checkout-context';
+import { CheckCircleSolid } from '@medusajs/icons';
+import { Button, Heading, Text } from '@medusajs/ui';
+import Divider from '@modules/common/components/divider';
+import Spinner from '@modules/common/icons/spinner';
+
+import BillingAddress from '../billing_address';
+import ShippingAddress from '../shipping-address';
 
 const Addresses = () => {
   const {
@@ -25,10 +26,10 @@ const Addresses = () => {
 
   return (
     <div className="bg-ui-bg-base px-4 small:px-8">
-      <div className="flex flex-row items-center justify-between mb-6">
+      <div className="mb-6 flex flex-row items-center justify-between">
         <Heading
           level="h2"
-          className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
+          className="text-3xl-regular flex flex-row items-baseline gap-x-2"
         >
           Address
           {!isOpen && <CheckCircleSolid />}
@@ -71,21 +72,21 @@ const Addresses = () => {
           <div className="text-small-regular">
             {cart && cart.shipping_address ? (
               <div className="flex items-start gap-x-8">
-                <div className="flex items-start gap-x-1 w-full">
-                  <div className="flex flex-col w-1/3">
-                    <Text className="txt-medium-plus text-ui-fg-base mb-1">
+                <div className="flex w-full items-start gap-x-1">
+                  <div className="flex w-1/3 flex-col">
+                    <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                       Shipping Address
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
-                      {cart.shipping_address.first_name}{" "}
+                      {cart.shipping_address.first_name}{' '}
                       {cart.shipping_address.last_name}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
-                      {cart.shipping_address.address_1}{" "}
+                      {cart.shipping_address.address_1}{' '}
                       {cart.shipping_address.address_2}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
-                      {cart.shipping_address.postal_code},{" "}
+                      {cart.shipping_address.postal_code},{' '}
                       {cart.shipping_address.city}
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
@@ -93,8 +94,8 @@ const Addresses = () => {
                     </Text>
                   </div>
 
-                  <div className="flex flex-col w-1/3 ">
-                    <Text className="txt-medium-plus text-ui-fg-base mb-1">
+                  <div className="flex w-1/3 flex-col ">
+                    <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                       Contact
                     </Text>
                     <Text className="txt-medium text-ui-fg-subtle">
@@ -105,8 +106,8 @@ const Addresses = () => {
                     </Text>
                   </div>
 
-                  <div className="flex flex-col w-1/3">
-                    <Text className="txt-medium-plus text-ui-fg-base mb-1">
+                  <div className="flex w-1/3 flex-col">
+                    <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                       Billing Address
                     </Text>
 
@@ -117,15 +118,15 @@ const Addresses = () => {
                     ) : (
                       <>
                         <Text className="txt-medium text-ui-fg-subtle">
-                          {cart.billing_address.first_name}{" "}
+                          {cart.billing_address.first_name}{' '}
                           {cart.billing_address.last_name}
                         </Text>
                         <Text className="txt-medium text-ui-fg-subtle">
-                          {cart.billing_address.address_1}{" "}
+                          {cart.billing_address.address_1}{' '}
                           {cart.billing_address.address_2}
                         </Text>
                         <Text className="txt-medium text-ui-fg-subtle">
-                          {cart.billing_address.postal_code},{" "}
+                          {cart.billing_address.postal_code},{' '}
                           {cart.billing_address.city}
                         </Text>
                         <Text className="txt-medium text-ui-fg-subtle">

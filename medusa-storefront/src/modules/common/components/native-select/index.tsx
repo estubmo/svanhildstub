@@ -1,6 +1,6 @@
-import { ErrorMessage } from "@hookform/error-message";
-import { ChevronUpDown } from "@medusajs/icons";
-import clsx from "clsx";
+import { ErrorMessage } from '@hookform/error-message';
+import { ChevronUpDown } from '@medusajs/icons';
+import clsx from 'clsx';
 import {
   forwardRef,
   SelectHTMLAttributes,
@@ -8,8 +8,8 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-} from "react";
-import { get } from "react-hook-form";
+} from 'react';
+import { get } from 'react-hook-form';
 
 export type NativeSelectProps = {
   placeholder?: string;
@@ -20,21 +20,21 @@ export type NativeSelectProps = {
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
     {
-      placeholder = "Select...",
+      placeholder = 'Select...',
       errors,
       touched,
       className,
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     const innerRef = useRef<HTMLSelectElement>(null);
     const [isPlaceholder, setIsPlaceholder] = useState(false);
 
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
-      () => innerRef.current
+      () => innerRef.current,
     );
 
     const hasError = props.name
@@ -42,7 +42,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
       : false;
 
     useEffect(() => {
-      if (innerRef.current && innerRef.current.value === "") {
+      if (innerRef.current && innerRef.current.value === '') {
         setIsPlaceholder(true);
       } else {
         setIsPlaceholder(false);
@@ -55,17 +55,17 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
           className={clsx(
-            "relative flex items-center text-base-regular border border-ui-border-base bg-ui-bg-field rounded-md hover:bg-ui-bg-field-hover",
+            'text-base-regular relative flex items-center rounded-md border border-ui-border-base bg-ui-bg-field hover:bg-ui-bg-field-hover',
             className,
             {
-              "text-ui-fg-muted": isPlaceholder,
-            }
+              'text-ui-fg-muted': isPlaceholder,
+            },
           )}
         >
           <select
             ref={innerRef}
             {...props}
-            className="appearance-none flex-1 bg-transparent border-none px-4 py-2.5 transition-colors duration-150 outline-none "
+            className="flex-1 appearance-none border-none bg-transparent px-4 py-2.5 outline-none transition-colors duration-150 "
           >
             <option
               disabled
@@ -76,7 +76,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             </option>
             {children}
           </select>
-          <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none">
+          <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
             <ChevronUpDown />
           </span>
         </div>
@@ -86,7 +86,7 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             name={props.name}
             render={({ message }) => {
               return (
-                <div className="pt-1 pl-2 text-rose-500 text-xsmall-regular">
+                <div className="text-xsmall-regular pl-2 pt-1 text-rose-500">
                   <span>{message}</span>
                 </div>
               );
@@ -95,9 +95,9 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
-NativeSelect.displayName = "NativeSelect";
+NativeSelect.displayName = 'NativeSelect';
 
 export default NativeSelect;

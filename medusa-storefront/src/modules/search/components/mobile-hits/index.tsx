@@ -1,10 +1,11 @@
-import { useMobileMenu } from "@lib/context/mobile-menu-context";
-import { ProductHit } from "@modules/search/components/hit";
-import React from "react";
-import { useHits, UseHitsProps, useSearchBox } from "react-instantsearch";
-import ShowAll from "../show-all";
+import { useMobileMenu } from '@lib/context/mobile-menu-context';
+import { ProductHit } from '@modules/search/components/hit';
+import React from 'react';
+import { useHits, UseHitsProps, useSearchBox } from 'react-instantsearch';
 
-type HitsProps<THit> = React.ComponentProps<"div"> &
+import ShowAll from '../show-all';
+
+type HitsProps<THit> = React.ComponentProps<'div'> &
   UseHitsProps & {
     hitComponent: (props: { hit: THit }) => JSX.Element;
   };

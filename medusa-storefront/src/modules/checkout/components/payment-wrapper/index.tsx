@@ -1,14 +1,14 @@
-import { PaymentSession } from "@medusajs/medusa";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
-import React from "react";
+import { PaymentSession } from '@medusajs/medusa';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe, StripeElementsOptions } from '@stripe/stripe-js';
+import React from 'react';
 
 type WrapperProps = {
   paymentSession?: PaymentSession | null;
 };
 
 const Wrapper: React.FC<WrapperProps> = ({ paymentSession, children }) => {
-  const isStripe = paymentSession?.provider_id?.includes("stripe");
+  const isStripe = paymentSession?.provider_id?.includes('stripe');
 
   if (isStripe && paymentSession) {
     return (
@@ -32,19 +32,19 @@ const StripeWrapper: React.FC<WrapperProps> = ({
 
   if (!stripeKey) {
     throw new Error(
-      "Stripe key is missing. Set NEXT_PUBLIC_STRIPE_KEY environment variable."
+      'Stripe key is missing. Set NEXT_PUBLIC_STRIPE_KEY environment variable.',
     );
   }
 
   if (!stripePromise) {
     throw new Error(
-      "Stripe promise is missing. Make sure you have provided a valid Stripe key."
+      'Stripe promise is missing. Make sure you have provided a valid Stripe key.',
     );
   }
 
   if (!paymentSession?.data?.client_secret) {
     throw new Error(
-      "Stripe client secret is missing. Cannot initialize Stripe."
+      'Stripe client secret is missing. Cannot initialize Stripe.',
     );
   }
 

@@ -1,34 +1,34 @@
-import { getPercentageDiff } from "@lib/util/get-precentage-diff";
-import { LineItem, Region } from "@medusajs/medusa";
-import clsx from "clsx";
-import { formatAmount } from "medusa-react";
-import { CalculatedVariant } from "types/medusa";
+import { getPercentageDiff } from '@lib/util/get-precentage-diff';
+import { LineItem, Region } from '@medusajs/medusa';
+import clsx from 'clsx';
+import { formatAmount } from 'medusa-react';
+import { CalculatedVariant } from 'types/medusa';
 
 type LineItemPriceProps = {
-  item: Omit<LineItem, "beforeInsert">;
+  item: Omit<LineItem, 'beforeInsert'>;
   region: Region;
-  style?: "default" | "tight";
+  style?: 'default' | 'tight';
 };
 
 const LineItemPrice = ({
   item,
   region,
-  style = "default",
+  style = 'default',
 }: LineItemPriceProps) => {
   const originalPrice =
     (item.variant as CalculatedVariant).original_price * item.quantity;
   const hasReducedPrice = (item.total || 0) < originalPrice;
 
   return (
-    <div className="flex flex-col gap-x-2 text-ui-fg-subtle items-end">
+    <div className="flex flex-col items-end gap-x-2 text-ui-fg-subtle">
       <div className="text-left">
         {hasReducedPrice && (
           <>
             <p>
-              {style === "default" && (
+              {style === 'default' && (
                 <span className="text-ui-fg-subtle">Original: </span>
               )}
-              <span className="line-through text-ui-fg-muted">
+              <span className="text-ui-fg-muted line-through">
                 {formatAmount({
                   amount: originalPrice,
                   region: region,
@@ -36,7 +36,7 @@ const LineItemPrice = ({
                 })}
               </span>
             </p>
-            {style === "default" && (
+            {style === 'default' && (
               <span className="text-ui-fg-interactive">
                 -{getPercentageDiff(originalPrice, item.total || 0)}%
               </span>
@@ -44,8 +44,8 @@ const LineItemPrice = ({
           </>
         )}
         <span
-          className={clsx("text-base-regular", {
-            "text-ui-fg-interactive": hasReducedPrice,
+          className={clsx('text-base-regular', {
+            'text-ui-fg-interactive': hasReducedPrice,
           })}
         >
           {formatAmount({

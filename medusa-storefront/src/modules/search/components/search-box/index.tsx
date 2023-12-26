@@ -1,8 +1,9 @@
-import { XMarkMini } from "@medusajs/icons";
-import { FormEvent, useEffect } from "react";
+import { XMarkMini } from '@medusajs/icons';
+import { FormEvent, useEffect } from 'react';
+
 import SearchBoxWrapper, {
   ControlledSearchBoxProps,
-} from "../search-box-wrapper";
+} from '../search-box-wrapper';
 
 const ControlledSearchBox = ({
   inputRef,
@@ -43,7 +44,7 @@ const ControlledSearchBox = ({
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
-      if (event.ctrlKey && event.key === "k") {
+      if (event.ctrlKey && event.key === 'k') {
         event.stopPropagation();
         event.preventDefault();
 
@@ -55,15 +56,15 @@ const ControlledSearchBox = ({
       }
     };
 
-    window.addEventListener("keydown", keyDownHandler);
+    window.addEventListener('keydown', keyDownHandler);
 
     return () => {
-      window.removeEventListener("keydown", keyDownHandler);
+      window.removeEventListener('keydown', keyDownHandler);
     };
   }, [inputRef]);
 
   return (
-    <div {...props} className="w-full z-20">
+    <div {...props} className="z-20 w-full">
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
         <div className="flex items-center justify-between">
           <input
@@ -75,7 +76,7 @@ const ControlledSearchBox = ({
             onFocus={onFocus}
             onBlur={onBlur}
             onKeyDown={(e) => {
-              if (e.key === "Escape") {
+              if (e.key === 'Escape') {
                 e.preventDefault();
                 e.stopPropagation();
                 if (inputRef.current) {
@@ -87,13 +88,13 @@ const ControlledSearchBox = ({
             type="search"
             value={value}
             onChange={onChange}
-            className="h-6 placeholder:text-ui-fg-on-color text-base-regular placeholder:text-base-regular placeholder:transition-colors focus:outline-none flex-1 bg-transparent"
+            className="text-base-regular placeholder:text-base-regular h-6 flex-1 bg-transparent placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none"
           />
           {value && (
             <button
               onClick={handleReset}
               type="button"
-              className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large hidden sm:flex"
+              className="txt-compact-large hidden items-center justify-center gap-x-2 px-2 text-ui-fg-on-color focus:outline-none sm:flex"
             >
               <XMarkMini />
             </button>

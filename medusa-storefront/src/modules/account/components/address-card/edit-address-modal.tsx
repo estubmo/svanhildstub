@@ -1,15 +1,15 @@
-import { medusaClient } from "@lib/config";
-import { useAccount } from "@lib/context/account-context";
-import useToggleState from "@lib/hooks/use-toggle-state";
-import { PencilSquare as Edit, Trash } from "@medusajs/icons";
-import { Address } from "@medusajs/medusa";
-import { Button, Heading, Text } from "@medusajs/ui";
-import CountrySelect from "@modules/checkout/components/country-select";
-import Input from "@modules/common/components/input";
-import Modal from "@modules/common/components/modal";
-import clsx from "clsx";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { medusaClient } from '@lib/config';
+import { useAccount } from '@lib/context/account-context';
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { PencilSquare as Edit, Trash } from '@medusajs/icons';
+import { Address } from '@medusajs/medusa';
+import { Button, Heading, Text } from '@medusajs/ui';
+import CountrySelect from '@modules/checkout/components/country-select';
+import Input from '@modules/common/components/input';
+import Modal from '@modules/common/components/modal';
+import clsx from 'clsx';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 type FormValues = {
   first_name: string;
@@ -64,14 +64,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
     const payload = {
       first_name: data.first_name,
       last_name: data.last_name,
-      company: data.company || "Personal",
+      company: data.company || 'Personal',
       address_1: data.address_1,
-      address_2: data.address_2 || "",
+      address_2: data.address_2 || '',
       city: data.city,
       country_code: data.country_code,
-      province: data.province || "",
+      province: data.province || '',
       postal_code: data.postal_code,
-      phone: data.phone || "None",
+      phone: data.phone || 'None',
       metadata: {},
     };
 
@@ -84,7 +84,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
       })
       .catch(() => {
         setSubmitting(false);
-        setError("Failed to update address, please try again.");
+        setError('Failed to update address, please try again.');
       });
   });
 
@@ -98,14 +98,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
     <>
       <div
         className={clsx(
-          "border rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between transition-colors",
+          'flex h-full min-h-[220px] w-full flex-col justify-between rounded-rounded border p-5 transition-colors',
           {
-            "border-gray-900": isActive,
-          }
+            'border-gray-900': isActive,
+          },
         )}
       >
         <div className="flex flex-col">
-          <Heading className="text-left text-base-semi">
+          <Heading className="text-base-semi text-left">
             {address.first_name} {address.last_name}
           </Heading>
           {address.company && (
@@ -113,7 +113,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               {address.company}
             </Text>
           )}
-          <Text className="flex flex-col text-left text-base-regular mt-2">
+          <Text className="text-base-regular mt-2 flex flex-col text-left">
             <span>
               {address.address_1}
               {address.address_2 && <span>, {address.address_2}</span>}
@@ -129,14 +129,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
         </div>
         <div className="flex items-center gap-x-4">
           <button
-            className="text-small-regular text-ui-fg-subtle hover:text-ui-fg-base flex items-center gap-x-2"
+            className="text-small-regular flex items-center gap-x-2 text-ui-fg-subtle hover:text-ui-fg-base"
             onClick={open}
           >
             <Edit />
             Edit
           </button>
           <button
-            className="text-small-regular text-ui-fg-subtle hover:text-ui-fg-base flex items-center gap-x-2"
+            className="text-small-regular flex items-center gap-x-2 text-ui-fg-subtle hover:text-ui-fg-base"
             onClick={removeAddress}
           >
             <Trash />
@@ -154,8 +154,8 @@ const EditAddress: React.FC<EditAddressProps> = ({
             <div className="grid grid-cols-2 gap-x-2">
               <Input
                 label="First name"
-                {...register("first_name", {
-                  required: "First name is required",
+                {...register('first_name', {
+                  required: 'First name is required',
                 })}
                 required
                 errors={errors}
@@ -163,19 +163,19 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
               <Input
                 label="Last name"
-                {...register("last_name", {
-                  required: "Last name is required",
+                {...register('last_name', {
+                  required: 'Last name is required',
                 })}
                 required
                 errors={errors}
                 autoComplete="family-name"
               />
             </div>
-            <Input label="Company" {...register("company")} errors={errors} />
+            <Input label="Company" {...register('company')} errors={errors} />
             <Input
               label="Address"
-              {...register("address_1", {
-                required: "Address is required",
+              {...register('address_1', {
+                required: 'Address is required',
               })}
               required
               errors={errors}
@@ -183,15 +183,15 @@ const EditAddress: React.FC<EditAddressProps> = ({
             />
             <Input
               label="Apartment, suite, etc."
-              {...register("address_2")}
+              {...register('address_2')}
               errors={errors}
               autoComplete="address-line2"
             />
             <div className="grid grid-cols-[144px_1fr] gap-x-2">
               <Input
                 label="Postal code"
-                {...register("postal_code", {
-                  required: "Postal code is required",
+                {...register('postal_code', {
+                  required: 'Postal code is required',
                 })}
                 required
                 errors={errors}
@@ -199,8 +199,8 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
               <Input
                 label="City"
-                {...register("city", {
-                  required: "City is required",
+                {...register('city', {
+                  required: 'City is required',
                 })}
                 errors={errors}
                 required
@@ -209,27 +209,27 @@ const EditAddress: React.FC<EditAddressProps> = ({
             </div>
             <Input
               label="Province / State"
-              {...register("province")}
+              {...register('province')}
               errors={errors}
               autoComplete="address-level1"
             />
             <CountrySelect
-              {...register("country_code", { required: true })}
+              {...register('country_code', { required: true })}
               autoComplete="country"
             />
             <Input
               label="Phone"
-              {...register("phone")}
+              {...register('phone')}
               errors={errors}
               autoComplete="phone"
             />
           </div>
           {error && (
-            <div className="text-rose-500 text-small-regular py-2">{error}</div>
+            <div className="text-small-regular py-2 text-rose-500">{error}</div>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <div className="flex gap-3 mt-4">
+          <div className="mt-4 flex gap-3">
             <Button variant="secondary" onClick={close} disabled={submitting}>
               Cancel
             </Button>

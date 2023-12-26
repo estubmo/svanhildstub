@@ -1,5 +1,5 @@
-import { IS_BROWSER } from "@lib/constants";
-import { useEffect, useState } from "react";
+import { IS_BROWSER } from '@lib/constants';
+import { useEffect, useState } from 'react';
 
 const getWidth = () => {
   if (IS_BROWSER) {
@@ -21,10 +21,10 @@ const useCurrentWidth = () => {
       setWidth(getWidth());
     };
 
-    window.addEventListener("resize", resizeListener);
+    window.addEventListener('resize', resizeListener);
 
     return () => {
-      window.removeEventListener("resize", resizeListener);
+      window.removeEventListener('resize', resizeListener);
     };
   }, []);
 

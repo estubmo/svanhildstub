@@ -1,13 +1,14 @@
-import { useAccount } from "@lib/context/account-context";
-import { Customer } from "@medusajs/medusa";
-import Input from "@modules/common/components/input";
-import { useUpdateMe } from "medusa-react";
-import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import AccountInfo from "../account-info";
+import { useAccount } from '@lib/context/account-context';
+import { Customer } from '@medusajs/medusa';
+import Input from '@modules/common/components/input';
+import { useUpdateMe } from 'medusa-react';
+import React, { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+
+import AccountInfo from '../account-info';
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">;
+  customer: Omit<Customer, 'password_hash'>;
 };
 
 type UpdateCustomerEmailFormData = {
@@ -16,7 +17,7 @@ type UpdateCustomerEmailFormData = {
 
 const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>(
-    undefined
+    undefined,
   );
 
   const {
@@ -49,7 +50,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
 
   const email = useWatch({
     control,
-    name: "email",
+    name: 'email',
   });
 
   const updateEmail = (data: UpdateCustomerEmailFormData) => {
@@ -63,9 +64,9 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
           refetchCustomer();
         },
         onError: () => {
-          setErrorMessage("Email already in use"); // TODO: Add proper error handling
+          setErrorMessage('Email already in use'); // TODO: Add proper error handling
         },
-      }
+      },
     );
   };
 
@@ -83,7 +84,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
         <div className="grid grid-cols-1 gap-y-2">
           <Input
             label="Email"
-            {...register("email", {
+            {...register('email', {
               required: true,
             })}
             defaultValue={email}

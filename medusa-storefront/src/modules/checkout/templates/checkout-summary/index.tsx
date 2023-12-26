@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Heading } from "@medusajs/ui";
-import ItemsPreviewTemplate from "@modules/cart/templates/preview";
-import DiscountCode from "@modules/checkout/components/discount-code";
-import CartTotals from "@modules/common/components/cart-totals";
-import Divider from "@modules/common/components/divider";
-import { useCart } from "medusa-react";
+import { Heading } from '@medusajs/ui';
+import ItemsPreviewTemplate from '@modules/cart/templates/preview';
+import DiscountCode from '@modules/checkout/components/discount-code';
+import CartTotals from '@modules/common/components/cart-totals';
+import Divider from '@modules/common/components/divider';
+import { useCart } from 'medusa-react';
 
 const CheckoutSummary = () => {
   const { cart } = useCart();
@@ -15,12 +15,12 @@ const CheckoutSummary = () => {
   }
 
   return (
-    <div className="sticky top-0 flex flex-col-reverse small:flex-col gap-y-8 py-8 px-4 small:py-0 small:pr-8 ">
-      <div className="w-full bg-ui-bg-base flex flex-col">
+    <div className="sticky top-0 flex flex-col-reverse gap-y-8 px-4 py-8 small:flex-col small:py-0 small:pr-8 ">
+      <div className="flex w-full flex-col bg-ui-bg-base">
         <Divider className="my-6 small:hidden" />
         <Heading
           level="h2"
-          className="flex flex-row text-3xl-regular items-baseline"
+          className="text-3xl-regular flex flex-row items-baseline"
         >
           In your Cart
         </Heading>

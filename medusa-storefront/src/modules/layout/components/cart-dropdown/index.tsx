@@ -1,17 +1,18 @@
-import { Popover, Transition } from "@headlessui/react";
-import { useCartDropdown } from "@lib/context/cart-dropdown-context";
-import { useStore } from "@lib/context/store-context";
-import useEnrichedLineItems from "@lib/hooks/use-enrich-line-items";
-import { ArrowRightMini, ShoppingCart } from "@medusajs/icons";
-import { Button, IconButton, clx, useToggleState } from "@medusajs/ui";
-import LineItemOptions from "@modules/common/components/line-item-options";
-import LineItemPrice from "@modules/common/components/line-item-price";
-import Trash from "@modules/common/icons/trash";
-import Thumbnail from "@modules/products/components/thumbnail";
-import { formatAmount, useCart } from "medusa-react";
-import Link from "next/link";
-import { Fragment } from "react";
-import CountrySelect from "../country-select";
+import { Popover, Transition } from '@headlessui/react';
+import { useCartDropdown } from '@lib/context/cart-dropdown-context';
+import { useStore } from '@lib/context/store-context';
+import useEnrichedLineItems from '@lib/hooks/use-enrich-line-items';
+import { ArrowRightMini, ShoppingCart } from '@medusajs/icons';
+import { Button, clx, IconButton, useToggleState } from '@medusajs/ui';
+import LineItemOptions from '@modules/common/components/line-item-options';
+import LineItemPrice from '@modules/common/components/line-item-price';
+import Trash from '@modules/common/icons/trash';
+import Thumbnail from '@modules/products/components/thumbnail';
+import { formatAmount, useCart } from 'medusa-react';
+import Link from 'next/link';
+import { Fragment } from 'react';
+
+import CountrySelect from '../country-select';
 
 const CartDropdown = () => {
   const { cart, totalItems } = useCart();
@@ -31,7 +32,7 @@ const CartDropdown = () => {
           <Link href="/cart">
             <ShoppingCart />
             {totalItems > 0 && (
-              <div className="absolute flex justify-center items-center right-0 top-0 -mr-2 -mt-2 h-4 w-4 rounded bg-blue-600 text-[11px] font-medium text-white">
+              <div className="absolute right-0 top-0 -mr-2 -mt-2 flex h-4 w-4 items-center justify-center rounded bg-blue-600 text-[11px] font-medium text-white">
                 {totalItems <= 99 ? (
                   totalItems
                 ) : (
@@ -55,14 +56,14 @@ const CartDropdown = () => {
         >
           <Popover.Panel
             static
-            className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-ui-bg-base border w-[382px] text-ui-fg-base"
+            className="absolute right-0 top-[calc(100%+1px)] hidden w-[382px] border bg-ui-bg-base text-ui-fg-base small:block"
           >
-            <div className="p-4 flex items-center justify-center">
+            <div className="flex items-center justify-center p-4">
               <h3 className="text-large-semi">Cart</h3>
             </div>
             {cart && items?.length ? (
               <>
-                <div className="overflow-y-scroll max-h-[402px] px-4 grid grid-cols-1 gap-y-8 no-scrollbar p-px">
+                <div className="no-scrollbar grid max-h-[402px] grid-cols-1 gap-y-8 overflow-y-scroll p-px px-4">
                   {items
                     .sort((a, b) => {
                       return a.created_at > b.created_at ? -1 : 1;
@@ -78,11 +79,11 @@ const CartDropdown = () => {
                         >
                           <Thumbnail thumbnail={item.thumbnail} size="square" />
                         </Link>
-                        <div className="flex flex-col justify-between flex-1">
-                          <div className="flex flex-col flex-1">
+                        <div className="flex flex-1 flex-col justify-between">
+                          <div className="flex flex-1 flex-col">
                             <div className="flex items-start justify-between">
                               <div>
-                                <h3 className="text-base-regular overflow-ellipsis overflow-hidden whitespace-nowrap mr-4 w-[130px]">
+                                <h3 className="text-base-regular mr-4 w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap">
                                   <Link
                                     href={`/products/${item.variant.product.handle}`}
                                   >
@@ -102,7 +103,7 @@ const CartDropdown = () => {
                               </div>
                             </div>
                           </div>
-                          <div className="flex items-end justify-between text-small-regular flex-1">
+                          <div className="text-small-regular flex flex-1 items-end justify-between">
                             <div>
                               <button
                                 className="flex items-center gap-x-1 text-ui-fg-subtle hover:text-ui-fg-base"
@@ -117,10 +118,10 @@ const CartDropdown = () => {
                       </div>
                     ))}
                 </div>
-                <div className="p-4 flex flex-col gap-y-4 text-small-regular">
+                <div className="text-small-regular flex flex-col gap-y-4 p-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-ui-fg-subtle font-semibold">
-                      Subtotal{" "}
+                    <span className="font-semibold text-ui-fg-subtle">
+                      Subtotal{' '}
                       <span className="font-normal">(excl. taxes)</span>
                     </span>
                     <span className="text-large-semi">
@@ -140,7 +141,7 @@ const CartDropdown = () => {
               </>
             ) : (
               <div>
-                <div className="flex pb-16 pt-8 flex-col gap-y-4 items-center justify-center">
+                <div className="flex flex-col items-center justify-center gap-y-4 pb-16 pt-8">
                   <div className="text-ui-fg-subtle">
                     <svg
                       fill="currentColor"
@@ -176,15 +177,15 @@ const CartDropdown = () => {
             )}
             <div className="px-4 py-2">
               <div
-                className="flex justify-between items-center"
+                className="flex items-center justify-between"
                 onMouseEnter={toggleState.open}
                 onMouseLeave={toggleState.close}
               >
                 <CountrySelect toggleState={toggleState} />
                 <ArrowRightMini
                   className={clx(
-                    "transition-transform duration-150",
-                    toggleState.state ? "-rotate-90" : ""
+                    'transition-transform duration-150',
+                    toggleState.state ? '-rotate-90' : '',
                   )}
                 />
               </div>

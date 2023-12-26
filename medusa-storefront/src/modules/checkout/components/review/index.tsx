@@ -1,6 +1,7 @@
-import { useCheckout } from "@lib/context/checkout-context";
-import { Heading, Text, clx } from "@medusajs/ui";
-import PaymentButton from "../payment-button";
+import { useCheckout } from '@lib/context/checkout-context';
+import { clx, Heading, Text } from '@medusajs/ui';
+
+import PaymentButton from '../payment-button';
 
 const Review = () => {
   const {
@@ -19,14 +20,14 @@ const Review = () => {
 
   return (
     <div className="bg-ui-bg-base px-4 small:px-8">
-      <div className="flex flex-row items-center justify-between mb-6">
+      <div className="mb-6 flex flex-row items-center justify-between">
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            'text-3xl-regular flex flex-row items-baseline gap-x-2',
             {
-              "opacity-50 pointer-events-none select-none": editingOtherSteps,
-            }
+              'pointer-events-none select-none opacity-50': editingOtherSteps,
+            },
           )}
         >
           Review
@@ -34,9 +35,9 @@ const Review = () => {
       </div>
       {!editingOtherSteps && previousStepsCompleted && (
         <>
-          <div className="flex items-start gap-x-1 w-full mb-6">
+          <div className="mb-6 flex w-full items-start gap-x-1">
             <div className="w-full">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
+              <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                 By clicking the Place Order button, you confirm that you have
                 read, understand and accept our Terms of Use, Terms of Sale and
                 Returns Policy and acknowledge that you have read Medusa

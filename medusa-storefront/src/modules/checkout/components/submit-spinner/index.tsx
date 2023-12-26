@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { Spinner } from "@medusajs/icons";
-import { Heading, Text } from "@medusajs/ui";
-import { useCart } from "medusa-react";
+import { Spinner } from '@medusajs/icons';
+import { Heading, Text } from '@medusajs/ui';
+import { useCart } from 'medusa-react';
 
 const SubmitSpinner = () => {
   const {
@@ -11,11 +11,11 @@ const SubmitSpinner = () => {
 
   if (isLoading) {
     return (
-      <div className="w-full h-full bg-ui-bg-base z-[9999] fixed flex flex-col items-center justify-center overflow-hidden ">
+      <div className="fixed z-[9999] flex h-full w-full flex-col items-center justify-center overflow-hidden bg-ui-bg-base ">
         <div className="flex flex-col items-center justify-center gap-y-6">
           <div className="flex items-center gap-x-3">
             <Spinner className="animate-spin" />
-            <Heading className="text-ui-fg-base text-2xl font-medium">
+            <Heading className="text-2xl font-medium text-ui-fg-base">
               Please wait...
             </Heading>
           </div>

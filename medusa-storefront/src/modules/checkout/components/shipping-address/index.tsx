@@ -1,12 +1,13 @@
-import { CheckoutFormValues } from "@lib/context/checkout-context";
-import { emailRegex } from "@lib/util/regex";
-import ConnectForm from "@modules/common/components/connect-form";
-import Input from "@modules/common/components/input";
-import { useMeCustomer } from "medusa-react";
-import AddressSelect from "../address-select";
-import CountrySelect from "../country-select";
-import Checkbox from "@modules/common/components/checkbox";
-import { Container } from "@medusajs/ui";
+import { CheckoutFormValues } from '@lib/context/checkout-context';
+import { emailRegex } from '@lib/util/regex';
+import { Container } from '@medusajs/ui';
+import Checkbox from '@modules/common/components/checkbox';
+import ConnectForm from '@modules/common/components/connect-form';
+import Input from '@modules/common/components/input';
+import { useMeCustomer } from 'medusa-react';
+
+import AddressSelect from '../address-select';
+import CountrySelect from '../country-select';
 
 const ShippingAddress = ({
   checked,
@@ -33,8 +34,8 @@ const ShippingAddress = ({
             <div className="grid grid-cols-2 gap-4">
               <Input
                 label="First name"
-                {...register("shipping_address.first_name", {
-                  required: "First name is required",
+                {...register('shipping_address.first_name', {
+                  required: 'First name is required',
                 })}
                 autoComplete="given-name"
                 errors={errors}
@@ -43,8 +44,8 @@ const ShippingAddress = ({
               />
               <Input
                 label="Last name"
-                {...register("shipping_address.last_name", {
-                  required: "Last name is required",
+                {...register('shipping_address.last_name', {
+                  required: 'Last name is required',
                 })}
                 autoComplete="family-name"
                 errors={errors}
@@ -53,8 +54,8 @@ const ShippingAddress = ({
               />
               <Input
                 label="Address"
-                {...register("shipping_address.address_1", {
-                  required: "Address is required",
+                {...register('shipping_address.address_1', {
+                  required: 'Address is required',
                 })}
                 autoComplete="address-line1"
                 errors={errors}
@@ -63,15 +64,15 @@ const ShippingAddress = ({
               />
               <Input
                 label="Company"
-                {...register("shipping_address.company")}
+                {...register('shipping_address.company')}
                 autoComplete="organization"
                 errors={errors}
                 touched={touchedFields}
               />
               <Input
                 label="Postal code"
-                {...register("shipping_address.postal_code", {
-                  required: "Postal code is required",
+                {...register('shipping_address.postal_code', {
+                  required: 'Postal code is required',
                 })}
                 autoComplete="postal-code"
                 errors={errors}
@@ -80,8 +81,8 @@ const ShippingAddress = ({
               />
               <Input
                 label="City"
-                {...register("shipping_address.city", {
-                  required: "City is required",
+                {...register('shipping_address.city', {
+                  required: 'City is required',
                 })}
                 autoComplete="address-level2"
                 errors={errors}
@@ -89,8 +90,8 @@ const ShippingAddress = ({
                 required
               />
               <CountrySelect
-                {...register("shipping_address.country_code", {
-                  required: "Country is required",
+                {...register('shipping_address.country_code', {
+                  required: 'Country is required',
                 })}
                 autoComplete="country"
                 errors={errors}
@@ -99,7 +100,7 @@ const ShippingAddress = ({
               />
               <Input
                 label="State / Province"
-                {...register("shipping_address.province")}
+                {...register('shipping_address.province')}
                 autoComplete="address-level1"
                 errors={errors}
                 touched={touchedFields}
@@ -112,11 +113,11 @@ const ShippingAddress = ({
                 onChange={onChange}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="mb-4 grid grid-cols-2 gap-4">
               <Input
                 label="Email"
-                {...register("email", {
-                  required: "Email is required",
+                {...register('email', {
+                  required: 'Email is required',
                   pattern: emailRegex,
                 })}
                 autoComplete="email"
@@ -126,7 +127,7 @@ const ShippingAddress = ({
               />
               <Input
                 label="Phone"
-                {...register("shipping_address.phone")}
+                {...register('shipping_address.phone')}
                 autoComplete="tel"
                 errors={errors}
                 touched={touchedFields}

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import medusaRequest from "@lib/medusa-fetch";
-import { ProductDTO, ProductVariantDTO } from "@medusajs/types/dist/product";
+import medusaRequest from '@lib/medusa-fetch';
+import { ProductDTO, ProductVariantDTO } from '@medusajs/types/dist/product';
 
 /**
  * Wourkaround to get variant prices until we release a dedicated pricing module
@@ -10,7 +10,7 @@ import { ProductDTO, ProductVariantDTO } from "@medusajs/types/dist/product";
 export default async function getPrices(
   data: ProductDTO[],
   cartId?: string,
-  regionId?: string
+  regionId?: string,
 ) {
   if (!data || !data.length) {
     return [];
@@ -23,7 +23,7 @@ export default async function getPrices(
 
   const query = {
     id: productIds,
-    expand: "variants,variants.prices,variants.options",
+    expand: 'variants,variants.prices,variants.options',
   } as Record<string, any>;
 
   if (cartId) {
@@ -35,7 +35,7 @@ export default async function getPrices(
   }
 
   // Get all products with variants and prices from Medusa API
-  const productsWithVariants = await medusaRequest("GET", `/products`, {
+  const productsWithVariants = await medusaRequest('GET', `/products`, {
     query,
   }).then((res) => res.body.products);
 

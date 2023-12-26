@@ -1,7 +1,7 @@
-import { getCategoryByHandle } from "@lib/data";
-import CategoryTemplate from "@modules/categories/templates";
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { getCategoryByHandle } from '@lib/data';
+import CategoryTemplate from '@modules/categories/templates';
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: { category: string[] };
@@ -9,7 +9,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { product_categories } = await getCategoryByHandle(
-    params.category
+    params.category,
   ).catch(() => {
     notFound();
   });
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function CategoryPage({ params }: Props) {
   const { product_categories } = await getCategoryByHandle(
-    params.category
+    params.category,
   ).catch(() => {
     notFound();
   });

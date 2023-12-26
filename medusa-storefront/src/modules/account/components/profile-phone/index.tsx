@@ -1,13 +1,14 @@
-import { useAccount } from "@lib/context/account-context";
-import { Customer } from "@medusajs/medusa";
-import Input from "@modules/common/components/input";
-import { useUpdateMe } from "medusa-react";
-import React, { useEffect } from "react";
-import { useForm, useWatch } from "react-hook-form";
-import AccountInfo from "../account-info";
+import { useAccount } from '@lib/context/account-context';
+import { Customer } from '@medusajs/medusa';
+import Input from '@modules/common/components/input';
+import { useUpdateMe } from 'medusa-react';
+import React, { useEffect } from 'react';
+import { useForm, useWatch } from 'react-hook-form';
+
+import AccountInfo from '../account-info';
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">;
+  customer: Omit<Customer, 'password_hash'>;
 };
 
 type UpdateCustomerPhoneFormData = {
@@ -45,7 +46,7 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ customer }) => {
 
   const phone = useWatch({
     control,
-    name: "phone",
+    name: 'phone',
   });
 
   const updatePhone = (data: UpdateCustomerPhoneFormData) => {
@@ -58,7 +59,7 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ customer }) => {
         onSuccess: () => {
           refetchCustomer();
         },
-      }
+      },
     );
   };
 
@@ -75,7 +76,7 @@ const ProfilePhone: React.FC<MyInformationProps> = ({ customer }) => {
         <div className="grid grid-cols-1 gap-y-2">
           <Input
             label="Phone"
-            {...register("phone", {
+            {...register('phone', {
               required: true,
             })}
             defaultValue={phone}

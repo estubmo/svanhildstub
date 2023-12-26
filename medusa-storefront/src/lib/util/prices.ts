@@ -1,10 +1,10 @@
-import { MoneyAmount } from "@medusajs/medusa";
-import { formatAmount } from "medusa-react";
-import { Region, Variant } from "types/medusa";
+import { MoneyAmount } from '@medusajs/medusa';
+import { formatAmount } from 'medusa-react';
+import { Region, Variant } from 'types/medusa';
 
 export const findCheapestRegionPrice = (
   variants: Variant[],
-  regionId: string
+  regionId: string,
 ) => {
   const regionPrices = variants.reduce((acc, v) => {
     if (!v.prices) {
@@ -37,7 +37,7 @@ export const findCheapestRegionPrice = (
 
 export const findCheapestCurrencyPrice = (
   variants: Variant[],
-  currencyCode: string
+  currencyCode: string,
 ) => {
   const currencyPrices = variants.reduce((acc, v) => {
     if (!v.prices) {
@@ -87,5 +87,5 @@ export const findCheapestPrice = (variants: Variant[], region: Region) => {
   // if we can't find any price that matches the current region,
   // either by id or currency, then the product is not available in
   // the current region
-  return "Not available in your region";
+  return 'Not available in your region';
 };

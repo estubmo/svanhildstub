@@ -1,7 +1,7 @@
-import { StoreGetProductsParams } from "@medusajs/medusa";
-import FilterRadioGroup from "@modules/common/components/filter-radio-group";
-import { useCollections } from "medusa-react";
-import { ChangeEvent, useState } from "react";
+import { StoreGetProductsParams } from '@medusajs/medusa';
+import FilterRadioGroup from '@modules/common/components/filter-radio-group';
+import { useCollections } from 'medusa-react';
+import { ChangeEvent, useState } from 'react';
 
 type SortCollectionFilterProps = {
   refinementList: StoreGetProductsParams;
@@ -26,7 +26,7 @@ const CollectionFilter = ({
 
   const handleCollectionChange = (
     e: ChangeEvent<HTMLInputElement>,
-    id: string
+    id: string,
   ) => {
     setCollectionId(id);
 

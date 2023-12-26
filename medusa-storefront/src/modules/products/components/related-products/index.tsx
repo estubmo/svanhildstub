@@ -1,15 +1,16 @@
-import { getProductsList } from "@lib/data";
-import usePreviews from "@lib/hooks/use-previews";
-import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons";
-import repeat from "@lib/util/repeat";
-import { StoreGetProductsParams } from "@medusajs/medusa";
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
-import { Button } from "@medusajs/ui";
-import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { useCart } from "medusa-react";
-import { useMemo } from "react";
-import ProductPreview from "../product-preview";
+import { getProductsList } from '@lib/data';
+import usePreviews from '@lib/hooks/use-previews';
+import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons';
+import repeat from '@lib/util/repeat';
+import { StoreGetProductsParams } from '@medusajs/medusa';
+import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { Button } from '@medusajs/ui';
+import SkeletonProductPreview from '@modules/skeletons/components/skeleton-product-preview';
+import { useInfiniteQuery } from '@tanstack/react-query';
+import { useCart } from 'medusa-react';
+import { useMemo } from 'react';
+
+import ProductPreview from '../product-preview';
 
 type RelatedProductsProps = {
   product: PricedProduct;
@@ -48,23 +49,23 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
       ({ pageParam }) => getProductsList({ pageParam, queryParams }),
       {
         getNextPageParam: (lastPage) => lastPage.nextPage,
-      }
+      },
     );
 
   const previews = usePreviews({ pages: data?.pages, region: cart?.region });
 
   return (
     <div className="product-page-constraint">
-      <div className="flex flex-col items-center text-center mb-16">
-        <span className="text-base-regular text-gray-600 mb-6">
+      <div className="mb-16 flex flex-col items-center text-center">
+        <span className="text-base-regular mb-6 text-gray-600">
           Related products
         </span>
-        <p className="text-2xl-regular text-ui-tag-blue-text max-w-lg">
+        <p className="text-2xl-regular max-w-lg text-ui-tag-blue-text">
           You might also want to check out these products.
         </p>
       </div>
 
-      <ul className="grid grid-cols-2 small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
+      <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
         {previews.map((p) => (
           <li key={p.id}>
             <ProductPreview {...p} />
@@ -85,7 +86,7 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
           ))}
       </ul>
       {hasNextPage && (
-        <div className="flex items-center justify-center mt-8">
+        <div className="mt-8 flex items-center justify-center">
           <Button
             isLoading={isLoading}
             onClick={() => fetchNextPage()}

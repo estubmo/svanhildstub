@@ -1,13 +1,13 @@
-import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client";
-import { InstantSearch } from "react-instantsearch";
+import { Transition } from '@headlessui/react';
+import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
+import { MagnifyingGlassMini } from '@medusajs/icons';
+import { clx } from '@medusajs/ui';
+import { Fragment, useCallback, useState } from 'react';
+import { InstantSearch } from 'react-instantsearch';
 
-import { Transition } from "@headlessui/react";
-import { MagnifyingGlassMini } from "@medusajs/icons";
-import { clx } from "@medusajs/ui";
-import { Fragment, useCallback, useState } from "react";
-import DesktopHit from "../desktop-hit";
-import DesktopHits from "../desktop-hits";
-import SearchBox from "../search-box";
+import DesktopHit from '../desktop-hit';
+import DesktopHits from '../desktop-hits';
+import SearchBox from '../search-box';
 
 const NavbarSearchContainer = () => {
   const [isOpen, setOpen] = useState(false);
@@ -30,10 +30,10 @@ const NavbarSearchContainer = () => {
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <div className="fixed bg-black/20 inset-0 z-10 backdrop-blur-sm animate-blur" />
+        <div className="animate-blur fixed inset-0 z-10 bg-black/20 backdrop-blur-sm" />
       </Transition>
-      <div className="flex flex-col h-fit">
-        <div className="w-[25vw] z-50 flex h-[42px] items-center gap-x-2 px-4 py-2 bg-ui-bg-subtle border rounded-rounded focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed ">
+      <div className="flex h-fit flex-col">
+        <div className="z-50 flex h-[42px] w-[25vw] items-center gap-x-2 rounded-rounded border bg-ui-bg-subtle px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed ">
           <MagnifyingGlassMini className="text-ui-fg-muted" />
           <InstantSearch
             indexName={SEARCH_INDEX_NAME}
@@ -42,8 +42,8 @@ const NavbarSearchContainer = () => {
             <SearchBox onFocus={() => setOpen(true)} onBlur={handleBlur} />
             <div
               className={clx(
-                "w-full justify-center  min-h-full absolute top-16 mt-2 left-0 right-0",
-                isOpen ? "flex" : "hidden"
+                'absolute left-0  right-0 top-16 mt-2 min-h-full w-full justify-center',
+                isOpen ? 'flex' : 'hidden',
               )}
             >
               <DesktopHits hitComponent={DesktopHit} />

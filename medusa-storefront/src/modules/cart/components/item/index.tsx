@@ -1,32 +1,32 @@
-import { useStore } from "@lib/context/store-context";
-import { LineItem, Region } from "@medusajs/medusa";
-import { Table, Text, clx } from "@medusajs/ui";
-import LineItemOptions from "@modules/common/components/line-item-options";
-import LineItemPrice from "@modules/common/components/line-item-price";
-import LineItemUnitPrice from "@modules/common/components/line-item-unit-price";
-import CartItemSelect from "@modules/cart/components/cart-item-select";
-import Trash from "@modules/common/icons/trash";
-import Thumbnail from "@modules/products/components/thumbnail";
-import Link from "next/link";
+import { useStore } from '@lib/context/store-context';
+import { LineItem, Region } from '@medusajs/medusa';
+import { clx, Table, Text } from '@medusajs/ui';
+import CartItemSelect from '@modules/cart/components/cart-item-select';
+import LineItemOptions from '@modules/common/components/line-item-options';
+import LineItemPrice from '@modules/common/components/line-item-price';
+import LineItemUnitPrice from '@modules/common/components/line-item-unit-price';
+import Trash from '@modules/common/icons/trash';
+import Thumbnail from '@modules/products/components/thumbnail';
+import Link from 'next/link';
 
 type ItemProps = {
-  item: Omit<LineItem, "beforeInsert">;
+  item: Omit<LineItem, 'beforeInsert'>;
   region: Region;
-  type?: "full" | "preview";
+  type?: 'full' | 'preview';
 };
 
-const Item = ({ item, region, type = "full" }: ItemProps) => {
+const Item = ({ item, region, type = 'full' }: ItemProps) => {
   const { updateItem, deleteItem } = useStore();
   const { handle } = item.variant.product;
 
   return (
     <Table.Row className="w-full">
-      <Table.Cell className="!pl-0 p-4 w-24">
+      <Table.Cell className="w-24 p-4 !pl-0">
         <Link
           href={`/products/${handle}`}
-          className={clx("flex", {
-            "w-16": type === "preview",
-            "small:w-24 w-12": type === "full",
+          className={clx('flex', {
+            'w-16': type === 'preview',
+            'w-12 small:w-24': type === 'full',
           })}
         >
           <Thumbnail thumbnail={item.thumbnail} size="square" />
@@ -38,11 +38,11 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
         <LineItemOptions variant={item.variant} />
       </Table.Cell>
 
-      {type === "full" && (
+      {type === 'full' && (
         <Table.Cell>
           <div className="flex gap-2">
             <button
-              className="flex items-center gap-x-"
+              className="gap-x- flex items-center"
               onClick={() => deleteItem(item.id)}
             >
               <Trash size={18} />
@@ -55,16 +55,16 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
                   quantity: parseInt(value.target.value),
                 })
               }
-              className="w-14 h-10 p-4"
+              className="h-10 w-14 p-4"
             >
               {Array.from(
                 [
                   ...Array(
                     item.variant.inventory_quantity > 0
                       ? item.variant.inventory_quantity
-                      : 10
+                      : 10,
                   ),
-                ].keys()
+                ].keys(),
               )
                 .slice(0, 10)
                 .map((i) => {
@@ -80,7 +80,7 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
         </Table.Cell>
       )}
 
-      {type === "full" && (
+      {type === 'full' && (
         <Table.Cell className="hidden small:table-cell">
           <LineItemUnitPrice item={item} region={region} style="tight" />
         </Table.Cell>
@@ -88,11 +88,11 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
 
       <Table.Cell className="!pr-0">
         <span
-          className={clx("!pr-0", {
-            "flex flex-col items-end h-full justify-center": type === "preview",
+          className={clx('!pr-0', {
+            'flex h-full flex-col items-end justify-center': type === 'preview',
           })}
         >
-          {type === "preview" && (
+          {type === 'preview' && (
             <span className="flex gap-x-1 ">
               <Text className="text-ui-fg-muted">{item.quantity}x </Text>
               <LineItemUnitPrice item={item} region={region} style="tight" />

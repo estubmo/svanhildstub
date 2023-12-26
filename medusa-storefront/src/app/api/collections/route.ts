@@ -1,6 +1,6 @@
-import { initialize as initializeProductModule } from "@medusajs/product";
-import { notFound } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import { initialize as initializeProductModule } from '@medusajs/product';
+import { notFound } from 'next/navigation';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * This endpoint uses the serverless Product Module to list and count all product collections.
@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       {
         skip: parseInt(offset) || 0,
         take: parseInt(limit) || 100,
-      }
+      },
     )
     .catch(() => {
       return notFound();

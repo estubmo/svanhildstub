@@ -135,24 +135,24 @@ yarn add algoliasearch
 After this you will need to switch the current MeiliSearch `SearchClient` out with a Alogolia client. To do this update `@lib/search-client`.
 
 ```ts
-import algoliasearch from "algoliasearch/lite";
+import algoliasearch from 'algoliasearch/lite';
 
-const appId = process.env.NEXT_PUBLIC_SEARCH_APP_ID || "test_app_id"; // You should add this to your environment variables
+const appId = process.env.NEXT_PUBLIC_SEARCH_APP_ID || 'test_app_id'; // You should add this to your environment variables
 
-const apiKey = process.env.NEXT_PUBLIC_SEARCH_API_KEY || "test_key";
+const apiKey = process.env.NEXT_PUBLIC_SEARCH_API_KEY || 'test_key';
 
 export const searchClient = algoliasearch(appId, apiKey);
 
 export const SEARCH_INDEX_NAME =
-  process.env.NEXT_PUBLIC_INDEX_NAME || "products";
+  process.env.NEXT_PUBLIC_INDEX_NAME || 'products';
 ```
 
 Then, in `src/app/(main)/search/actions.ts`, remove the MeiliSearch code (line 10-16) and uncomment the Algolia code.
 
 ```ts
-"use server";
+'use server';
 
-import { searchClient, SEARCH_INDEX_NAME } from "@lib/search-client";
+import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
 
 /**
  * Uses MeiliSearch or Algolia to search for a query

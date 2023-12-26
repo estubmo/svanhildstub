@@ -1,11 +1,11 @@
-import { Cart, Order } from "@medusajs/medusa";
-import { Tooltip } from "@medusajs/ui";
-import { InformationCircleSolid } from "@medusajs/icons";
-import { formatAmount } from "medusa-react";
-import React from "react";
+import { InformationCircleSolid } from '@medusajs/icons';
+import { Cart, Order } from '@medusajs/medusa';
+import { Tooltip } from '@medusajs/ui';
+import { formatAmount } from 'medusa-react';
+import React from 'react';
 
 type CartTotalsProps = {
-  data: Omit<Cart, "refundable_amount" | "refunded_total"> | Order;
+  data: Omit<Cart, 'refundable_amount' | 'refunded_total'> | Order;
 };
 
 const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
@@ -28,9 +28,9 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
 
   return (
     <div>
-      <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
+      <div className="txt-medium flex flex-col gap-y-2 text-ui-fg-subtle ">
         <div className="flex items-center justify-between">
-          <span className="flex gap-x-1 items-center">
+          <span className="flex items-center gap-x-1">
             Subtotal
             <Tooltip content="Cart total excluding shipping and taxes.">
               <InformationCircleSolid color="var(--fg-muted)" />
@@ -59,16 +59,16 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
           <span>{getAmount(shipping_total)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="flex gap-x-1 items-center ">Taxes</span>
+          <span className="flex items-center gap-x-1 ">Taxes</span>
           <span>{getAmount(tax_total)}</span>
         </div>
       </div>
-      <div className="h-px w-full border-b border-gray-200 my-4" />
-      <div className="flex items-center justify-between text-ui-fg-base mb-2 txt-medium ">
+      <div className="my-4 h-px w-full border-b border-gray-200" />
+      <div className="txt-medium mb-2 flex items-center justify-between text-ui-fg-base ">
         <span>Total</span>
         <span className="txt-xlarge-plus">{getAmount(total)}</span>
       </div>
-      <div className="h-px w-full border-b border-gray-200 mt-4" />
+      <div className="mt-4 h-px w-full border-b border-gray-200" />
     </div>
   );
 };

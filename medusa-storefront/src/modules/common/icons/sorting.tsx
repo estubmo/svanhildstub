@@ -1,5 +1,5 @@
-import React from "react";
-import { IconProps } from "types/icon";
+import React from 'react';
+import { IconProps } from 'types/icon';
 
 type SortingIconProps = {
   ascendingColor?: string;
@@ -7,8 +7,8 @@ type SortingIconProps = {
 } & IconProps;
 
 const Sorting: React.FC<SortingIconProps> = ({
-  size = "16",
-  color = "currentColor",
+  size = '16',
+  color = 'currentColor',
   ascendingColor,
   descendingColor,
   ...attributes

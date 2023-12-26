@@ -1,6 +1,6 @@
-import { formatAmount, useCart, useProducts } from "medusa-react";
-import { useEffect, useMemo } from "react";
-import { CalculatedVariant } from "types/medusa";
+import { formatAmount, useCart, useProducts } from 'medusa-react';
+import { useEffect, useMemo } from 'react';
+import { CalculatedVariant } from 'types/medusa';
 
 type useProductPriceProps = {
   id: string;
@@ -15,7 +15,7 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
       id: id,
       cart_id: cart?.id,
     },
-    { enabled: !!cart?.id && !!cart?.region_id }
+    { enabled: !!cart?.id && !!cart?.region_id },
   );
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
       price_type: cheapestVariant.calculated_price_type,
       percentage_diff: getPercentageDiff(
         cheapestVariant.original_price,
-        cheapestVariant.calculated_price
+        cheapestVariant.calculated_price,
       ),
     };
   }, [product, cart?.region]);
@@ -69,7 +69,7 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
     }
 
     const variant = product.variants.find(
-      (v) => v.id === variantId || v.sku === variantId
+      (v) => v.id === variantId || v.sku === variantId,
     ) as unknown as CalculatedVariant;
 
     if (!variant) {
@@ -90,7 +90,7 @@ const useProductPrice = ({ id, variantId }: useProductPriceProps) => {
       price_type: variant.calculated_price_type,
       percentage_diff: getPercentageDiff(
         variant.original_price,
-        variant.calculated_price
+        variant.calculated_price,
       ),
     };
   }, [product, variantId, cart?.region]);

@@ -1,30 +1,30 @@
-import { getPercentageDiff } from "@lib/util/get-precentage-diff";
-import { LineItem, Region } from "@medusajs/medusa";
-import clsx from "clsx";
-import { formatAmount } from "medusa-react";
-import { CalculatedVariant } from "types/medusa";
+import { getPercentageDiff } from '@lib/util/get-precentage-diff';
+import { LineItem, Region } from '@medusajs/medusa';
+import clsx from 'clsx';
+import { formatAmount } from 'medusa-react';
+import { CalculatedVariant } from 'types/medusa';
 
 type LineItemUnitPriceProps = {
-  item: Omit<LineItem, "beforeInsert">;
+  item: Omit<LineItem, 'beforeInsert'>;
   region: Region;
-  style?: "default" | "tight";
+  style?: 'default' | 'tight';
 };
 
 const LineItemUnitPrice = ({
   item,
   region,
-  style = "default",
+  style = 'default',
 }: LineItemUnitPriceProps) => {
   const originalPrice = (item.variant as CalculatedVariant).original_price;
   const hasReducedPrice = (originalPrice * item.quantity || 0) > item.total!;
   const reducedPrice = (item.total || 0) / item.quantity!;
 
   return (
-    <div className="flex flex-col text-ui-fg-muted justify-center h-full">
+    <div className="flex h-full flex-col justify-center text-ui-fg-muted">
       {hasReducedPrice && (
         <>
           <p>
-            {style === "default" && (
+            {style === 'default' && (
               <span className="text-ui-fg-muted">Original: </span>
             )}
             <span className="line-through">
@@ -35,7 +35,7 @@ const LineItemUnitPrice = ({
               })}
             </span>
           </p>
-          {style === "default" && (
+          {style === 'default' && (
             <span className="text-ui-fg-interactive">
               -{getPercentageDiff(originalPrice, reducedPrice || 0)}%
             </span>
@@ -43,8 +43,8 @@ const LineItemUnitPrice = ({
         </>
       )}
       <span
-        className={clsx("text-base-regular", {
-          "text-ui-fg-interactive": hasReducedPrice,
+        className={clsx('text-base-regular', {
+          'text-ui-fg-interactive': hasReducedPrice,
         })}
       >
         {formatAmount({

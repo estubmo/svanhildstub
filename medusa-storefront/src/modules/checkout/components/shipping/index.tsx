@@ -1,15 +1,15 @@
-import { RadioGroup } from "@headlessui/react";
-import { ErrorMessage } from "@hookform/error-message";
-import { useCheckout } from "@lib/context/checkout-context";
-import { CheckCircleSolid } from "@medusajs/icons";
-import { Cart } from "@medusajs/medusa";
-import { Button, Heading, Text, clx } from "@medusajs/ui";
-import Divider from "@modules/common/components/divider";
-import Radio from "@modules/common/components/radio";
-import Spinner from "@modules/common/icons/spinner";
-import { formatAmount, useCart, useCartShippingOptions } from "medusa-react";
-import { useEffect, useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { RadioGroup } from '@headlessui/react';
+import { ErrorMessage } from '@hookform/error-message';
+import { useCheckout } from '@lib/context/checkout-context';
+import { CheckCircleSolid } from '@medusajs/icons';
+import { Cart } from '@medusajs/medusa';
+import { Button, clx, Heading, Text } from '@medusajs/ui';
+import Divider from '@modules/common/components/divider';
+import Radio from '@modules/common/components/radio';
+import Spinner from '@modules/common/icons/spinner';
+import { formatAmount, useCart, useCartShippingOptions } from 'medusa-react';
+import { useEffect, useMemo, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 type ShippingOption = {
   value?: string;
@@ -18,7 +18,7 @@ type ShippingOption = {
 };
 
 type ShippingProps = {
-  cart: Omit<Cart, "refundable_amount" | "refunded_total">;
+  cart: Omit<Cart, 'refundable_amount' | 'refunded_total'>;
 };
 
 const Shipping: React.FC<ShippingProps> = ({ cart }) => {
@@ -35,10 +35,10 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
   } = useCheckout();
 
   const currentShippingOption =
-    cart.shipping_methods?.[0]?.shipping_option.id || "";
+    cart.shipping_methods?.[0]?.shipping_option.id || '';
 
   const [shippingOptionId, setShippingOptionId] = useState(
-    currentShippingOption
+    currentShippingOption,
   );
 
   const { addShippingMethod, setCart } = useCart();
@@ -73,15 +73,15 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
         },
         onError: () =>
           setError(
-            "soId",
+            'soId',
             {
-              type: "validate",
+              type: 'validate',
               message:
-                "An error occurred while adding shipping. Please try again.",
+                'An error occurred while adding shipping. Please try again.',
             },
-            { shouldFocus: true }
+            { shouldFocus: true },
           ),
-      }
+      },
     );
   };
 
@@ -115,15 +115,15 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
 
   return (
     <div className="bg-ui-bg-base p-4 small:px-8">
-      <div className="flex flex-row items-center justify-between mb-6">
+      <div className="mb-6 flex flex-row items-center justify-between">
         <Heading
           level="h2"
           className={clx(
-            "flex flex-row text-3xl-regular gap-x-2 items-baseline",
+            'text-3xl-regular flex flex-row items-baseline gap-x-2',
             {
-              "opacity-50 pointer-events-none select-none":
+              'pointer-events-none select-none opacity-50':
                 editingOtherSteps && !shippingReady,
-            }
+            },
           )}
         >
           Delivery
@@ -153,11 +153,11 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                       key={option.value}
                       value={option.value}
                       className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                        'text-small-regular mb-2 flex cursor-pointer items-center justify-between rounded-rounded border px-8 py-4 hover:shadow-borders-interactive-with-active',
                         {
-                          "border-ui-border-interactive":
+                          'border-ui-border-interactive':
                             option.value === shippingOptionId,
-                        }
+                        },
                       )}
                     >
                       <div className="flex items-center gap-x-4">
@@ -183,7 +183,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
               name="soId"
               render={({ message }) => {
                 return (
-                  <div className="pt-2 text-rose-500 text-small-regular">
+                  <div className="text-small-regular pt-2 text-rose-500">
                     <span>{message}</span>
                   </div>
                 );
@@ -203,8 +203,8 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
         <div>
           <div className="text-small-regular">
             {cart && shippingReady && (
-              <div className="flex flex-col w-1/3">
-                <Text className="txt-medium-plus text-ui-fg-base mb-1">
+              <div className="flex w-1/3 flex-col">
+                <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                   Method
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
@@ -213,8 +213,8 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                     amount: cart.shipping_methods[0].price,
                     region: cart.region,
                   })
-                    .replace(/,/g, "")
-                    .replace(/\./g, ",")}
+                    .replace(/,/g, '')
+                    .replace(/\./g, ',')}
                   )
                 </Text>
               </div>

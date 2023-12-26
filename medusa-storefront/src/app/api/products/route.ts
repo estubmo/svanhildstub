@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { notFound } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
-
-import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id";
-import { MedusaApp, Modules } from "@medusajs/modules-sdk";
-import { IPricingModuleService } from "@medusajs/types";
+import { getPricesByPriceSetId } from '@lib/util/get-prices-by-price-set-id';
+import { MedusaApp, Modules } from '@medusajs/modules-sdk';
+import { IPricingModuleService } from '@medusajs/types';
+import { notFound } from 'next/navigation';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * This endpoint uses the serverless Product and Pricing Modules to retrieve a product list.

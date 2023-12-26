@@ -1,20 +1,20 @@
 /* eslint-disable no-unused-vars */
-"use client";
+'use client';
 
-import { medusaClient } from "@lib/config";
-import { Customer } from "@medusajs/medusa";
-import { useMutation } from "@tanstack/react-query";
-import { useMeCustomer } from "medusa-react";
-import { useRouter } from "next/navigation";
-import React, { createContext, useCallback, useContext, useState } from "react";
+import { medusaClient } from '@lib/config';
+import { Customer } from '@medusajs/medusa';
+import { useMutation } from '@tanstack/react-query';
+import { useMeCustomer } from 'medusa-react';
+import { useRouter } from 'next/navigation';
+import React, { createContext, useCallback, useContext, useState } from 'react';
 
 export enum LOGIN_VIEW {
-  SIGN_IN = "sign-in",
-  REGISTER = "register",
+  SIGN_IN = 'sign-in',
+  REGISTER = 'register',
 }
 
 interface AccountContext {
-  customer?: Omit<Customer, "password_hash">;
+  customer?: Omit<Customer, 'password_hash'>;
   retrievingCustomer: boolean;
   loginView: [LOGIN_VIEW, React.Dispatch<React.SetStateAction<LOGIN_VIEW>>];
   checkSession: () => void;
@@ -46,13 +46,13 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
 
   const checkSession = useCallback(() => {
     if (!customer && !retrievingCustomer) {
-      router.push("/account/login");
+      router.push('/account/login');
     }
   }, [customer, retrievingCustomer, router]);
 
   const useDeleteSession = useMutation({
     mutationFn: handleDeleteSession,
-    mutationKey: ["delete-session"],
+    mutationKey: ['delete-session'],
   });
 
   const handleLogout = () => {
@@ -60,7 +60,7 @@ export const AccountProvider = ({ children }: AccountProviderProps) => {
       onSuccess: () => {
         remove();
         loginView[1](LOGIN_VIEW.SIGN_IN);
-        router.push("/");
+        router.push('/');
       },
     });
   };
@@ -85,7 +85,7 @@ export const useAccount = () => {
   const context = useContext(AccountContext);
 
   if (context === null) {
-    throw new Error("useAccount must be used within a AccountProvider");
+    throw new Error('useAccount must be used within a AccountProvider');
   }
   return context;
 };

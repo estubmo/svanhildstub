@@ -1,4 +1,4 @@
-import { medusaClient } from "../config";
+import { medusaClient } from '../config';
 
 export const getCollectionIds = async (): Promise<string[]> => {
   const data = await medusaClient.collections

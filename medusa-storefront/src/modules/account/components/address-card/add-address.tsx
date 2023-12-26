@@ -1,13 +1,13 @@
-import { medusaClient } from "@lib/config";
-import { useAccount } from "@lib/context/account-context";
-import useToggleState from "@lib/hooks/use-toggle-state";
-import { Plus } from "@medusajs/icons";
-import { Button, Heading } from "@medusajs/ui";
-import CountrySelect from "@modules/checkout/components/country-select";
-import Input from "@modules/common/components/input";
-import Modal from "@modules/common/components/modal";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { medusaClient } from '@lib/config';
+import { useAccount } from '@lib/context/account-context';
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { Plus } from '@medusajs/icons';
+import { Button, Heading } from '@medusajs/ui';
+import CountrySelect from '@modules/checkout/components/country-select';
+import Input from '@modules/common/components/input';
+import Modal from '@modules/common/components/modal';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 type FormValues = {
   first_name: string;
@@ -37,16 +37,16 @@ const AddAddress: React.FC = () => {
 
   const handleClose = () => {
     reset({
-      first_name: "",
-      last_name: "",
-      city: "",
-      country_code: "",
-      postal_code: "",
-      address_1: "",
-      address_2: "",
-      company: "",
-      phone: "",
-      province: "",
+      first_name: '',
+      last_name: '',
+      city: '',
+      country_code: '',
+      postal_code: '',
+      address_1: '',
+      address_2: '',
+      company: '',
+      phone: '',
+      province: '',
     });
     close();
   };
@@ -58,14 +58,14 @@ const AddAddress: React.FC = () => {
     const payload = {
       first_name: data.first_name,
       last_name: data.last_name,
-      company: data.company || "",
+      company: data.company || '',
       address_1: data.address_1,
-      address_2: data.address_2 || "",
+      address_2: data.address_2 || '',
       city: data.city,
       country_code: data.country_code,
-      province: data.province || "",
+      province: data.province || '',
       postal_code: data.postal_code,
-      phone: data.phone || "",
+      phone: data.phone || '',
       metadata: {},
     };
 
@@ -78,14 +78,14 @@ const AddAddress: React.FC = () => {
       })
       .catch(() => {
         setSubmitting(false);
-        setError("Failed to add address, please try again.");
+        setError('Failed to add address, please try again.');
       });
   });
 
   return (
     <>
       <button
-        className="border border-ui-border-base rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between"
+        className="flex h-full min-h-[220px] w-full flex-col justify-between rounded-rounded border border-ui-border-base p-5"
         onClick={open}
       >
         <span className="text-base-semi">New address</span>
@@ -101,8 +101,8 @@ const AddAddress: React.FC = () => {
             <div className="grid grid-cols-2 gap-x-2">
               <Input
                 label="First name"
-                {...register("first_name", {
-                  required: "First name is required",
+                {...register('first_name', {
+                  required: 'First name is required',
                 })}
                 required
                 errors={errors}
@@ -110,19 +110,19 @@ const AddAddress: React.FC = () => {
               />
               <Input
                 label="Last name"
-                {...register("last_name", {
-                  required: "Last name is required",
+                {...register('last_name', {
+                  required: 'Last name is required',
                 })}
                 required
                 errors={errors}
                 autoComplete="family-name"
               />
             </div>
-            <Input label="Company" {...register("company")} errors={errors} />
+            <Input label="Company" {...register('company')} errors={errors} />
             <Input
               label="Address"
-              {...register("address_1", {
-                required: "Address is required",
+              {...register('address_1', {
+                required: 'Address is required',
               })}
               required
               errors={errors}
@@ -130,15 +130,15 @@ const AddAddress: React.FC = () => {
             />
             <Input
               label="Apartment, suite, etc."
-              {...register("address_2")}
+              {...register('address_2')}
               errors={errors}
               autoComplete="address-line2"
             />
             <div className="grid grid-cols-[144px_1fr] gap-x-2">
               <Input
                 label="Postal code"
-                {...register("postal_code", {
-                  required: "Postal code is required",
+                {...register('postal_code', {
+                  required: 'Postal code is required',
                 })}
                 required
                 errors={errors}
@@ -146,8 +146,8 @@ const AddAddress: React.FC = () => {
               />
               <Input
                 label="City"
-                {...register("city", {
-                  required: "City is required",
+                {...register('city', {
+                  required: 'City is required',
                 })}
                 errors={errors}
                 required
@@ -156,27 +156,27 @@ const AddAddress: React.FC = () => {
             </div>
             <Input
               label="Province / State"
-              {...register("province")}
+              {...register('province')}
               errors={errors}
               autoComplete="address-level1"
             />
             <CountrySelect
-              {...register("country_code", { required: true })}
+              {...register('country_code', { required: true })}
               autoComplete="country"
             />
             <Input
               label="Phone"
-              {...register("phone")}
+              {...register('phone')}
               errors={errors}
               autoComplete="phone"
             />
           </div>
           {error && (
-            <div className="text-rose-500 text-small-regular py-2">{error}</div>
+            <div className="text-small-regular py-2 text-rose-500">{error}</div>
           )}
         </Modal.Body>
         <Modal.Footer>
-          <div className="flex gap-3 mt-4">
+          <div className="mt-4 flex gap-3">
             <Button
               variant="secondary"
               onClick={handleClose}

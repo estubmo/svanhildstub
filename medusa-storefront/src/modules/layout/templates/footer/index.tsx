@@ -1,4 +1,4 @@
-import FooterNav from "@modules/layout/components/footer-nav";
+import FooterNav from '@modules/layout/components/footer-nav';
 
 const Footer = () => {
   return (

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import useToggleState from "@lib/hooks/use-toggle-state";
-import { createContext, useContext, useEffect, useState } from "react";
+import useToggleState from '@lib/hooks/use-toggle-state';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 interface CartDropdownContext {
   state: boolean;
@@ -11,7 +11,7 @@ interface CartDropdownContext {
 }
 
 export const CartDropdownContext = createContext<CartDropdownContext | null>(
-  null
+  null,
 );
 
 export const CartDropdownProvider = ({
@@ -21,7 +21,7 @@ export const CartDropdownProvider = ({
 }) => {
   const { state, close, open } = useToggleState();
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
-    undefined
+    undefined,
   );
 
   const timedOpen = () => {
@@ -63,7 +63,7 @@ export const useCartDropdown = () => {
 
   if (context === null) {
     throw new Error(
-      "useCartDropdown must be used within a CartDropdownProvider"
+      'useCartDropdown must be used within a CartDropdownProvider',
     );
   }
 

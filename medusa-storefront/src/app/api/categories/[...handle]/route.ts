@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id";
-import { MedusaApp, Modules } from "@medusajs/modules-sdk";
-import { initialize as initializeProductModule } from "@medusajs/product";
-import { IPricingModuleService } from "@medusajs/types";
-import { ProductDTO } from "@medusajs/types/dist/product";
-import { notFound } from "next/navigation";
-import { NextRequest, NextResponse } from "next/server";
+import { getPricesByPriceSetId } from '@lib/util/get-prices-by-price-set-id';
+import { MedusaApp, Modules } from '@medusajs/modules-sdk';
+import { initialize as initializeProductModule } from '@medusajs/product';
+import { IPricingModuleService } from '@medusajs/types';
+import { ProductDTO } from '@medusajs/types/dist/product';
+import { notFound } from 'next/navigation';
+import { NextRequest, NextResponse } from 'next/server';
 
 /**
  * This endpoint uses the serverless Product and Pricing Modules to retrieve a category and its products by handle.
@@ -14,7 +14,7 @@ import { NextRequest, NextResponse } from "next/server";
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: Record<string, any> }
+  { params }: { params: Record<string, any> },
 ) {
   // Initialize the Product Module
   const productService = await initializeProductModule();
@@ -26,7 +26,7 @@ export async function GET(
   const { handle: categoryHandle } = params;
 
   const handle = categoryHandle.map((handle: string, index: number) =>
-    categoryHandle.slice(0, index + 1).join("/")
+    categoryHandle.slice(0, index + 1).join('/'),
   );
 
   // Fetch the category by handle
@@ -36,10 +36,10 @@ export async function GET(
         handle,
       },
       {
-        select: ["id", "handle", "name", "description"],
-        relations: ["category_children"],
+        select: ['id', 'handle', 'name', 'description'],
+        relations: ['category_children'],
         take: handle.length,
-      }
+      },
     )
     .catch(() => {
       return notFound();
@@ -59,7 +59,7 @@ export async function GET(
 
   // Filter out unpublished products
   const publishedProducts: ProductDTO[] = products.filter(
-    (product) => product.status === "published"
+    (product) => product.status === 'published',
   );
 
   // Calculate the next page
@@ -84,7 +84,7 @@ export async function GET(
  */
 async function getProductsByCategoryId(
   category_id: string,
-  params: Record<string, any>
+  params: Record<string, any>,
 ): Promise<{ rows: ProductDTO[]; metadata: Record<string, any> }> {
   // Extract the query parameters
   let { currency_code } = params;

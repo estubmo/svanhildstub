@@ -1,4 +1,4 @@
-import SkeletonProductPreview from "../skeleton-product-preview";
+import SkeletonProductPreview from '../skeleton-product-preview';
 
 const SkeletonHomepageProducts: React.FC<{
   count: number;
