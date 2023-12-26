@@ -1,11 +1,11 @@
-import React from "react"
-import { Checkbox, Label } from "@medusajs/ui"
+import React from "react";
+import { Checkbox, Label } from "@medusajs/ui";
 
 type CheckboxProps = {
-  checked?: boolean
-  onChange?: () => void
-  label: string
-}
+  checked?: boolean;
+  onChange?: () => void;
+  label: string;
+};
 
 const CheckboxWithLabel: React.FC<CheckboxProps> = ({
   checked = true,
@@ -25,7 +25,7 @@ const CheckboxWithLabel: React.FC<CheckboxProps> = ({
       />
       <Label htmlFor="checkbox">{label}</Label>
     </div>
-  )
-}
+  );
+};
 
-export default CheckboxWithLabel
+export default CheckboxWithLabel;

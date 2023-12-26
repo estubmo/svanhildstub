@@ -1,10 +1,10 @@
-import Providers from "@modules/providers"
-import "styles/globals.css"
+import Providers from "@modules/providers";
+import "styles/globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" data-mode="light">
@@ -14,5 +14,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }

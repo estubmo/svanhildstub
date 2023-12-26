@@ -1,10 +1,11 @@
-import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id"
-import { MedusaApp, Modules } from "@medusajs/modules-sdk"
-import { initialize as initializeProductModule } from "@medusajs/product"
-import { IPricingModuleService } from "@medusajs/types"
-import { ProductDTO } from "@medusajs/types/dist/product"
-import { notFound } from "next/navigation"
-import { NextRequest, NextResponse } from "next/server"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id";
+import { MedusaApp, Modules } from "@medusajs/modules-sdk";
+import { initialize as initializeProductModule } from "@medusajs/product";
+import { IPricingModuleService } from "@medusajs/types";
+import { ProductDTO } from "@medusajs/types/dist/product";
+import { notFound } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * This endpoint uses the serverless Product and Pricing Modules to retrieve a category and its products by handle.
@@ -16,17 +17,17 @@ export async function GET(
   { params }: { params: Record<string, any> }
 ) {
   // Initialize the Product Module
-  const productService = await initializeProductModule()
+  const productService = await initializeProductModule();
 
   // Extract the query parameters
-  const searchParams = Object.fromEntries(request.nextUrl.searchParams)
-  const { page, limit } = searchParams
+  const searchParams = Object.fromEntries(request.nextUrl.searchParams);
+  const { page, limit } = searchParams;
 
-  const { handle: categoryHandle } = params
+  const { handle: categoryHandle } = params;
 
   const handle = categoryHandle.map((handle: string, index: number) =>
     categoryHandle.slice(0, index + 1).join("/")
-  )
+  );
 
   // Fetch the category by handle
   const product_categories = await productService
@@ -41,28 +42,28 @@ export async function GET(
       }
     )
     .catch(() => {
-      return notFound()
-    })
+      return notFound();
+    });
 
-  const category = product_categories[0]
+  const category = product_categories[0];
 
   if (!category) {
-    return notFound()
+    return notFound();
   }
 
   // Fetch the products by category id
   const {
     rows: products,
     metadata: { count },
-  } = await getProductsByCategoryId(category.id, searchParams)
+  } = await getProductsByCategoryId(category.id, searchParams);
 
   // Filter out unpublished products
   const publishedProducts: ProductDTO[] = products.filter(
     (product) => product.status === "published"
-  )
+  );
 
   // Calculate the next page
-  const nextPage = parseInt(page) + parseInt(limit)
+  const nextPage = parseInt(page) + parseInt(limit);
 
   // Return the response
   return NextResponse.json({
@@ -72,7 +73,7 @@ export async function GET(
       count,
     },
     nextPage: count > nextPage ? nextPage : null,
-  })
+  });
 }
 
 /**
@@ -86,9 +87,9 @@ async function getProductsByCategoryId(
   params: Record<string, any>
 ): Promise<{ rows: ProductDTO[]; metadata: Record<string, any> }> {
   // Extract the query parameters
-  let { currency_code } = params
+  let { currency_code } = params;
 
-  currency_code = currency_code && currency_code.toUpperCase()
+  currency_code = currency_code && currency_code.toUpperCase();
 
   // Initialize Remote Query with the Product and Pricing Modules
   const { query, modules } = await MedusaApp({
@@ -99,7 +100,7 @@ async function getProductsByCategoryId(
     sharedResourcesConfig: {
       database: { clientUrl: process.env.POSTGRES_URL },
     },
-  })
+  });
 
   // Set the filters for the query
   const filters = {
@@ -109,7 +110,7 @@ async function getProductsByCategoryId(
       category_id: [category_id],
     },
     currency_code,
-  }
+  };
 
   // Set the GraphQL query
   const productsQuery = `#graphql
@@ -157,21 +158,21 @@ async function getProductsByCategoryId(
           }
         }
       }
-    }`
+    }`;
 
   // Run the query
-  const { rows, metadata } = await query(productsQuery, filters)
+  const { rows, metadata } = await query(productsQuery, filters);
 
   // Calculate prices
   const productsWithPrices = await getPricesByPriceSetId({
     products: rows,
     currency_code,
     pricingService: modules.pricingService as unknown as IPricingModuleService,
-  })
+  });
 
   // Return the response
   return {
     rows: productsWithPrices,
     metadata,
-  }
+  };
 }

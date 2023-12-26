@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const Search: React.FC<IconProps> = ({
   size = "16",
@@ -20,7 +20,7 @@ const Search: React.FC<IconProps> = ({
         fill={color}
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

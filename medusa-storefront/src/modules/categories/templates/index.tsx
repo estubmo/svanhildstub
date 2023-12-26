@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
 import {
-    ProductCategoryWithChildren,
-    getProductsByCategoryHandle,
-} from "@lib/data"
-import usePreviews from "@lib/hooks/use-previews"
-import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons"
-import repeat from "@lib/util/repeat"
-import UnderlineLink from "@modules/common/components/interactive-link"
-import ProductPreview from "@modules/products/components/product-preview"
-import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
-import { useInfiniteQuery } from "@tanstack/react-query"
-import { useCart } from "medusa-react"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-import React, { useEffect } from "react"
-import { useInView } from "react-intersection-observer"
+  ProductCategoryWithChildren,
+  getProductsByCategoryHandle,
+} from "@lib/data";
+import usePreviews from "@lib/hooks/use-previews";
+import getNumberOfSkeletons from "@lib/util/get-number-of-skeletons";
+import repeat from "@lib/util/repeat";
+import UnderlineLink from "@modules/common/components/interactive-link";
+import ProductPreview from "@modules/products/components/product-preview";
+import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useCart } from "medusa-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import React, { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 type CategoryTemplateProps = {
-  categories: ProductCategoryWithChildren[]
-}
+  categories: ProductCategoryWithChildren[];
+};
 
 const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
-  const { cart } = useCart()
-  const { ref, inView } = useInView()
+  const { cart } = useCart();
+  const { ref, inView } = useInView();
 
-  const category = categories[categories.length - 1]
-  const parents = categories.slice(0, categories.length - 1)
+  const category = categories[categories.length - 1];
+  const parents = categories.slice(0, categories.length - 1);
 
-  if (!category) notFound()
+  if (!category) notFound();
 
   const {
     data: infiniteData,
@@ -48,25 +48,25 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
     {
       getNextPageParam: (lastPage) => lastPage.nextPage,
     }
-  )
+  );
 
   useEffect(() => {
     if (cart?.region_id) {
-      refetch()
+      refetch();
     }
-  }, [cart?.region_id, refetch])
+  }, [cart?.region_id, refetch]);
 
   const previews = usePreviews({
     pages: infiniteData?.pages,
     region: cart?.region,
-  })
+  });
 
   useEffect(() => {
     if (inView && hasNextPage) {
-      fetchNextPage()
+      fetchNextPage();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, hasNextPage])
+  }, [inView, hasNextPage]);
 
   return (
     <div className="content-container py-6">
@@ -121,7 +121,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
         <span ref={ref}></span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CategoryTemplate
+export default CategoryTemplate;

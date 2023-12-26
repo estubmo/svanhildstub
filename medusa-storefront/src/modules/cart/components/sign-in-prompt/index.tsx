@@ -1,5 +1,5 @@
-import { Button, Heading, Text } from "@medusajs/ui"
-import Link from "next/link"
+import { Button, Heading, Text } from "@medusajs/ui";
+import Link from "next/link";
 
 const SignInPrompt = () => {
   return (
@@ -20,7 +20,7 @@ const SignInPrompt = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SignInPrompt
+export default SignInPrompt;

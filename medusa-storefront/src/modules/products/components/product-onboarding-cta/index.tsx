@@ -1,4 +1,4 @@
-import { Button, Container, Text } from "@medusajs/ui"
+import { Button, Container, Text } from "@medusajs/ui";
 
 const ProductOnboardingCta = () => {
   return (
@@ -15,7 +15,7 @@ const ProductOnboardingCta = () => {
         </a>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default ProductOnboardingCta
+export default ProductOnboardingCta;

@@ -1,5 +1,6 @@
-import { NextResponse, NextRequest } from "next/server"
-import { initialize as initializeProductModule } from "@medusajs/product"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { initialize as initializeProductModule } from "@medusajs/product";
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * This endpoint uses the serverless Product Module to retrieve a product by handle.
@@ -11,10 +12,10 @@ export async function GET(
   { params }: { params: Record<string, any> }
 ) {
   // Extract the query parameters
-  const { handle } = params
+  const { handle } = params;
 
   // Initialize the Product Module
-  const productService = await initializeProductModule()
+  const productService = await initializeProductModule();
 
   // Run the query
   const products = await productService.list(
@@ -33,8 +34,8 @@ export async function GET(
       ],
       take: 1,
     }
-  )
+  );
 
   // Return the response
-  return NextResponse.json({ products })
+  return NextResponse.json({ products });
 }

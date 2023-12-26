@@ -1,22 +1,22 @@
-import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client"
-import { InstantSearch } from "react-instantsearch"
+import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client";
+import { InstantSearch } from "react-instantsearch";
 
-import { Transition } from "@headlessui/react"
-import { MagnifyingGlassMini } from "@medusajs/icons"
-import { clx } from "@medusajs/ui"
-import { Fragment, useCallback, useState } from "react"
-import DesktopHit from "../desktop-hit"
-import DesktopHits from "../desktop-hits"
-import SearchBox from "../search-box"
+import { Transition } from "@headlessui/react";
+import { MagnifyingGlassMini } from "@medusajs/icons";
+import { clx } from "@medusajs/ui";
+import { Fragment, useCallback, useState } from "react";
+import DesktopHit from "../desktop-hit";
+import DesktopHits from "../desktop-hits";
+import SearchBox from "../search-box";
 
-const NavbarSearchContainer = ({}) => {
-  const [isOpen, setOpen] = useState(false)
+const NavbarSearchContainer = () => {
+  const [isOpen, setOpen] = useState(false);
 
   const handleBlur = useCallback(() => {
     setTimeout(() => {
-      setOpen(false)
-    }, 200)
-  }, [])
+      setOpen(false);
+    }, 200);
+  }, []);
 
   return (
     <>
@@ -52,7 +52,7 @@ const NavbarSearchContainer = ({}) => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default NavbarSearchContainer
+export default NavbarSearchContainer;

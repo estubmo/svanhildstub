@@ -1,18 +1,18 @@
-import medusaRequest from "../medusa-fetch"
+import medusaRequest from "../medusa-fetch";
 import {
   StoreGetProductsParams,
   Product,
   ProductCategory,
   ProductCollection,
-} from "@medusajs/medusa"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
+} from "@medusajs/medusa";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
 
 export type ProductCategoryWithChildren = Omit<
   ProductCategory,
   "category_children"
 > & {
-  category_children: ProductCategory[]
-}
+  category_children: ProductCategory[];
+};
 
 /**
  * This file contains functions for fetching products and collections from the Medusa API or the Medusa V2 Modules,
@@ -20,14 +20,15 @@ export type ProductCategoryWithChildren = Omit<
  */
 
 // The MEDUSA_FF_MEDUSA_V2 flag is set in the .env file of both the storefront and the server. It is used to determine whether to use the Medusa API or the Medusa V2 Modules.
-let MEDUSA_V2_ENABLED = false
+let MEDUSA_V2_ENABLED = false;
 
 if (process.env.MEDUSA_FF_MEDUSA_V2) {
-  MEDUSA_V2_ENABLED = process.env.MEDUSA_FF_MEDUSA_V2 === "true"
+  MEDUSA_V2_ENABLED = process.env.MEDUSA_FF_MEDUSA_V2 === "true";
 }
 
 // The API_BASE_URL is set in the .env file. It is the base URL of your Next.js app.
-const API_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000"
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:8000";
 
 /**
  * Fetches a product by handle, using the Medusa API or the Medusa Product Module, depending on the feature flag.
@@ -41,10 +42,10 @@ export async function getProductByHandle(
     const data = await fetch(`${API_BASE_URL}/api/products/${handle}`)
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
-    return data
+    return data;
   }
 
   const { products } = await medusaRequest("GET", "/products", {
@@ -54,12 +55,12 @@ export async function getProductByHandle(
   })
     .then((res) => res.body)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     products,
-  }
+  };
 }
 
 /**
@@ -73,16 +74,16 @@ export async function getProductsList({
   pageParam = 0,
   queryParams,
 }: {
-  pageParam?: number
-  queryParams: StoreGetProductsParams
+  pageParam?: number;
+  queryParams: StoreGetProductsParams;
 }): Promise<{
-  response: { products: PricedProduct[]; count: number }
-  nextPage: number
+  response: { products: PricedProduct[]; count: number };
+  nextPage: number;
 }> {
-  const limit = queryParams.limit || 12
+  const limit = queryParams.limit || 12;
 
   if (MEDUSA_V2_ENABLED) {
-    const params = new URLSearchParams(queryParams as Record<string, string>)
+    const params = new URLSearchParams(queryParams as Record<string, string>);
 
     const { products, count, nextPage } = await fetch(
       `${API_BASE_URL}/api/products?limit=${limit}&offset=${pageParam}&${params.toString()}`,
@@ -91,12 +92,12 @@ export async function getProductsList({
           tags: ["products"],
         },
       }
-    ).then((res) => res.json())
+    ).then((res) => res.json());
 
     return {
       response: { products, count },
       nextPage,
-    }
+    };
   }
 
   const { products, count, nextPage } = await medusaRequest(
@@ -112,13 +113,13 @@ export async function getProductsList({
   )
     .then((res) => res.body)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     response: { products, count },
     nextPage,
-  }
+  };
 }
 
 /**
@@ -142,13 +143,13 @@ export async function getCollectionsList(
     )
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
     return {
       collections,
       count,
-    }
+    };
   }
 
   const { collections, count } = await medusaRequest("GET", "/collections", {
@@ -159,13 +160,13 @@ export async function getCollectionsList(
   })
     .then((res) => res.body)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     collections,
     count,
-  }
+  };
 }
 
 /**
@@ -176,18 +177,18 @@ export async function getCollectionsList(
  * @returns nextPage (number) - The offset of the next page of products
  */
 export async function getCollectionByHandle(handle: string): Promise<{
-  collections: ProductCollection[]
-  response: { products: Product[]; count: number }
-  nextPage: number
+  collections: ProductCollection[];
+  response: { products: Product[]; count: number };
+  nextPage: number;
 }> {
   if (MEDUSA_V2_ENABLED) {
     const data = await fetch(`${API_BASE_URL}/api/collections/${handle}`)
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
-    return data
+    return data;
   }
 
   const data = await medusaRequest("GET", "/collections", {
@@ -197,10 +198,10 @@ export async function getCollectionByHandle(handle: string): Promise<{
   })
     .then((res) => res.body)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
-  return data
+  return data;
 }
 
 /**
@@ -218,14 +219,14 @@ export async function getProductsByCollectionHandle({
   cartId,
   currencyCode,
 }: {
-  pageParam?: number
-  handle: string
-  limit?: number
-  cartId?: string
-  currencyCode?: string
+  pageParam?: number;
+  handle: string;
+  limit?: number;
+  cartId?: string;
+  currencyCode?: string;
 }): Promise<{
-  response: { products: PricedProduct[]; count: number }
-  nextPage: number
+  response: { products: PricedProduct[]; count: number };
+  nextPage: number;
 }> {
   if (MEDUSA_V2_ENABLED) {
     const { response, nextPage } = await fetch(
@@ -233,18 +234,18 @@ export async function getProductsByCollectionHandle({
     )
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
     return {
       response,
       nextPage,
-    }
+    };
   }
 
   const { id } = await getCollectionByHandle(handle).then(
     (res) => res.collections[0]
-  )
+  );
 
   const { response, nextPage } = await getProductsList({
     pageParam,
@@ -252,13 +253,13 @@ export async function getProductsByCollectionHandle({
   })
     .then((res) => res)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     response,
     nextPage,
-  }
+  };
 }
 
 /**
@@ -273,8 +274,8 @@ export async function getCategoriesList(
   offset: number = 0,
   limit?: number
 ): Promise<{
-  product_categories: ProductCategoryWithChildren[]
-  count: number
+  product_categories: ProductCategoryWithChildren[];
+  count: number;
 }> {
   if (MEDUSA_V2_ENABLED) {
     const { product_categories, count } = await fetch(
@@ -287,13 +288,13 @@ export async function getCategoriesList(
     )
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
     return {
       product_categories,
       count,
-    }
+    };
   }
 
   const { product_categories, count } = await medusaRequest(
@@ -308,13 +309,13 @@ export async function getCategoriesList(
   )
     .then((res) => res.body)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     product_categories,
     count,
-  }
+  };
 }
 
 /**
@@ -325,7 +326,7 @@ export async function getCategoriesList(
  * @returns nextPage (number) - The offset of the next page of products
  */
 export async function getCategoryByHandle(categoryHandle: string[]): Promise<{
-  product_categories: ProductCategoryWithChildren[]
+  product_categories: ProductCategoryWithChildren[];
 }> {
   if (MEDUSA_V2_ENABLED) {
     const data = await fetch(
@@ -338,17 +339,17 @@ export async function getCategoryByHandle(categoryHandle: string[]): Promise<{
     )
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
-    return data
+    return data;
   }
 
   const handles = categoryHandle.map((handle: string, index: number) =>
     categoryHandle.slice(0, index + 1).join("/")
-  )
+  );
 
-  const product_categories = [] as ProductCategoryWithChildren[]
+  const product_categories = [] as ProductCategoryWithChildren[];
 
   for (const handle of handles) {
     await medusaRequest("GET", "/product-categories", {
@@ -357,16 +358,16 @@ export async function getCategoryByHandle(categoryHandle: string[]): Promise<{
       },
     })
       .then(({ body }) => {
-        product_categories.push(body.product_categories[0])
+        product_categories.push(body.product_categories[0]);
       })
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
   }
 
   return {
     product_categories,
-  }
+  };
 }
 
 /**
@@ -383,13 +384,13 @@ export async function getProductsByCategoryHandle({
   cartId,
   currencyCode,
 }: {
-  pageParam?: number
-  handle: string
-  cartId?: string
-  currencyCode?: string
+  pageParam?: number;
+  handle: string;
+  cartId?: string;
+  currencyCode?: string;
 }): Promise<{
-  response: { products: PricedProduct[]; count: number }
-  nextPage: number
+  response: { products: PricedProduct[]; count: number };
+  nextPage: number;
 }> {
   if (MEDUSA_V2_ENABLED) {
     const { response, nextPage } = await fetch(
@@ -402,18 +403,18 @@ export async function getProductsByCategoryHandle({
     )
       .then((res) => res.json())
       .catch((err) => {
-        throw err
-      })
+        throw err;
+      });
 
     return {
       response,
       nextPage,
-    }
+    };
   }
 
   const { id } = await getCategoryByHandle([handle]).then(
     (res) => res.product_categories[0]
-  )
+  );
 
   const { response, nextPage } = await getProductsList({
     pageParam,
@@ -421,28 +422,28 @@ export async function getProductsByCategoryHandle({
   })
     .then((res) => res)
     .catch((err) => {
-      throw err
-    })
+      throw err;
+    });
 
   return {
     response,
     nextPage,
-  }
+  };
 }
 
 export async function getHomepageProducts({
   collectionHandles,
   currencyCode,
 }: {
-  collectionHandles?: string[]
-  currencyCode: string
+  collectionHandles?: string[];
+  currencyCode: string;
 }) {
-  const collectionProductsMap = new Map<string, PricedProduct[]>()
+  const collectionProductsMap = new Map<string, PricedProduct[]>();
 
-  const { collections } = await getCollectionsList(0, 3)
+  const { collections } = await getCollectionsList(0, 3);
 
   if (!collectionHandles) {
-    collectionHandles = collections.map((collection) => collection.handle)
+    collectionHandles = collections.map((collection) => collection.handle);
   }
 
   for (const handle of collectionHandles) {
@@ -450,9 +451,9 @@ export async function getHomepageProducts({
       handle,
       currencyCode,
       limit: 3,
-    })
-    collectionProductsMap.set(handle, products.response.products)
+    });
+    collectionProductsMap.set(handle, products.response.products);
   }
 
-  return collectionProductsMap
+  return collectionProductsMap;
 }

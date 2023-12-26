@@ -1,11 +1,11 @@
-import NextHead from "next/head"
-import React from "react"
+import NextHead from "next/head";
+import React from "react";
 
 type HeadProps = {
-  title?: string
-  description?: string | null
-  image?: string | null
-}
+  title?: string;
+  description?: string | null;
+  image?: string | null;
+};
 
 const Head: React.FC<HeadProps> = ({ title, description, image }) => {
   return (
@@ -16,7 +16,7 @@ const Head: React.FC<HeadProps> = ({ title, description, image }) => {
       {image && <meta itemProp="image" content={image} />}
       <link rel="icon" href="/favicon.ico" />
     </NextHead>
-  )
-}
+  );
+};
 
-export default Head
+export default Head;

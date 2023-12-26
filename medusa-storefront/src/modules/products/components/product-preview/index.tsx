@@ -1,8 +1,8 @@
-import { Text } from "@medusajs/ui"
-import clsx from "clsx"
-import Link from "next/link"
-import { ProductPreviewType } from "types/global"
-import Thumbnail from "../thumbnail"
+import { Text } from "@medusajs/ui";
+import clsx from "clsx";
+import Link from "next/link";
+import { ProductPreviewType } from "types/global";
+import Thumbnail from "../thumbnail";
 
 const ProductPreview = ({
   title,
@@ -39,6 +39,6 @@ const ProductPreview = ({
       </div>
     </div>
   </Link>
-)
+);
 
-export default ProductPreview
+export default ProductPreview;

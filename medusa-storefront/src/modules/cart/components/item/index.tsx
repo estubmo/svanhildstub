@@ -1,23 +1,23 @@
-import { useStore } from "@lib/context/store-context"
-import { LineItem, Region } from "@medusajs/medusa"
-import { Table, Text, clx } from "@medusajs/ui"
-import LineItemOptions from "@modules/common/components/line-item-options"
-import LineItemPrice from "@modules/common/components/line-item-price"
-import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
-import CartItemSelect from "@modules/cart/components/cart-item-select"
-import Trash from "@modules/common/icons/trash"
-import Thumbnail from "@modules/products/components/thumbnail"
-import Link from "next/link"
+import { useStore } from "@lib/context/store-context";
+import { LineItem, Region } from "@medusajs/medusa";
+import { Table, Text, clx } from "@medusajs/ui";
+import LineItemOptions from "@modules/common/components/line-item-options";
+import LineItemPrice from "@modules/common/components/line-item-price";
+import LineItemUnitPrice from "@modules/common/components/line-item-unit-price";
+import CartItemSelect from "@modules/cart/components/cart-item-select";
+import Trash from "@modules/common/icons/trash";
+import Thumbnail from "@modules/products/components/thumbnail";
+import Link from "next/link";
 
 type ItemProps = {
-  item: Omit<LineItem, "beforeInsert">
-  region: Region
-  type?: "full" | "preview"
-}
+  item: Omit<LineItem, "beforeInsert">;
+  region: Region;
+  type?: "full" | "preview";
+};
 
 const Item = ({ item, region, type = "full" }: ItemProps) => {
-  const { updateItem, deleteItem } = useStore()
-  const { handle } = item.variant.product
+  const { updateItem, deleteItem } = useStore();
+  const { handle } = item.variant.product;
 
   return (
     <Table.Row className="w-full">
@@ -68,12 +68,12 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
               )
                 .slice(0, 10)
                 .map((i) => {
-                  const value = i + 1
+                  const value = i + 1;
                   return (
                     <option value={value} key={i}>
                       {value}
                     </option>
-                  )
+                  );
                 })}
             </CartItemSelect>
           </div>
@@ -102,7 +102,7 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
         </span>
       </Table.Cell>
     </Table.Row>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;

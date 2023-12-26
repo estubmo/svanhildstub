@@ -1,23 +1,23 @@
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import { useStore } from "@lib/context/store-context"
-import useCountryOptions from "@lib/hooks/use-country-options"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import X from "@modules/common/icons/x"
-import ReactCountryFlag from "react-country-flag"
+import { useMobileMenu } from "@lib/context/mobile-menu-context";
+import { useStore } from "@lib/context/store-context";
+import useCountryOptions from "@lib/hooks/use-country-options";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import X from "@modules/common/icons/x";
+import ReactCountryFlag from "react-country-flag";
 
 const CountryMenu = () => {
   const {
     close,
     screen: [_, setScreen],
-  } = useMobileMenu()
+  } = useMobileMenu();
 
-  const { setRegion } = useStore()
-  const countryOptions = useCountryOptions()
+  const { setRegion } = useStore();
+  const countryOptions = useCountryOptions();
 
   const handleSelectCountry = (regionId: string, countryCode: string) => {
-    setRegion(regionId, countryCode)
-    close()
-  }
+    setRegion(regionId, countryCode);
+    close();
+  };
 
   return (
     <div className="flex flex-col flex-1">
@@ -61,7 +61,7 @@ const CountryMenu = () => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CountryMenu
+export default CountryMenu;

@@ -1,30 +1,31 @@
-import { ErrorMessage } from "@hookform/error-message"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { ErrorMessage } from "@hookform/error-message";
+import { CheckCircleMiniSolid } from "@medusajs/icons";
 import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
-} from "@stripe/react-stripe-js"
+} from "@stripe/react-stripe-js";
 import {
   StripeCardCvcElementOptions,
   StripeCardExpiryElementOptions,
   StripeCardNumberElementOptions,
-} from "@stripe/stripe-js"
-import React, { useMemo } from "react"
-import { FieldValues, UseFormReturn } from "react-hook-form"
-import { CheckCircleMiniSolid } from "@medusajs/icons"
+} from "@stripe/stripe-js";
+import React, { useMemo } from "react";
+import { FieldValues, UseFormReturn } from "react-hook-form";
 
 type PaymentStripeProps = StateProps & {
-  useFormState: UseFormReturn<FieldValues, any, undefined>
-}
+  useFormState: UseFormReturn<FieldValues, any, undefined>;
+};
 
 type StateProps = {
   state: {
-    cardNumberComplete: boolean
-    cardExpiryComplete: boolean
-    cardCvcComplete: boolean
-  }
-  setState: (state: PaymentStripeProps["state"]) => void
-}
+    cardNumberComplete: boolean;
+    cardExpiryComplete: boolean;
+    cardCvcComplete: boolean;
+  };
+  setState: (state: PaymentStripeProps["state"]) => void;
+};
 
 const PaymentStripe: React.FC<PaymentStripeProps> = ({
   useFormState,
@@ -48,8 +49,8 @@ const PaymentStripe: React.FC<PaymentStripeProps> = ({
       classes: {
         base: "pt-3 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover",
       },
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <div className="flex flex-col relative w-full pb-6">
@@ -74,8 +75,8 @@ const PaymentStripe: React.FC<PaymentStripeProps> = ({
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const CardNumber = ({
   useFormState,
@@ -83,32 +84,32 @@ const CardNumber = ({
   state,
   setState,
 }: {
-  useFormState: UseFormReturn<FieldValues, any, undefined>
-  options: StripeCardNumberElementOptions
-  state: StateProps["state"]
-  setState: StateProps["setState"]
+  useFormState: UseFormReturn<FieldValues, any, undefined>;
+  options: StripeCardNumberElementOptions;
+  state: StateProps["state"];
+  setState: StateProps["setState"];
 }) => {
   const {
     setError,
     formState: { errors },
     clearErrors,
-  } = useFormState
+  } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardNumber")
-    setState({ ...state, cardNumberComplete: false })
+    clearErrors("cardNumber");
+    setState({ ...state, cardNumberComplete: false });
 
     if (event.complete) {
-      setState({ ...state, cardNumberComplete: true })
+      setState({ ...state, cardNumberComplete: true });
     }
 
     if (event.error) {
       setError("cardNumber", {
         type: "stripe",
         message: event.error.message,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="py-2 relative">
@@ -125,12 +126,12 @@ const CardNumber = ({
             <div className="pt-2 text-rose-500 txt-compact-small">
               <span>{message}</span>
             </div>
-          )
+          );
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 const CardExpiry = ({
   useFormState,
@@ -138,32 +139,32 @@ const CardExpiry = ({
   state,
   setState,
 }: {
-  useFormState: UseFormReturn<FieldValues, any, undefined>
-  options: StripeCardExpiryElementOptions
-  state: StateProps["state"]
-  setState: StateProps["setState"]
+  useFormState: UseFormReturn<FieldValues, any, undefined>;
+  options: StripeCardExpiryElementOptions;
+  state: StateProps["state"];
+  setState: StateProps["setState"];
 }) => {
   const {
     setError,
     formState: { errors },
     clearErrors,
-  } = useFormState
+  } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardExpiry")
-    setState({ ...state, cardExpiryComplete: false })
+    clearErrors("cardExpiry");
+    setState({ ...state, cardExpiryComplete: false });
 
     if (event.complete) {
-      setState({ ...state, cardExpiryComplete: true })
+      setState({ ...state, cardExpiryComplete: true });
     }
 
     if (event.error) {
       setError("cardExpiry", {
         type: "stripe",
         message: event.error.message,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="w-full py-2 relative">
@@ -180,12 +181,12 @@ const CardExpiry = ({
             <div className="pt-2 text-rose-500 txt-compact-small">
               <span>{message}</span>
             </div>
-          )
+          );
         }}
       />
     </div>
-  )
-}
+  );
+};
 
 const CardCVC = ({
   useFormState,
@@ -193,32 +194,32 @@ const CardCVC = ({
   state,
   setState,
 }: {
-  useFormState: UseFormReturn<FieldValues, any, undefined>
-  options: StripeCardCvcElementOptions
-  state: StateProps["state"]
-  setState: StateProps["setState"]
+  useFormState: UseFormReturn<FieldValues, any, undefined>;
+  options: StripeCardCvcElementOptions;
+  state: StateProps["state"];
+  setState: StateProps["setState"];
 }) => {
   const {
     setError,
     formState: { errors },
     clearErrors,
-  } = useFormState
+  } = useFormState;
 
   const handleChange = (event: any) => {
-    clearErrors("cardCvc")
-    setState({ ...state, cardCvcComplete: false })
+    clearErrors("cardCvc");
+    setState({ ...state, cardCvcComplete: false });
 
     if (event.complete) {
-      setState({ ...state, cardCvcComplete: true })
+      setState({ ...state, cardCvcComplete: true });
     }
 
     if (event.error) {
       setError("cardCvc", {
         type: "stripe",
         message: event.error.message,
-      })
+      });
     }
-  }
+  };
 
   return (
     <div className="w-full py-2 relative">
@@ -238,11 +239,11 @@ const CardCVC = ({
             <div className="pt-2 text-rose-500 txt-compact-small">
               <span>{message}</span>
             </div>
-          )
+          );
         }}
       />
     </div>
-  )
-}
+  );
+};
 
-export default PaymentStripe
+export default PaymentStripe;

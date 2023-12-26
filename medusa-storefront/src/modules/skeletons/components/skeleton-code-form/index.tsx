@@ -7,7 +7,7 @@ export const SkeletonCodeForm = () => {
         <div className="bg-gray-200 h-12 animate-pulse"></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SkeletonCodeForm
+export default SkeletonCodeForm;

@@ -1,30 +1,30 @@
 import {
-    ProductProvider,
-    useProductActions,
-} from "@lib/context/product-context"
-import useProductPrice from "@lib/hooks/use-product-price"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import { Button } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
-import OptionSelect from "@modules/products/components/option-select"
-import clsx from "clsx"
-import React, { useMemo } from "react"
+  ProductProvider,
+  useProductActions,
+} from "@lib/context/product-context";
+import useProductPrice from "@lib/hooks/use-product-price";
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import { Button } from "@medusajs/ui";
+import Divider from "@modules/common/components/divider";
+import OptionSelect from "@modules/products/components/option-select";
+import clsx from "clsx";
+import React, { useMemo } from "react";
 
 type ProductActionsProps = {
-  product: PricedProduct
-}
+  product: PricedProduct;
+};
 
 const ProductActionsInner: React.FC<ProductActionsProps> = ({ product }) => {
   const { updateOptions, addToCart, options, inStock, variant } =
-    useProductActions()
+    useProductActions();
 
-  const price = useProductPrice({ id: product.id!, variantId: variant?.id })
+  const price = useProductPrice({ id: product.id!, variantId: variant?.id });
 
   const selectedPrice = useMemo(() => {
-    const { variantPrice, cheapestPrice } = price
+    const { variantPrice, cheapestPrice } = price;
 
-    return variantPrice || cheapestPrice || null
-  }, [price])
+    return variantPrice || cheapestPrice || null;
+  }, [price]);
 
   return (
     <div className="flex flex-col gap-y-2">
@@ -41,7 +41,7 @@ const ProductActionsInner: React.FC<ProductActionsProps> = ({ product }) => {
                     title={option.title}
                   />
                 </div>
-              )
+              );
             })}
             <Divider />
           </div>
@@ -84,17 +84,17 @@ const ProductActionsInner: React.FC<ProductActionsProps> = ({ product }) => {
         {!inStock
           ? "Out of stock"
           : !variant
-          ? "Select variant"
-          : "Add to cart"}
+            ? "Select variant"
+            : "Add to cart"}
       </Button>
     </div>
-  )
-}
+  );
+};
 
 const ProductActions: React.FC<ProductActionsProps> = ({ product }) => (
   <ProductProvider product={product}>
     <ProductActionsInner product={product} />
   </ProductProvider>
-)
+);
 
-export default ProductActions
+export default ProductActions;

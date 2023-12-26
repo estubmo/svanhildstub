@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { Spinner } from "@medusajs/icons"
-import { Heading, Text } from "@medusajs/ui"
-import { useCart } from "medusa-react"
+import { Spinner } from "@medusajs/icons";
+import { Heading, Text } from "@medusajs/ui";
+import { useCart } from "medusa-react";
 
 const SubmitSpinner = () => {
   const {
     completeCheckout: { isLoading },
-  } = useCart()
+  } = useCart();
 
   if (isLoading) {
     return (
@@ -25,10 +25,10 @@ const SubmitSpinner = () => {
           </Text>
         </div>
       </div>
-    )
+    );
   }
 
-  return null
-}
+  return null;
+};
 
-export default SubmitSpinner
+export default SubmitSpinner;

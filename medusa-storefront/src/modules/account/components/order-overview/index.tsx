@@ -1,20 +1,20 @@
-"use client"
+"use client";
 
-import { Button } from "@medusajs/ui"
-import Spinner from "@modules/common/icons/spinner"
-import { useCustomerOrders } from "medusa-react"
-import Link from "next/link"
-import OrderCard from "../order-card"
+import { Button } from "@medusajs/ui";
+import Spinner from "@modules/common/icons/spinner";
+import { useCustomerOrders } from "medusa-react";
+import Link from "next/link";
+import OrderCard from "../order-card";
 
 const OrderOverview = () => {
-  const { orders, isLoading } = useCustomerOrders()
+  const { orders, isLoading } = useCustomerOrders();
 
   if (isLoading) {
     return (
       <div className="text-ui-fg-base w-full flex justify-center pt-12">
         <Spinner size={36} />
       </div>
-    )
+    );
   }
 
   if (orders?.length) {
@@ -29,7 +29,7 @@ const OrderOverview = () => {
           </div>
         ))}
       </div>
-    )
+    );
   }
 
   return (
@@ -44,7 +44,7 @@ const OrderOverview = () => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderOverview
+export default OrderOverview;

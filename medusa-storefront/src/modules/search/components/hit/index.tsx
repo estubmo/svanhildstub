@@ -1,22 +1,22 @@
-import { ProductVariant } from "@medusajs/medusa"
-import { Container, Text } from "@medusajs/ui"
-import Thumbnail from "@modules/products/components/thumbnail"
-import Link from "next/link"
+import { ProductVariant } from "@medusajs/medusa";
+import { Container, Text } from "@medusajs/ui";
+import Thumbnail from "@modules/products/components/thumbnail";
+import Link from "next/link";
 
 export type ProductHit = {
-  id: string
-  title: string
-  handle: string
-  description: string | null
-  thumbnail: string | null
-  variants: ProductVariant[]
-  collection_handle: string | null
-  collection_id: string | null
-}
+  id: string;
+  title: string;
+  handle: string;
+  description: string | null;
+  thumbnail: string | null;
+  variants: ProductVariant[];
+  collection_handle: string | null;
+  collection_id: string | null;
+};
 
 export type HitProps = {
-  hit: ProductHit
-}
+  hit: ProductHit;
+};
 
 const Hit = ({ hit }: HitProps) => {
   return (
@@ -36,7 +36,7 @@ const Hit = ({ hit }: HitProps) => {
         </div>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default Hit
+export default Hit;

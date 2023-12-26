@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { Listbox, Transition } from "@headlessui/react"
-import { useStore } from "@lib/context/store-context"
-import { StateType } from "@lib/hooks/use-toggle-state"
-import { revalidateTags } from "app/actions"
-import { useRegions } from "medusa-react"
-import { Fragment, useEffect, useMemo, useState } from "react"
-import ReactCountryFlag from "react-country-flag"
+import { Listbox, Transition } from "@headlessui/react";
+import { useStore } from "@lib/context/store-context";
+import { StateType } from "@lib/hooks/use-toggle-state";
+import { revalidateTags } from "app/actions";
+import { useRegions } from "medusa-react";
+import { Fragment, useEffect, useMemo, useState } from "react";
+import ReactCountryFlag from "react-country-flag";
 
 type CountryOption = {
-  country: string
-  region: string
-  label: string
-}
+  country: string;
+  region: string;
+  label: string;
+};
 
 type CountrySelectProps = {
-  toggleState: StateType
-}
+  toggleState: StateType;
+};
 
 const CountrySelect = ({ toggleState }: CountrySelectProps) => {
-  const { countryCode, setRegion } = useStore()
-  const { regions } = useRegions()
-  const [current, setCurrent] = useState<CountryOption | undefined>(undefined)
+  const { countryCode, setRegion } = useStore();
+  const { regions } = useRegions();
+  const [current, setCurrent] = useState<CountryOption | undefined>(undefined);
 
-  const { state, open, close } = toggleState
+  const { state, close } = toggleState;
 
   const options: CountryOption[] | undefined = useMemo(() => {
     return regions
@@ -32,23 +32,23 @@ const CountrySelect = ({ toggleState }: CountrySelectProps) => {
           country: c.iso_2,
           region: r.id,
           label: c.display_name,
-        }))
+        }));
       })
-      .flat()
-  }, [regions])
+      .flat();
+  }, [regions]);
 
   useEffect(() => {
     if (countryCode) {
-      const option = options?.find((o) => o.country === countryCode)
-      setCurrent(option)
+      const option = options?.find((o) => o.country === countryCode);
+      setCurrent(option);
     }
-  }, [countryCode, options])
+  }, [countryCode, options]);
 
   const handleChange = (option: CountryOption) => {
-    revalidateTags(["medusa_request", "products", "collections"])
-    setRegion(option.region, option.country)
-    close()
-  }
+    revalidateTags(["medusa_request", "products", "collections"]);
+    setRegion(option.region, option.country);
+    close();
+  };
 
   return (
     <div>
@@ -107,14 +107,14 @@ const CountrySelect = ({ toggleState }: CountrySelectProps) => {
                     />{" "}
                     {o.label}
                   </Listbox.Option>
-                )
+                );
               })}
             </Listbox.Options>
           </Transition>
         </div>
       </Listbox>
     </div>
-  )
-}
+  );
+};
 
-export default CountrySelect
+export default CountrySelect;

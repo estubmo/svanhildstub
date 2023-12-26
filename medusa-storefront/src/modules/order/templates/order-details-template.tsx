@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { Order } from "@medusajs/medusa"
-import Help from "@modules/order/components/help"
-import Items from "@modules/order/components/items"
-import OrderDetails from "@modules/order/components/order-details"
-import OrderSummary from "@modules/order/components/order-summary"
-import ShippingDetails from "@modules/order/components/shipping-details"
-import React from "react"
+import { Order } from "@medusajs/medusa";
+import Help from "@modules/order/components/help";
+import Items from "@modules/order/components/items";
+import OrderDetails from "@modules/order/components/order-details";
+import OrderSummary from "@modules/order/components/order-summary";
+import ShippingDetails from "@modules/order/components/shipping-details";
+import React from "react";
 
 type OrderDetailsTemplateProps = {
-  order: Order
-}
+  order: Order;
+};
 
 const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
   order,
@@ -32,7 +32,7 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderDetailsTemplate
+export default OrderDetailsTemplate;

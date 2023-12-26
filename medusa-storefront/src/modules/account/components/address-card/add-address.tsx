@@ -1,39 +1,39 @@
-import { medusaClient } from "@lib/config"
-import { useAccount } from "@lib/context/account-context"
-import useToggleState from "@lib/hooks/use-toggle-state"
-import { Plus } from "@medusajs/icons"
-import { Button, Heading } from "@medusajs/ui"
-import CountrySelect from "@modules/checkout/components/country-select"
-import Input from "@modules/common/components/input"
-import Modal from "@modules/common/components/modal"
-import React, { useState } from "react"
-import { useForm } from "react-hook-form"
+import { medusaClient } from "@lib/config";
+import { useAccount } from "@lib/context/account-context";
+import useToggleState from "@lib/hooks/use-toggle-state";
+import { Plus } from "@medusajs/icons";
+import { Button, Heading } from "@medusajs/ui";
+import CountrySelect from "@modules/checkout/components/country-select";
+import Input from "@modules/common/components/input";
+import Modal from "@modules/common/components/modal";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 type FormValues = {
-  first_name: string
-  last_name: string
-  city: string
-  country_code: string
-  postal_code: string
-  province?: string
-  address_1: string
-  address_2?: string
-  phone?: string
-  company?: string
-}
+  first_name: string;
+  last_name: string;
+  city: string;
+  country_code: string;
+  postal_code: string;
+  province?: string;
+  address_1: string;
+  address_2?: string;
+  phone?: string;
+  company?: string;
+};
 
 const AddAddress: React.FC = () => {
-  const { state, open, close } = useToggleState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState<string | undefined>(undefined)
+  const { state, open, close } = useToggleState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | undefined>(undefined);
 
-  const { refetchCustomer } = useAccount()
+  const { refetchCustomer } = useAccount();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<FormValues>()
+  } = useForm<FormValues>();
 
   const handleClose = () => {
     reset({
@@ -47,13 +47,13 @@ const AddAddress: React.FC = () => {
       company: "",
       phone: "",
       province: "",
-    })
-    close()
-  }
+    });
+    close();
+  };
 
   const submit = handleSubmit(async (data: FormValues) => {
-    setSubmitting(true)
-    setError(undefined)
+    setSubmitting(true);
+    setError(undefined);
 
     const payload = {
       first_name: data.first_name,
@@ -67,20 +67,20 @@ const AddAddress: React.FC = () => {
       postal_code: data.postal_code,
       phone: data.phone || "",
       metadata: {},
-    }
+    };
 
     medusaClient.customers.addresses
       .addAddress({ address: payload })
       .then(() => {
-        setSubmitting(false)
-        refetchCustomer()
-        handleClose()
+        setSubmitting(false);
+        refetchCustomer();
+        handleClose();
       })
       .catch(() => {
-        setSubmitting(false)
-        setError("Failed to add address, please try again.")
-      })
-  })
+        setSubmitting(false);
+        setError("Failed to add address, please try again.");
+      });
+  });
 
   return (
     <>
@@ -191,7 +191,7 @@ const AddAddress: React.FC = () => {
         </Modal.Footer>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default AddAddress
+export default AddAddress;

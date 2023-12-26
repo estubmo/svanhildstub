@@ -1,20 +1,20 @@
-import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import React from "react"
-import { Heading, Text, clx } from "@medusajs/ui"
+import { Text, clx } from "@medusajs/ui";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import React from "react";
 
 type AccordionItemProps = AccordionPrimitive.AccordionItemProps & {
-  title: string
-  subtitle?: string
-  description?: string
-  required?: boolean
-  tooltip?: string
-  forceMountContent?: true
-  headingSize?: "small" | "medium" | "large"
-  customTrigger?: React.ReactNode
-  complete?: boolean
-  active?: boolean
-  triggerable?: boolean
-}
+  title: string;
+  subtitle?: string;
+  description?: string;
+  required?: boolean;
+  tooltip?: string;
+  forceMountContent?: true;
+  headingSize?: "small" | "medium" | "large";
+  customTrigger?: React.ReactNode;
+  complete?: boolean;
+  active?: boolean;
+  triggerable?: boolean;
+};
 
 const Accordion: React.FC<
   | (AccordionPrimitive.AccordionSingleProps &
@@ -22,12 +22,12 @@ const Accordion: React.FC<
   | (AccordionPrimitive.AccordionMultipleProps &
       React.RefAttributes<HTMLDivElement>)
 > & {
-  Item: React.FC<AccordionItemProps>
+  Item: React.FC<AccordionItemProps>;
 } = ({ children, ...props }) => {
   return (
     <AccordionPrimitive.Root {...props}>{children}</AccordionPrimitive.Root>
-  )
-}
+  );
+};
 
 const Item: React.FC<AccordionItemProps> = ({
   title,
@@ -35,7 +35,6 @@ const Item: React.FC<AccordionItemProps> = ({
   description,
   children,
   className,
-  headingSize = "large",
   customTrigger = undefined,
   forceMountContent = undefined,
   triggerable,
@@ -79,10 +78,10 @@ const Item: React.FC<AccordionItemProps> = ({
         </div>
       </AccordionPrimitive.Content>
     </AccordionPrimitive.Item>
-  )
-}
+  );
+};
 
-Accordion.Item = Item
+Accordion.Item = Item;
 
 const MorphingTrigger = () => {
   return (
@@ -92,7 +91,7 @@ const MorphingTrigger = () => {
         <span className="bg-grey-50 rounded-circle group-radix-state-open:rotate-90 group-radix-state-open:left-1/2 group-radix-state-open:right-1/2 absolute inset-x-[31.75%] top-[48%] bottom-1/2 h-[1.5px] duration-300" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Accordion
+export default Accordion;

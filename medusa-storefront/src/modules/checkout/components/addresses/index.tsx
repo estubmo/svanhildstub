@@ -1,10 +1,10 @@
-import { useCheckout } from "@lib/context/checkout-context"
-import { CheckCircleSolid } from "@medusajs/icons"
-import { Button, Heading, Text } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
-import Spinner from "@modules/common/icons/spinner"
-import BillingAddress from "../billing_address"
-import ShippingAddress from "../shipping-address"
+import { useCheckout } from "@lib/context/checkout-context";
+import { CheckCircleSolid } from "@medusajs/icons";
+import { Button, Heading, Text } from "@medusajs/ui";
+import Divider from "@modules/common/components/divider";
+import Spinner from "@modules/common/icons/spinner";
+import BillingAddress from "../billing_address";
+import ShippingAddress from "../shipping-address";
 
 const Addresses = () => {
   const {
@@ -15,13 +15,13 @@ const Addresses = () => {
     setAddresses,
     handleSubmit,
     cart,
-  } = useCheckout()
+  } = useCheckout();
 
   const handleEdit = () => {
-    open()
-    closeShipping()
-    closePayment()
-  }
+    open();
+    closeShipping();
+    closePayment();
+  };
 
   return (
     <div className="bg-ui-bg-base px-4 small:px-8">
@@ -146,7 +146,7 @@ const Addresses = () => {
       )}
       <Divider className="mt-8" />
     </div>
-  )
-}
+  );
+};
 
-export default Addresses
+export default Addresses;

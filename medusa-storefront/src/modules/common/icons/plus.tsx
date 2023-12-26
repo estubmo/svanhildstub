@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const Plus: React.FC<IconProps> = ({
   size = "16",
@@ -30,7 +30,7 @@ const Plus: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Plus
+export default Plus;

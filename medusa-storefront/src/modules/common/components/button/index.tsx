@@ -1,11 +1,11 @@
-import Spinner from "@modules/common/icons/spinner"
-import clsx from "clsx"
-import React from "react"
+import Spinner from "@modules/common/icons/spinner";
+import clsx from "clsx";
+import React from "react";
 
 type ButtonProps = {
-  isLoading?: boolean
-  variant?: "primary" | "secondary"
-} & React.ButtonHTMLAttributes<HTMLButtonElement>
+  isLoading?: boolean;
+  variant?: "primary" | "secondary";
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({
   children,
@@ -30,7 +30,7 @@ const Button = ({
     >
       {isLoading ? <Spinner /> : children}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

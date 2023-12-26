@@ -1,11 +1,12 @@
-import { NextRequest, NextResponse } from "next/server"
-import { notFound } from "next/navigation"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { notFound } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
-import { initialize as initializeProductModule } from "@medusajs/product"
-import { MedusaApp, Modules } from "@medusajs/modules-sdk"
-import { ProductCollectionDTO, ProductDTO } from "@medusajs/types/dist/product"
-import { IPricingModuleService } from "@medusajs/types"
-import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id"
+import { getPricesByPriceSetId } from "@lib/util/get-prices-by-price-set-id";
+import { MedusaApp, Modules } from "@medusajs/modules-sdk";
+import { initialize as initializeProductModule } from "@medusajs/product";
+import { IPricingModuleService } from "@medusajs/types";
+import { ProductCollectionDTO, ProductDTO } from "@medusajs/types/dist/product";
 
 /**
  * This endpoint uses the serverless Product Module to retrieve a collection and its products by handle.
@@ -17,44 +18,44 @@ export async function GET(
   { params }: { params: Record<string, any> }
 ) {
   // Initialize the Product Module
-  const productService = await initializeProductModule()
+  const productService = await initializeProductModule();
 
   // Extract the query parameters
-  const { handle } = params
+  const { handle } = params;
 
-  const searchParams = Object.fromEntries(request.nextUrl.searchParams)
-  const { page, limit } = searchParams
+  const searchParams = Object.fromEntries(request.nextUrl.searchParams);
+  const { page, limit } = searchParams;
 
   // Fetch the collections
-  const collections = await productService.listCollections()
+  const collections = await productService.listCollections();
 
   // Create a map of collections by handle
-  const collectionsByHandle = new Map<string, ProductCollectionDTO>()
+  const collectionsByHandle = new Map<string, ProductCollectionDTO>();
 
   for (const collection of collections) {
-    collectionsByHandle.set(collection.handle, collection)
+    collectionsByHandle.set(collection.handle, collection);
   }
 
   // Fetch the collection by handle
-  const collection = collectionsByHandle.get(handle)
+  const collection = collectionsByHandle.get(handle);
 
   if (!collection) {
-    return notFound()
+    return notFound();
   }
 
   // Fetch the products by collection id
   const {
     rows: products,
     metadata: { count },
-  } = await getProductsByCollectionId(collection.id, searchParams)
+  } = await getProductsByCollectionId(collection.id, searchParams);
 
   // Filter out unpublished products
   const publishedProducts: ProductDTO[] = products.filter(
     (product) => product.status === "published"
-  )
+  );
 
   // Calculate the next page
-  const nextPage = parseInt(page) + parseInt(limit)
+  const nextPage = parseInt(page) + parseInt(limit);
 
   // Return the response
   return NextResponse.json({
@@ -64,7 +65,7 @@ export async function GET(
       count,
     },
     nextPage: count > nextPage ? nextPage : null,
-  })
+  });
 }
 
 /**
@@ -78,9 +79,9 @@ async function getProductsByCollectionId(
   params: Record<string, any>
 ): Promise<{ rows: ProductDTO[]; metadata: Record<string, any> }> {
   // Extract the query parameters
-  let { currency_code } = params
+  let { currency_code } = params;
 
-  currency_code = currency_code && currency_code.toUpperCase()
+  currency_code = currency_code && currency_code.toUpperCase();
 
   // Initialize Remote Query with the Product and Pricing Modules
   const { query, modules } = await MedusaApp({
@@ -91,7 +92,7 @@ async function getProductsByCollectionId(
     sharedResourcesConfig: {
       database: { clientUrl: process.env.POSTGRES_URL },
     },
-  })
+  });
 
   // Set the filters for the query
   const filters = {
@@ -101,7 +102,7 @@ async function getProductsByCollectionId(
       collection_id: [collection_id],
     },
     currency_code,
-  }
+  };
 
   // Set the GraphQL query
   const productsQuery = `#graphql
@@ -149,21 +150,21 @@ async function getProductsByCollectionId(
           }
         }
       }
-    }`
+    }`;
 
   // Run the query
-  const { rows, metadata } = await query(productsQuery, filters)
+  const { rows, metadata } = await query(productsQuery, filters);
 
   // Calculate prices
   const productsWithPrices = await getPricesByPriceSetId({
     products: rows,
     currency_code,
     pricingService: modules.pricingService as unknown as IPricingModuleService,
-  })
+  });
 
   // Return the response
   return {
     rows: productsWithPrices,
     metadata,
-  }
+  };
 }

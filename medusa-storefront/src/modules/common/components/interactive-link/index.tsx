@@ -1,12 +1,12 @@
-import Link from "next/link"
-import { ArrowUpRightMini } from "@medusajs/icons"
-import { Text } from "@medusajs/ui"
+import Link from "next/link";
+import { ArrowUpRightMini } from "@medusajs/icons";
+import { Text } from "@medusajs/ui";
 
 type InteractiveLinkProps = {
-  href: string
-  children?: React.ReactNode
-  onClick?: () => void
-}
+  href: string;
+  children?: React.ReactNode;
+  onClick?: () => void;
+};
 
 const InteractiveLink = ({
   href,
@@ -27,7 +27,7 @@ const InteractiveLink = ({
         color="var(--fg-interactive)"
       />
     </Link>
-  )
-}
+  );
+};
 
-export default InteractiveLink
+export default InteractiveLink;

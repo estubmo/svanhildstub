@@ -1,27 +1,30 @@
-"use client"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import { Heading, Text } from "@medusajs/ui"
-import InfiniteProducts from "@modules/products/components/infinite-products"
-import RefinementList from "@modules/store/components/refinement-list"
-import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+import { StoreGetProductsParams } from "@medusajs/medusa";
+import { Heading, Text } from "@medusajs/ui";
+import InfiniteProducts from "@modules/products/components/infinite-products";
+import RefinementList from "@modules/store/components/refinement-list";
+import { SortOptions } from "@modules/store/components/refinement-list/sort-products";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 type SearchResultsTemplateProps = {
-  query: string
-  hits: Record<string, any>[]
-}
+  query: string;
+  hits: Record<string, any>[];
+};
 
 const SearchResultsTemplate = ({ query, hits }: SearchResultsTemplateProps) => {
-  const [params, setParams] = useState<StoreGetProductsParams>({})
-  const [sortBy, setSortBy] = useState<SortOptions>("created_at")
+  const [params, setParams] = useState<StoreGetProductsParams>({});
+  const [sortBy, setSortBy] = useState<SortOptions>("created_at");
 
   useEffect(() => {
     setParams({
-      id: hits.map((h) => (h.hasOwnProperty("objectID") ? h.objectID : h.id)),
-    })
-  }, [hits])
+      id: hits.map((h) =>
+        Object.prototype.hasOwnProperty.call(h, "objectID") ? h.objectID : h.id
+      ),
+    });
+  }, [hits]);
 
   return (
     <div>
@@ -56,7 +59,7 @@ const SearchResultsTemplate = ({ query, hits }: SearchResultsTemplateProps) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SearchResultsTemplate
+export default SearchResultsTemplate;

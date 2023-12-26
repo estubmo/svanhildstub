@@ -1,24 +1,24 @@
-import { Order } from "@medusajs/medusa"
-import { Container, Heading, Text } from "@medusajs/ui"
-import { paymentInfoMap } from "@modules/checkout/components/payment"
-import Divider from "@modules/common/components/divider"
-import { formatAmount } from "medusa-react"
+import { Order } from "@medusajs/medusa";
+import { Container, Heading, Text } from "@medusajs/ui";
+import { paymentInfoMap } from "@modules/checkout/components/payment";
+import Divider from "@modules/common/components/divider";
+import { formatAmount } from "medusa-react";
 
 type PaymentDetailsProps = {
-  order: Order
-}
+  order: Order;
+};
 
-const currencyCodeSymbolMap: { [key: string]: string } = {
+const _currencyCodeSymbolMap: { [key: string]: string } = {
   USD: "$",
   EUR: "€",
   DKK: "kr",
   GBP: "£",
   SEK: "kr",
   NOK: "kr",
-}
+};
 
 const PaymentDetails = ({ order }: PaymentDetailsProps) => {
-  const payment = order.payments[0]
+  const payment = order.payments[0];
   return (
     <div>
       <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
@@ -61,7 +61,7 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
 
       <Divider className="mt-8" />
     </div>
-  )
-}
+  );
+};
 
-export default PaymentDetails
+export default PaymentDetails;

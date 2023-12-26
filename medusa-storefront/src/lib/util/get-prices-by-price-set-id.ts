@@ -1,10 +1,11 @@
-import { IPricingModuleService, CalculatedPriceSetDTO } from "@medusajs/types"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CalculatedPriceSetDTO, IPricingModuleService } from "@medusajs/types";
 
 type Props = {
-  products: any[]
-  currency_code: string
-  pricingService: IPricingModuleService
-}
+  products: any[];
+  currency_code: string;
+  pricingService: IPricingModuleService;
+};
 
 /**
  * Calculates the prices for a list of products, given a currency code.
@@ -20,22 +21,22 @@ export async function getPricesByPriceSetId({
 }: Props): Promise<typeof products> {
   for (const product of products) {
     for (const variant of product.variants) {
-      const priceSetId = variant.price.price_set.id
+      const priceSetId = variant.price.price_set.id;
 
       const [price] = (await pricingService.calculatePrices(
         { id: [priceSetId] },
         {
           context: { currency_code },
         }
-      )) as unknown as CalculatedPriceSetDTO[]
+      )) as unknown as CalculatedPriceSetDTO[];
 
-      delete variant.price
+      delete variant.price;
 
-      if (!price) continue
+      if (!price) continue;
 
-      variant.price = price
-      variant.calculated_price = price.amount
+      variant.price = price;
+      variant.calculated_price = price.amount;
     }
   }
-  return products
+  return products;
 }

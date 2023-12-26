@@ -1,13 +1,13 @@
-"use client"
+"use client";
 
-import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data"
-import { ProductCollection } from "@medusajs/medusa"
-import ProductPreview from "@modules/products/components/product-preview"
-import { Text } from "@medusajs/ui"
-import InteractiveLink from "@modules/common/components/interactive-link"
+import { useFeaturedProductsQuery } from "@lib/hooks/use-layout-data";
+import { ProductCollection } from "@medusajs/medusa";
+import ProductPreview from "@modules/products/components/product-preview";
+import { Text } from "@medusajs/ui";
+import InteractiveLink from "@modules/common/components/interactive-link";
 
 const ProductRail = ({ collection }: { collection: ProductCollection }) => {
-  const { data } = useFeaturedProductsQuery(collection.id)
+  const { data } = useFeaturedProductsQuery(collection.id);
 
   return (
     <div className="small:py-12">
@@ -28,7 +28,7 @@ const ProductRail = ({ collection }: { collection: ProductCollection }) => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductRail
+export default ProductRail;

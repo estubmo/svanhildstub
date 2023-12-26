@@ -1,5 +1,5 @@
-import { Heading } from "@medusajs/ui"
-import Link from "next/link"
+import { Heading } from "@medusajs/ui";
+import Link from "next/link";
 
 const Help = () => {
   return (
@@ -16,7 +16,7 @@ const Help = () => {
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Help
+export default Help;

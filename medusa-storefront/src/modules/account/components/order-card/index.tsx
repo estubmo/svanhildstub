@@ -1,24 +1,24 @@
-import { Order } from "@medusajs/medusa"
-import { Button } from "@medusajs/ui"
-import Thumbnail from "@modules/products/components/thumbnail"
-import { formatAmount } from "medusa-react"
-import Link from "next/link"
-import { useMemo } from "react"
+import { Order } from "@medusajs/medusa";
+import { Button } from "@medusajs/ui";
+import Thumbnail from "@modules/products/components/thumbnail";
+import { formatAmount } from "medusa-react";
+import Link from "next/link";
+import { useMemo } from "react";
 
 type OrderCardProps = {
-  order: Omit<Order, "beforeInsert">
-}
+  order: Omit<Order, "beforeInsert">;
+};
 
 const OrderCard = ({ order }: OrderCardProps) => {
   const numberOfLines = useMemo(() => {
     return order.items.reduce((acc, item) => {
-      return acc + item.quantity
-    }, 0)
-  }, [order])
+      return acc + item.quantity;
+    }, 0);
+  }, [order]);
 
   const numberOfProducts = useMemo(() => {
-    return order.items.length
-  }, [order])
+    return order.items.length;
+  }, [order]);
 
   return (
     <div className="bg-ui-bg-base flex flex-col">
@@ -49,7 +49,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
                 <span>{i.quantity}</span>
               </div>
             </div>
-          )
+          );
         })}
         {numberOfProducts > 4 && (
           <div className="w-full h-full flex flex-col items-center justify-center">
@@ -66,7 +66,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
         </Link>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderCard
+export default OrderCard;

@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const Cart: React.FC<IconProps> = ({
   size = "20",
@@ -44,7 +44,7 @@ const Cart: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Cart
+export default Cart;

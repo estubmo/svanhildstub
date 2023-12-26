@@ -1,20 +1,20 @@
-import { Container, Text } from "@medusajs/ui"
-import InteractiveLink from "@modules/common/components/interactive-link"
-import { useHits, useSearchBox } from "react-instantsearch"
+import { Container, Text } from "@medusajs/ui";
+import InteractiveLink from "@modules/common/components/interactive-link";
+import { useHits, useSearchBox } from "react-instantsearch";
 
 const ShowAll = ({ close }: { close: () => void }) => {
-  const { hits } = useHits()
-  const { query } = useSearchBox()
+  const { hits } = useHits();
+  const { query } = useSearchBox();
 
-  if (query === "") return null
-  if (hits.length > 0 && hits.length <= 6) return null
+  if (query === "") return null;
+  if (hits.length > 0 && hits.length <= 6) return null;
 
   if (hits.length === 0) {
     return (
       <Container className="flex gap-2 justify-center h-fit py-2">
         <Text>No results found.</Text>
       </Container>
-    )
+    );
   }
 
   return (
@@ -24,7 +24,7 @@ const ShowAll = ({ close }: { close: () => void }) => {
         View all
       </InteractiveLink>
     </Container>
-  )
-}
+  );
+};
 
-export default ShowAll
+export default ShowAll;

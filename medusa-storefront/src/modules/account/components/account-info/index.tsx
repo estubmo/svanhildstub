@@ -1,19 +1,19 @@
-import { Disclosure } from "@headlessui/react"
-import useToggleState from "@lib/hooks/use-toggle-state"
-import { Badge, Button } from "@medusajs/ui"
-import clsx from "clsx"
-import { useEffect } from "react"
+import { Disclosure } from "@headlessui/react";
+import useToggleState from "@lib/hooks/use-toggle-state";
+import { Badge, Button } from "@medusajs/ui";
+import clsx from "clsx";
+import { useEffect } from "react";
 
 type AccountInfoProps = {
-  label: string
-  currentInfo: string | React.ReactNode
-  isLoading?: boolean
-  isSuccess?: boolean
-  isError?: boolean
-  errorMessage?: string
-  clearState: () => void
-  children?: React.ReactNode
-}
+  label: string;
+  currentInfo: string | React.ReactNode;
+  isLoading?: boolean;
+  isSuccess?: boolean;
+  isError?: boolean;
+  errorMessage?: string;
+  clearState: () => void;
+  children?: React.ReactNode;
+};
 
 const AccountInfo = ({
   label,
@@ -25,18 +25,18 @@ const AccountInfo = ({
   errorMessage = "An error occurred, please try again",
   children,
 }: AccountInfoProps) => {
-  const { state, close, toggle } = useToggleState()
+  const { state, close, toggle } = useToggleState();
 
   const handleToggle = () => {
-    clearState()
-    setTimeout(() => toggle(), 100)
-  }
+    clearState();
+    setTimeout(() => toggle(), 100);
+  };
 
   useEffect(() => {
     if (isSuccess) {
-      close()
+      close();
     }
-  }, [isSuccess, close])
+  }, [isSuccess, close]);
 
   return (
     <div className="text-small-regular">
@@ -125,7 +125,7 @@ const AccountInfo = ({
         </Disclosure.Panel>
       </Disclosure>
     </div>
-  )
-}
+  );
+};
 
-export default AccountInfo
+export default AccountInfo;

@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { Text } from "@medusajs/ui"
-import clsx from "clsx"
-import { useCollections, useProductCategories } from "medusa-react"
-import Link from "next/link"
-import MedusaCTA from "../medusa-cta"
+import { Text } from "@medusajs/ui";
+import clsx from "clsx";
+import { useCollections, useProductCategories } from "medusa-react";
+import Link from "next/link";
+import MedusaCTA from "../medusa-cta";
 
 const FooterNav = () => {
-  const { collections } = useCollections()
-  const { product_categories } = useProductCategories()
+  const { collections } = useCollections();
+  const { product_categories } = useProductCategories();
 
   return (
     <div className="border-t border-ui-border-base">
@@ -19,7 +19,7 @@ const FooterNav = () => {
               href="/"
               className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             >
-            Svanhild Stub
+              Svanhild Stub
             </Link>
           </div>
           <div className="text-small-regular grid grid-cols-3 gap-x-10 md:gap-x-16">
@@ -31,7 +31,7 @@ const FooterNav = () => {
                 <ul className="grid grid-cols-1 gap-2">
                   {product_categories?.slice(0, 6).map((c) => {
                     if (c.parent_category) {
-                      return
+                      return;
                     }
 
                     const children =
@@ -39,7 +39,7 @@ const FooterNav = () => {
                         name: child.name,
                         handle: child.handle,
                         id: child.id,
-                      })) || null
+                      })) || null;
 
                     return (
                       <li
@@ -71,7 +71,7 @@ const FooterNav = () => {
                           </ul>
                         )}
                       </li>
-                    )
+                    );
                   })}
                 </ul>
               </div>
@@ -147,7 +147,7 @@ const FooterNav = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FooterNav
+export default FooterNav;

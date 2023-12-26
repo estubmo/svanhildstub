@@ -1,27 +1,27 @@
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import { useStore } from "@lib/context/store-context"
-import useCountryOptions from "@lib/hooks/use-country-options"
-import { MagnifyingGlassMini, XMark as X } from "@medusajs/icons"
-import { Heading } from "@medusajs/ui"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import { useCollections, useMeCustomer } from "medusa-react"
-import Link from "next/link"
-import ReactCountryFlag from "react-country-flag"
+import { useMobileMenu } from "@lib/context/mobile-menu-context";
+import { useStore } from "@lib/context/store-context";
+import useCountryOptions from "@lib/hooks/use-country-options";
+import { MagnifyingGlassMini, XMark as X } from "@medusajs/icons";
+import { Heading } from "@medusajs/ui";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import { useCollections, useMeCustomer } from "medusa-react";
+import Link from "next/link";
+import ReactCountryFlag from "react-country-flag";
 
 const MainMenu = () => {
-  const { collections } = useCollections()
-  const { customer } = useMeCustomer()
-  const { countryCode } = useStore()
+  const { collections } = useCollections();
+  const { customer } = useMeCustomer();
+  const { countryCode } = useStore();
 
-  const countries = useCountryOptions()
+  const countries = useCountryOptions();
 
   const {
     close,
     screen: [_, setScreen],
-  } = useMobileMenu()
+  } = useMobileMenu();
 
-  const setScreenCountry = () => setScreen("country")
-  const setScreenSearch = () => setScreen("search")
+  const setScreenCountry = () => setScreen("country");
+  const setScreenSearch = () => setScreen("search");
 
   return (
     <div className="flex flex-col flex-1">
@@ -154,7 +154,7 @@ const MainMenu = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MainMenu
+export default MainMenu;

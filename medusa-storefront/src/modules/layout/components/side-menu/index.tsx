@@ -1,9 +1,9 @@
-import { Popover, Transition } from "@headlessui/react"
-import { ArrowRightMini, XMark } from "@medusajs/icons"
-import { Text, clx, useToggleState } from "@medusajs/ui"
-import Link from "next/link"
-import { Fragment } from "react"
-import CountrySelect from "../country-select"
+import { Popover, Transition } from "@headlessui/react";
+import { ArrowRightMini, XMark } from "@medusajs/icons";
+import { Text, clx, useToggleState } from "@medusajs/ui";
+import Link from "next/link";
+import { Fragment } from "react";
+import CountrySelect from "../country-select";
 
 const SideMenuItems = {
   Home: "/",
@@ -11,15 +11,15 @@ const SideMenuItems = {
   Search: "",
   Account: "/account",
   Cart: "/cart",
-}
+};
 
 const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
   const handleSearchClick = (close: () => void) => {
-    searchModalOpen()
-    close()
-  }
+    searchModalOpen();
+    close();
+  };
 
-  const toggleState = useToggleState()
+  const toggleState = useToggleState();
 
   return (
     <div className="h-full">
@@ -65,7 +65,7 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                                 {name}
                               </button>
                             </li>
-                          )
+                          );
                         }
                         return (
                           <li key={name}>
@@ -77,7 +77,7 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
                               {name}
                             </Link>
                           </li>
-                        )
+                        );
                       })}
                     </ul>
                     <div className="flex flex-col gap-y-6">
@@ -107,7 +107,7 @@ const SideMenu = ({ searchModalOpen }: { searchModalOpen: () => void }) => {
         </Popover>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SideMenu
+export default SideMenu;

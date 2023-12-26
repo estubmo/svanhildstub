@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const ArrowRight: React.FC<IconProps> = ({
   size = "20",
@@ -29,7 +29,7 @@ const ArrowRight: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ArrowRight
+export default ArrowRight;

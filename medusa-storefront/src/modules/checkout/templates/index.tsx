@@ -1,11 +1,11 @@
-import { CheckoutProvider } from "@lib/context/checkout-context"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
-import Link from "next/link"
-import CheckoutLoader from "../components/checkout-loader"
-import SubmitSpinner from "../components/submit-spinner"
-import CheckoutForm from "./checkout-form"
-import CheckoutSummary from "./checkout-summary"
+import { CheckoutProvider } from "@lib/context/checkout-context";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import MedusaCTA from "@modules/layout/components/medusa-cta";
+import Link from "next/link";
+import CheckoutLoader from "../components/checkout-loader";
+import SubmitSpinner from "../components/submit-spinner";
+import CheckoutForm from "./checkout-form";
+import CheckoutSummary from "./checkout-summary";
 
 const CheckoutTemplate = () => {
   return (
@@ -30,7 +30,7 @@ const CheckoutTemplate = () => {
               href="/"
               className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             >
-             Svanhild Stub
+              Svanhild Stub
             </Link>
             <div className="flex-1 basis-0" />
           </nav>
@@ -47,7 +47,7 @@ const CheckoutTemplate = () => {
         </div>
       </div>
     </CheckoutProvider>
-  )
-}
+  );
+};
 
-export default CheckoutTemplate
+export default CheckoutTemplate;

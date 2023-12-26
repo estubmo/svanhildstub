@@ -1,12 +1,12 @@
-import { useAccount } from "@lib/context/account-context"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import clsx from "clsx"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useAccount } from "@lib/context/account-context";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const AccountNav = () => {
-  const route = usePathname()
-  const { handleLogout } = useAccount()
+  const route = usePathname();
+  const { handleLogout } = useAccount();
 
   return (
     <div>
@@ -60,25 +60,27 @@ const AccountNav = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 type AccountNavLinkProps = {
-  href: string
-  route: string
-  children: React.ReactNode
-}
+  href: string;
+  route: string;
+  children: React.ReactNode;
+};
 
 const AccountNavLink = ({ href, route, children }: AccountNavLinkProps) => {
-  const active = route === href
+  const active = route === href;
   return (
     <Link
       href={href}
-      className={clsx(active ? "text-ui-fg-base font-semibold" : "text-ui-fg-muted")}
+      className={clsx(
+        active ? "text-ui-fg-base font-semibold" : "text-ui-fg-muted"
+      )}
     >
       <>{children}</>
     </Link>
-  )
-}
+  );
+};
 
-export default AccountNav
+export default AccountNav;

@@ -1,12 +1,12 @@
-import FilterRadioGroup from "@modules/common/components/filter-radio-group"
-import { ChangeEvent } from "react"
+import FilterRadioGroup from "@modules/common/components/filter-radio-group";
+import { ChangeEvent } from "react";
 
-export type SortOptions = "price_asc" | "price_desc" | "created_at"
+export type SortOptions = "price_asc" | "price_desc" | "created_at";
 
 type SortProductsProps = {
-  sortBy: SortOptions
-  setSortBy: (value: string) => void
-}
+  sortBy: SortOptions;
+  setSortBy: (value: string) => void;
+};
 
 const sortOptions = [
   {
@@ -21,12 +21,12 @@ const sortOptions = [
     value: "price_desc",
     label: "Price: High -> Low",
   },
-]
+];
 
 const SortProducts = ({ sortBy, setSortBy }: SortProductsProps) => {
   const handleChange = (e: ChangeEvent<HTMLButtonElement>) => {
-    setSortBy(e.target.value)
-  }
+    setSortBy(e.target.value);
+  };
 
   return (
     <FilterRadioGroup
@@ -35,7 +35,7 @@ const SortProducts = ({ sortBy, setSortBy }: SortProductsProps) => {
       value={sortBy}
       handleChange={handleChange}
     />
-  )
-}
+  );
+};
 
-export default SortProducts
+export default SortProducts;

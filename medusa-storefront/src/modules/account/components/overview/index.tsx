@@ -1,16 +1,16 @@
-import { Customer, Order } from "@medusajs/medusa"
-import { Container } from "@medusajs/ui"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import MapPin from "@modules/common/icons/map-pin"
-import Package from "@modules/common/icons/package"
-import User from "@modules/common/icons/user"
-import { formatAmount } from "medusa-react"
-import Link from "next/link"
+import { Customer, Order } from "@medusajs/medusa";
+import { Container } from "@medusajs/ui";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import MapPin from "@modules/common/icons/map-pin";
+import Package from "@modules/common/icons/package";
+import User from "@modules/common/icons/user";
+import { formatAmount } from "medusa-react";
+import Link from "next/link";
 
 type OverviewProps = {
-  orders?: Order[]
-  customer?: Omit<Customer, "password_hash">
-}
+  orders?: Order[];
+  customer?: Omit<Customer, "password_hash">;
+};
 
 const Overview = ({ orders, customer }: OverviewProps) => {
   return (
@@ -146,7 +146,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                           </Container>
                         </Link>
                       </li>
-                    )
+                    );
                   })
                 ) : (
                   <span>No recent orders</span>
@@ -157,33 +157,33 @@ const Overview = ({ orders, customer }: OverviewProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const getProfileCompletion = (customer?: Omit<Customer, "password_hash">) => {
-  let count = 0
+  let count = 0;
 
   if (!customer) {
-    return 0
+    return 0;
   }
 
   if (customer.email) {
-    count++
+    count++;
   }
 
   if (customer.first_name && customer.last_name) {
-    count++
+    count++;
   }
 
   if (customer.phone) {
-    count++
+    count++;
   }
 
   if (customer.billing_address) {
-    count++
+    count++;
   }
 
-  return (count / 4) * 100
-}
+  return (count / 4) * 100;
+};
 
-export default Overview
+export default Overview;

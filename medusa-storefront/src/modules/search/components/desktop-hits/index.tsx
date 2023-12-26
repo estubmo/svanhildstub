@@ -1,21 +1,21 @@
-import clsx from "clsx"
-import React from "react"
-import { useHits, UseHitsProps, useSearchBox } from "react-instantsearch"
-import { ProductHit } from "../hit"
-import ShowAll from "../show-all"
+import clsx from "clsx";
+import React from "react";
+import { useHits, UseHitsProps, useSearchBox } from "react-instantsearch";
+import { ProductHit } from "../hit";
+import ShowAll from "../show-all";
 
 type HitsProps<THit> = React.ComponentProps<"div"> &
   UseHitsProps & {
-    hitComponent: (props: { hit: THit }) => JSX.Element
-  }
+    hitComponent: (props: { hit: THit }) => JSX.Element;
+  };
 
 const DesktopHits = ({
   hitComponent: Hit,
   className,
   ...props
 }: HitsProps<ProductHit>) => {
-  const { query } = useSearchBox()
-  const { hits } = useHits(props)
+  const { query } = useSearchBox();
+  const { hits } = useHits(props);
 
   return (
     <div
@@ -37,7 +37,7 @@ const DesktopHits = ({
       </div>
       <ShowAll close={close} />
     </div>
-  )
-}
+  );
+};
 
-export default DesktopHits
+export default DesktopHits;

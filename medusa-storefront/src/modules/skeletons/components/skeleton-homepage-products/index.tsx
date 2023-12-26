@@ -1,7 +1,7 @@
-import SkeletonProductPreview from "../skeleton-product-preview"
+import SkeletonProductPreview from "../skeleton-product-preview";
 
 const SkeletonHomepageProducts: React.FC<{
-  count: number
+  count: number;
 }> = ({ count = 3 }) => {
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -9,7 +9,7 @@ const SkeletonHomepageProducts: React.FC<{
         <SkeletonProductPreview key={i} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default SkeletonHomepageProducts
+export default SkeletonHomepageProducts;

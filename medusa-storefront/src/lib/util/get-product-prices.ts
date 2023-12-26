@@ -1,5 +1,6 @@
-import medusaRequest from "@lib/medusa-fetch"
-import { ProductDTO, ProductVariantDTO } from "@medusajs/types/dist/product"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import medusaRequest from "@lib/medusa-fetch";
+import { ProductDTO, ProductVariantDTO } from "@medusajs/types/dist/product";
 
 /**
  * Wourkaround to get variant prices until we release a dedicated pricing module
@@ -12,54 +13,54 @@ export default async function getPrices(
   regionId?: string
 ) {
   if (!data || !data.length) {
-    return []
+    return [];
   }
 
   // Map of variant id to variant object
-  const variantsById = new Map<string, Record<string, any>>()
+  const variantsById = new Map<string, Record<string, any>>();
 
-  const productIds = data.map((p) => p.id)
+  const productIds = data.map((p) => p.id);
 
   const query = {
     id: productIds,
     expand: "variants,variants.prices,variants.options",
-  } as Record<string, any>
+  } as Record<string, any>;
 
   if (cartId) {
-    query.cart_id = cartId
+    query.cart_id = cartId;
   }
 
   if (regionId) {
-    query.region_id = regionId
+    query.region_id = regionId;
   }
 
   // Get all products with variants and prices from Medusa API
   const productsWithVariants = await medusaRequest("GET", `/products`, {
     query,
-  }).then((res) => res.body.products)
+  }).then((res) => res.body.products);
 
   // Map all variants by id
   for (const product of productsWithVariants) {
     for (const variant of product.variants) {
-      variantsById.set(variant.id, variant)
+      variantsById.set(variant.id, variant);
     }
   }
 
   // Map prices to variants
   const output = data.map((product) => {
     const variants = product.variants.map((v) => {
-      const variant = variantsById.get(v.id)
+      const variant = variantsById.get(v.id);
 
       if (!variant) {
-        return v
+        return v;
       }
 
-      return variant as ProductVariantDTO
-    })
-    product.variants = variants
-    return product
-  })
+      return variant as ProductVariantDTO;
+    });
+    product.variants = variants;
+    return product;
+  });
 
   // Return products with prices
-  return output
+  return output;
 }

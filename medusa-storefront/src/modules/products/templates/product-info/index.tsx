@@ -1,11 +1,11 @@
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import { Heading, Text } from "@medusajs/ui"
-import Link from "next/link"
-import React from "react"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import { Heading, Text } from "@medusajs/ui";
+import Link from "next/link";
+import React from "react";
 
 type ProductInfoProps = {
-  product: PricedProduct
-}
+  product: PricedProduct;
+};
 
 const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
   return (
@@ -28,7 +28,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
         </Text>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductInfo
+export default ProductInfo;

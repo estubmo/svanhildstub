@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const Minus: React.FC<IconProps> = ({
   size = "16",
@@ -23,7 +23,7 @@ const Minus: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Minus
+export default Minus;

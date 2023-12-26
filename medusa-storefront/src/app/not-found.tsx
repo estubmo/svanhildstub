@@ -1,10 +1,10 @@
-import { Metadata } from "next"
-import Link from "next/link"
+import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "404",
   description: "Something went wrong",
-}
+};
 
 export default function NotFound() {
   return (
@@ -13,9 +13,12 @@ export default function NotFound() {
       <p className="text-small-regular text-ui-tag-neutral-text">
         The page you tried to access does not exist.
       </p>
-      <Link href="/" className="mt-4 underline text-base-regular text-ui-fg-interactive">
+      <Link
+        href="/"
+        className="mt-4 underline text-base-regular text-ui-fg-interactive"
+      >
         Go to frontpage
       </Link>
     </div>
-  )
+  );
 }

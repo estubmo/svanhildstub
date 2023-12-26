@@ -1,30 +1,30 @@
-import { useQuery } from "@lib/context/query-context"
-import useDebounce from "@lib/hooks/use-debounce"
-import { useRouter } from "next/navigation"
-import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from "react"
-import { UseSearchBoxProps, useSearchBox } from "react-instantsearch"
+import { useQuery } from "@lib/context/query-context";
+import { useDebounce } from "@lib/hooks/use-debounce";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from "react";
+import { UseSearchBoxProps, useSearchBox } from "react-instantsearch";
 
 export type ControlledSearchBoxProps = React.ComponentProps<"div"> & {
-  inputRef: RefObject<HTMLInputElement>
-  onChange(_event: ChangeEvent): void
-  onReset(_event: FormEvent): void
-  onSubmit?(_event: FormEvent): void
-  close?: () => void
-  placeholder?: string
-  value: string
-}
+  inputRef: RefObject<HTMLInputElement>;
+  onChange(_event: ChangeEvent): void;
+  onReset(_event: FormEvent): void;
+  onSubmit?(_event: FormEvent): void;
+  close?: () => void;
+  placeholder?: string;
+  value: string;
+};
 
 type SearchBoxProps = {
   children: (_state: {
-    value: string
-    inputRef: RefObject<HTMLInputElement>
-    onChange: (_event: ChangeEvent<HTMLInputElement>) => void
-    onReset: () => void
-    placeholder: string
-  }) => React.ReactNode
-  placeholder?: string
-  shouldFocus?: boolean
-} & UseSearchBoxProps
+    value: string;
+    inputRef: RefObject<HTMLInputElement>;
+    onChange: (_event: ChangeEvent<HTMLInputElement>) => void;
+    onReset: () => void;
+    placeholder: string;
+  }) => React.ReactNode;
+  placeholder?: string;
+  shouldFocus?: boolean;
+} & UseSearchBoxProps;
 
 const SearchBoxWrapper = ({
   children,
@@ -32,39 +32,39 @@ const SearchBoxWrapper = ({
   shouldFocus = false,
   ...rest
 }: SearchBoxProps) => {
-  const { refine } = useSearchBox(rest)
+  const { refine } = useSearchBox(rest);
 
-  const { value, setValue } = useQuery()
+  const { value, setValue } = useQuery();
 
-  const debouncedSearchTerm = useDebounce(value, 100)
+  const debouncedSearchTerm = useDebounce(value, 100);
 
   useEffect(() => {
-    refine(debouncedSearchTerm)
-  }, [debouncedSearchTerm, refine])
+    refine(debouncedSearchTerm);
+  }, [debouncedSearchTerm, refine]);
 
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onReset = () => {
-    setValue("")
-  }
+    setValue("");
+  };
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setValue(event.currentTarget.value)
-  }
+    setValue(event.currentTarget.value);
+  };
 
   const onSubmit = () => {
     if (value) {
-      router.replace(`/search/${value}`)
+      router.replace(`/search/${value}`);
     }
-  }
+  };
 
   useEffect(() => {
     if (inputRef.current && shouldFocus) {
-      inputRef.current.focus()
+      inputRef.current.focus();
     }
-  }, [shouldFocus])
+  }, [shouldFocus]);
 
   const state = {
     value,
@@ -73,9 +73,9 @@ const SearchBoxWrapper = ({
     onSubmit,
     onReset,
     placeholder,
-  }
+  };
 
-  return children(state) as React.ReactElement
-}
+  return children(state) as React.ReactElement;
+};
 
-export default SearchBoxWrapper
+export default SearchBoxWrapper;

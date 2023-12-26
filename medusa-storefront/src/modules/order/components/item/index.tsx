@@ -1,18 +1,14 @@
-import { useStore } from "@lib/context/store-context"
-import { LineItem, Region } from "@medusajs/medusa"
-import { Table, Text, clx } from "@medusajs/ui"
-import LineItemOptions from "@modules/common/components/line-item-options"
-import LineItemPrice from "@modules/common/components/line-item-price"
-import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
-import CartItemSelect from "@modules/cart/components/cart-item-select"
-import Trash from "@modules/common/icons/trash"
-import Thumbnail from "@modules/products/components/thumbnail"
-import Link from "next/link"
+import { LineItem, Region } from "@medusajs/medusa";
+import { Table, Text } from "@medusajs/ui";
+import LineItemOptions from "@modules/common/components/line-item-options";
+import LineItemPrice from "@modules/common/components/line-item-price";
+import LineItemUnitPrice from "@modules/common/components/line-item-unit-price";
+import Thumbnail from "@modules/products/components/thumbnail";
 
 type ItemProps = {
-  item: Omit<LineItem, "beforeInsert">
-  region: Region
-}
+  item: Omit<LineItem, "beforeInsert">;
+  region: Region;
+};
 
 const Item = ({ item, region }: ItemProps) => {
   return (
@@ -39,7 +35,7 @@ const Item = ({ item, region }: ItemProps) => {
         </span>
       </Table.Cell>
     </Table.Row>
-  )
-}
+  );
+};
 
-export default Item
+export default Item;

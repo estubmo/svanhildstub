@@ -1,17 +1,17 @@
-import { RadioGroup } from "@headlessui/react"
-import { ErrorMessage } from "@hookform/error-message"
-import { useCheckout } from "@lib/context/checkout-context"
-import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
-import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
-import Bancontact from "@modules/common/icons/bancontact"
-import Ideal from "@modules/common/icons/ideal"
-import Spinner from "@modules/common/icons/spinner"
-import { useCart, useSetPaymentSession } from "medusa-react"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import PaymentContainer from "../payment-container"
-import PaymentStripe from "../payment-stripe"
+import { RadioGroup } from "@headlessui/react";
+import { ErrorMessage } from "@hookform/error-message";
+import { useCheckout } from "@lib/context/checkout-context";
+import { CheckCircleSolid, CreditCard } from "@medusajs/icons";
+import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui";
+import Divider from "@modules/common/components/divider";
+import Bancontact from "@modules/common/icons/bancontact";
+import Ideal from "@modules/common/icons/ideal";
+import Spinner from "@modules/common/icons/spinner";
+import { useCart, useSetPaymentSession } from "medusa-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import PaymentContainer from "../payment-container";
+import PaymentStripe from "../payment-stripe";
 
 /* Map of payment provider_id to their title and icon. Add in any payment providers you want to use. */
 export const paymentInfoMap: Record<
@@ -35,7 +35,7 @@ export const paymentInfoMap: Record<
     icon: <CreditCard />,
   },
   // Add more payment providers here
-}
+};
 
 const Payment = () => {
   const {
@@ -46,51 +46,54 @@ const Payment = () => {
     addressReady,
     shippingReady,
     paymentReady,
-  } = useCheckout()
+  } = useCheckout();
 
-  const { setCart } = useCart()
+  const { setCart } = useCart();
 
   const [cardFormState, setCardFormState] = useState({
     cardNumberComplete: false,
     cardExpiryComplete: false,
     cardCvcComplete: false,
-  })
+  });
 
   const { cardNumberComplete, cardExpiryComplete, cardCvcComplete } =
-    cardFormState
+    cardFormState;
 
   const cardFormComplete =
-    cardNumberComplete && cardExpiryComplete && cardCvcComplete
+    cardNumberComplete && cardExpiryComplete && cardCvcComplete;
 
   const {
     mutate: setPaymentSessionMutation,
     isLoading: settingPaymentSession,
-  } = useSetPaymentSession(cart?.id!)
+  } = useSetPaymentSession(cart?.id || "");
 
   const handleEdit = () => {
-    open()
-    closeAddresses()
-    closeShipping()
-  }
+    open();
+    closeAddresses();
+    closeShipping();
+  };
 
-  const editingOtherSteps = addressesIsOpen || shippingIsOpen
+  const editingOtherSteps = addressesIsOpen || shippingIsOpen;
 
   const handleSubmit = () => {
-    close()
-  }
+    close();
+  };
 
   const handleChange = (value: string) => {
-    setPaymentSession(value)
-    clearErrors("paymentSession")
-  }
+    setPaymentSession(value);
+    clearErrors("paymentSession");
+  };
 
-  const useFormState = useForm({ mode: "onChange", reValidateMode: "onChange" })
+  const useFormState = useForm({
+    mode: "onChange",
+    reValidateMode: "onChange",
+  });
 
   const {
     setError,
-    formState: { errors, isValid },
+    formState: { errors },
     clearErrors,
-  } = useFormState
+  } = useFormState;
 
   const setPaymentSession = (providerId: string) => {
     if (cart) {
@@ -100,7 +103,7 @@ const Payment = () => {
         },
         {
           onSuccess: ({ cart }) => {
-            setCart(cart)
+            setCart(cart);
           },
           onError: () =>
             setError(
@@ -113,9 +116,9 @@ const Payment = () => {
               { shouldFocus: true }
             ),
         }
-      )
+      );
     }
-  }
+  };
 
   return (
     <div className="bg-ui-bg-base px-4 small:px-8">
@@ -150,7 +153,7 @@ const Payment = () => {
             >
               {cart.payment_sessions
                 .sort((a, b) => {
-                  return a.provider_id > b.provider_id ? 1 : -1
+                  return a.provider_id > b.provider_id ? 1 : -1;
                 })
                 .map((paymentSession) => {
                   return (
@@ -162,7 +165,7 @@ const Payment = () => {
                         cart.payment_session?.provider_id || null
                       }
                     />
-                  )
+                  );
                 })}
             </RadioGroup>
             <ErrorMessage
@@ -173,7 +176,7 @@ const Payment = () => {
                   <div className="pt-2 text-rose-500 text-small-regular">
                     <span>{message}</span>
                   </div>
-                )
+                );
               }}
             />
             {cart.payment_session?.provider_id === "stripe" && (
@@ -248,7 +251,7 @@ const Payment = () => {
       </div>
       <Divider className="mt-8" />
     </div>
-  )
-}
+  );
+};
 
-export default Payment
+export default Payment;

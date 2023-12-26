@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { useAccount } from "@lib/context/account-context"
-import ProfileEmail from "@modules/account/components/profile-email"
-import ProfileName from "@modules/account/components/profile-name"
-import ProfilePassword from "@modules/account/components/profile-password"
-import ProfileBillingAddress from "../components/profile-billing-address"
-import ProfilePhone from "../components/profile-phone"
+import { useAccount } from "@lib/context/account-context";
+import ProfileEmail from "@modules/account/components/profile-email";
+import ProfileName from "@modules/account/components/profile-name";
+import ProfilePassword from "@modules/account/components/profile-password";
+import ProfileBillingAddress from "../components/profile-billing-address";
+import ProfilePhone from "../components/profile-phone";
 
 const ProfileTemplate = () => {
-  const { customer, retrievingCustomer, refetchCustomer } = useAccount()
+  const { customer, retrievingCustomer } = useAccount();
 
   if (retrievingCustomer || !customer) {
-    return null
+    return null;
   }
 
   return (
@@ -36,11 +36,11 @@ const ProfileTemplate = () => {
         <ProfileBillingAddress customer={customer} />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const Divider = () => {
-  return <div className="w-full h-px bg-gray-200" />
-}
+  return <div className="w-full h-px bg-gray-200" />;
+};
 
-export default ProfileTemplate
+export default ProfileTemplate;

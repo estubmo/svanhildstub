@@ -1,9 +1,9 @@
-import { Button, Container, Text } from "@medusajs/ui"
+import { Button, Container, Text } from "@medusajs/ui";
 
 const OnboardingCta = ({ orderId }: { orderId: string }) => {
   const resetOnboarding = () => {
-    window.sessionStorage.setItem("onboarding", "false")
-  }
+    window.sessionStorage.setItem("onboarding", "false");
+  };
 
   return (
     <Container className="max-w-4xl h-full bg-ui-bg-subtle w-full">
@@ -22,7 +22,7 @@ const OnboardingCta = ({ orderId }: { orderId: string }) => {
         </a>
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default OnboardingCta
+export default OnboardingCta;

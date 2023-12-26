@@ -1,6 +1,6 @@
-import { NextRequest, NextResponse } from "next/server"
-import { initialize as initializeProductModule } from "@medusajs/product"
-import { notFound } from "next/navigation"
+import { initialize as initializeProductModule } from "@medusajs/product";
+import { notFound } from "next/navigation";
+import { NextRequest, NextResponse } from "next/server";
 
 /**
  * This endpoint uses the serverless Product Module to list and count all product collections.
@@ -8,9 +8,9 @@ import { notFound } from "next/navigation"
  * Read more about the Product Module here: https://docs.medusajs.com/modules/products/serverless-module
  */
 export async function GET(request: NextRequest) {
-  const productService = await initializeProductModule()
+  const productService = await initializeProductModule();
 
-  const { offset, limit } = Object.fromEntries(request.nextUrl.searchParams)
+  const { offset, limit } = Object.fromEntries(request.nextUrl.searchParams);
 
   const [collections, count] = await productService
     .listAndCountCollections(
@@ -20,12 +20,12 @@ export async function GET(request: NextRequest) {
         take: parseInt(limit) || 100,
       }
     )
-    .catch((e) => {
-      return notFound()
-    })
+    .catch(() => {
+      return notFound();
+    });
 
   return NextResponse.json({
     collections,
     count,
-  })
+  });
 }

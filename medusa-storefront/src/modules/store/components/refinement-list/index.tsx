@@ -1,14 +1,15 @@
-import { StoreGetProductsParams } from "@medusajs/medusa"
-import CollectionFilter from "./collection-filter"
-import SortProducts, { SortOptions } from "./sort-products"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { StoreGetProductsParams } from "@medusajs/medusa";
+import CollectionFilter from "./collection-filter";
+import SortProducts, { SortOptions } from "./sort-products";
 
 type RefinementListProps = {
-  refinementList: StoreGetProductsParams
-  setRefinementList: (refinementList: StoreGetProductsParams) => void
-  sortBy: SortOptions
-  setSortBy: (...args: any[]) => void
-  search?: boolean
-}
+  refinementList: StoreGetProductsParams;
+  setRefinementList: (refinementList: StoreGetProductsParams) => void;
+  sortBy: SortOptions;
+  setSortBy: (...args: any[]) => void;
+  search?: boolean;
+};
 
 const RefinementList = ({
   refinementList,
@@ -27,7 +28,7 @@ const RefinementList = ({
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default RefinementList
+export default RefinementList;

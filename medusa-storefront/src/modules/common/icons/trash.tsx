@@ -1,5 +1,5 @@
-import React from "react"
-import { IconProps } from "types/icon"
+import React from "react";
+import { IconProps } from "types/icon";
 
 const Trash: React.FC<IconProps> = ({
   size = "16",
@@ -44,7 +44,7 @@ const Trash: React.FC<IconProps> = ({
         strokeLinejoin="round"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default Trash
+export default Trash;

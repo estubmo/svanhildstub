@@ -1,5 +1,5 @@
-const { withStoreConfig } = require("./store-config")
-const store = require("./store.config.json")
+const { withStoreConfig } = require("./store-config");
+const store = require("./store.config.json");
 
 module.exports = withStoreConfig({
   experimental: {
@@ -30,9 +30,7 @@ module.exports = withStoreConfig({
       },
     ],
     domains: [
-        "<YOUR_SPACE_DOMAIN>", // TODO: Add your space domain here
-      ],
-
+      "<YOUR_SPACE_DOMAIN>", // TODO: Add your space domain here
+    ],
   },
-})
-
+});

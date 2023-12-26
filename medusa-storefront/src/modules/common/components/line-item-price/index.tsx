@@ -1,14 +1,14 @@
-import { getPercentageDiff } from "@lib/util/get-precentage-diff"
-import { LineItem, Region } from "@medusajs/medusa"
-import clsx from "clsx"
-import { formatAmount } from "medusa-react"
-import { CalculatedVariant } from "types/medusa"
+import { getPercentageDiff } from "@lib/util/get-precentage-diff";
+import { LineItem, Region } from "@medusajs/medusa";
+import clsx from "clsx";
+import { formatAmount } from "medusa-react";
+import { CalculatedVariant } from "types/medusa";
 
 type LineItemPriceProps = {
-  item: Omit<LineItem, "beforeInsert">
-  region: Region
-  style?: "default" | "tight"
-}
+  item: Omit<LineItem, "beforeInsert">;
+  region: Region;
+  style?: "default" | "tight";
+};
 
 const LineItemPrice = ({
   item,
@@ -16,8 +16,8 @@ const LineItemPrice = ({
   style = "default",
 }: LineItemPriceProps) => {
   const originalPrice =
-    (item.variant as CalculatedVariant).original_price * item.quantity
-  const hasReducedPrice = (item.total || 0) < originalPrice
+    (item.variant as CalculatedVariant).original_price * item.quantity;
+  const hasReducedPrice = (item.total || 0) < originalPrice;
 
   return (
     <div className="flex flex-col gap-x-2 text-ui-fg-subtle items-end">
@@ -56,7 +56,7 @@ const LineItemPrice = ({
         </span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LineItemPrice
+export default LineItemPrice;

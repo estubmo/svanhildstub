@@ -1,8 +1,8 @@
-import { XMarkMini } from "@medusajs/icons"
-import { FormEvent, useEffect } from "react"
+import { XMarkMini } from "@medusajs/icons";
+import { FormEvent, useEffect } from "react";
 import SearchBoxWrapper, {
-    ControlledSearchBoxProps,
-} from "../search-box-wrapper"
+  ControlledSearchBoxProps,
+} from "../search-box-wrapper";
 
 const ControlledSearchBox = ({
   inputRef,
@@ -17,50 +17,50 @@ const ControlledSearchBox = ({
   ...props
 }: ControlledSearchBoxProps) => {
   const handleSubmit = (event: FormEvent) => {
-    event.preventDefault()
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
 
     if (onSubmit) {
-      onSubmit(event)
-      close && close()
+      onSubmit(event);
+      close && close();
     }
 
     if (inputRef.current) {
-      inputRef.current.blur()
+      inputRef.current.blur();
     }
-  }
+  };
 
   const handleReset = (event: FormEvent) => {
-    event.preventDefault()
-    event.stopPropagation()
+    event.preventDefault();
+    event.stopPropagation();
 
-    onReset(event)
+    onReset(event);
 
     if (inputRef.current) {
-      inputRef.current.blur()
+      inputRef.current.blur();
     }
-  }
+  };
 
   useEffect(() => {
     const keyDownHandler = (event: KeyboardEvent) => {
       if (event.ctrlKey && event.key === "k") {
-        event.stopPropagation()
-        event.preventDefault()
+        event.stopPropagation();
+        event.preventDefault();
 
         if (document.activeElement === inputRef.current) {
-          inputRef.current?.blur()
+          inputRef.current?.blur();
         } else {
-          inputRef.current?.focus()
+          inputRef.current?.focus();
         }
       }
-    }
+    };
 
-    window.addEventListener("keydown", keyDownHandler)
+    window.addEventListener("keydown", keyDownHandler);
 
     return () => {
-      window.removeEventListener("keydown", keyDownHandler)
-    }
-  }, [inputRef])
+      window.removeEventListener("keydown", keyDownHandler);
+    };
+  }, [inputRef]);
 
   return (
     <div {...props} className="w-full z-20">
@@ -76,10 +76,10 @@ const ControlledSearchBox = ({
             onBlur={onBlur}
             onKeyDown={(e) => {
               if (e.key === "Escape") {
-                e.preventDefault()
-                e.stopPropagation()
+                e.preventDefault();
+                e.stopPropagation();
                 if (inputRef.current) {
-                  inputRef.current.blur()
+                  inputRef.current.blur();
                 }
               }
             }}
@@ -101,15 +101,15 @@ const ControlledSearchBox = ({
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
 type SearchBoxProps = {
-  onFocus?: () => void
-  onBlur?: () => void
-  close?: () => void
-  shouldFocus?: boolean
-}
+  onFocus?: () => void;
+  onBlur?: () => void;
+  close?: () => void;
+  shouldFocus?: boolean;
+};
 
 const SearchBox = ({
   close,
@@ -128,7 +128,7 @@ const SearchBox = ({
         />
       )}
     </SearchBoxWrapper>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;

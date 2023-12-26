@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import Hamburger from "@modules/common/components/hamburger"
-import CartDropdown from "@modules/layout/components/cart-dropdown"
-import MobileMenu from "@modules/mobile-menu/templates"
-import NavbarSearchContainer from "@modules/search/components/navbar-search-container"
-import Link from "next/link"
+import { useMobileMenu } from "@lib/context/mobile-menu-context";
+import Hamburger from "@modules/common/components/hamburger";
+import CartDropdown from "@modules/layout/components/cart-dropdown";
+import MobileMenu from "@modules/mobile-menu/templates";
+import NavbarSearchContainer from "@modules/search/components/navbar-search-container";
+import Link from "next/link";
 
 const Nav = () => {
-  const { toggle } = useMobileMenu()
+  const { toggle } = useMobileMenu();
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
@@ -45,7 +45,7 @@ const Nav = () => {
         <MobileMenu />
       </header>
     </div>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

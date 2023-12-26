@@ -1,10 +1,10 @@
-import { ProductCollection } from "@medusajs/medusa"
-import ProductRail from "./product-rail"
+import { ProductCollection } from "@medusajs/medusa";
+import ProductRail from "./product-rail";
 
 const FeaturedProducts = ({
   collections,
 }: {
-  collections: ProductCollection[]
+  collections: ProductCollection[];
 }) => {
   return (
     <div className="py-12">
@@ -18,7 +18,7 @@ const FeaturedProducts = ({
         </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FeaturedProducts
+export default FeaturedProducts;

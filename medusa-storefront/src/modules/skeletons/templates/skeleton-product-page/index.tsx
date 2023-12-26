@@ -1,6 +1,6 @@
-import repeat from "@lib/util/repeat"
-import Divider from "@modules/common/components/divider"
-import SkeletonButton from "@modules/skeletons/components/skeleton-button"
+import repeat from "@lib/util/repeat";
+import Divider from "@modules/common/components/divider";
+import SkeletonButton from "@modules/skeletons/components/skeleton-button";
 
 const SkeletonProductPage = () => {
   return (
@@ -32,7 +32,7 @@ const SkeletonProductPage = () => {
                   key={index}
                   className="relative aspect-[29/34] w-full bg-gray-200 rounded-rounded"
                 ></div>
-              )
+              );
             })}
           </div>
         </div>
@@ -50,7 +50,7 @@ const SkeletonProductPage = () => {
                             key={v}
                             className="bg-gray-200 w-15 h-10 rounded-rounded"
                           ></div>
-                        )
+                        );
                       })}
                     </div>
                     <Divider />
@@ -64,7 +64,7 @@ const SkeletonProductPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default SkeletonProductPage
+export default SkeletonProductPage;

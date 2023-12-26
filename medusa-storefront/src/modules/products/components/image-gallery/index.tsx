@@ -1,10 +1,10 @@
-import { Image as MedusaImage } from "@medusajs/medusa"
-import { Container } from "@medusajs/ui"
-import Image from "next/image"
+import { Image as MedusaImage } from "@medusajs/medusa";
+import { Container } from "@medusajs/ui";
+import Image from "next/image";
 
 type ImageGalleryProps = {
-  images: MedusaImage[]
-}
+  images: MedusaImage[];
+};
 
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
@@ -29,11 +29,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 }}
               />
             </Container>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ImageGallery
+export default ImageGallery;

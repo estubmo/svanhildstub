@@ -1,5 +1,5 @@
-import { Heading, Text } from "@medusajs/ui"
-import UnderlineLink from "@modules/common/components/interactive-link"
+import { Heading, Text } from "@medusajs/ui";
+import UnderlineLink from "@modules/common/components/interactive-link";
 
 const EmptyCartMessage = () => {
   return (
@@ -18,7 +18,7 @@ const EmptyCartMessage = () => {
         <UnderlineLink href="/store">Explore products</UnderlineLink>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EmptyCartMessage
+export default EmptyCartMessage;

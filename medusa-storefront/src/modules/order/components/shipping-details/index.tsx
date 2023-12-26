@@ -1,11 +1,11 @@
-import { Order } from "@medusajs/medusa"
-import { Heading, Text } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
-import { formatAmount } from "medusa-react"
+import { Order } from "@medusajs/medusa";
+import { Heading, Text } from "@medusajs/ui";
+import Divider from "@modules/common/components/divider";
+import { formatAmount } from "medusa-react";
 
 type ShippingDetailsProps = {
-  order: Order
-}
+  order: Order;
+};
 
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
   return (
@@ -58,7 +58,7 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
       </div>
       <Divider className="mt-8" />
     </div>
-  )
-}
+  );
+};
 
-export default ShippingDetails
+export default ShippingDetails;

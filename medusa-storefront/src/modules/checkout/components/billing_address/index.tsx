@@ -1,7 +1,7 @@
-import { CheckoutFormValues } from "@lib/context/checkout-context"
-import ConnectForm from "@modules/common/components/connect-form"
-import Input from "@modules/common/components/input"
-import CountrySelect from "../country-select"
+import { CheckoutFormValues } from "@lib/context/checkout-context";
+import ConnectForm from "@modules/common/components/connect-form";
+import Input from "@modules/common/components/input";
+import CountrySelect from "../country-select";
 
 const BillingAddress = () => {
   return (
@@ -91,7 +91,7 @@ const BillingAddress = () => {
         </div>
       )}
     </ConnectForm>
-  )
-}
+  );
+};
 
-export default BillingAddress
+export default BillingAddress;

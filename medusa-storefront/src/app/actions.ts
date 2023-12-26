@@ -1,6 +1,6 @@
-"use server"
+"use server";
 
-import { revalidateTag } from "next/cache"
+import { revalidateTag } from "next/cache";
 
 /**
  * Revalidates each cache tag in the passed array
@@ -8,6 +8,6 @@ import { revalidateTag } from "next/cache"
  */
 export async function revalidateTags(tags: string[]) {
   tags.forEach((tag) => {
-    revalidateTag(tag)
-  })
+    revalidateTag(tag);
+  });
 }

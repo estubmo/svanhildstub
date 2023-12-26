@@ -1,6 +1,6 @@
-import { useCheckout } from "@lib/context/checkout-context"
-import { Heading, Text, clx } from "@medusajs/ui"
-import PaymentButton from "../payment-button"
+import { useCheckout } from "@lib/context/checkout-context";
+import { Heading, Text, clx } from "@medusajs/ui";
+import PaymentButton from "../payment-button";
 
 const Review = () => {
   const {
@@ -8,14 +8,14 @@ const Review = () => {
     editPayment: { state: isEditPayment },
     editAddresses: { state: isEditAddresses },
     editShipping: { state: isEditShipping },
-  } = useCheckout()
+  } = useCheckout();
 
   const previousStepsCompleted =
     !!cart?.shipping_address &&
     !!cart.shipping_methods?.[0]?.shipping_option.id &&
-    !!cart?.payment_sessions
+    !!cart?.payment_sessions;
 
-  const editingOtherSteps = isEditAddresses || isEditShipping || isEditPayment
+  const editingOtherSteps = isEditAddresses || isEditShipping || isEditPayment;
 
   return (
     <div className="bg-ui-bg-base px-4 small:px-8">
@@ -48,7 +48,7 @@ const Review = () => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default Review
+export default Review;

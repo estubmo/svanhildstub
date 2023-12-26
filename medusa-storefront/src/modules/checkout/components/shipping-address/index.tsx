@@ -1,21 +1,21 @@
-import { CheckoutFormValues } from "@lib/context/checkout-context"
-import { emailRegex } from "@lib/util/regex"
-import ConnectForm from "@modules/common/components/connect-form"
-import Input from "@modules/common/components/input"
-import { useMeCustomer } from "medusa-react"
-import AddressSelect from "../address-select"
-import CountrySelect from "../country-select"
-import Checkbox from "@modules/common/components/checkbox"
-import { Container } from "@medusajs/ui"
+import { CheckoutFormValues } from "@lib/context/checkout-context";
+import { emailRegex } from "@lib/util/regex";
+import ConnectForm from "@modules/common/components/connect-form";
+import Input from "@modules/common/components/input";
+import { useMeCustomer } from "medusa-react";
+import AddressSelect from "../address-select";
+import CountrySelect from "../country-select";
+import Checkbox from "@modules/common/components/checkbox";
+import { Container } from "@medusajs/ui";
 
 const ShippingAddress = ({
   checked,
   onChange,
 }: {
-  checked: boolean
-  onChange: () => void
+  checked: boolean;
+  onChange: () => void;
 }) => {
-  const { customer } = useMeCustomer()
+  const { customer } = useMeCustomer();
 
   return (
     <div>
@@ -136,7 +136,7 @@ const ShippingAddress = ({
         )}
       </ConnectForm>
     </div>
-  )
-}
+  );
+};
 
-export default ShippingAddress
+export default ShippingAddress;

@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { Order } from "@medusajs/medusa"
-import { Heading } from "@medusajs/ui"
-import CartTotals from "@modules/common/components/cart-totals"
-import Help from "@modules/order/components/help"
-import Items from "@modules/order/components/items"
-import OnboardingCta from "@modules/order/components/onboarding-cta"
-import OrderDetails from "@modules/order/components/order-details"
-import ShippingDetails from "@modules/order/components/shipping-details"
-import React, { useEffect, useState } from "react"
-import PaymentDetails from "../components/payment-details"
+import { Order } from "@medusajs/medusa";
+import { Heading } from "@medusajs/ui";
+import CartTotals from "@modules/common/components/cart-totals";
+import Help from "@modules/order/components/help";
+import Items from "@modules/order/components/items";
+import OnboardingCta from "@modules/order/components/onboarding-cta";
+import OrderDetails from "@modules/order/components/order-details";
+import ShippingDetails from "@modules/order/components/shipping-details";
+import React, { useEffect, useState } from "react";
+import PaymentDetails from "../components/payment-details";
 
 type OrderCompletedTemplateProps = {
-  order: Order
-}
+  order: Order;
+};
 
 const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
   order,
 }) => {
-  const [isOnboarding, setIsOnboarding] = useState<boolean>(false)
+  const [isOnboarding, setIsOnboarding] = useState<boolean>(false);
 
   useEffect(() => {
-    const onboarding = window.sessionStorage.getItem("onboarding")
-    setIsOnboarding(onboarding === "true")
-  }, [])
+    const onboarding = window.sessionStorage.getItem("onboarding");
+    setIsOnboarding(onboarding === "true");
+  }, []);
 
   return (
     <div className="py-6 min-h-[calc(100vh-64px)]">
@@ -53,7 +53,7 @@ const OrderCompletedTemplate: React.FC<OrderCompletedTemplateProps> = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderCompletedTemplate
+export default OrderCompletedTemplate;

@@ -1,32 +1,32 @@
-import { medusaClient } from "@lib/config"
-import { Customer } from "@medusajs/medusa"
-import Input from "@modules/common/components/input"
-import { useUpdateMe } from "medusa-react"
-import React, { useEffect } from "react"
-import { useForm } from "react-hook-form"
-import AccountInfo from "../account-info"
+import { medusaClient } from "@lib/config";
+import { Customer } from "@medusajs/medusa";
+import Input from "@modules/common/components/input";
+import { useUpdateMe } from "medusa-react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import AccountInfo from "../account-info";
 
 type MyInformationProps = {
-  customer: Omit<Customer, "password_hash">
-}
+  customer: Omit<Customer, "password_hash">;
+};
 
 type UpdateCustomerPasswordFormData = {
-  old_password: string
-  new_password: string
-  confirm_password: string
-}
+  old_password: string;
+  new_password: string;
+  confirm_password: string;
+};
 
 const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   const [errorMessage, setErrorMessage] = React.useState<string | undefined>(
     undefined
-  )
+  );
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
     setError,
-  } = useForm<UpdateCustomerPasswordFormData>()
+  } = useForm<UpdateCustomerPasswordFormData>();
 
   const {
     mutate: update,
@@ -34,11 +34,11 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
     isSuccess,
     isError,
     reset: clearState,
-  } = useUpdateMe()
+  } = useUpdateMe();
 
   useEffect(() => {
-    reset()
-  }, [customer, reset])
+    reset();
+  }, [customer, reset]);
 
   const updatePassword = async (data: UpdateCustomerPasswordFormData) => {
     const isValid = await medusaClient.auth
@@ -47,33 +47,33 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         password: data.old_password,
       })
       .then(() => true)
-      .catch(() => false)
+      .catch(() => false);
 
     if (!isValid) {
       setError("old_password", {
         type: "validate",
         message: "Old password is incorrect",
-      })
-      setErrorMessage("Old password is incorrect")
+      });
+      setErrorMessage("Old password is incorrect");
 
-      return
+      return;
     }
 
     if (data.new_password !== data.confirm_password) {
       setError("confirm_password", {
         type: "validate",
         message: "Passwords do not match",
-      })
-      setErrorMessage("Passwords do not match")
+      });
+      setErrorMessage("Passwords do not match");
 
-      return
+      return;
     }
 
     return update({
       id: customer.id,
       password: data.new_password,
-    })
-  }
+    });
+  };
 
   return (
     <form
@@ -116,7 +116,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         </div>
       </AccountInfo>
     </form>
-  )
-}
+  );
+};
 
-export default ProfileName
+export default ProfileName;

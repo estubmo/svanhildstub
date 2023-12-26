@@ -1,16 +1,13 @@
-import { Tab } from "@headlessui/react"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
-import Back from "@modules/common/icons/back"
-import FastDelivery from "@modules/common/icons/fast-delivery"
-import Refresh from "@modules/common/icons/refresh"
-import { ProgressAccordion, Text } from "@medusajs/ui"
-import clsx from "clsx"
-import { useMemo } from "react"
-import Accordion from "./accordion"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing";
+import Back from "@modules/common/icons/back";
+import FastDelivery from "@modules/common/icons/fast-delivery";
+import Refresh from "@modules/common/icons/refresh";
+import { useMemo } from "react";
+import Accordion from "./accordion";
 
 type ProductTabsProps = {
-  product: PricedProduct
-}
+  product: PricedProduct;
+};
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
   const tabs = useMemo(() => {
@@ -23,8 +20,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
         label: "Shipping & Returns",
         component: <ShippingInfoTab />,
       },
-    ]
-  }, [product])
+    ];
+  }, [product]);
 
   return (
     <div className="w-full">
@@ -41,8 +38,8 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
         ))}
       </Accordion>
     </div>
-  )
-}
+  );
+};
 
 const ProductInfoTab = ({ product }: ProductTabsProps) => {
   return (
@@ -83,8 +80,8 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
         </div>
       ) : null}
     </div>
-  )
-}
+  );
+};
 
 const ShippingInfoTab = () => {
   return (
@@ -123,7 +120,7 @@ const ShippingInfoTab = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductTabs
+export default ProductTabs;

@@ -1,42 +1,42 @@
-import { medusaClient } from "@lib/config"
-import { LOGIN_VIEW, useAccount } from "@lib/context/account-context"
-import { Spinner } from "@medusajs/icons"
-import { Button } from "@medusajs/ui"
-import Input from "@modules/common/components/input"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { FieldValues, useForm } from "react-hook-form"
+import { medusaClient } from "@lib/config";
+import { LOGIN_VIEW, useAccount } from "@lib/context/account-context";
+import { Spinner } from "@medusajs/icons";
+import { Button } from "@medusajs/ui";
+import Input from "@modules/common/components/input";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
 
 interface SignInCredentials extends FieldValues {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 const Login = () => {
-  const { loginView, refetchCustomer } = useAccount()
-  const [_, setCurrentView] = loginView
-  const [authError, setAuthError] = useState<string | undefined>(undefined)
-  const router = useRouter()
+  const { loginView, refetchCustomer } = useAccount();
+  const [_, setCurrentView] = loginView;
+  const [authError, setAuthError] = useState<string | undefined>(undefined);
+  const router = useRouter();
 
   const handleError = (_e: Error) => {
-    setAuthError("Invalid email or password")
-  }
+    setAuthError("Invalid email or password");
+  };
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<SignInCredentials>()
+  } = useForm<SignInCredentials>();
 
   const onSubmit = handleSubmit(async (credentials) => {
     await medusaClient.auth
       .authenticate(credentials)
       .then(() => {
-        refetchCustomer()
-        router.push("/account")
+        refetchCustomer();
+        router.push("/account");
       })
-      .catch(handleError)
-  })
+      .catch(handleError);
+  });
 
   return (
     <div className="max-w-sm w-full flex flex-col items-center">
@@ -87,7 +87,7 @@ const Login = () => {
         .
       </span>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

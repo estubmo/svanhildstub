@@ -1,7 +1,7 @@
-import { ErrorMessage } from "@hookform/error-message"
-import { IconBadge } from "@medusajs/ui"
-import ChevronDown from "@modules/common/icons/chevron-down"
-import clsx from "clsx"
+import { ErrorMessage } from "@hookform/error-message";
+import { IconBadge } from "@medusajs/ui";
+import ChevronDown from "@modules/common/icons/chevron-down";
+import clsx from "clsx";
 import {
   forwardRef,
   SelectHTMLAttributes,
@@ -9,14 +9,14 @@ import {
   useImperativeHandle,
   useRef,
   useState,
-} from "react"
-import { get } from "react-hook-form"
+} from "react";
+import { get } from "react-hook-form";
 
 export type NativeSelectProps = {
-  placeholder?: string
-  errors?: Record<string, unknown>
-  touched?: Record<string, unknown>
-} & Omit<SelectHTMLAttributes<HTMLSelectElement>, "size">
+  placeholder?: string;
+  errors?: Record<string, unknown>;
+  touched?: Record<string, unknown>;
+} & Omit<SelectHTMLAttributes<HTMLSelectElement>, "size">;
 
 const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
@@ -30,25 +30,25 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
     },
     ref
   ) => {
-    const innerRef = useRef<HTMLSelectElement>(null)
-    const [isPlaceholder, setIsPlaceholder] = useState(false)
+    const innerRef = useRef<HTMLSelectElement>(null);
+    const [isPlaceholder, setIsPlaceholder] = useState(false);
 
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
       () => innerRef.current
-    )
+    );
 
     const hasError = props.name
       ? get(errors, props.name) && get(touched, props.name)
-      : false
+      : false;
 
     useEffect(() => {
       if (innerRef.current && innerRef.current.value === "") {
-        setIsPlaceholder(true)
+        setIsPlaceholder(true);
       } else {
-        setIsPlaceholder(false)
+        setIsPlaceholder(false);
       }
-    }, [innerRef.current?.value])
+    }, [innerRef.current?.value]);
 
     return (
       <div>
@@ -86,15 +86,15 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
                 <div className="pt-1 pl-2 text-rose-500 text-xsmall-regular">
                   <span>{message}</span>
                 </div>
-              )
+              );
             }}
           />
         )}
       </div>
-    )
+    );
   }
-)
+);
 
-CartItemSelect.displayName = "CartItemSelect"
+CartItemSelect.displayName = "CartItemSelect";
 
-export default CartItemSelect
+export default CartItemSelect;

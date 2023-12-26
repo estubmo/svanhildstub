@@ -1,9 +1,9 @@
-import AccountLayout from "@modules/account/templates/account-layout"
+import AccountLayout from "@modules/account/templates/account-layout";
 
 export default function AccountPageLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  return <AccountLayout>{children}</AccountLayout>
+  return <AccountLayout>{children}</AccountLayout>;
 }

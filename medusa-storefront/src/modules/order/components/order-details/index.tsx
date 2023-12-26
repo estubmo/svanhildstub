@@ -1,19 +1,19 @@
-import { Order } from "@medusajs/medusa"
-import { Heading, Text } from "@medusajs/ui"
+import { Order } from "@medusajs/medusa";
+import { Text } from "@medusajs/ui";
 
 type OrderDetailsProps = {
-  order: Order
-  showStatus?: boolean
-}
+  order: Order;
+  showStatus?: boolean;
+};
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const items = order.items.reduce((acc, i) => acc + i.quantity, 0)
+  const _items = order.items.reduce((acc, i) => acc + i.quantity, 0);
 
   const formatStatus = (str: string) => {
-    const formatted = str.split("_").join(" ")
+    const formatted = str.split("_").join(" ");
 
-    return formatted.slice(0, 1).toUpperCase() + formatted.slice(1)
-  }
+    return formatted.slice(0, 1).toUpperCase() + formatted.slice(1);
+  };
 
   return (
     <div>
@@ -50,7 +50,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default OrderDetails
+export default OrderDetails;

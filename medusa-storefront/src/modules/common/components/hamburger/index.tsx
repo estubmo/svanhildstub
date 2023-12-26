@@ -1,9 +1,9 @@
-import clsx from "clsx"
-import React from "react"
+import clsx from "clsx";
+import React from "react";
 
 type HamburgerProps = {
-  setOpen: () => void
-}
+  setOpen: () => void;
+};
 
 const Hamburger: React.FC<HamburgerProps> = ({ setOpen }) => {
   return (
@@ -30,7 +30,7 @@ const Hamburger: React.FC<HamburgerProps> = ({ setOpen }) => {
         ></span>
       </div>
     </button>
-  )
-}
+  );
+};
 
-export default Hamburger
+export default Hamburger;

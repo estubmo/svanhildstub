@@ -1,24 +1,24 @@
-import { Popover, Transition } from "@headlessui/react"
+import { Popover, Transition } from "@headlessui/react";
 import {
-    useFeaturedProductsQuery,
-    useNavigationCollections,
-} from "@lib/hooks/use-layout-data"
-import repeat from "@lib/util/repeat"
-import ProductPreview from "@modules/products/components/product-preview"
-import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview"
-import clsx from "clsx"
-import { chunk } from "lodash"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import React, { useState } from "react"
+  useFeaturedProductsQuery,
+  useNavigationCollections,
+} from "@lib/hooks/use-layout-data";
+import repeat from "@lib/util/repeat";
+import ProductPreview from "@modules/products/components/product-preview";
+import SkeletonProductPreview from "@modules/skeletons/components/skeleton-product-preview";
+import clsx from "clsx";
+import { chunk } from "lodash";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 const DropdownMenu = () => {
-  const [open, setOpen] = useState(false)
-  const { push } = useRouter()
+  const [open, setOpen] = useState(false);
+  const { push } = useRouter();
   const { data: collections, isLoading: loadingCollections } =
-    useNavigationCollections()
+    useNavigationCollections();
   const { data: products, isLoading: loadingProducts } =
-    useFeaturedProductsQuery()
+    useFeaturedProductsQuery();
 
   return (
     <div
@@ -81,10 +81,10 @@ const DropdownMenu = () => {
                                         {collection.title}
                                       </Link>
                                     </div>
-                                  )
+                                  );
                                 })}
                               </ul>
-                            )
+                            );
                           })}
                         {loadingCollections &&
                           repeat(6).map((index) => (
@@ -97,9 +97,11 @@ const DropdownMenu = () => {
                     </div>
                     <div className="flex-1">
                       <div className="grid grid-cols-3 gap-4">
-                        {products?.slice(0, 3).map((product) => (
-                          <ProductPreview {...product} key={product.id} />
-                        ))}
+                        {products
+                          ?.slice(0, 3)
+                          .map((product) => (
+                            <ProductPreview {...product} key={product.id} />
+                          ))}
                         {loadingProducts &&
                           repeat(3).map((index) => (
                             <SkeletonProductPreview key={index} />
@@ -114,7 +116,7 @@ const DropdownMenu = () => {
         </Popover>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DropdownMenu
+export default DropdownMenu;

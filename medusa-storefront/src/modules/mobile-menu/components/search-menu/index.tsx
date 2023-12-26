@@ -1,16 +1,16 @@
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client"
-import { MagnifyingGlassMini } from "@medusajs/icons"
-import MobileHit from "@modules/search/components/mobile-hit"
-import MobileHits from "@modules/search/components/mobile-hits"
-import SearchBox from "@modules/search/components/search-box"
-import { InstantSearch } from "react-instantsearch"
+import { useMobileMenu } from "@lib/context/mobile-menu-context";
+import { SEARCH_INDEX_NAME, searchClient } from "@lib/search-client";
+import { MagnifyingGlassMini } from "@medusajs/icons";
+import MobileHit from "@modules/search/components/mobile-hit";
+import MobileHits from "@modules/search/components/mobile-hits";
+import SearchBox from "@modules/search/components/search-box";
+import { InstantSearch } from "react-instantsearch";
 
 const SearchMenu = () => {
   const {
     screen: [_, setScreen],
     close,
-  } = useMobileMenu()
+  } = useMobileMenu();
 
   return (
     <InstantSearch searchClient={searchClient} indexName={SEARCH_INDEX_NAME}>
@@ -19,7 +19,7 @@ const SearchMenu = () => {
           <div className="flex-1 basis-0">
             <div className="flex items-center gap-x-2">
               <MagnifyingGlassMini />
-              <SearchBox close={close} shouldFocus/>
+              <SearchBox close={close} shouldFocus />
             </div>
           </div>
           <div className="flex justify-end ml-4">
@@ -37,7 +37,7 @@ const SearchMenu = () => {
         </div>
       </div>
     </InstantSearch>
-  )
-}
+  );
+};
 
-export default SearchMenu
+export default SearchMenu;

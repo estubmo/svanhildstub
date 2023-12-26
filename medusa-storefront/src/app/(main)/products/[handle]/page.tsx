@@ -1,19 +1,19 @@
-import { getProductByHandle } from "@lib/data"
-import ProductTemplate from "@modules/products/templates"
-import { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { getProductByHandle } from "@lib/data";
+import ProductTemplate from "@modules/products/templates";
+import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 type Props = {
-  params: { handle: string }
-}
+  params: { handle: string };
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const data = await getProductByHandle(params.handle)
+  const data = await getProductByHandle(params.handle);
 
-  const product = data.products[0]
+  const product = data.products[0];
 
   if (!product) {
-    notFound()
+    notFound();
   }
 
   return {
@@ -24,13 +24,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: `${product.title}`,
       images: product.thumbnail ? [product.thumbnail] : [],
     },
-  }
+  };
 }
 
 export default async function ProductPage({ params }: Props) {
-  const { products } = await getProductByHandle(params.handle).catch((err) => {
-    notFound()
-  })
+  const { products } = await getProductByHandle(params.handle).catch(() => {
+    notFound();
+  });
 
-  return <ProductTemplate product={products[0]} />
+  return <ProductTemplate product={products[0]} />;
 }

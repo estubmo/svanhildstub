@@ -1,8 +1,14 @@
 module.exports = {
-  extends: ["next", "prettier"],
-  plugins: ["unicorn"],
+  extends: [
+    "next",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+  ],
+  parser: "@typescript-eslint/parser",
+  plugins: ["unicorn", "@typescript-eslint"],
   rules: {
-    "no-unused-vars": [
+    "@typescript-eslint/no-unused-vars": [
       "warn",
       {
         args: "after-used",
@@ -22,5 +28,7 @@ module.exports = {
         case: "kebabCase",
       },
     ],
+    "@typescript-eslint/array-type": "error",
   },
-}
+  root: true,
+};

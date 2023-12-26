@@ -1,13 +1,13 @@
-import { useMobileMenu } from "@lib/context/mobile-menu-context"
-import Container from "@modules/mobile-menu/components/container"
-import MainMenu from "@modules/mobile-menu/components/main-menu"
-import CountryMenu from "../components/country-menu"
-import SearchMenu from "../components/search-menu"
+import { useMobileMenu } from "@lib/context/mobile-menu-context";
+import Container from "@modules/mobile-menu/components/container";
+import MainMenu from "@modules/mobile-menu/components/main-menu";
+import CountryMenu from "../components/country-menu";
+import SearchMenu from "../components/search-menu";
 
 const MobileMenu = () => {
   const {
     screen: [currentScreen],
-  } = useMobileMenu()
+  } = useMobileMenu();
 
   return (
     <Container>
@@ -15,16 +15,16 @@ const MobileMenu = () => {
         {(() => {
           switch (currentScreen) {
             case "country":
-              return <CountryMenu />
+              return <CountryMenu />;
             case "search":
-              return <SearchMenu />
+              return <SearchMenu />;
             default:
-              return <MainMenu />
+              return <MainMenu />;
           }
         })()}
       </div>
     </Container>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;

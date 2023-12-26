@@ -1,25 +1,25 @@
-import { RadioGroup } from "@headlessui/react"
-import { ErrorMessage } from "@hookform/error-message"
-import { useCheckout } from "@lib/context/checkout-context"
-import { CheckCircleSolid } from "@medusajs/icons"
-import { Cart } from "@medusajs/medusa"
-import { Button, Heading, Text, clx } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
-import Radio from "@modules/common/components/radio"
-import Spinner from "@modules/common/icons/spinner"
-import { formatAmount, useCart, useCartShippingOptions } from "medusa-react"
-import { useEffect, useMemo, useState } from "react"
-import { useForm } from "react-hook-form"
+import { RadioGroup } from "@headlessui/react";
+import { ErrorMessage } from "@hookform/error-message";
+import { useCheckout } from "@lib/context/checkout-context";
+import { CheckCircleSolid } from "@medusajs/icons";
+import { Cart } from "@medusajs/medusa";
+import { Button, Heading, Text, clx } from "@medusajs/ui";
+import Divider from "@modules/common/components/divider";
+import Radio from "@modules/common/components/radio";
+import Spinner from "@modules/common/icons/spinner";
+import { formatAmount, useCart, useCartShippingOptions } from "medusa-react";
+import { useEffect, useMemo, useState } from "react";
+import { useForm } from "react-hook-form";
 
 type ShippingOption = {
-  value?: string
-  label?: string
-  price: string
-}
+  value?: string;
+  label?: string;
+  price: string;
+};
 
 type ShippingProps = {
-  cart: Omit<Cart, "refundable_amount" | "refunded_total">
-}
+  cart: Omit<Cart, "refundable_amount" | "refunded_total">;
+};
 
 const Shipping: React.FC<ShippingProps> = ({ cart }) => {
   const {
@@ -32,44 +32,44 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
     },
     addressReady,
     shippingReady,
-  } = useCheckout()
+  } = useCheckout();
 
   const currentShippingOption =
-    cart.shipping_methods?.[0]?.shipping_option.id || ""
+    cart.shipping_methods?.[0]?.shipping_option.id || "";
 
   const [shippingOptionId, setShippingOptionId] = useState(
     currentShippingOption
-  )
+  );
 
-  const { addShippingMethod, setCart } = useCart()
+  const { addShippingMethod, setCart } = useCart();
 
   const {
     setError,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
   // Fetch shipping options
   const { shipping_options, refetch } = useCartShippingOptions(cart.id, {
     enabled: !!cart.id,
-  })
+  });
 
   // Any time the cart changes we need to ensure that we are displaying valid shipping options
   useEffect(() => {
     const refetchShipping = async () => {
-      await refetch()
-    }
+      await refetch();
+    };
 
-    refetchShipping()
-  }, [cart, refetch])
+    refetchShipping();
+  }, [cart, refetch]);
 
   const submitShippingOption = (soId: string) => {
     addShippingMethod.mutate(
       { option_id: soId },
       {
         onSuccess: ({ cart }) => {
-          setCart(cart)
-          close()
-          openPayment()
+          setCart(cart);
+          close();
+          openPayment();
         },
         onError: () =>
           setError(
@@ -82,20 +82,20 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
             { shouldFocus: true }
           ),
       }
-    )
-  }
+    );
+  };
 
   const handleChange = (value: string) => {
-    setShippingOptionId(value)
-  }
+    setShippingOptionId(value);
+  };
 
   const handleEdit = () => {
-    open()
-    closeAddresses()
-    closePayment()
-  }
+    open();
+    closeAddresses();
+    closePayment();
+  };
 
-  const editingOtherSteps = isAddressesOpen || isPaymentOpen
+  const editingOtherSteps = isAddressesOpen || isPaymentOpen;
 
   // Memoized shipping method options
   const shippingMethods: ShippingOption[] = useMemo(() => {
@@ -107,11 +107,11 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
           amount: option.amount || 0,
           region: cart.region,
         }),
-      }))
+      }));
     }
 
-    return []
-  }, [shipping_options, cart])
+    return [];
+  }, [shipping_options, cart]);
 
   return (
     <div className="bg-ui-bg-base p-4 small:px-8">
@@ -170,7 +170,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                         {option.price}
                       </span>
                     </RadioGroup.Option>
-                  )
+                  );
                 })
               ) : (
                 <div className="flex flex-col items-center justify-center px-4 py-8 text-ui-fg-base">
@@ -186,7 +186,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
                   <div className="pt-2 text-rose-500 text-small-regular">
                     <span>{message}</span>
                   </div>
-                )
+                );
               }}
             />
           </div>
@@ -224,7 +224,7 @@ const Shipping: React.FC<ShippingProps> = ({ cart }) => {
       )}
       <Divider className="mt-8" />
     </div>
-  )
-}
+  );
+};
 
-export default Shipping
+export default Shipping;
