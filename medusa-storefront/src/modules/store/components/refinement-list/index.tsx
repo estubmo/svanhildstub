@@ -1,6 +1,6 @@
 import { StoreGetProductsParams } from "@medusajs/medusa"
-import SortProducts, { SortOptions } from "./sort-products"
 import CollectionFilter from "./collection-filter"
+import SortProducts, { SortOptions } from "./sort-products"
 
 type RefinementListProps = {
   refinementList: StoreGetProductsParams

@@ -1,17 +1,18 @@
 import { XMarkMini } from "@medusajs/icons"
-import { FormEvent } from "react"
+import { FormEvent, useEffect } from "react"
 import SearchBoxWrapper, {
-  ControlledSearchBoxProps,
+    ControlledSearchBoxProps,
 } from "../search-box-wrapper"
 
 const ControlledSearchBox = ({
   inputRef,
-  isSearchStalled,
   onChange,
   onReset,
   onSubmit,
   placeholder,
   value,
+  onFocus,
+  onBlur,
   close,
   ...props
 }: ControlledSearchBoxProps) => {
@@ -21,7 +22,7 @@ const ControlledSearchBox = ({
 
     if (onSubmit) {
       onSubmit(event)
-      close()
+      close && close()
     }
 
     if (inputRef.current) {
@@ -36,12 +37,33 @@ const ControlledSearchBox = ({
     onReset(event)
 
     if (inputRef.current) {
-      inputRef.current.focus()
+      inputRef.current.blur()
     }
   }
 
+  useEffect(() => {
+    const keyDownHandler = (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === "k") {
+        event.stopPropagation()
+        event.preventDefault()
+
+        if (document.activeElement === inputRef.current) {
+          inputRef.current?.blur()
+        } else {
+          inputRef.current?.focus()
+        }
+      }
+    }
+
+    window.addEventListener("keydown", keyDownHandler)
+
+    return () => {
+      window.removeEventListener("keydown", keyDownHandler)
+    }
+  }, [inputRef])
+
   return (
-    <div {...props} className="w-full">
+    <div {...props} className="w-full z-20">
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
         <div className="flex items-center justify-between">
           <input
@@ -50,11 +72,22 @@ const ControlledSearchBox = ({
             autoCorrect="off"
             autoCapitalize="off"
             placeholder={placeholder}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.preventDefault()
+                e.stopPropagation()
+                if (inputRef.current) {
+                  inputRef.current.blur()
+                }
+              }
+            }}
             spellCheck={false}
             type="search"
             value={value}
             onChange={onChange}
-            className="txt-compact-large h-6 placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none flex-1 bg-transparent "
+            className="h-6 placeholder:text-ui-fg-on-color text-base-regular placeholder:text-base-regular placeholder:transition-colors focus:outline-none flex-1 bg-transparent"
           />
           {value && (
             <button
@@ -63,7 +96,6 @@ const ControlledSearchBox = ({
               className="items-center justify-center text-ui-fg-on-color focus:outline-none gap-x-2 px-2 txt-compact-large hidden sm:flex"
             >
               <XMarkMini />
-              Cancel
             </button>
           )}
         </div>
@@ -72,16 +104,29 @@ const ControlledSearchBox = ({
   )
 }
 
-const SearchBox = ({ close }: { close: () => void }) => {
+type SearchBoxProps = {
+  onFocus?: () => void
+  onBlur?: () => void
+  close?: () => void
+  shouldFocus?: boolean
+}
+
+const SearchBox = ({
+  close,
+  onFocus,
+  onBlur,
+  shouldFocus = false,
+}: SearchBoxProps) => {
   return (
-    <SearchBoxWrapper>
-      {(props) => {
-        return (
-          <>
-            <ControlledSearchBox close={close} {...props} />
-          </>
-        )
-      }}
+    <SearchBoxWrapper shouldFocus={shouldFocus}>
+      {(props) => (
+        <ControlledSearchBox
+          close={close}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          {...props}
+        />
+      )}
     </SearchBoxWrapper>
   )
 }

@@ -21,7 +21,7 @@ const CartDropdown = () => {
   const toggleState = useToggleState()
 
   return (
-    <div className="z-50">
+    <div>
       <Popover
         className="relative h-full"
         onMouseEnter={open}
@@ -175,21 +175,20 @@ const CartDropdown = () => {
               </div>
             )}
             <div className="px-4 py-2">
-
-            <div
-              className="flex justify-between items-center"
-              onMouseEnter={toggleState.open}
-              onMouseLeave={toggleState.close}
+              <div
+                className="flex justify-between items-center"
+                onMouseEnter={toggleState.open}
+                onMouseLeave={toggleState.close}
               >
-              <CountrySelect toggleState={toggleState} />
-              <ArrowRightMini
-                className={clx(
-                  "transition-transform duration-150",
-                  toggleState.state ? "-rotate-90" : ""
+                <CountrySelect toggleState={toggleState} />
+                <ArrowRightMini
+                  className={clx(
+                    "transition-transform duration-150",
+                    toggleState.state ? "-rotate-90" : ""
                   )}
-                  />
+                />
+              </div>
             </div>
-                  </div>
           </Popover.Panel>
         </Transition>
       </Popover>

@@ -4,7 +4,7 @@ import useCountryOptions from "@lib/hooks/use-country-options"
 import { MagnifyingGlassMini, XMark as X } from "@medusajs/icons"
 import { Heading } from "@medusajs/ui"
 import ChevronDown from "@modules/common/icons/chevron-down"
-import { useAdminStore, useCollections, useMeCustomer } from "medusa-react"
+import { useCollections, useMeCustomer } from "medusa-react"
 import Link from "next/link"
 import ReactCountryFlag from "react-country-flag"
 
@@ -12,8 +12,6 @@ const MainMenu = () => {
   const { collections } = useCollections()
   const { customer } = useMeCustomer()
   const { countryCode } = useStore()
-  const { store } = useAdminStore()
-  console.log("🚀 ~ file: index.tsx:16 ~ MainMenu ~ collections:", collections)
 
   const countries = useCountryOptions()
 

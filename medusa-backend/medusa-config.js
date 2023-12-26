@@ -55,11 +55,11 @@ const plugins = [
   {
     resolve: `medusa-file-spaces`,
     options: {
-        spaces_url: process.env.SPACE_URL,
-        bucket: process.env.SPACE_BUCKET,
-        endpoint: process.env.SPACE_ENDPOINT,
-        access_key_id: process.env.SPACE_ACCESS_KEY_ID,
-        secret_access_key: process.env.SPACE_SECRET_ACCESS_KEY,
+      spaces_url: process.env.SPACE_URL,
+      bucket: process.env.SPACE_BUCKET,
+      endpoint: process.env.SPACE_ENDPOINT,
+      access_key_id: process.env.SPACE_ACCESS_KEY_ID,
+      secret_access_key: process.env.SPACE_SECRET_ACCESS_KEY,
     },
   },
   {
@@ -72,12 +72,9 @@ const plugins = [
       settings: {
         products: {
           indexSettings: {
-            searchableAttributes: [
-              "title",
-              "description",
-              "variant_sku",
-            ],
+            searchableAttributes: ["title", "description", "variant_sku"],
             displayedAttributes: [
+              "id",
               "title",
               "description",
               "variant_sku",
@@ -118,7 +115,7 @@ const projectConfig = {
   store_cors: STORE_CORS,
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
-  product_categories: process.env.MEDUSA_FF_PRODUCT_CATEGORIES
+  product_categories: process.env.MEDUSA_FF_PRODUCT_CATEGORIES,
   // Uncomment the following lines to enable REDIS
   // redis_url: REDIS_URL
 };

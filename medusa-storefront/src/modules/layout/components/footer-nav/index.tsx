@@ -139,9 +139,9 @@ const FooterNav = () => {
             </div>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
+        <div className="grid grid-cols-2 w-full mb-16 justify-between text-ui-fg-muted gap-2">
           <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
+            © {new Date().getFullYear()} Mo Web Dev. All rights reserved.
           </Text>
           <MedusaCTA />
         </div>

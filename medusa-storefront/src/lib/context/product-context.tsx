@@ -2,18 +2,18 @@
 
 import { canBuy } from "@lib/util/can-buy"
 import { findCheapestPrice } from "@lib/util/prices"
+import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import isEqual from "lodash/isEqual"
 import { formatVariantPrice, useCart } from "medusa-react"
 import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
+    createContext,
+    useContext,
+    useEffect,
+    useMemo,
+    useState,
 } from "react"
 import { Variant } from "types/medusa"
 import { useStore } from "./store-context"
-import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 
 interface ProductContext {
   formattedPrice: string

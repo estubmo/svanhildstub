@@ -1,23 +1,17 @@
 import clsx from "clsx"
 import React from "react"
-import {
-    useHits,
-    UseHitsProps,
-    useSearchBox,
-} from "react-instantsearch"
+import { useHits, UseHitsProps, useSearchBox } from "react-instantsearch"
 import { ProductHit } from "../hit"
 import ShowAll from "../show-all"
 
 type HitsProps<THit> = React.ComponentProps<"div"> &
   UseHitsProps & {
     hitComponent: (props: { hit: THit }) => JSX.Element
-    close: () => void
   }
 
 const DesktopHits = ({
   hitComponent: Hit,
   className,
-  close,
   ...props
 }: HitsProps<ProductHit>) => {
   const { query } = useSearchBox()
@@ -26,7 +20,7 @@ const DesktopHits = ({
   return (
     <div
       className={clsx(
-        "transition-[height,max-height,opacity] duration-300 ease-in-out overflow-y-scroll w-[50vw] mb-1 p-px",
+        "transition-[height,max-height,opacity] duration-300 ease-in-out w-[50vw] mb-1 p-px",
         className,
         {
           "max-h-full opacity-100": !!query,
