@@ -57,7 +57,7 @@ const Nav = () => {
             </div>
           </div>
 
-          <div className="flex h-full flex-grow items-center justify-center small:flex-grow-0">
+          <div className="flex h-full flex-grow items-center justify-center small:hidden">
             <Link href="/">
               <Image
                 className="invert filter"
