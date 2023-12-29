@@ -8,10 +8,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-mode="light">
+    <html lang="en" data-mode="dark" style={{ scrollbarGutter: 'stable' }}>
       <body>
         <Providers>
-          <main className="relative">{children}</main>
+          <main className="relative bg-gray-900">{children}</main>
         </Providers>
       </body>
     </html>

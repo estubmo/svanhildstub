@@ -2,7 +2,7 @@ import { Transition } from '@headlessui/react';
 import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
 import { MagnifyingGlassMini } from '@medusajs/icons';
 import { clx } from '@medusajs/ui';
-import { Fragment, useCallback, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import { InstantSearch } from 'react-instantsearch';
 
 import DesktopHit from '../desktop-hit';
@@ -11,6 +11,10 @@ import SearchBox from '../search-box';
 
 const NavbarSearchContainer = () => {
   const [isOpen, setOpen] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+  }, [isOpen]);
 
   const handleBlur = useCallback(() => {
     setTimeout(() => {
@@ -33,7 +37,7 @@ const NavbarSearchContainer = () => {
         <div className="animate-blur fixed inset-0 z-10 bg-black/20 backdrop-blur-sm" />
       </Transition>
       <div className="flex h-fit flex-col">
-        <div className="z-50 flex h-[42px] w-[25vw] items-center gap-x-2 rounded-rounded border bg-ui-bg-subtle px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed ">
+        <div className="z-20 flex h-[42px] w-[25vw] items-center gap-x-2 rounded-rounded border bg-ui-bg-subtle px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed hover:bg-ui-bg-field-hover ">
           <MagnifyingGlassMini className="text-ui-fg-muted" />
           <InstantSearch
             indexName={SEARCH_INDEX_NAME}
