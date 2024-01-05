@@ -55,7 +55,7 @@ const Nav = () => {
           animate={hidden ? 'hidden' : 'visible'}
           transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.4 }}
         >
-          <div className="flex left-0 pl-8 h-full basis-0 items-center small:flex-none">
+          <div className="absolute left-0 flex h-full basis-0 items-center pl-8 small:flex-none">
             <div className="block small:hidden">
               <Hamburger setOpen={toggle} />
             </div>
