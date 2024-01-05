@@ -81,7 +81,7 @@ const MainMenu = () => {
                     key={collection.id}
                     className="rounded-rounded bg-ui-bg-field p-4"
                   >
-                    <Link href={`/collections/${collection.handle}`}>
+                    <Link href={`/store/collections/${collection.handle}`}>
                       <button
                         className="flex w-full items-center justify-between text-ui-fg-base"
                         onClick={close}

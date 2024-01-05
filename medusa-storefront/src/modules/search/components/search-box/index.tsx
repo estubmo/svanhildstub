@@ -2,7 +2,7 @@ import { XMarkMini } from '@medusajs/icons';
 import { FormEvent, useEffect } from 'react';
 
 import SearchBoxWrapper, {
-  ControlledSearchBoxProps,
+    ControlledSearchBoxProps,
 } from '../search-box-wrapper';
 
 const ControlledSearchBox = ({
@@ -66,7 +66,7 @@ const ControlledSearchBox = ({
   return (
     <div {...props} className="z-20 w-full">
       <form action="" noValidate onSubmit={handleSubmit} onReset={handleReset}>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           <input
             ref={inputRef}
             autoComplete="off"
@@ -88,13 +88,13 @@ const ControlledSearchBox = ({
             type="search"
             value={value}
             onChange={onChange}
-            className="text-base-regular placeholder:text-base-regular h-6 flex-1 bg-transparent placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none"
+            className="text-base-regular placeholder:text-base-regular h-6 flex-shrink bg-transparent placeholder:text-ui-fg-on-color placeholder:transition-colors focus:outline-none"
           />
           {value && (
             <button
               onClick={handleReset}
               type="button"
-              className="txt-compact-large hidden items-center justify-center gap-x-2 px-2 text-ui-fg-on-color focus:outline-none sm:flex"
+              className="absolute right-0 txt-compact-large hidden items-center justify-center gap-x-2 text-ui-fg-on-color flex-shrink-0 focus:outline-none sm:flex"
             >
               <XMarkMini />
             </button>

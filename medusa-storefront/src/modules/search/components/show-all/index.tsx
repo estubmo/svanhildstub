@@ -2,7 +2,7 @@ import { Container, Text } from '@medusajs/ui';
 import InteractiveLink from '@modules/common/components/interactive-link';
 import { useHits, useSearchBox } from 'react-instantsearch';
 
-const ShowAll = ({ close }: { close: () => void }) => {
+const ShowAll = ({ close }: { close?: () => void }) => {
   const { hits } = useHits();
   const { query } = useSearchBox();
 
@@ -20,7 +20,7 @@ const ShowAll = ({ close }: { close: () => void }) => {
   return (
     <Container className="flex h-fit flex-col items-center justify-center gap-2 py-4 small:flex-row small:py-2">
       <Text>Showing the first 6 results.</Text>
-      <InteractiveLink href={`/search/${query}`} onClick={close}>
+      <InteractiveLink href={`/store/search/${query}`} onClick={close}>
         View all
       </InteractiveLink>
     </Container>

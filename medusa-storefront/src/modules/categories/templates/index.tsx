@@ -1,8 +1,8 @@
 'use client';
 
 import {
-  getProductsByCategoryHandle,
-  ProductCategoryWithChildren,
+    getProductsByCategoryHandle,
+    ProductCategoryWithChildren,
 } from '@lib/data';
 import usePreviews from '@lib/hooks/use-previews';
 import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons';
@@ -95,7 +95,7 @@ const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
           <ul className="grid grid-cols-1 gap-2">
             {category.category_children?.map((c) => (
               <li key={c.id}>
-                <UnderlineLink href={`/${c.handle}`}>{c.name}</UnderlineLink>
+                <UnderlineLink href={`/store/${c.handle}`}>{c.name}</UnderlineLink>
               </li>
             ))}
           </ul>

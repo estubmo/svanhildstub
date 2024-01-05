@@ -8,7 +8,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-mode="dark" style={{ scrollbarGutter: 'stable' }}>
+    <html
+      lang="en"
+      data-mode="dark"
+      style={{ scrollbarGutter: 'stable' }}
+      suppressHydrationWarning
+    >
       <body>
         <Providers>
           <main className="relative bg-gray-900">{children}</main>

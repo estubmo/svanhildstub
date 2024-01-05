@@ -16,7 +16,7 @@ const CheckoutTemplate = () => {
         <div className="h-16 bg-ui-bg-base">
           <nav className="content-container flex h-full items-center justify-between border-b">
             <Link
-              href="/cart"
+              href="/store/cart"
               className="text-small-semi flex flex-1 basis-0 items-center gap-x-2 uppercase text-ui-fg-subtle"
             >
               <>

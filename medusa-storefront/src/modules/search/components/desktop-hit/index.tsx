@@ -7,7 +7,7 @@ const DesktopHit = ({ hit }: HitProps) => {
   const { setValue } = useQuery();
 
   const go = () => {
-    push(`/products/${hit.handle}`);
+    push(`/store/products/${hit.handle}`);
     setValue('');
   };
 

@@ -1,3 +1,4 @@
+import tailwindTypography from '@tailwindcss/typography';
 import tailwindcssRadix from 'tailwindcss-radix';
 
 
@@ -160,7 +161,7 @@ const config = {
       },
     },
   },
-  plugins: [tailwindcssRadix()],
+  plugins: [tailwindcssRadix(), tailwindTypography()],
 };
 
 export default config;

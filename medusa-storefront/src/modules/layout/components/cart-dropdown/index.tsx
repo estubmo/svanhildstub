@@ -30,10 +30,10 @@ const CartDropdown = () => {
       >
         <div className="overflow-visible">
           <Link
-            href="/cart"
+            href="/store/cart"
             className={clx(
-              'flex items-center justify-center text-xl hover:text-ui-fg-base',
-              state ? 'text-ui-fg-base' : 'text-ui-fg-subtle',
+              'flex items-center justify-center text-xl hover:text-white',
+              state ? 'text-white' : 'text-gray-200 ',
             )}
           >
             <svg
@@ -43,9 +43,9 @@ const CartDropdown = () => {
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
             >
               <circle cx="8" cy="21" r="1" />
               <circle cx="19" cy="21" r="1" />
@@ -92,7 +92,7 @@ const CartDropdown = () => {
                           key={item.id}
                         >
                           <Link
-                            href={`/products/${item.variant.product.handle}`}
+                            href={`/store/products/${item.variant.product.handle}`}
                             className="w-24"
                           >
                             <Thumbnail
@@ -106,7 +106,7 @@ const CartDropdown = () => {
                                 <div>
                                   <h3 className="text-base-regular mr-4 w-[130px] overflow-hidden overflow-ellipsis whitespace-nowrap">
                                     <Link
-                                      href={`/products/${item.variant.product.handle}`}
+                                      href={`/store/products/${item.variant.product.handle}`}
                                     >
                                       {item.title}
                                     </Link>
@@ -153,7 +153,7 @@ const CartDropdown = () => {
                         })}
                       </span>
                     </div>
-                    <Link href="/cart" passHref>
+                    <Link href="/store/cart" passHref>
                       <Button className="w-full" size="large">
                         Go to cart
                       </Button>

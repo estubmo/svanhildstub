@@ -1,6 +1,6 @@
 import { useStore } from '@lib/context/store-context';
 import { LineItem, Region } from '@medusajs/medusa';
-import { clx, Table, Text } from '@medusajs/ui';
+import { Table, Text, clx } from '@medusajs/ui';
 import CartItemSelect from '@modules/cart/components/cart-item-select';
 import LineItemOptions from '@modules/common/components/line-item-options';
 import LineItemPrice from '@modules/common/components/line-item-price';
@@ -20,10 +20,10 @@ const Item = ({ item, region, type = 'full' }: ItemProps) => {
   const { handle } = item.variant.product;
 
   return (
-    <Table.Row className="w-full">
+    <Table.Row className="w-full hover:bg-transparent">
       <Table.Cell className="w-24 p-4 !pl-0">
         <Link
-          href={`/products/${handle}`}
+          href={`/store/products/${handle}`}
           className={clx('flex', {
             'w-16': type === 'preview',
             'w-12 small:w-24': type === 'full',
@@ -42,7 +42,7 @@ const Item = ({ item, region, type = 'full' }: ItemProps) => {
         <Table.Cell>
           <div className="flex gap-2">
             <button
-              className="gap-x- flex items-center"
+              className="flex items-center"
               onClick={() => deleteItem(item.id)}
             >
               <Trash size={18} />
@@ -70,7 +70,7 @@ const Item = ({ item, region, type = 'full' }: ItemProps) => {
                 .map((i) => {
                   const value = i + 1;
                   return (
-                    <option value={value} key={i}>
+                    <option value={value} key={i} className="bg-ui-bg-field-hover cursor-pointer">
                       {value}
                     </option>
                   );

@@ -22,7 +22,7 @@ export const PageWrapper = ({
       variants={pageWrapperVariants}
       className={clx(
         className,
-        'mx-4 flex min-h-screen font-light tracking-widest md:mx-8 lg:mx-16',
+        'mx-4 flex min-h-screen font-light  md:mx-8 lg:mx-16',
       )}
     >
       {children}

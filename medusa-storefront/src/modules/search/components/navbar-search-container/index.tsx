@@ -3,7 +3,7 @@ import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
 import { MagnifyingGlassMini } from '@medusajs/icons';
 import { clx } from '@medusajs/ui';
 import { Fragment, useCallback, useEffect, useState } from 'react';
-import { InstantSearch } from 'react-instantsearch';
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
 
 import DesktopHit from '../desktop-hit';
 import DesktopHits from '../desktop-hits';
@@ -37,22 +37,25 @@ const NavbarSearchContainer = () => {
         <div className="animate-blur fixed inset-0 z-10 bg-black/20 backdrop-blur-sm" />
       </Transition>
       <div className="flex h-fit flex-col">
-        <div className="z-20 flex h-[42px] w-[25vw] items-center gap-x-2 rounded-rounded border bg-ui-bg-subtle px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed hover:bg-ui-bg-field-hover ">
-          <MagnifyingGlassMini className="text-ui-fg-muted" />
-          <InstantSearch
+        <div className="z-20 flex h-[42px] w-[20vw] items-center gap-x-2 rounded-rounded border bg-gray-950/60 px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed hover:bg-ui-bg-field-hover ">
+          <MagnifyingGlassMini className="text-ui-fg-muted flex-shrink-0" />
+          <InstantSearchNext
             indexName={SEARCH_INDEX_NAME}
             searchClient={searchClient}
+            future={{
+              preserveSharedStateOnUnmount: true,
+            }}
           >
             <SearchBox onFocus={() => setOpen(true)} onBlur={handleBlur} />
             <div
               className={clx(
-                'absolute left-0  right-0 top-16 mt-2 min-h-full w-full justify-center',
+                'fixed left-0 right-0 top-16 mt-2 min-h-full w-full justify-center',
                 isOpen ? 'flex' : 'hidden',
               )}
             >
               <DesktopHits hitComponent={DesktopHit} />
             </div>
-          </InstantSearch>
+          </InstantSearchNext>
         </div>
       </div>
     </>

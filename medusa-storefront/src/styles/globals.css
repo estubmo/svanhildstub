@@ -32,9 +32,11 @@
     .dark {
         --bg-base: hsla(221, 39%, 7%, 1);
         --bg-subtle: hsla(220, 71%, 4%, 1);
+        --bg-subtle-80: hsla(220, 71%, 4%, 0.8);
         --bg-subtle-pressed: hsla(225, 36%, 8%, 1);
         --bg-field: hsla(224, 71%, 4%, 1);
         --bg-field-hover: hsla(225, 36%, 8%, 1);
+        --bg-base-hover: hsla(225, 36%, 8%, 1);
         --border-base: hsla(215, 28%, 17%, 1);
         --fg-disabled: hsl(223, 3%, 59%);
         --bg-disabled: hsla(230, 20%, 16%, 1);
@@ -45,25 +47,21 @@
         --button-neutral-pressed: hsla(224, 31%, 35%, 1);
     }
 
-    * {
-        scrollbar-width: thin;
-        scrollbar-color: var(--button-neutral-pressed) rgb(17 24 39);
-    }
 
     /* Chrome, Edge, and Safari */
     *::-webkit-scrollbar {
-        width: 15px;
+        width: 13px;
     }
 
     *::-webkit-scrollbar-track {
-        background: rgb(17 24 39);
-        border-radius: 5px;
+        background-color: transparent;
     }
 
     *::-webkit-scrollbar-thumb {
-        background-color: var(--button-neutral-pressed);
-        border-radius: 14px;
-        border: 3px solid rgb(17 24 39);
+        background-color: rgb(41, 45, 51);
+        border: 2px solid transparent;
+        border-radius: 4px;
+        background-clip: content-box;
     }
 
     input:-webkit-autofill,

@@ -2,7 +2,7 @@ import { useQuery } from '@lib/context/query-context';
 import { useDebounce } from '@lib/hooks/use-debounce';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from 'react';
-import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch';
+import { UseSearchBoxProps, useSearchBox } from 'react-instantsearch';
 
 export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
   inputRef: RefObject<HTMLInputElement>;
@@ -56,7 +56,7 @@ const SearchBoxWrapper = ({
 
   const onSubmit = () => {
     if (value) {
-      router.replace(`/search/${value}`);
+      router.replace(`/store/search/${value}`);
     }
   };
 

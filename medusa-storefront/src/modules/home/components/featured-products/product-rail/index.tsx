@@ -14,7 +14,7 @@ const ProductRail = ({ collection }: { collection: ProductCollection }) => {
       <div className="content-container py-12">
         <div className="mb-8 flex justify-between">
           <Text className="txt-xlarge">{collection.title}</Text>
-          <InteractiveLink href={`/collections/${collection.handle}`}>
+          <InteractiveLink href={`/store/collections/${collection.handle}`}>
             View all
           </InteractiveLink>
         </div>

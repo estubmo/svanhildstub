@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: '404',
+  title: '404 - Svanhild Stub',
   description: 'Something went wrong',
 };
 

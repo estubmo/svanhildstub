@@ -20,7 +20,7 @@ export const CartDropdownProvider = ({
   children: React.ReactNode;
 }) => {
   const { state, close, open } = useToggleState();
-  const [activeTimer, setActiveTimer] = useState<NodeJS.Timer | undefined>(
+  const [activeTimer, setActiveTimer] = useState<NodeJS.Timeout | undefined>(
     undefined,
   );
 

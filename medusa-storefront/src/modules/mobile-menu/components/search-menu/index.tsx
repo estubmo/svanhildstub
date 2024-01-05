@@ -4,7 +4,8 @@ import { MagnifyingGlassMini } from '@medusajs/icons';
 import MobileHit from '@modules/search/components/mobile-hit';
 import MobileHits from '@modules/search/components/mobile-hits';
 import SearchBox from '@modules/search/components/search-box';
-import { InstantSearch } from 'react-instantsearch';
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
+
 
 const SearchMenu = () => {
   const {
@@ -13,7 +14,13 @@ const SearchMenu = () => {
   } = useMobileMenu();
 
   return (
-    <InstantSearch searchClient={searchClient} indexName={SEARCH_INDEX_NAME}>
+    <InstantSearchNext
+      searchClient={searchClient}
+      indexName={SEARCH_INDEX_NAME}
+      future={{
+        preserveSharedStateOnUnmount: true,
+      }}
+    >
       <div className="flex flex-1 flex-col">
         <div className="flex w-full items-center justify-between border-b border-gray-200 px-6 py-4">
           <div className="flex-1 basis-0">
@@ -36,7 +43,7 @@ const SearchMenu = () => {
           <MobileHits hitComponent={MobileHit} />
         </div>
       </div>
-    </InstantSearch>
+    </InstantSearchNext>
   );
 };
 

@@ -12,7 +12,7 @@ const ProductPreview = ({
   price,
   isFeatured,
 }: ProductPreviewType) => (
-  <Link href={`/products/${handle}`} className="group">
+  <Link href={`/store/products/${handle}`} className="group">
     <div>
       <Thumbnail thumbnail={thumbnail} size="full" isFeatured={isFeatured} />
       <div className="txt-compact-medium mt-4 flex justify-between">

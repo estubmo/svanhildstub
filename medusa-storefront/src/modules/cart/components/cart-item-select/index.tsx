@@ -3,12 +3,12 @@ import { IconBadge } from '@medusajs/ui';
 import ChevronDown from '@modules/common/icons/chevron-down';
 import clsx from 'clsx';
 import {
-  forwardRef,
-  SelectHTMLAttributes,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-  useState,
+    forwardRef,
+    SelectHTMLAttributes,
+    useEffect,
+    useImperativeHandle,
+    useRef,
+    useState,
 } from 'react';
 import { get } from 'react-hook-form';
 
@@ -56,7 +56,7 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
           className={clsx(
-            'group txt-compact-small relative flex items-center border text-ui-fg-base',
+            'group txt-compact-small relative flex items-center border text-ui-fg-base ',
             className,
             {
               'text-ui-fg-subtle': isPlaceholder,
@@ -66,9 +66,9 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           <select
             ref={innerRef}
             {...props}
-            className="h-16 w-16 appearance-none items-center justify-center border-none bg-transparent px-4 outline-none transition-colors duration-150 focus:border-gray-700"
+            className="h-16 w-16 appearance-none items-center justify-center border-none bg-ui-bg-field cursor-pointer hover:bg-ui-bg-field-hover focus:bg-ui-bg-field-hover px-4 transition-colors duration-150 "
           >
-            <option disabled value="">
+            <option disabled value="" className="bg-ui-bg-field-hover">
               {placeholder}
             </option>
             {children}

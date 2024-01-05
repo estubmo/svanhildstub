@@ -36,7 +36,7 @@ const DesktopHits = ({
           </li>
         ))}
       </div>
-      <ShowAll close={close} />
+      <ShowAll  />
     </div>
   );
 };

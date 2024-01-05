@@ -52,7 +52,7 @@ const FooterNav = () => {
                             'hover:text-ui-fg-base',
                             children && 'txt-small-plus',
                           )}
-                          href={`/${c.handle}`}
+                          href={`/store/${c.handle}`}
                         >
                           {c.name}
                         </Link>
@@ -63,7 +63,7 @@ const FooterNav = () => {
                                 <li key={child.id}>
                                   <Link
                                     className="hover:text-ui-fg-base"
-                                    href={`/${child.handle}`}
+                                    href={`/store/${child.handle}`}
                                   >
                                     {child.name}
                                   </Link>
@@ -94,7 +94,7 @@ const FooterNav = () => {
                     <li key={c.id}>
                       <Link
                         className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
+                        href={`/store/collections/${c.handle}`}
                       >
                         {c.title}
                       </Link>
