@@ -15,7 +15,7 @@ type GalleryImageProps = {
 
 const GalleryImage = ({ image, index }: GalleryImageProps) => {
   return (
-    <div className="relative w-full min-h-[400px]">
+    <div className="relative w-full xsmall:min-h-[400px] small:min-h-[250px] medium:min-h-[400px]">
     <Image
       src={image.url}
       priority={index <= 2 ? true : false}
