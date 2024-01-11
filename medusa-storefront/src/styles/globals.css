@@ -85,6 +85,27 @@
     input[type='search']::-webkit-search-results-decoration {
         -webkit-appearance: none;
     }
+
+    .custom-zoom [data-rmiz-modal-overlay="hidden"] {
+        background-color: hsla(221, 39%, 7%, 0);
+        backdrop-filter: blur(0px);
+    }
+
+    .custom-zoom [data-rmiz-modal-overlay="visible"] {
+        background-color: hsla(221, 39%, 7%, 0.8);
+        backdrop-filter: blur(2px);
+    }
+
+    .custom-zoom [data-rmiz-btn-unzoom] {
+        background-color: hsla(224, 71%, 4%, 0.9);
+        color: rgba(237, 238, 240, 1);
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .custom-zoom [data-rmiz-btn-unzoom]:focus-visible {
+        outline-offset: 0.4rem;
+        outline: 0.2rem solid rgba(46, 48, 53, 1);
+    }
 }
 
 @layer components {

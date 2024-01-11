@@ -1,34 +1,42 @@
 import { Image as MedusaImage } from '@medusajs/medusa';
-import { Container } from '@medusajs/ui';
 import Image from 'next/image';
+import Zoom from 'react-medium-image-zoom';
+
+import 'react-medium-image-zoom/dist/styles.css';
 
 type ImageGalleryProps = {
   images: MedusaImage[];
 };
 
+type GalleryImageProps = {
+  image: MedusaImage;
+  index: number;
+};
+
+const GalleryImage = ({ image, index }: GalleryImageProps) => {
+  return (
+    <div className="relative w-full min-h-[400px]">
+    <Image
+      src={image.url}
+      priority={index <= 2 ? true : false}
+      alt={`Product image ${index + 1}`}
+      className="object-contain"
+      fill
+      sizes="100vw"
+      />
+      </div>
+  );
+};
+
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="relative flex items-start">
-      <div className="flex flex-1 flex-col gap-y-4 small:mx-16">
+      <div className="flex flex-1 flex-col gap-y-20 small:mx-16">
         {images.map((image, index) => {
           return (
-            <Container
-              key={image.id}
-              className="relative aspect-[29/34] w-full overflow-hidden bg-ui-bg-subtle"
-              id={image.id}
-            >
-              <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute inset-0 rounded-rounded"
-                alt={`Product image ${index + 1}`}
-                fill
-                sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
-                style={{
-                  objectFit: 'cover',
-                }}
-              />
-            </Container>
+              <Zoom key={image.id} classDialog="custom-zoom">
+                <GalleryImage image={image} index={index} />
+              </Zoom>
           );
         })}
       </div>

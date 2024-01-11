@@ -13,7 +13,7 @@ const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
       <div className="mx-auto flex flex-col gap-y-4 lg:max-w-[500px]">
         {product.collection && (
           <Link
-            href={`/collections/${product.collection.handle}`}
+            href={`/store/collections/${product.collection.handle}`}
             className="text-medium text-ui-fg-muted hover:text-ui-fg-subtle"
           >
             {product.collection.title}

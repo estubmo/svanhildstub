@@ -28,7 +28,7 @@ const Hit = ({ hit }: HitProps) => {
       <div className="flex flex-col justify-between">
         <div className="flex flex-col text-ui-fg-subtle group-hover/hit:text-ui-fg-on-color group-hover/hit:underline ">
           {hit.collection_id && (
-            <Link href={`/collections/${hit.collection_handle}`} className=" ">
+            <Link href={`/store/collections/${hit.collection_handle}`} className=" ">
               {hit.collection_handle}
             </Link>
           )}

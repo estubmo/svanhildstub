@@ -36,7 +36,7 @@ const LandingNav = () => {
   const { toggle } = useMobileMenu();
 
   return (
-    <div className="group fixed inset-x-0 top-0 z-50">
+    <div className="group fixed inset-x-0 top-0 z-40">
       <header className="relative mx-auto flex h-16 ">
         <div className="absolute left-0 top-0 z-40 hidden h-full flex-grow items-center justify-center pl-8 small:flex small:flex-grow-0">
           <Link href="/">

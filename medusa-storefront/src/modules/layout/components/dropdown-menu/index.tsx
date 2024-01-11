@@ -75,7 +75,7 @@ const DropdownMenu = () => {
                                       className="pb-3"
                                     >
                                       <Link
-                                        href={`/collections/${collection.handle}`}
+                                        href={`/store/collections/${collection.handle}`}
                                         onClick={() => setOpen(false)}
                                       >
                                         {collection.title}
