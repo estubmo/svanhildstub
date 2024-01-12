@@ -63,6 +63,18 @@ const MainMenu = () => {
         <div className="text-large-regular flex flex-1 flex-col text-ui-fg-base">
           <ul className="flex flex-col gap-y-2">
             <li className="rounded-rounded bg-ui-bg-field p-4">
+              <Link href="/">
+                <button
+                  className="flex w-full items-center justify-between text-ui-fg-base"
+                  onClick={close}
+                >
+                  <span className="sr-only">Go to Home</span>
+                  <span>Home</span>
+                  <ChevronDown className="-rotate-90" />
+                </button>
+              </Link>
+            </li>
+            <li className="rounded-rounded bg-ui-bg-field p-4">
               <Link href="/store">
                 <button
                   className="flex w-full items-center justify-between text-ui-fg-base"
@@ -74,7 +86,19 @@ const MainMenu = () => {
                 </button>
               </Link>
             </li>
-            {collections ? (
+            <li className="rounded-rounded bg-ui-bg-field p-4">
+              <Link href="/about">
+                <button
+                  className="flex w-full items-center justify-between text-ui-fg-base"
+                  onClick={close}
+                >
+                  <span className="sr-only">Go to About</span>
+                  <span>About</span>
+                  <ChevronDown className="-rotate-90" />
+                </button>
+              </Link>
+            </li>
+            {/* {collections ? (
               <>
                 {collections.map((collection) => (
                   <li
@@ -96,7 +120,7 @@ const MainMenu = () => {
                   </li>
                 ))}
               </>
-            ) : null}
+            ) : null} */}
           </ul>
         </div>
 
