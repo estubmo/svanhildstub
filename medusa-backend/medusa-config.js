@@ -94,19 +94,20 @@ const plugins = [
 ];
 
 const modules = {
-  /*eventBus: {
+  eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: REDIS_URL
-    }
+      redisUrl: process.env.EVENTS_REDIS_URL,
+    },
   },
-  cacheService: {
+  /*cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
       redisUrl: REDIS_URL
     }
   },*/
 };
+console.log("🚀 ~ modules:", modules)
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
