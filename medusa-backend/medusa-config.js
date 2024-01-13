@@ -37,12 +37,6 @@ const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
   {
-    resolve: `@medusajs/file-local`,
-    options: {
-      upload_dir: "uploads",
-    },
-  },
-  {
     resolve: "@medusajs/admin",
     /** @type {import('@medusajs/admin').PluginOptions} */
     options: {
@@ -53,13 +47,12 @@ const plugins = [
     },
   },
   {
-    resolve: `medusa-file-spaces`,
+  resolve: `medusa-file-minio`,
     options: {
-      spaces_url: process.env.SPACE_URL,
-      bucket: process.env.SPACE_BUCKET,
-      endpoint: process.env.SPACE_ENDPOINT,
-      access_key_id: process.env.SPACE_ACCESS_KEY_ID,
-      secret_access_key: process.env.SPACE_SECRET_ACCESS_KEY,
+        endpoint: process.env.MINIO_ENDPOINT,
+        bucket: process.env.MINIO_BUCKET,
+        access_key_id: process.env.MINIO_ACCESS_KEY,
+        secret_access_key: process.env.MINIO_SECRET_KEY,
     },
   },
   {
@@ -91,13 +84,20 @@ const plugins = [
       },
     },
   },
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
+    },
+  },
 ];
 
 const modules = {
   eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
-      redisUrl: process.env.EVENTS_REDIS_URL,
+      redisUrl: REDIS_URL,
     },
   },
   /*cacheService: {
