@@ -107,7 +107,6 @@ const modules = {
     }
   },*/
 };
-console.log("🚀 ~ modules:", modules)
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
