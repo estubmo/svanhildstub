@@ -1,23 +1,13 @@
-FROM node:20-slim AS base
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-ENV NODE_ENV production
+FROM node:alpine
 
-RUN corepack enable
-COPY . /app
 WORKDIR /app
 
-FROM base AS prod-deps
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+COPY package*.json ./
 
-FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN NODE_ENV=production pnpm run build
+RUN npm i
+COPY . .
 
-FROM base
-COPY --from=prod-deps /app/node_modules /app/node_modules
-COPY --from=build /app/dist /app/dist
+ENV NODE_ENV production
 
-ENV NODE_ENV=production
 EXPOSE 9000
-CMD [ "pnpm", "start" ]
+CMD [ "npm", "start" ]
