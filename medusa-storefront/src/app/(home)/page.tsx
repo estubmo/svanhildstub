@@ -4,13 +4,8 @@ import BackgroundFader from '@modules/home/components/hero/background-fader';
 import FrontpageFooter from '@modules/home/components/hero/frontpage-footer';
 import MonochromeParallax from '@modules/home/components/hero/monochrome-parallax';
 import MoroccoParallax from '@modules/home/components/hero/morocco-parallax';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Svanhild Stub',
-  description:
-    'Svanhild Stub is a Norwegian artist and painter. She is known for her unique abstract work.',
-};
+
 
 export default async function Home() {
   const { collections, count } = await getCollectionsList(0, 3);

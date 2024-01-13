@@ -28,9 +28,10 @@ const config = withStoreConfig({
         protocol: 'https',
         hostname: 'medusa-server-testing.s3.us-east-1.amazonaws.com',
       },
-    ],
-    domains: [
-      '<YOUR_SPACE_DOMAIN>', // TODO: Add your space domain here
+      {
+        protocol: 'https',
+        hostname: 'minio.svanhildstub.com', // TODO: Add your space domain here
+      },
     ],
   },
 });

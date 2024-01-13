@@ -331,7 +331,7 @@ export const CheckoutProvider = ({ children }: CheckoutProviderProps) => {
     isCompleting.open();
     complete(undefined, {
       onSuccess: ({ data }) => {
-        push(`/order/confirmed/${data.id}`);
+        push(`/store/order/confirmed/${data.id}`);
         resetCart();
       },
     });

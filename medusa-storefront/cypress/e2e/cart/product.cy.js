@@ -1,12 +1,12 @@
 describe('Product page', () => {
   it('fetches product with handle [t-shirt]', () => {
-    cy.visit('/products/t-shirt');
+    cy.visit('/store/products/t-shirt');
 
     cy.get('h1').contains('Medusa T-Shirt');
   });
 
   it('adds a product to the cart', () => {
-    cy.visit('/products/t-shirt');
+    cy.visit('/store/products/t-shirt');
 
     cy.get('button').click();
 
@@ -14,7 +14,7 @@ describe('Product page', () => {
   });
 
   it('adds a product twice to the cart', () => {
-    cy.visit('/products/t-shirt');
+    cy.visit('/store/products/t-shirt');
 
     cy.get('button').click();
     cy.get('button').click();
@@ -23,7 +23,7 @@ describe('Product page', () => {
   });
 
   it('changes the current image by clicking a thumbnail', () => {
-    cy.visit('/products/t-shirt');
+    cy.visit('/store/products/t-shirt');
 
     cy.get('[data-cy=current_image]')
       .should('have.attr', 'src')

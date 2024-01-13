@@ -112,7 +112,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                   orders.slice(0, 5).map((order) => {
                     return (
                       <li key={order.id}>
-                        <Link href={`/order/details/${order.id}`}>
+                        <Link href={`/store/order/details/${order.id}`}>
                           <Container className="flex items-center justify-between bg-ui-bg-base p-4">
                             <div className="text-small-regular grid flex-1 grid-cols-3 grid-rows-2 gap-x-4">
                               <span className="font-semibold">Date placed</span>
