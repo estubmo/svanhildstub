@@ -30,7 +30,7 @@ const config = withStoreConfig({
       },
       {
         protocol: 'https',
-        hostname: 'minio.svanhildstub.com', // TODO: Add your space domain here
+        hostname: 'minio-console.svanhildstub.com',
       },
     ],
   },
