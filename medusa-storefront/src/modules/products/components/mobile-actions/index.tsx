@@ -3,7 +3,7 @@ import { useProductActions } from '@lib/context/product-context';
 import useProductPrice from '@lib/hooks/use-product-price';
 import useToggleState from '@lib/hooks/use-toggle-state';
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
-import { Button } from '@medusajs/ui';
+import { Button, clx } from '@medusajs/ui';
 import ChevronDown from '@modules/common/icons/chevron-down';
 import X from '@modules/common/icons/x';
 import clsx from 'clsx';
@@ -18,7 +18,9 @@ type MobileActionsProps = {
 
 const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
   const { variant, addToCart, options, inStock, updateOptions } =
-    useProductActions();
+  useProductActions();
+  const isOnlyOneVariant = product.variants.length === 1;
+
   const { state, open, close } = useToggleState();
 
   const price = useProductPrice({ id: product.id!, variantId: variant?.id });
@@ -73,7 +75,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
               )}
             </div>
             <div className="grid w-full grid-cols-2 gap-x-4">
-              <Button onClick={open} variant="secondary" className="w-full">
+              <Button onClick={open} variant="secondary"  className={clx("w-full", isOnlyOneVariant && 'hidden')}>
                 <div className="flex w-full items-center justify-between">
                   <span>
                     {variant
@@ -83,7 +85,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                   <ChevronDown />
                 </div>
               </Button>
-              <Button onClick={addToCart} className="w-full">
+              <Button onClick={addToCart} className={clx("w-full", isOnlyOneVariant && 'col-span-2')}>
                 {!inStock ? 'Out of stock' : 'Add to cart'}
               </Button>
             </div>
