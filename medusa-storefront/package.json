@@ -17,6 +17,7 @@
     "cypress": "cypress open",
     "analyze": "ANALYZE=true next build"
   },
+  "packageManager": "pnpm@8.14.1",
   "resolutions": {
     "webpack": "^5",
     "@types/react": "17.0.40"
