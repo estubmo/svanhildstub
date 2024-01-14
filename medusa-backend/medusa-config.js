@@ -47,12 +47,13 @@ const plugins = [
     },
   },
   {
-  resolve: `medusa-file-minio`,
+    resolve: `medusa-file-minio`,
     options: {
-        endpoint: process.env.MINIO_ENDPOINT,
-        bucket: process.env.MINIO_BUCKET,
-        access_key_id: process.env.MINIO_ACCESS_KEY,
-        secret_access_key: process.env.MINIO_SECRET_KEY,
+      endpoint: process.env.MINIO_ENDPOINT,
+      bucket: process.env.MINIO_BUCKET,
+      access_key_id: process.env.MINIO_ACCESS_KEY,
+      secret_access_key: process.env.MINIO_SECRET_KEY,
+      private_bucket: process.env.MINIO_PRIVATE_BUCKET,
     },
   },
   {
@@ -100,12 +101,13 @@ const modules = {
       redisUrl: REDIS_URL,
     },
   },
-  /*cacheService: {
+  cacheService: {
     resolve: "@medusajs/cache-redis",
     options: {
-      redisUrl: REDIS_URL
-    }
-  },*/
+      redisUrl: REDIS_URL,
+      ttl: 30,
+    },
+  },
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
@@ -116,7 +118,7 @@ const projectConfig = {
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
   product_categories: process.env.MEDUSA_FF_PRODUCT_CATEGORIES,
-  redis_url: REDIS_URL
+  redis_url: REDIS_URL,
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */
