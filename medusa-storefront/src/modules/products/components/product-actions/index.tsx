@@ -7,10 +7,10 @@ import { Button } from '@medusajs/ui';
 import { addToCart } from '@modules/cart/actions';
 import Divider from '@modules/common/components/divider';
 import OptionSelect from '@modules/products/components/option-select';
-import { isEqual } from 'lodash';
 import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
+import { isEqual } from '@lib/is-equal';
 import MobileActions from '../mobile-actions';
 import ProductPrice from '../product-price';
 

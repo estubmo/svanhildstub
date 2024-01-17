@@ -1,8 +1,4 @@
-const ErrorMessage = ({
-  error,
-}: {
-  error?: { message: string } | string | null;
-}) => {
+const ErrorMessage = ({ error }: { error?: string | null }) => {
   if (!error) {
     return null;
   }

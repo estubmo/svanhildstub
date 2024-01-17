@@ -1,10 +1,12 @@
+import { isEqual } from '@lib/is-equal';
+import { omit } from '@lib/omit';
 import { Address } from '@medusajs/medusa';
-import { isEqual, omit } from 'lodash';
 
 export default function compareAddresses(
   address1?: Address | null,
   address2?: Address | null,
 ) {
+  if (!address1 || !address2) return false;
   return isEqual(
     omit(address1, [
       'id',
