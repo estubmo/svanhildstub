@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import {
-    slideFromLeftVariants,
-    slideFromRightVariants,
-    slideUpTextVariants,
+  slideFromLeftVariants,
+  slideFromRightVariants,
+  slideUpTextVariants,
 } from 'utils/variants';
 
 import Parallax from './parallax';
@@ -143,7 +143,7 @@ const MoroccoParallax = () => {
               variants={parentVariants}
               initial="hidden"
               animate="visible"
-              className="bg-[#A77C55] absolute bottom-96 z-20 mb-44 w-1/2 bg-opacity-80 p-2 md:bottom-1/2 md:right-10 md:mb-0 md:w-1/3"
+              className="absolute bottom-96 z-20 mb-44 ml-40 w-[240px] bg-[#A77C55] bg-opacity-80 p-2 md:bottom-0 md:right-10 md:mb-0 md:ml-auto"
             >
               <motion.h1
                 variants={slideFromRightVariants}

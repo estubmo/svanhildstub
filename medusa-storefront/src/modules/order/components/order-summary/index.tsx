@@ -1,5 +1,5 @@
+import { formatAmount } from '@lib/util/prices';
 import { Order } from '@medusajs/medusa';
-import { formatAmount } from 'medusa-react';
 
 type OrderSummaryProps = {
   order: Order;

@@ -1,3 +1,5 @@
+'use client';
+
 import { Image as MedusaImage } from '@medusajs/medusa';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom';
@@ -5,7 +7,7 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 
 type ImageGalleryProps = {
-  images: MedusaImage[];
+  images: Array<MedusaImage>;
 };
 
 type GalleryImageProps = {
@@ -15,16 +17,17 @@ type GalleryImageProps = {
 
 const GalleryImage = ({ image, index }: GalleryImageProps) => {
   return (
-    <div className="relative w-full min-h-[400px] small:min-h-[250px] medium:min-h-[400px]">
-    <Image
-      src={image.url}
-      priority={index <= 2 ? true : false}
-      alt={`Product image ${index + 1}`}
-      className="object-contain"
-      fill
-      sizes="100vw"
+    <div className="relative w-full bg-ui-bg-subtle aspect-[29/34]">
+      <Image
+        src={image.url}
+        priority={index <= 2 ? true : false}
+        alt={`Product image ${index + 1}`}
+        className="object-cover"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 77vw, 50vw"
+        quality={85}
       />
-      </div>
+    </div>
   );
 };
 
@@ -34,9 +37,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
       <div className="flex flex-1 flex-col gap-y-20 small:mx-16">
         {images.map((image, index) => {
           return (
-              <Zoom key={image.id} classDialog="custom-zoom">
-                <GalleryImage image={image} index={index} />
-              </Zoom>
+            <Zoom key={image.id} classDialog="custom-zoom"
+
+            >
+              <GalleryImage image={image} index={index} />
+            </Zoom>
           );
         })}
       </div>

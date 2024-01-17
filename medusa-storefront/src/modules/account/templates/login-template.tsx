@@ -1,27 +1,24 @@
 'use client';
 
-import { useAccount } from '@lib/context/account-context';
+import Login from '@modules/account/components/login';
 import Register from '@modules/account/components/register';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useState } from 'react';
 
-import Login from '../components/login';
+export enum LOGIN_VIEW {
+  SIGN_IN = 'sign-in',
+  REGISTER = 'register',
+}
 
 const LoginTemplate = () => {
-  const { loginView, customer, retrievingCustomer } = useAccount();
-  const [currentView, _] = loginView;
-
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!retrievingCustomer && customer) {
-      router.push('/account');
-    }
-  }, [customer, retrievingCustomer, router]);
+  const [currentView, setCurrentView] = useState('sign-in');
 
   return (
-    <div className="flex w-full justify-center px-8 py-12">
-      {currentView === 'sign-in' ? <Login /> : <Register />}
+    <div className="flex w-full justify-start px-8 py-8">
+      {currentView === 'sign-in' ? (
+        <Login setCurrentView={setCurrentView} />
+      ) : (
+        <Register setCurrentView={setCurrentView} />
+      )}
     </div>
   );
 };

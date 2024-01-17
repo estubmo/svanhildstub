@@ -1,18 +1,13 @@
-"use client";
+'use client';
 
-import {
-    motion,
-    useScroll,
-    useSpring,
-    useTransform,
-} from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import {
-    parentVariants,
-    slideFromLeftVariants,
-    slideFromRightVariants,
-    slideUpTextVariants,
+  parentVariants,
+  slideFromLeftVariants,
+  slideFromRightVariants,
+  slideUpTextVariants,
 } from 'utils/variants';
 
 type Hero = {
@@ -93,7 +88,7 @@ const Hero = ({ wallpaperUrl, sigUrl, stampUrl }: Hero) => {
           initial="offscreen"
           whileInView="onscreen"
           viewport={{ once: true, amount: 'some', root: scrollRef }}
-          className="relative font-serif text-xl italic tracking-widest md:text-xl px-8 max-w-md"
+          className="relative max-w-md px-8 font-serif text-xl italic tracking-widest md:text-xl"
         >
           &quot;Abstract art has helped us to experience the{' '}
           <motion.span

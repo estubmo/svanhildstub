@@ -1,6 +1,8 @@
 'use client';
 
+import { XMark } from '@medusajs/icons';
 import { Order } from '@medusajs/medusa';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import Help from '@modules/order/components/help';
 import Items from '@modules/order/components/items';
 import OrderDetails from '@modules/order/components/order-details';
@@ -16,20 +18,22 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
   order,
 }) => {
   return (
-    <div className=" min-h-[calc(100vh-64px)] py-6">
-      <div className="content-container flex justify-center">
-        <div className="flex h-full w-full max-w-4xl flex-col gap-4 bg-ui-bg-base p-10">
-          <OrderDetails order={order} showStatus />
-          <Items
-            items={order.items}
-            region={order.region}
-            cartId={order.cart_id}
-          />
-          <ShippingDetails order={order} />
-          <OrderSummary order={order} />
-
-          <Help />
-        </div>
+    <div className="flex flex-col justify-center gap-y-4">
+      <div className="flex items-center justify-between gap-2">
+        <h1 className="text-2xl-semi">Order details</h1>
+        <LocalizedClientLink
+          href="/account/orders"
+          className="flex items-center gap-2 text-ui-fg-subtle hover:text-ui-fg-base"
+        >
+          <XMark /> Back to overview
+        </LocalizedClientLink>
+      </div>
+      <div className="flex h-full w-full flex-col gap-4 bg-ui-bg-base">
+        <OrderDetails order={order} showStatus />
+        <Items items={order.items} region={order.region} />
+        <ShippingDetails order={order} />
+        <OrderSummary order={order} />
+        <Help />
       </div>
     </div>
   );

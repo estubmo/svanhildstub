@@ -1,62 +1,43 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { useCheckout } from '@lib/context/checkout-context';
-import { isEqual } from '@lib/is-equal';
 import { omit } from '@lib/omit';
+import compareAddresses from '@lib/util/compare-addresses';
 import { ChevronUpDown } from '@medusajs/icons';
-import { Address } from '@medusajs/medusa';
+import { Address, AddressPayload, Cart } from '@medusajs/medusa';
+import { clx } from '@medusajs/ui';
 import Radio from '@modules/common/components/radio';
-import clsx from 'clsx';
-import { Fragment, useMemo, useState } from 'react';
-import { useWatch } from 'react-hook-form';
+import { Fragment, useMemo } from 'react';
+
+import { cartUpdate } from '../../actions';
 
 type AddressSelectProps = {
-  addresses: Address[];
+  addresses: Array<Address>;
+  cart: Omit<Cart, 'refundable_amount' | 'refunded_total'> | null;
 };
 
-const AddressSelect = ({ addresses }: AddressSelectProps) => {
-  const [selected, setSelected] = useState<string | undefined>(undefined);
-
-  const { control, setSavedAddress } = useCheckout();
-
+const AddressSelect = ({ addresses, cart }: AddressSelectProps) => {
   const handleSelect = (id: string) => {
     const savedAddress = addresses.find((a) => a.id === id);
-
     if (savedAddress) {
-      setSavedAddress(savedAddress);
-    }
-
-    setSelected(id);
-  };
-
-  const currentShippingAddress = useWatch({
-    control,
-    name: 'shipping_address',
-  });
-
-  const selectedAddress = useMemo(() => {
-    for (const address of addresses) {
-      const checkEquality = isEqual(
-        omit(address, [
+      cartUpdate({
+        shipping_address: omit(savedAddress, [
           'id',
           'created_at',
           'updated_at',
           'country',
           'deleted_at',
-          'customer',
           'metadata',
           'customer_id',
-        ]),
-        currentShippingAddress,
-      );
-
-      if (checkEquality) {
-        return address;
-      }
+        ]) as AddressPayload,
+      });
     }
-  }, [currentShippingAddress, addresses]);
+  };
+
+  const selectedAddress = useMemo(() => {
+    return addresses.find((a) => compareAddresses(a, cart?.shipping_address));
+  }, [addresses, cart?.shipping_address]);
 
   return (
-    <Listbox onChange={handleSelect} value={selected}>
+    <Listbox onChange={handleSelect} value={selectedAddress?.id}>
       <div className="relative">
         <Listbox.Button className="text-base-regular relative flex w-full cursor-default items-center justify-between rounded-rounded border bg-ui-bg-base px-4 py-[10px] text-left focus:outline-none focus-visible:border-gray-300 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-300">
           {({ open }) => (
@@ -67,7 +48,7 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
                   : 'Choose an address'}
               </span>
               <ChevronUpDown
-                className={clsx('transition-rotate duration-200', {
+                className={clx('transition-rotate duration-200', {
                   'rotate-180 transform': open,
                 })}
               />
@@ -86,16 +67,16 @@ const AddressSelect = ({ addresses }: AddressSelectProps) => {
                 <Listbox.Option
                   key={address.id}
                   value={address.id}
-                  className="relative cursor-default select-none py-4 pl-6 pr-10 hover:bg-ui-bg-field-hover"
+                  className="relative cursor-default select-none py-4 pl-6 pr-10 hover:bg-gray-50"
                 >
                   <div className="flex items-start gap-x-4">
-                    <Radio checked={selected === address.id} />
+                    <Radio checked={selectedAddress?.id === address.id} />
                     <div className="flex flex-col">
                       <span className="text-base-semi text-left">
                         {address.first_name} {address.last_name}
                       </span>
                       {address.company && (
-                        <span className="text-small-regular text-ui-fg-subtle">
+                        <span className="text-small-regular text-ui-fg-base">
                           {address.company}
                         </span>
                       )}

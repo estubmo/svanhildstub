@@ -28,7 +28,7 @@ module.exports = {
         case: 'kebabCase',
       },
     ],
-    '@typescript-eslint/array-type': 'error',
+    '@typescript-eslint/array-type': ['error', { default: 'generic' }],
   },
   root: true,
 };

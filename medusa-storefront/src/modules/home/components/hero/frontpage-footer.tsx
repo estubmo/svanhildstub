@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 
@@ -16,13 +17,13 @@ const parentVariants: Variants = {
 
 const FrontpageFooter = () => {
   return (
-    <div className="min-h-156 relative flex flex-col h-screen max-h-screen w-full justify-center overflow-hidden">
+    <div className="min-h-156 relative flex h-screen max-h-screen w-full flex-col justify-center overflow-hidden">
       <motion.div
         variants={parentVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.8 }}
-        className="relative z-30 flex h-screen w-full flex-col items-center justify-center space-y-1 bg-black bg-opacity-20 text-center tracking-wider font-mono md:space-y-4"
+        className="relative z-30 flex h-screen w-full flex-col items-center justify-center space-y-1 bg-black bg-opacity-20 text-center font-mono tracking-wider md:space-y-4"
       >
         <div>Svanhild Stub</div>
         <div>
@@ -38,7 +39,6 @@ const FrontpageFooter = () => {
           </a>{' '}
           © {new Date().getFullYear()}
         </div>
-
       </motion.div>
 
       <Image

@@ -1,13 +1,12 @@
 import { Image as MedusaImage } from '@medusajs/medusa';
-import { Container } from '@medusajs/ui';
+import { clx, Container } from '@medusajs/ui';
 import PlaceholderImage from '@modules/common/icons/placeholder-image';
-import clsx from 'clsx';
 import Image from 'next/image';
 import React from 'react';
 
 type ThumbnailProps = {
   thumbnail?: string | null;
-  images?: MedusaImage[] | null;
+  images?: Array<MedusaImage> | null;
   size?: 'small' | 'medium' | 'large' | 'full' | 'square';
   isFeatured?: boolean;
   className?: string;
@@ -24,7 +23,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
 
   return (
     <Container
-      className={clsx(
+      className={clx(
         'relative w-full overflow-hidden rounded-large bg-ui-bg-subtle p-4 shadow-elevation-card-rest transition-shadow duration-150 ease-in-out group-hover:shadow-elevation-card-hover',
         className,
         {

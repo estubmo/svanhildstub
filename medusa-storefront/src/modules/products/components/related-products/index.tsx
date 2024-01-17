@@ -1,33 +1,35 @@
 import { getProductsList } from '@lib/data';
-import usePreviews from '@lib/hooks/use-previews';
-import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons';
-import repeat from '@lib/util/repeat';
 import { StoreGetProductsParams } from '@medusajs/medusa';
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
-import { Button } from '@medusajs/ui';
-import SkeletonProductPreview from '@modules/skeletons/components/skeleton-product-preview';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useCart } from 'medusa-react';
-import { useMemo } from 'react';
+import { getRegion } from 'app/actions';
 
 import ProductPreview from '../product-preview';
 
 type RelatedProductsProps = {
   product: PricedProduct;
+  countryCode: string;
 };
 
-const RelatedProducts = ({ product }: RelatedProductsProps) => {
-  const { cart } = useCart();
+export default async function RelatedProducts({
+  product,
+  countryCode,
+}: RelatedProductsProps) {
+  const region = await getRegion(countryCode);
 
-  const queryParams: StoreGetProductsParams = useMemo(() => {
+  if (!region) {
+    return null;
+  }
+
+  // edit this function to define your related products logic
+  const setQueryParams = (): StoreGetProductsParams => {
     const params: StoreGetProductsParams = {};
 
-    if (cart?.id) {
-      params.cart_id = cart.id;
+    if (region?.id) {
+      params.region_id = region.id;
     }
 
-    if (cart?.region?.currency_code) {
-      params.currency_code = cart.region.currency_code;
+    if (region?.currency_code) {
+      params.currency_code = region.currency_code;
     }
 
     if (product.collection_id) {
@@ -41,63 +43,41 @@ const RelatedProducts = ({ product }: RelatedProductsProps) => {
     params.is_giftcard = false;
 
     return params;
-  }, [product, cart?.id, cart?.region]);
+  };
 
-  const { data, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } =
-    useInfiniteQuery(
-      [`infinite-products-${product.id}`, queryParams, cart],
-      ({ pageParam }) => getProductsList({ pageParam, queryParams }),
-      {
-        getNextPageParam: (lastPage) => lastPage.nextPage,
-      },
-    );
+  const queryParams = setQueryParams();
 
-  const previews = usePreviews({ pages: data?.pages, region: cart?.region });
+  const productPreviews = await getProductsList({
+    queryParams,
+    countryCode,
+  }).then(({ response }) =>
+    response.products.filter(
+      (productPreview) => productPreview.id !== product.id,
+    ),
+  );
+
+  if (!productPreviews.length) {
+    return null;
+  }
 
   return (
     <div className="product-page-constraint">
       <div className="mb-16 flex flex-col items-center text-center">
-        <span className="text-base-regular mb-6 text-gray-400">
-          Related paintings
+        <span className="text-base-regular mb-6 text-gray-600">
+          Related products
         </span>
-        <p className="text-2xl-regular max-w-lg text-ui-tag-blue-text">
-          You might also want to check out these paintings.
+        <p className="text-2xl-regular max-w-lg text-ui-fg-base">
+          You might also want to check out these products.
         </p>
       </div>
 
       <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
+        {productPreviews.map((productPreview) => (
+          <li key={productPreview.id}>
+            <ProductPreview region={region} productPreview={productPreview} />
           </li>
         ))}
-        {isLoading &&
-          !previews.length &&
-          repeat(8).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(data?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
       </ul>
-      {hasNextPage && (
-        <div className="mt-8 flex items-center justify-center">
-          <Button
-            isLoading={isLoading}
-            onClick={() => fetchNextPage()}
-            className="w-72"
-          >
-            Load more
-          </Button>
-        </div>
-      )}
     </div>
   );
-};
-
-export default RelatedProducts;
+}

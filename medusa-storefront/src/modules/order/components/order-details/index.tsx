@@ -7,8 +7,6 @@ type OrderDetailsProps = {
 };
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const _items = order.items.reduce((acc, i) => acc + i.quantity, 0);
-
   const formatStatus = (str: string) => {
     const formatted = str.split('_').join(' ');
 
@@ -17,7 +15,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
   return (
     <div>
-      <Text className="mt-8">
+      <Text>
         We have sent the order confirmation details to{' '}
         <span className="text-ui-fg-medium-plus font-semibold">
           {order.email}

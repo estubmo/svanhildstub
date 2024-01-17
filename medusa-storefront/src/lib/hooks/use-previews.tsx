@@ -7,7 +7,7 @@ import { useMemo } from 'react';
 import { InfiniteProductPage, ProductPreviewType } from 'types/global';
 
 type UsePreviewProps<T> = {
-  pages?: T[];
+  pages?: Array<T>;
   region?: Region;
   sortBy?: SortOptions;
 };
@@ -17,12 +17,12 @@ const usePreviews = <T extends InfiniteProductPage>({
   region,
   sortBy,
 }: UsePreviewProps<T>) => {
-  const previews: ProductPreviewType[] = useMemo(() => {
+  const previews: Array<ProductPreviewType> = useMemo(() => {
     if (!pages || !region) {
       return [];
     }
 
-    const products: PricedProduct[] = [];
+    const products: Array<PricedProduct> = [];
 
     for (const page of pages) {
       products.push(...page.response.products);

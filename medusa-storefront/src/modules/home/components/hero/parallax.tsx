@@ -1,11 +1,11 @@
 'use client';
 
 import {
-    motion,
-    useReducedMotion,
-    useScroll,
-    useSpring,
-    useTransform,
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
 } from 'framer-motion';
 import { ReactNode, useEffect, useRef, useState } from 'react';
 
@@ -30,8 +30,7 @@ const Parallax = ({ children, offset = 50 }: ParallaxProps): JSX.Element => {
     const element = ref.current;
     if (element) {
       setElementTop(
-        element.getBoundingClientRect().top + window.scrollY ||
-          window.pageYOffset,
+        element.getBoundingClientRect().top + window.scrollY || window.scrollY,
       );
       setClientHeight(window.innerHeight);
     }

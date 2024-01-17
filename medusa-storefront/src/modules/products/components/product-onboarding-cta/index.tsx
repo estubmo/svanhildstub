@@ -1,6 +1,13 @@
 import { Button, Container, Text } from '@medusajs/ui';
+import { cookies } from 'next/headers';
 
 const ProductOnboardingCta = () => {
+  const isOnboarding = cookies().get('_medusa_onboarding')?.value === 'true';
+
+  if (!isOnboarding) {
+    return null;
+  }
+
   return (
     <Container className="h-full w-full max-w-4xl bg-ui-bg-subtle p-8">
       <div className="center flex flex-col gap-y-4">

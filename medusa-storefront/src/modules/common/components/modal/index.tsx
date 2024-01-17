@@ -1,7 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ModalProvider, useModal } from '@lib/context/modal-context';
+import { clx } from '@medusajs/ui';
 import X from '@modules/common/icons/x';
-import clsx from 'clsx';
 import React, { Fragment } from 'react';
 
 type ModalProps = {
@@ -9,14 +9,16 @@ type ModalProps = {
   close: () => void;
   size?: 'small' | 'medium' | 'large';
   search?: boolean;
+  children: React.ReactNode;
 };
 
-const Modal: React.FC<ModalProps> & {
-  Title: React.FC;
-  Description: React.FC;
-  Body: React.FC;
-  Footer: React.FC;
-} = ({ isOpen, close, size = 'medium', search = false, children }) => {
+const Modal = ({
+  isOpen,
+  close,
+  size = 'medium',
+  search = false,
+  children,
+}: ModalProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-[75]" onClose={close}>
@@ -34,7 +36,7 @@ const Modal: React.FC<ModalProps> & {
 
         <div className="fixed inset-0 overflow-y-hidden">
           <div
-            className={clsx(
+            className={clx(
               'flex h-full min-h-full justify-center p-4 text-center',
               {
                 'items-center': !search,
@@ -52,7 +54,7 @@ const Modal: React.FC<ModalProps> & {
               leaveTo="opacity-0 scale-95"
             >
               <Dialog.Panel
-                className={clsx(
+                className={clx(
                   'flex h-fit max-h-[75vh] w-full transform flex-col justify-start p-5 text-left align-middle transition-all',
                   {
                     'max-w-md': size === 'small',
@@ -73,7 +75,7 @@ const Modal: React.FC<ModalProps> & {
   );
 };
 
-const Title: React.FC = ({ children }) => {
+const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { close } = useModal();
 
   return (
@@ -88,19 +90,19 @@ const Title: React.FC = ({ children }) => {
   );
 };
 
-const Description: React.FC = ({ children }) => {
+const Description: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <Dialog.Description className="text-small-regular flex h-full items-center justify-center pb-4 pt-2 text-ui-fg-subtle">
+    <Dialog.Description className="text-small-regular flex h-full items-center justify-center pb-4 pt-2 text-ui-fg-base">
       {children}
     </Dialog.Description>
   );
 };
 
-const Body: React.FC = ({ children }) => {
+const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <div className="flex justify-center">{children}</div>;
 };
 
-const Footer: React.FC = ({ children }) => {
+const Footer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className="flex items-center justify-end gap-x-4">{children}</div>
   );

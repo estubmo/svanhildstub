@@ -2,7 +2,7 @@
 import { CalculatedPriceSetDTO, IPricingModuleService } from '@medusajs/types';
 
 type Props = {
-  products: any[];
+  products: Array<any>;
   currency_code: string;
   pricingService: IPricingModuleService;
 };
@@ -28,7 +28,7 @@ export async function getPricesByPriceSetId({
         {
           context: { currency_code },
         },
-      )) as unknown as CalculatedPriceSetDTO[];
+      )) as unknown as Array<CalculatedPriceSetDTO>;
 
       delete variant.price;
 

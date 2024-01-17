@@ -1,6 +1,6 @@
 import { medusaClient } from '../config';
 
-export const getCollectionIds = async (): Promise<string[]> => {
+export const getCollectionIds = async (): Promise<Array<string>> => {
   const data = await medusaClient.collections
     .list({ limit: 100 })
     .then(({ collections }) => {

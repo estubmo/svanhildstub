@@ -1,45 +1,52 @@
+import { Region } from '@medusajs/medusa';
 import NativeSelect, {
   NativeSelectProps,
 } from '@modules/common/components/native-select';
-import { useCart, useRegions } from 'medusa-react';
 import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react';
 
-const CountrySelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
-  ({ placeholder = 'Country', ...props }, ref) => {
-    const innerRef = useRef<HTMLSelectElement>(null);
+const CountrySelect = forwardRef<
+  HTMLSelectElement,
+  NativeSelectProps & {
+    region?: Region;
+  }
+>(({ placeholder = 'Country', region, defaultValue, ...props }, ref) => {
+  const innerRef = useRef<HTMLSelectElement>(null);
 
-    useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
-      ref,
-      () => innerRef.current,
-    );
+  useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
+    ref,
+    () => innerRef.current,
+  );
 
-    const { regions } = useRegions();
-    const { cart } = useCart();
+  const countryOptions = useMemo(() => {
+    if (!region) {
+      return [];
+    }
 
-    const countryOptions = useMemo(() => {
-      const currentRegion = regions?.find((r) => r.id === cart?.region_id);
+    return region.countries.map((country) => ({
+      value: country.iso_2,
+      label: country.display_name,
+    }));
+  }, [region]);
 
-      if (!currentRegion) {
-        return [];
-      }
-
-      return currentRegion.countries.map((country) => ({
-        value: country.iso_2,
-        label: country.display_name,
-      }));
-    }, [regions, cart]);
-
-    return (
-      <NativeSelect ref={innerRef} placeholder={placeholder} {...props}>
-        {countryOptions.map(({ value, label }, index) => (
-          <option key={index} value={value} className="bg-ui-bg-field">
-            {label}
-          </option>
-        ))}
-      </NativeSelect>
-    );
-  },
-);
+  return (
+    <NativeSelect
+      ref={innerRef}
+      placeholder={placeholder}
+      defaultValue={defaultValue}
+      {...props}
+    >
+      {countryOptions.map(({ value, label }) => (
+        <option
+          key={value}
+          value={value}
+          className="bg-ui-bg-field hover:bg-ui-bg-field-hover"
+        >
+          {label}
+        </option>
+      ))}
+    </NativeSelect>
+  );
+});
 
 CountrySelect.displayName = 'CountrySelect';
 

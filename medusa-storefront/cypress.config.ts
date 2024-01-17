@@ -1,9 +1,9 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   env: {
     codeCoverage: {
-      url: "/api/__coverage__",
+      url: '/api/__coverage__',
     },
   },
 
@@ -15,8 +15,8 @@ export default defineConfig({
 
   component: {
     devServer: {
-      framework: "next",
-      bundler: "webpack",
+      framework: 'next',
+      bundler: 'webpack',
     },
   },
 });

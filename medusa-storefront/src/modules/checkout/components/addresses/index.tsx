@@ -1,31 +1,55 @@
-import { useCheckout } from '@lib/context/checkout-context';
+'use client';
+
+import compareAddresses from '@lib/util/compare-addresses';
 import { CheckCircleSolid } from '@medusajs/icons';
-import { Button, Heading, Text } from '@medusajs/ui';
+import { Cart, Customer } from '@medusajs/medusa';
+import { Heading, Text, useToggleState } from '@medusajs/ui';
 import Divider from '@modules/common/components/divider';
 import Spinner from '@modules/common/icons/spinner';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import { useFormState } from 'react-dom';
 
+import { setAddresses } from '../../actions';
 import BillingAddress from '../billing_address';
+import ErrorMessage from '../error-message';
 import ShippingAddress from '../shipping-address';
+import { SubmitButton } from '../submit-button';
 
-const Addresses = () => {
-  const {
-    sameAsBilling: { state: checked, toggle: onChange },
-    editAddresses: { state: isOpen, open },
-    editShipping: { close: closeShipping },
-    editPayment: { close: closePayment },
-    setAddresses,
-    handleSubmit,
-    cart,
-  } = useCheckout();
+const Addresses = ({
+  cart,
+  customer,
+}: {
+  cart: Omit<Cart, 'refundable_amount' | 'refunded_total'> | null;
+  customer: Omit<Customer, 'password_hash'> | null;
+}) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+
+  const countryCode = params.countryCode as string;
+
+  const isOpen = searchParams.get('step') === 'address';
+
+  const { state: sameAsSBilling, toggle: toggleSameAsBilling } = useToggleState(
+    cart?.shipping_address && cart?.billing_address
+      ? compareAddresses(cart?.shipping_address, cart?.billing_address)
+      : true,
+  );
 
   const handleEdit = () => {
-    open();
-    closeShipping();
-    closePayment();
+    router.push(`${pathname}?step=address`);
   };
 
+  const [message, formAction] = useFormState(setAddresses, null);
+
   return (
-    <div className="bg-ui-bg-base px-4 small:px-8">
+    <div className="bg-ui-bg-base">
       <div className="mb-6 flex flex-row items-center justify-between">
         <Heading
           level="h2"
@@ -34,39 +58,44 @@ const Addresses = () => {
           Address
           {!isOpen && <CheckCircleSolid />}
         </Heading>
-        {!isOpen && (
+        {!isOpen && cart?.shipping_address && (
           <Text>
-            <button onClick={handleEdit} className="text-ui-fg-interactive">
+            <button
+              onClick={handleEdit}
+              className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
+            >
               Edit
             </button>
           </Text>
         )}
       </div>
       {isOpen ? (
-        <div className="pb-8">
-          <ShippingAddress checked={checked} onChange={onChange} />
+        <form action={formAction}>
+          <div className="pb-8">
+            <ShippingAddress
+              customer={customer}
+              countryCode={countryCode}
+              checked={sameAsSBilling}
+              onChange={toggleSameAsBilling}
+              cart={cart}
+            />
 
-          {!checked && (
-            <div>
-              <Heading
-                level="h2"
-                className="text-3xl-regular gap-x-4 pb-6 pt-8"
-              >
-                Billing address
-              </Heading>
+            {!sameAsSBilling && (
+              <div>
+                <Heading
+                  level="h2"
+                  className="text-3xl-regular gap-x-4 pb-6 pt-8"
+                >
+                  Billing address
+                </Heading>
 
-              <BillingAddress />
-            </div>
-          )}
-
-          <Button
-            size="large"
-            className="mt-6"
-            onClick={handleSubmit(setAddresses)}
-          >
-            Continue to delivery
-          </Button>
-        </div>
+                <BillingAddress cart={cart} countryCode={countryCode} />
+              </div>
+            )}
+            <SubmitButton className="mt-6">Continue to delivery</SubmitButton>
+            <ErrorMessage error={message} />
+          </div>
+        </form>
       ) : (
         <div>
           <div className="text-small-regular">
@@ -111,7 +140,7 @@ const Addresses = () => {
                       Billing Address
                     </Text>
 
-                    {checked ? (
+                    {sameAsSBilling ? (
                       <Text className="txt-medium text-ui-fg-subtle">
                         Billing- and delivery address are the same.
                       </Text>
@@ -138,7 +167,7 @@ const Addresses = () => {
                 </div>
               </div>
             ) : (
-              <div className="">
+              <div>
                 <Spinner />
               </div>
             )}

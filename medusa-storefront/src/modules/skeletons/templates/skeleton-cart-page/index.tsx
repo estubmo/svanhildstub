@@ -29,7 +29,7 @@ const SkeletonCartPage = () => {
                     <Table.HeaderCell className="!pl-0">
                       <div className="h-6 w-10 animate-pulse bg-gray-200" />
                     </Table.HeaderCell>
-                    <Table.HeaderCell></Table.HeaderCell>
+                    <Table.HeaderCell />
                     <Table.HeaderCell>
                       <div className="h-6 w-16 animate-pulse bg-gray-200" />
                     </Table.HeaderCell>

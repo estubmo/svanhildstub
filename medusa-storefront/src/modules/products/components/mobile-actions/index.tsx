@@ -1,31 +1,54 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { useProductActions } from '@lib/context/product-context';
-import useProductPrice from '@lib/hooks/use-product-price';
 import useToggleState from '@lib/hooks/use-toggle-state';
-import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { getProductPrice } from '@lib/util/get-product-price';
+import { Region } from '@medusajs/medusa';
+import {
+  PricedProduct,
+  PricedVariant,
+} from '@medusajs/medusa/dist/types/pricing';
 import { Button, clx } from '@medusajs/ui';
 import ChevronDown from '@modules/common/icons/chevron-down';
 import X from '@modules/common/icons/x';
-import clsx from 'clsx';
 import React, { Fragment, useMemo } from 'react';
 
 import OptionSelect from '../option-select';
 
 type MobileActionsProps = {
   product: PricedProduct;
+  variant?: PricedVariant;
+  region: Region;
+  options: Record<string, string>;
+  updateOptions: (update: Record<string, string>) => void;
+  inStock?: boolean;
+  handleAddToCart: () => void;
+  isAdding?: boolean;
   show: boolean;
 };
 
-const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
-  const { variant, addToCart, options, inStock, updateOptions } =
-  useProductActions();
+const MobileActions: React.FC<MobileActionsProps> = ({
+  product,
+  variant,
+  region,
+  options,
+  updateOptions,
+  inStock,
+  handleAddToCart,
+  isAdding,
+  show,
+}) => {
+  const { state, open, close } = useToggleState();
   const isOnlyOneVariant = product.variants.length === 1;
 
-  const { state, open, close } = useToggleState();
-
-  const price = useProductPrice({ id: product.id!, variantId: variant?.id });
+  const price = getProductPrice({
+    product: product,
+    variantId: variant?.id,
+    region,
+  });
 
   const selectedPrice = useMemo(() => {
+    if (!price) {
+      return null;
+    }
     const { variantPrice, cheapestPrice } = price;
 
     return variantPrice || cheapestPrice || null;
@@ -34,7 +57,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
   return (
     <>
       <div
-        className={clsx('sticky inset-x-0 bottom-0 lg:hidden', {
+        className={clx('fixed inset-x-0 bottom-0 lg:hidden', {
           'pointer-events-none': !show,
         })}
       >
@@ -53,7 +76,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
               <span>{product.title}</span>
               <span>—</span>
               {selectedPrice ? (
-                <div className="flex items-end gap-x-2 text-ui-fg-subtle">
+                <div className="flex items-end gap-x-2 text-ui-fg-base">
                   {selectedPrice.price_type === 'sale' && (
                     <p>
                       <span className="text-small-regular line-through">
@@ -62,7 +85,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                     </p>
                   )}
                   <span
-                    className={clsx({
+                    className={clx({
                       'text-ui-fg-interactive':
                         selectedPrice.price_type === 'sale',
                     })}
@@ -75,7 +98,11 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
               )}
             </div>
             <div className="grid w-full grid-cols-2 gap-x-4">
-              <Button onClick={open} variant="secondary"  className={clx("w-full", isOnlyOneVariant && 'hidden')}>
+              <Button
+                onClick={open}
+                variant="secondary"
+                className={clx('w-full', isOnlyOneVariant && 'hidden')}
+              >
                 <div className="flex w-full items-center justify-between">
                   <span>
                     {variant
@@ -85,8 +112,17 @@ const MobileActions: React.FC<MobileActionsProps> = ({ product, show }) => {
                   <ChevronDown />
                 </div>
               </Button>
-              <Button onClick={addToCart} className={clx("w-full", isOnlyOneVariant && 'col-span-2')}>
-                {!inStock ? 'Out of stock' : 'Add to cart'}
+              <Button
+                onClick={handleAddToCart}
+                disabled={!inStock || !variant}
+                className={clx('w-full', isOnlyOneVariant && 'col-span-2')}
+                isLoading={isAdding}
+              >
+                {!variant
+                  ? 'Select variant'
+                  : !inStock
+                    ? 'Out of stock'
+                    : 'Add to cart'}
               </Button>
             </div>
           </div>

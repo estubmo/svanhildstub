@@ -8,7 +8,7 @@ import { ProductDTO, ProductVariantDTO } from '@medusajs/types/dist/product';
  * @param cartId (Optional) cart id to get region-specific prices
  */
 export default async function getPrices(
-  data: ProductDTO[],
+  data: Array<ProductDTO>,
   cartId?: string,
   regionId?: string,
 ) {

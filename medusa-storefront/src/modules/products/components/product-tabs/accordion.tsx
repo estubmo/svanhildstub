@@ -13,14 +13,16 @@ type AccordionItemProps = AccordionPrimitive.AccordionItemProps & {
   complete?: boolean;
   active?: boolean;
   triggerable?: boolean;
+  children: React.ReactNode;
 };
 
-const Accordion: React.FC<
+type AccordionProps =
   | (AccordionPrimitive.AccordionSingleProps &
       React.RefAttributes<HTMLDivElement>)
   | (AccordionPrimitive.AccordionMultipleProps &
-      React.RefAttributes<HTMLDivElement>)
-> & {
+      React.RefAttributes<HTMLDivElement>);
+
+const Accordion: React.FC<AccordionProps> & {
   Item: React.FC<AccordionItemProps>;
 } = ({ children, ...props }) => {
   return (

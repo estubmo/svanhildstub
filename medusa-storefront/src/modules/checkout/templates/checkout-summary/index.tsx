@@ -1,21 +1,19 @@
-'use client';
-
 import { Heading } from '@medusajs/ui';
+import { retrieveCart } from '@modules/cart/actions';
 import ItemsPreviewTemplate from '@modules/cart/templates/preview';
 import DiscountCode from '@modules/checkout/components/discount-code';
 import CartTotals from '@modules/common/components/cart-totals';
 import Divider from '@modules/common/components/divider';
-import { useCart } from 'medusa-react';
 
-const CheckoutSummary = () => {
-  const { cart } = useCart();
+const CheckoutSummary = async () => {
+  const cart = await retrieveCart().then((cart) => cart);
 
-  if (!cart?.id) {
+  if (!cart) {
     return null;
   }
 
   return (
-    <div className="sticky top-0 flex flex-col-reverse gap-y-8 px-4 py-8 small:flex-col small:py-0 small:pr-8 ">
+    <div className="sticky top-0 flex flex-col-reverse gap-y-8 py-8 small:flex-col small:py-0 ">
       <div className="flex w-full flex-col bg-ui-bg-base">
         <Divider className="my-6 small:hidden" />
         <Heading

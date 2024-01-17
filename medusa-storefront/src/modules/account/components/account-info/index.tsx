@@ -1,16 +1,15 @@
 import { Disclosure } from '@headlessui/react';
 import useToggleState from '@lib/hooks/use-toggle-state';
-import { Badge, Button } from '@medusajs/ui';
-import clsx from 'clsx';
+import { Badge, Button, clx } from '@medusajs/ui';
 import { useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 
 type AccountInfoProps = {
   label: string;
   currentInfo: string | React.ReactNode;
-  isLoading?: boolean;
   isSuccess?: boolean;
   isError?: boolean;
-  errorMessage?: string;
+  errorMessage?: string | null;
   clearState: () => void;
   children?: React.ReactNode;
 };
@@ -18,7 +17,6 @@ type AccountInfoProps = {
 const AccountInfo = ({
   label,
   currentInfo,
-  isLoading,
   isSuccess,
   isError,
   clearState,
@@ -26,6 +24,8 @@ const AccountInfo = ({
   children,
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState();
+
+  const { pending } = useFormStatus();
 
   const handleToggle = () => {
     clearState();
@@ -42,7 +42,7 @@ const AccountInfo = ({
     <div className="text-small-regular">
       <div className="flex items-end justify-between">
         <div className="flex flex-col">
-          <span className="uppercase text-ui-fg-muted">{label}</span>
+          <span className="uppercase text-ui-fg-base">{label}</span>
           <div className="flex flex-1 basis-0 items-center justify-end gap-x-4">
             {typeof currentInfo === 'string' ? (
               <span className="font-semibold">{currentInfo}</span>
@@ -67,7 +67,7 @@ const AccountInfo = ({
       <Disclosure>
         <Disclosure.Panel
           static
-          className={clsx(
+          className={clx(
             'overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out',
             {
               'max-h-[1000px] opacity-100': isSuccess,
@@ -85,7 +85,7 @@ const AccountInfo = ({
       <Disclosure>
         <Disclosure.Panel
           static
-          className={clsx(
+          className={clx(
             'overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out',
             {
               'max-h-[1000px] opacity-100': isError,
@@ -102,7 +102,7 @@ const AccountInfo = ({
       <Disclosure>
         <Disclosure.Panel
           static
-          className={clsx(
+          className={clx(
             'overflow-visible transition-[max-height,opacity] duration-300 ease-in-out',
             {
               'max-h-[1000px] opacity-100': state,
@@ -114,7 +114,7 @@ const AccountInfo = ({
             <div>{children}</div>
             <div className="mt-2 flex items-center justify-end">
               <Button
-                isLoading={isLoading}
+                isLoading={pending}
                 className="w-full small:max-w-[140px]"
                 type="submit"
               >

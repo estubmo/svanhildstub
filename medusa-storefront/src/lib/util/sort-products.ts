@@ -5,7 +5,10 @@ const stripCurrency = (price: string) => {
   return parseFloat(price.replace(/[^0-9.]/g, ''));
 };
 
-const sortProducts = (products: ProductPreviewType[], sortBy: SortOptions) => {
+const sortProducts = (
+  products: Array<ProductPreviewType>,
+  sortBy: SortOptions,
+) => {
   if (sortBy === 'price_asc') {
     return products.sort((a, b) => {
       if (!a.price?.calculated_price || !b.price?.calculated_price) return 0;

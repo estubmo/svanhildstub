@@ -1,13 +1,10 @@
 import { withStoreConfig } from './store-config.mjs';
 import store from './store.config.json' assert { type: "json" };
 
-const config = withStoreConfig({
-  experimental: {
-    serverComponentsExternalPackages: [
-      '@medusajs/product',
-      '@medusajs/modules-sdk',
-    ],
-  },
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = withStoreConfig({
   features: store.features,
   reactStrictMode: true,
   images: {
@@ -36,4 +33,4 @@ const config = withStoreConfig({
   },
 });
 
-export default config;
+export default nextConfig;

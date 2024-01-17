@@ -1,33 +1,38 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { StoreGetProductsParams } from '@medusajs/medusa';
+'use client';
 
-import CollectionFilter from './collection-filter';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useCallback } from 'react';
+
 import SortProducts, { SortOptions } from './sort-products';
 
 type RefinementListProps = {
-  refinementList: StoreGetProductsParams;
-  setRefinementList: (refinementList: StoreGetProductsParams) => void;
   sortBy: SortOptions;
-  setSortBy: (...args: any[]) => void;
   search?: boolean;
 };
 
-const RefinementList = ({
-  refinementList,
-  setRefinementList,
-  sortBy,
-  setSortBy,
-  search = false,
-}: RefinementListProps) => {
+const RefinementList = ({ sortBy }: RefinementListProps) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
+
+  const setQueryParams = (name: string, value: string) => {
+    const query = createQueryString(name, value);
+    router.push(`${pathname}?${query}`);
+  };
+
   return (
-    <div className="mb-8 flex gap-12 px-8 py-4 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:pl-8 small:pr-0">
-      <SortProducts sortBy={sortBy} setSortBy={setSortBy} />
-      {!search && (
-        <CollectionFilter
-          refinementList={refinementList}
-          setRefinementList={setRefinementList}
-        />
-      )}
+    <div className="mb-8 flex gap-12 py-4 pl-6 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:px-0">
+      <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} />
     </div>
   );
 };

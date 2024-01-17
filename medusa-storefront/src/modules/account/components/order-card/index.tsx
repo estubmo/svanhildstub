@@ -1,8 +1,8 @@
+import { formatAmount } from '@lib/util/prices';
 import { Order } from '@medusajs/medusa';
 import { Button } from '@medusajs/ui';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import Thumbnail from '@modules/products/components/thumbnail';
-import { formatAmount } from 'medusa-react';
-import Link from 'next/link';
 import { useMemo } from 'react';
 
 type OrderCardProps = {
@@ -23,7 +23,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
   return (
     <div className="flex flex-col bg-ui-bg-base">
       <div className="text-large-semi mb-1 uppercase">#{order.display_id}</div>
-      <div className="text-small-regular flex items-center divide-x divide-gray-200 text-ui-fg-subtle">
+      <div className="text-small-regular flex items-center divide-x divide-gray-200 text-ui-fg-base">
         <span className="pr-2">
           {new Date(order.created_at).toDateString()}
         </span>
@@ -43,7 +43,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
           return (
             <div key={i.id} className="flex flex-col gap-y-2">
               <Thumbnail thumbnail={i.thumbnail} images={[]} size="full" />
-              <div className="text-small-regular flex items-center text-ui-fg-subtle">
+              <div className="text-small-regular flex items-center text-ui-fg-base">
                 <span className="font-semibold text-ui-fg-base">{i.title}</span>
                 <span className="ml-2">x</span>
                 <span>{i.quantity}</span>
@@ -53,17 +53,17 @@ const OrderCard = ({ order }: OrderCardProps) => {
         })}
         {numberOfProducts > 4 && (
           <div className="flex h-full w-full flex-col items-center justify-center">
-            <span className="text-small-regular text-ui-fg-subtle">
+            <span className="text-small-regular text-ui-fg-base">
               + {numberOfLines - 4}
             </span>
-            <span className="text-small-regular text-ui-fg-subtle">more</span>
+            <span className="text-small-regular text-ui-fg-base">more</span>
           </div>
         )}
       </div>
       <div className="flex justify-end">
-        <Link href={`/store/order/details/${order.id}`}>
+        <LocalizedClientLink href={`/account/orders/details/${order.id}`}>
           <Button variant="secondary">See details</Button>
-        </Link>
+        </LocalizedClientLink>
       </div>
     </div>
   );

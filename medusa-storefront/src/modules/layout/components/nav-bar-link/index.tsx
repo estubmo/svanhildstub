@@ -1,6 +1,6 @@
 import { clx } from '@medusajs/ui';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 type NavBarLinkProps = {
   route: {
@@ -43,9 +43,9 @@ const activePathVariants = {
 const NavBarLink = ({ route, active }: NavBarLinkProps) => {
   return (
     <motion.div className="relative" whileHover="hover">
-      <Link href={route.path}>
+      <LocalizedClientLink href={route.path}>
         <div className="overflow-hidden focus:outline-none focus-visible:underline">
-          <motion.div className="text-base select-none uppercase tracking-widest text-gray-50">
+          <motion.div className="select-none text-base uppercase tracking-widest text-gray-50">
             {route.name}
           </motion.div>
           <motion.div
@@ -70,7 +70,7 @@ const NavBarLink = ({ route, active }: NavBarLinkProps) => {
             />
           )}
         </div>
-      </Link>
+      </LocalizedClientLink>
     </motion.div>
   );
 };

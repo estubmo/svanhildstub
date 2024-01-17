@@ -1,45 +1,54 @@
+import { retrievePricedProductById } from '@lib/data';
+import { getProductPrice } from '@lib/util/get-product-price';
+import { Region } from '@medusajs/medusa';
 import { Text } from '@medusajs/ui';
-import clsx from 'clsx';
-import Link from 'next/link';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import { ProductPreviewType } from 'types/global';
 
 import Thumbnail from '../thumbnail';
+import PreviewPrice from './price';
 
-const ProductPreview = ({
-  title,
-  handle,
-  thumbnail,
-  price,
+export default async function ProductPreview({
+  productPreview,
   isFeatured,
-}: ProductPreviewType) => (
-  <Link href={`/store/products/${handle}`} className="group">
-    <div>
-      <Thumbnail thumbnail={thumbnail} size="full" isFeatured={isFeatured} />
-      <div className="txt-compact-medium mt-4 flex justify-between">
-        <Text className="text-ui-fg-subtle">{title}</Text>
-        <div className="flex items-center gap-x-2">
-          {price ? (
-            <>
-              {price.price_type === 'sale' && (
-                <Text className="text-ui-fg-muted line-through">
-                  {price.original_price}
-                </Text>
-              )}
-              <Text
-                className={clsx('text-ui-fg-muted', {
-                  'text-ui-fg-interactive': price.price_type === 'sale',
-                })}
-              >
-                {price.calculated_price}
-              </Text>
-            </>
-          ) : (
-            <div className="h-6 w-20 animate-pulse bg-gray-200"></div>
-          )}
+  region,
+}: {
+  productPreview: ProductPreviewType;
+  isFeatured?: boolean;
+  region: Region;
+}) {
+  const pricedProduct = await retrievePricedProductById({
+    id: productPreview.id,
+    regionId: region.id,
+  }).then((product) => product);
+
+  if (!pricedProduct) {
+    return null;
+  }
+
+  const { cheapestPrice } = getProductPrice({
+    product: pricedProduct,
+    region,
+  });
+
+  return (
+    <LocalizedClientLink
+      href={`/store/products/${productPreview.handle}`}
+      className="group"
+    >
+      <div>
+        <Thumbnail
+          thumbnail={productPreview.thumbnail}
+          size="full"
+          isFeatured={isFeatured}
+        />
+        <div className="txt-compact-medium mt-4 flex justify-between">
+          <Text className="text-ui-fg-subtle">{productPreview.title}</Text>
+          <div className="flex items-center gap-x-2">
+            {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
+          </div>
         </div>
       </div>
-    </div>
-  </Link>
-);
-
-export default ProductPreview;
+    </LocalizedClientLink>
+  );
+}

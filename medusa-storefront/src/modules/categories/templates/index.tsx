@@ -1,127 +1,76 @@
-'use client';
-
-import {
-    getProductsByCategoryHandle,
-    ProductCategoryWithChildren,
-} from '@lib/data';
-import usePreviews from '@lib/hooks/use-previews';
-import getNumberOfSkeletons from '@lib/util/get-number-of-skeletons';
-import repeat from '@lib/util/repeat';
-import UnderlineLink from '@modules/common/components/interactive-link';
-import ProductPreview from '@modules/products/components/product-preview';
-import SkeletonProductPreview from '@modules/skeletons/components/skeleton-product-preview';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useCart } from 'medusa-react';
-import Link from 'next/link';
+import InteractiveLink from '@modules/common/components/interactive-link';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
+import SkeletonProductGrid from '@modules/skeletons/templates/skeleton-product-grid';
+import RefinementList from '@modules/store/components/refinement-list';
+import { SortOptions } from '@modules/store/components/refinement-list/sort-products';
+import PaginatedProducts from '@modules/store/templates/paginated-products';
 import { notFound } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { Suspense } from 'react';
+import { ProductCategoryWithChildren } from 'types/global';
 
-type CategoryTemplateProps = {
-  categories: ProductCategoryWithChildren[];
-};
-
-const CategoryTemplate: React.FC<CategoryTemplateProps> = ({ categories }) => {
-  const { cart } = useCart();
-  const { ref, inView } = useInView();
+export default function CategoryTemplate({
+  categories,
+  sortBy,
+  page,
+  countryCode,
+}: {
+  categories: Array<ProductCategoryWithChildren>;
+  sortBy?: SortOptions;
+  page?: string;
+  countryCode: string;
+}) {
+  const pageNumber = page ? parseInt(page) : 1;
 
   const category = categories[categories.length - 1];
   const parents = categories.slice(0, categories.length - 1);
 
-  if (!category) notFound();
-
-  const {
-    data: infiniteData,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-    refetch,
-  } = useInfiniteQuery(
-    [`get_category_products`, category.handle, cart?.id],
-    ({ pageParam }) =>
-      getProductsByCategoryHandle({
-        pageParam,
-        handle: category.handle!,
-        cartId: cart?.id,
-        currencyCode: cart?.region?.currency_code,
-      }),
-    {
-      getNextPageParam: (lastPage) => lastPage.nextPage,
-    },
-  );
-
-  useEffect(() => {
-    if (cart?.region_id) {
-      refetch();
-    }
-  }, [cart?.region_id, refetch]);
-
-  const previews = usePreviews({
-    pages: infiniteData?.pages,
-    region: cart?.region,
-  });
-
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inView, hasNextPage]);
+  if (!category || !countryCode) notFound();
 
   return (
-    <div className="content-container py-6">
-      <div className="text-2xl-semi mb-8 flex flex-row gap-4">
-        {parents &&
-          parents.map((parent) => (
-            <span key={parent.id} className="text-gray-500">
-              <Link
+    <div className="content-container flex flex-col py-6 small:flex-row small:items-start">
+      <RefinementList sortBy={sortBy || 'created_at'} />
+      <div className="w-full">
+        <div className="text-2xl-semi mb-8 flex flex-row gap-4">
+          {parents?.map((parent) => (
+            <span key={parent.id} className="text-ui-fg-subtle">
+              <LocalizedClientLink
                 className="mr-4 hover:text-black"
-                href={`/${parent.handle}`}
+                href={`/store/categories/${parent.handle}`}
               >
                 {parent.name}
-              </Link>
+              </LocalizedClientLink>
               /
             </span>
           ))}
-        <h1>{category.name}</h1>
-      </div>
-      {category.description && (
-        <div className="text-base-regular mb-8">
-          <p>{category.description}</p>
+          <h1>{category.name}</h1>
         </div>
-      )}
-      {category.category_children && (
-        <div className="text-base-large mb-8">
-          <ul className="grid grid-cols-1 gap-2">
-            {category.category_children?.map((c) => (
-              <li key={c.id}>
-                <UnderlineLink href={`/store/${c.handle}`}>{c.name}</UnderlineLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-8 small:grid-cols-3 medium:grid-cols-4">
-        {previews.map((p) => (
-          <li key={p.id}>
-            <ProductPreview {...p} />
-          </li>
-        ))}
-        {isFetchingNextPage &&
-          repeat(getNumberOfSkeletons(infiniteData?.pages)).map((index) => (
-            <li key={index}>
-              <SkeletonProductPreview />
-            </li>
-          ))}
-      </ul>
-      <div
-        className="text-small-regular flex items-center justify-center py-16 text-ui-fg-subtle"
-        ref={ref}
-      >
-        <span ref={ref}></span>
+        {category.description && (
+          <div className="text-base-regular mb-8">
+            <p>{category.description}</p>
+          </div>
+        )}
+        {category.category_children && (
+          <div className="text-base-large mb-8">
+            <ul className="grid grid-cols-1 gap-2">
+              {category.category_children?.map((c) => (
+                <li key={c.id}>
+                  <InteractiveLink href={`/store/categories/${c.handle}`}>
+                    {c.name}
+                  </InteractiveLink>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <Suspense fallback={<SkeletonProductGrid />}>
+          <PaginatedProducts
+            sortBy={sortBy || 'created_at'}
+            page={pageNumber}
+            categoryId={category.id}
+            countryCode={countryCode}
+          />
+        </Suspense>
       </div>
     </div>
   );
-};
-
-export default CategoryTemplate;
+}

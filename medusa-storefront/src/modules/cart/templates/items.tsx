@@ -4,7 +4,7 @@ import Item from '@modules/cart/components/item';
 import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item';
 
 type ItemsTemplateProps = {
-  items?: Omit<LineItem, 'beforeInsert'>[];
+  items?: Array<Omit<LineItem, 'beforeInsert'>>;
   region?: Region;
 };
 

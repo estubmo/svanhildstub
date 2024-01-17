@@ -1,40 +1,29 @@
-'use client';
-
-import { useAccount } from '@lib/context/account-context';
+import { Customer } from '@medusajs/medusa';
 import UnderlineLink from '@modules/common/components/interactive-link';
-import Spinner from '@modules/common/icons/spinner';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import AccountNav from '../components/account-nav';
 
-const AccountLayout: React.FC = ({ children }) => {
-  const { customer, retrievingCustomer, checkSession } = useAccount();
+interface AccountLayoutProps {
+  customer: Omit<Customer, 'password_hash'> | null;
+  children: React.ReactNode;
+}
 
-  useEffect(() => {
-    checkSession();
-  }, [checkSession]);
-
-  if (retrievingCustomer || !customer) {
-    return (
-      <div className="flex h-full min-h-[640px] w-full items-center justify-center text-ui-fg-base">
-        <Spinner size={36} />
-      </div>
-    );
-  }
-
+const AccountLayout: React.FC<AccountLayoutProps> = ({
+  customer,
+  children,
+}) => {
   return (
     <div className="flex-1 small:py-12">
-      <div className="mx-auto flex h-full max-w-5xl flex-1 flex-col bg-ui-bg-base">
-        <div className="grid grid-cols-1 px-8 py-12 small:grid-cols-[240px_1fr]">
-          <div>
-            <AccountNav />
-          </div>
+      <div className="content-container mx-auto flex h-full max-w-5xl flex-1 flex-col bg-ui-bg-base">
+        <div className="grid grid-cols-1 py-12 small:grid-cols-[240px_1fr]">
+          <div>{customer && <AccountNav customer={customer} />}</div>
           <div className="flex-1">{children}</div>
         </div>
-        <div className="flex flex-col items-end justify-between gap-x-8 border-gray-200 px-8 py-12 small:flex-row small:border-t">
+        <div className="flex flex-col items-end justify-between gap-8 border-gray-200 py-12 small:flex-row small:border-t">
           <div>
             <h3 className="text-xl-semi mb-4">Got questions?</h3>
-            <span className="text-small-regular">
+            <span className="txt-medium">
               You can find frequently asked questions and answers on our
               customer service page.
             </span>

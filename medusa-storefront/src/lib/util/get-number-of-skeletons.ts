@@ -6,7 +6,7 @@
 
 import { InfiniteProductPage } from 'types/global';
 
-const getNumberOfSkeletons = (pages?: InfiniteProductPage[]) => {
+const getNumberOfSkeletons = (pages?: Array<InfiniteProductPage>) => {
   if (!pages) {
     return 0;
   }

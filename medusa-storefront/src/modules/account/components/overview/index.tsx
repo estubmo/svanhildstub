@@ -1,76 +1,21 @@
+import { formatAmount } from '@lib/util/prices';
 import { Customer, Order } from '@medusajs/medusa';
 import { Container } from '@medusajs/ui';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import ChevronDown from '@modules/common/icons/chevron-down';
-import MapPin from '@modules/common/icons/map-pin';
-import Package from '@modules/common/icons/package';
-import User from '@modules/common/icons/user';
-import { formatAmount } from 'medusa-react';
-import Link from 'next/link';
 
 type OverviewProps = {
-  orders?: Order[];
-  customer?: Omit<Customer, 'password_hash'>;
+  customer: Omit<Customer, 'password_hash'> | null;
+  orders: Array<Order> | null;
 };
 
-const Overview = ({ orders, customer }: OverviewProps) => {
+const Overview = ({ customer, orders }: OverviewProps) => {
   return (
     <div>
-      <div className="small:hidden">
-        <div className="text-xl-semi mb-4 px-8">
-          Hello {customer?.first_name}
-        </div>
-        <div className="text-base-regular">
-          <ul>
-            <li>
-              <Link
-                href="/account/profile"
-                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
-              >
-                <>
-                  <div className="flex items-center gap-x-2">
-                    <User size={16} />
-                    <span>Profile</span>
-                  </div>
-                  <ChevronDown className="-rotate-90 transform" />
-                </>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/account/addresses"
-                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
-              >
-                <>
-                  <div className="flex items-center gap-x-2">
-                    <MapPin size={16} />
-                    <span>Addresses</span>
-                  </div>
-                  <ChevronDown className="-rotate-90 transform" />
-                </>
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/account/orders"
-                className="flex items-center justify-between border-b border-gray-200 px-8 py-4"
-              >
-                <>
-                  <div className="flex items-center gap-x-2">
-                    <Package size={16} />
-                    <span>Orders</span>
-                  </div>
-                  <ChevronDown className="-rotate-90 transform" />
-                </>
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </div>
-
       <div className="hidden small:block">
-        <div className="text-xl-semi mb-4 flex items-start justify-between">
+        <div className="text-xl-semi mb-4 flex items-center justify-between">
           <span>Hello {customer?.first_name}</span>
-          <span className="text-small-regular text-ui-fg-muted">
+          <span className="text-small-regular text-ui-fg-base">
             Signed in as:{' '}
             <span className="font-semibold">{customer?.email}</span>
           </span>
@@ -84,7 +29,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                   <span className="text-3xl-semi leading-none">
                     {getProfileCompletion(customer)}%
                   </span>
-                  <span className="text-base-regular uppercase text-gray-500">
+                  <span className="text-base-regular uppercase text-ui-fg-subtle">
                     Completed
                   </span>
                 </div>
@@ -96,7 +41,7 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                   <span className="text-3xl-semi leading-none">
                     {customer?.shipping_addresses?.length || 0}
                   </span>
-                  <span className="text-base-regular uppercase text-gray-500">
+                  <span className="text-base-regular uppercase text-ui-fg-subtle">
                     Saved
                   </span>
                 </div>
@@ -108,12 +53,14 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                 <h3 className="text-large-semi">Recent orders</h3>
               </div>
               <ul className="flex flex-col gap-y-4">
-                {orders ? (
+                {orders && orders.length > 0 ? (
                   orders.slice(0, 5).map((order) => {
                     return (
                       <li key={order.id}>
-                        <Link href={`/store/order/details/${order.id}`}>
-                          <Container className="flex items-center justify-between bg-ui-bg-base p-4">
+                        <LocalizedClientLink
+                          href={`/account/orders/details/${order.id}`}
+                        >
+                          <Container className="flex items-center justify-between bg-gray-50 p-4">
                             <div className="text-small-regular grid flex-1 grid-cols-3 grid-rows-2 gap-x-4">
                               <span className="font-semibold">Date placed</span>
                               <span className="font-semibold">
@@ -134,17 +81,14 @@ const Overview = ({ orders, customer }: OverviewProps) => {
                                 })}
                               </span>
                             </div>
-                            <button
-                              className="flex items-center justify-between"
-                              onClick={close}
-                            >
+                            <button className="flex items-center justify-between">
                               <span className="sr-only">
                                 Go to order #{order.display_id}
                               </span>
                               <ChevronDown className="-rotate-90" />
                             </button>
                           </Container>
-                        </Link>
+                        </LocalizedClientLink>
                       </li>
                     );
                   })
@@ -160,7 +104,9 @@ const Overview = ({ orders, customer }: OverviewProps) => {
   );
 };
 
-const getProfileCompletion = (customer?: Omit<Customer, 'password_hash'>) => {
+const getProfileCompletion = (
+  customer: Omit<Customer, 'password_hash'> | null,
+) => {
   let count = 0;
 
   if (!customer) {

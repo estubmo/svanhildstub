@@ -1,5 +1,7 @@
+import { ArrowUpRightMini } from '@medusajs/icons';
+import { Text } from '@medusajs/ui';
 import Footer from '@modules/layout/templates/footer';
-import LandingNav from '@modules/layout/templates/landing-nav';
+import Nav from '@modules/layout/templates/nav';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -11,21 +13,22 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <>
-      <LandingNav />
+      <Nav />
+      <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center gap-4">
+        <h1 className="text-2xl-semi text-ui-fg-base">Page not found</h1>
+        <p className="text-small-regular text-ui-fg-base">
+          The page you tried to access does not exist.
+        </p>
 
-    <div className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center">
-      <h1 className="text-2xl-semi text-ui-tag-neutral-text">Page not found</h1>
-      <p className="text-small-regular text-ui-tag-neutral-text">
-        The page you tried to access does not exist.
-      </p>
-      <Link
-        href="/"
-        className="text-base-regular mt-4 text-ui-fg-interactive underline"
-      >
-        Go to frontpage
-      </Link>
-    </div>
-    <Footer/>
+        <Link className="group flex items-center gap-x-1" href="/">
+          <Text className="text-ui-fg-interactive">Go to frontpage</Text>
+          <ArrowUpRightMini
+            className="duration-150 ease-in-out group-hover:rotate-45"
+            color="var(--fg-interactive)"
+          />
+        </Link>
+      </div>
+      <Footer />
     </>
   );
 }

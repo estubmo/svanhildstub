@@ -59,7 +59,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
               <PaymentTest className="hidden small:block" />
             )}
           </div>
-          <span className="justify-self-end text-ui-fg-subtle">
+          <span className="justify-self-end text-ui-fg-base">
             {paymentInfoMap[paymentSession.provider_id]?.icon}
           </span>
         </div>

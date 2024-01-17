@@ -1,8 +1,9 @@
+'use client';
+
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 import Back from '@modules/common/icons/back';
 import FastDelivery from '@modules/common/icons/fast-delivery';
 import Refresh from '@modules/common/icons/refresh';
-import { useMemo } from 'react';
 
 import Accordion from './accordion';
 
@@ -11,18 +12,16 @@ type ProductTabsProps = {
 };
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
-  const tabs = useMemo(() => {
-    return [
-      {
-        label: 'Product Information',
-        component: <ProductInfoTab product={product} />,
-      },
-      {
-        label: 'Shipping & Returns',
-        component: <ShippingInfoTab />,
-      },
-    ];
-  }, [product]);
+  const tabs = [
+    {
+      label: 'Product Information',
+      component: <ProductInfoTab product={product} />,
+    },
+    {
+      label: 'Shipping & Returns',
+      component: <ShippingInfoTab />,
+    },
+  ];
 
   return (
     <div className="w-full">

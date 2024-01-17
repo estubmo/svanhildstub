@@ -5,12 +5,12 @@ import { ChangeEvent } from 'react';
 
 type FilterRadioGroupProps = {
   title: string;
-  items: {
+  items: Array<{
     value: string;
     label: string;
-  }[];
+  }>;
   value: any;
-  handleChange: (...args: any[]) => void;
+  handleChange: (...args: Array<any>) => void;
 };
 
 const FilterRadioGroup = ({

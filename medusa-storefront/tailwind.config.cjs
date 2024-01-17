@@ -1,7 +1,6 @@
 import tailwindTypography from '@tailwindcss/typography';
 import tailwindcssRadix from 'tailwindcss-radix';
 
-
 /** @type {import('tailwindcss').Config} */
 const config = {
   darkMode: 'class',

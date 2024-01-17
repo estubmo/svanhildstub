@@ -1,10 +1,11 @@
-"use client";
+'use client';
+
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import {
-    slideFromLeftVariants,
-    slideFromRightVariants,
-    slideUpTextVariants,
+  slideFromLeftVariants,
+  slideFromRightVariants,
+  slideUpTextVariants,
 } from 'utils/variants';
 
 import Parallax from './parallax';
@@ -77,8 +78,7 @@ const MonochromeParallax = () => {
             viewport={{ once: true, amount: 0.8 }}
             style={{ y: 0, x: 0 }}
           >
-
-              <Image
+            <Image
               alt="Monochrome Third Photo"
               src="/assets/images/monochrome/monochrome_003.webp"
               fill
@@ -98,14 +98,12 @@ const MonochromeParallax = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.8 }}
             >
-
-
               <Image
-              alt="Monochrome First Photo"
-              src="/assets/images/monochrome/monochrome_001.webp"
-              fill
-              className="object-cover"
-            />
+                alt="Monochrome First Photo"
+                src="/assets/images/monochrome/monochrome_001.webp"
+                fill
+                className="object-cover"
+              />
             </motion.div>
           </Parallax>
           <motion.div
@@ -115,9 +113,7 @@ const MonochromeParallax = () => {
             whileInView="visible"
             viewport={{ once: true, amount: 0.8 }}
           >
-
-
-           <Image
+            <Image
               alt="Monochrome Second Photo"
               src="/assets/images/monochrome/monochrome_002.webp"
               fill
@@ -132,14 +128,12 @@ const MonochromeParallax = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.8 }}
             >
-
-
-            <Image
-              alt="Monochrome Third Photo"
-              src="/assets/images/monochrome/monochrome_003.webp"
-              fill
-              className="object-cover"
-            />
+              <Image
+                alt="Monochrome Third Photo"
+                src="/assets/images/monochrome/monochrome_003.webp"
+                fill
+                className="object-cover"
+              />
             </motion.div>
           </Parallax>
         </div>
@@ -149,14 +143,14 @@ const MonochromeParallax = () => {
               variants={parentVariants}
               initial="hidden"
               animate="visible"
-              className="bg-[#CBC5BA] absolute bottom-96 z-20 mb-44 w-1/2 bg-opacity-80 p-2 md:bottom-1/2 md:right-10 md:mb-0 md:w-1/3"
+              className="absolute bottom-96 z-20 mb-44 ml-40 w-[240px] bg-[#CBC5BA] bg-opacity-80 p-2 md:bottom-0 md:right-10 md:mb-0 md:ml-auto"
             >
               <motion.h1
                 variants={slideFromRightVariants}
                 initial="offscreen"
                 whileInView="onscreen"
                 viewport={{ once: false, amount: 'some' }}
-                className="text-[#5B5752] relative w-full font-serif text-xl italic tracking-widest"
+                className="relative w-full font-serif text-xl italic tracking-widest text-[#5B5752]"
               >
                 &quot;Color is my day-long obsession, joy and{' '}
                 <motion.span
@@ -187,15 +181,12 @@ const MonochromeParallax = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.4 }}
               >
-
-
-
-              <Image
-              alt="Monochrome Full Photo"
-              src="/assets/images/monochrome/monochrome_full.webp"
-              fill
-              className="object-cover"
-            />
+                <Image
+                  alt="Monochrome Full Photo"
+                  src="/assets/images/monochrome/monochrome_full.webp"
+                  fill
+                  className="object-cover"
+                />
               </motion.div>
             </Scale>
           </div>
