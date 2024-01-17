@@ -24,7 +24,7 @@ const GalleryImage = ({ image, index }: GalleryImageProps) => {
         alt={`Product image ${index + 1}`}
         className="object-contain"
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 77vw, 50w"
+        sizes="100w"
         quality={85}
       />
     </div>
