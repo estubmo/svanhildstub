@@ -17,14 +17,14 @@ type GalleryImageProps = {
 
 const GalleryImage = ({ image, index }: GalleryImageProps) => {
   return (
-    <div className="relative w-full bg-ui-bg-subtle aspect-[29/34]">
+    <div className="relative min-h-[400px] w-full small:min-h-[250px] medium:min-h-[400px]">
       <Image
         src={image.url}
         priority={index <= 2 ? true : false}
         alt={`Product image ${index + 1}`}
-        className="object-cover"
+        className="object-contain"
         fill
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 77vw, 50vw"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 77vw, 50w"
         quality={85}
       />
     </div>
@@ -37,9 +37,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
       <div className="flex flex-1 flex-col gap-y-20 small:mx-16">
         {images.map((image, index) => {
           return (
-            <Zoom key={image.id} classDialog="custom-zoom"
-
-            >
+            <Zoom key={image.id} classDialog="custom-zoom">
               <GalleryImage image={image} index={index} />
             </Zoom>
           );
