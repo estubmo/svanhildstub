@@ -9,9 +9,9 @@ import {
   updateCart,
   updateItem,
 } from '@lib/data';
+import { omit } from '@lib/omit';
 import { LineItem } from '@medusajs/medusa';
 import { getRegion } from 'app/actions';
-import { omit } from 'lodash';
 import { revalidateTag } from 'next/cache';
 import { cookies } from 'next/headers';
 
@@ -119,6 +119,7 @@ export async function updateLineItem({
   try {
     await updateItem({ cartId, lineId, quantity });
     revalidateTag('cart');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     return e.toString();
   }
@@ -184,7 +185,7 @@ export async function enrichLineItems(
       ...item,
       variant: {
         ...variant,
-        product: omit(product, 'variants'),
+        product: omit(product, ['variants']),
       },
     };
   }) as Array<LineItem>;
