@@ -5,7 +5,7 @@ import CheckoutForm from '@modules/checkout/templates/checkout-form';
 import CheckoutSummary from '@modules/checkout/templates/checkout-summary';
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Checkout - Svanhild Stub',
@@ -23,6 +23,12 @@ const fetchCart = async () => {
 };
 
 export default async function Checkout() {
+
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === "true";
+  if (isOrdersDisabled) {
+    redirect("/store/cart");
+  }
+
   const cartId = cookies().get('_medusa_cart_id')?.value;
 
   if (!cartId) {

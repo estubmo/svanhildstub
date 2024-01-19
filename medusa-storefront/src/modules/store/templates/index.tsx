@@ -1,3 +1,4 @@
+import { OrdersDisabledDismissable } from '@modules/common/components/orders-disabled-dismissable';
 import SkeletonProductGrid from '@modules/skeletons/templates/skeleton-product-grid';
 import RefinementList from '@modules/store/components/refinement-list';
 import { SortOptions } from '@modules/store/components/refinement-list/sort-products';
@@ -20,6 +21,9 @@ const StoreTemplate = ({
     <div className="content-container flex flex-grow flex-col py-6 small:flex-row small:items-start">
       <RefinementList sortBy={sortBy || 'created_at'} />
       <div className="w-full">
+      <div className="flex w-full justify-center">
+        <OrdersDisabledDismissable />
+      </div>
         <div className="text-2xl-semi mb-8">
           <h1>All products</h1>
         </div>

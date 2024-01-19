@@ -32,6 +32,7 @@ const CartDropdown = ({
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCountrySelectOpen, setIsCountrySelectOpen] = useState(false);
   const [activeTimer, setActiveTimer] = useState<NodeJS.Timeout | null>(null);
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
 
   const { countryCode } = useParams();
   const currentPath = usePathname().split(`/${countryCode}`)[1];
@@ -228,7 +229,7 @@ const CartDropdown = ({
                       </g>
                     </svg>
                   </div>
-                  <span>Your shopping cart is empty.</span>
+                  <span>{ isOrdersDisabled ? "Orders are currently disabled." : "Your shopping cart is empty."}</span>
                   <div>
                     <LocalizedClientLink href="/store">
                       <>

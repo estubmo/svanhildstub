@@ -38,6 +38,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
 }) => {
   const { state, open, close } = useToggleState();
   const isOnlyOneVariant = product.variants.length === 1;
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
 
   const price = getProductPrice({
     product: product,
@@ -74,7 +75,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           <div className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-ui-bg-base p-4">
             <div className="flex items-center gap-x-2">
               <span>{product.title}</span>
-              {selectedPrice?.price_type &&<span>—</span>}
+              {selectedPrice?.price_type && <span>—</span>}
               {selectedPrice?.price_type ? (
                 <div className="flex items-end gap-x-2 text-ui-fg-base">
                   {selectedPrice.price_type === 'sale' && (
@@ -117,18 +118,23 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               <Button
                 onClick={handleAddToCart}
                 disabled={
-                  !inStock || !variant || !price.cheapestPrice?.price_type
+                  !inStock ||
+                  !variant ||
+                  !price.cheapestPrice?.price_type ||
+                  isOrdersDisabled
                 }
                 className={clx('w-full', isOnlyOneVariant && 'col-span-2')}
                 isLoading={isAdding}
               >
                 {!price.cheapestPrice?.price_type
                   ? 'Not currently for sale'
-                  : !variant
-                    ? 'Select variant'
-                    : !inStock
-                      ? 'Sold'
-                      : 'Add to cart'}
+                  : isOrdersDisabled
+                    ? 'Orders are currently disabled'
+                    : !variant
+                      ? 'Select variant'
+                      : !inStock
+                        ? 'Sold'
+                        : 'Add to cart'}
               </Button>
             </div>
           </div>

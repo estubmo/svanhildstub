@@ -33,6 +33,7 @@ export default function ProductActions({
 }: ProductActionsProps): JSX.Element {
   const [options, setOptions] = useState<Record<string, string>>({});
   const [isAdding, setIsAdding] = useState(false);
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
 
   const countryCode = useParams().countryCode as string;
 
@@ -153,13 +154,15 @@ export default function ProductActions({
 
         <Button
           onClick={handleAddToCart}
-          disabled={!inStock || !variant || !cheapestPrice?.price_type}
+          disabled={!inStock || !variant || !cheapestPrice?.price_type || isOrdersDisabled}
           variant="primary"
           className="h-10 w-full"
           isLoading={isAdding}
         >
           {!cheapestPrice?.price_type
             ? 'Not currently for sale'
+            : isOrdersDisabled
+            ? 'Orders are currently disabled'
             : !variant
               ? 'Select variant'
               : !inStock
