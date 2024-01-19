@@ -1,6 +1,8 @@
 'use client';
 
 import { useIntersection } from '@lib/hooks/use-in-view';
+import { isEqual } from '@lib/is-equal';
+import { getProductPrice } from '@lib/util/get-product-price';
 import { Region } from '@medusajs/medusa';
 import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
 import { Button } from '@medusajs/ui';
@@ -10,7 +12,6 @@ import OptionSelect from '@modules/products/components/option-select';
 import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-import { isEqual } from '@lib/is-equal';
 import MobileActions from '../mobile-actions';
 import ProductPrice from '../product-price';
 
@@ -80,6 +81,12 @@ export default function ProductActions({
     return variants.find((v) => v.id === variantId);
   }, [options, variantRecord, variants]);
 
+  const { cheapestPrice } = getProductPrice({
+    product,
+    variantId: variant?.id,
+    region,
+  });
+
   // if product only has one variant, then select it
   useEffect(() => {
     if (variants.length === 1 && variants[0].id) {
@@ -146,16 +153,18 @@ export default function ProductActions({
 
         <Button
           onClick={handleAddToCart}
-          disabled={!inStock || !variant}
+          disabled={!inStock || !variant || !cheapestPrice?.price_type}
           variant="primary"
           className="h-10 w-full"
           isLoading={isAdding}
         >
-          {!variant
-            ? 'Select variant'
-            : !inStock
-              ? 'Out of stock'
-              : 'Add to cart'}
+          {!cheapestPrice?.price_type
+            ? 'Not currently for sale'
+            : !variant
+              ? 'Select variant'
+              : !inStock
+                ? 'Sold'
+                : 'Add to cart'}
         </Button>
         <MobileActions
           product={product}

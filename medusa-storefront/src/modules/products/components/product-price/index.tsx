@@ -27,6 +27,10 @@ export default function ProductPrice({
     return <div className="block h-9 w-32 animate-pulse bg-gray-100" />;
   }
 
+  if (!selectedPrice.price_type) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col text-ui-fg-base">
       <span

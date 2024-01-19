@@ -74,8 +74,8 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           <div className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-ui-bg-base p-4">
             <div className="flex items-center gap-x-2">
               <span>{product.title}</span>
-              <span>—</span>
-              {selectedPrice ? (
+              {selectedPrice?.price_type &&<span>—</span>}
+              {selectedPrice?.price_type ? (
                 <div className="flex items-end gap-x-2 text-ui-fg-base">
                   {selectedPrice.price_type === 'sale' && (
                     <p>
@@ -84,17 +84,19 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                       </span>
                     </p>
                   )}
-                  <span
-                    className={clx({
-                      'text-ui-fg-interactive':
-                        selectedPrice.price_type === 'sale',
-                    })}
-                  >
-                    {selectedPrice.calculated_price}
-                  </span>
+                  {selectedPrice.price_type && (
+                    <span
+                      className={clx({
+                        'text-ui-fg-interactive':
+                          selectedPrice.price_type === 'sale',
+                      })}
+                    >
+                      {selectedPrice.calculated_price}
+                    </span>
+                  )}
                 </div>
               ) : (
-                <div></div>
+                <></>
               )}
             </div>
             <div className="grid w-full grid-cols-2 gap-x-4">
@@ -114,15 +116,19 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               </Button>
               <Button
                 onClick={handleAddToCart}
-                disabled={!inStock || !variant}
+                disabled={
+                  !inStock || !variant || !price.cheapestPrice?.price_type
+                }
                 className={clx('w-full', isOnlyOneVariant && 'col-span-2')}
                 isLoading={isAdding}
               >
-                {!variant
-                  ? 'Select variant'
-                  : !inStock
-                    ? 'Out of stock'
-                    : 'Add to cart'}
+                {!price.cheapestPrice?.price_type
+                  ? 'Not currently for sale'
+                  : !variant
+                    ? 'Select variant'
+                    : !inStock
+                      ? 'Sold'
+                      : 'Add to cart'}
               </Button>
             </div>
           </div>

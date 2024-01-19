@@ -3,6 +3,9 @@ import { clx, Text } from '@medusajs/ui';
 import { PriceType } from '../product-actions';
 
 export default async function PreviewPrice({ price }: { price: PriceType }) {
+
+  if (!price.price_type) return null;
+
   return (
     <>
       {price.price_type === 'sale' && (
