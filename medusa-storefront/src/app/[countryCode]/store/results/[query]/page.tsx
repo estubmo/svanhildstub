@@ -38,3 +38,5 @@ export default async function SearchResults({ params, searchParams }: Params) {
     />
   );
 }
+
+export const dynamic = 'force-dynamic';
