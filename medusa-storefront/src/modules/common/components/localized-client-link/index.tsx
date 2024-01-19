@@ -23,8 +23,14 @@ function LocalizedClientLink(
 ) {
   const { countryCode } = useParams();
 
+  let newHref = `/${countryCode}${href}`;
+
+  if (newHref.includes('undefined/')) {
+    newHref = newHref.replace('undefined/', '');
+  }
+
   return (
-    <Link ref={ref} href={`/${countryCode}${href}`} {...props}>
+    <Link ref={ref} href={newHref} {...props}>
       {children}
     </Link>
   );
