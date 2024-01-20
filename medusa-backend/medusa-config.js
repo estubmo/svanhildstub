@@ -92,7 +92,16 @@ const plugins = [
       webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
     },
   },
+  {
+    resolve: `medusa-plugin-sendgrid`,
+    options: {
+      api_key: process.env.SENDGRID_API_KEY,
+      from: process.env.SENDGRID_FROM,
+      order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
+    },
+  },
 ];
+console.log("🚀 ~ process.env.SENDGRID_API_KEY:", process.env.SENDGRID_API_KEY)
 
 const modules = {
   eventBus: {
