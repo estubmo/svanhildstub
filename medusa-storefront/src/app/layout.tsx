@@ -1,5 +1,5 @@
 import Providers from '@modules/providers';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 import 'styles/globals.css';
 
@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   title: 'Svanhild Stub',
   description:
     'Svanhild Stub is a Norwegian artist and painter. She is known for her unique abstract work.',
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  interactiveWidget: "resizes-content", // This is here so that OSK resize the content instead of overlapping it
 };
 
 type RootLayoutProps = {
