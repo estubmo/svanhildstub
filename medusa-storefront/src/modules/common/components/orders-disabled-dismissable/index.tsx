@@ -16,7 +16,7 @@ export function OrdersDisabledDismissable() {
     setOrdersDisabledSeen(true);
   };
 
-  if (!process.env.NEXT_PUBLIC_DISABLE_ORDERS) return null;
+  if (!process.env.NEXT_PUBLIC_DISABLE_ORDERS || process.env.NEXT_PUBLIC_DISABLE_ORDERS === "false") return null;
   if (ordersDisabledSeen) return null;
   return (
     <div className="w-full md:max-w-md">
