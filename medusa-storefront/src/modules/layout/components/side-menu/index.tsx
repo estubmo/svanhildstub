@@ -61,7 +61,7 @@ const SideMenu = ({ regions }: { regions: Array<Region> | null }) => {
             </div>
           </Dialog.Trigger>
           <Dialog.Portal>
-            <Dialog.Content className="2xl:w-1/ fixed inset-x-0 top-0 z-40 m-2 flex h-[calc(100vh-1rem)] w-full flex-col rounded-[6px] pr-4 text-sm text-ui-fg-on-color backdrop-blur-2xl focus:outline-none data-[state=closed]:animate-[content-hide_300ms] data-[state=open]:animate-[content-show_300ms] sm:w-1/3 sm:min-w-min sm:pr-0">
+            <Dialog.Content className="2xl:w-1/ fixed inset-x-0 top-0 z-40 m-2 flex h-[calc(100vh-2rem)] w-full flex-col rounded-[6px] pr-4 text-sm text-ui-fg-on-color backdrop-blur-2xl focus:outline-none data-[state=closed]:animate-[content-hide_300ms] data-[state=open]:animate-[content-show_300ms] sm:w-1/3 sm:min-w-min sm:pr-0">
               <div className="flex h-full flex-col justify-between rounded-rounded bg-[rgba(3,7,18,0.5)] p-6">
                 <div className="flex justify-end" id="xmark">
                   <button onClick={() => setIsOpen(false)}>
@@ -87,7 +87,7 @@ const SideMenu = ({ regions }: { regions: Array<Region> | null }) => {
                   <div className="flex items-center justify-between">
                     {regions && <CountrySelect regions={regions} />}
                   </div>
-                  <Text className="txt-compact-small flex justify-between">
+                  <Text className="txt-compact-small flex justify-between pb-4">
                     © {new Date().getFullYear()} Mo Web Dev. All rights
                     reserved.
                   </Text>
