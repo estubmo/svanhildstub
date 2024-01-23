@@ -229,7 +229,11 @@ const CartDropdown = ({
                       </g>
                     </svg>
                   </div>
-                  <span>{ isOrdersDisabled ? "Orders are currently disabled." : "Your shopping cart is empty."}</span>
+                  <span>
+                    {isOrdersDisabled
+                      ? 'Orders are currently disabled.'
+                      : 'Your shopping cart is empty.'}
+                  </span>
                   <div>
                     <LocalizedClientLink href="/store">
                       <>

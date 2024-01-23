@@ -2,6 +2,7 @@
 
 import { Cart } from '@medusajs/medusa';
 import { clx, Heading, Text } from '@medusajs/ui';
+import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import { useSearchParams } from 'next/navigation';
 
 import PaymentButton from '../payment-button';
@@ -41,9 +42,36 @@ const Review = ({
             <div className="w-full">
               <Text className="txt-medium-plus mb-1 text-ui-fg-base">
                 By clicking the Place Order button, you confirm that you have
-                read, understand and accept our Terms of Use, Terms of Sale and
-                Returns Policy and acknowledge that you have read Medusa
-                Store&apos;s Privacy Policy.
+                read, understand and accept our{' '}
+                <LocalizedClientLink
+                  href="/content/terms-of-use"
+                  className="underline"
+                >
+                  Terms of Use
+                </LocalizedClientLink>
+                ,{' '}
+                <LocalizedClientLink
+                  href="/content/terms-of-sale"
+                  className="underline"
+                >
+                  Terms of Sale
+                </LocalizedClientLink>{' '}
+                and{' '}
+                <LocalizedClientLink
+                  href="/content/return-policy"
+                  className="underline"
+                >
+                  Returns Policy
+                </LocalizedClientLink>{' '}
+                and acknowledge that you have read the Svanhild Stub
+                Store&apos;s{' '}
+                <LocalizedClientLink
+                  href="/content/privacy-policy"
+                  className="underline"
+                >
+                  Privacy Policy
+                </LocalizedClientLink>{' '}
+                .
               </Text>
             </div>
           </div>

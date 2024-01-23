@@ -27,11 +27,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     <div className="w-full">
       <Accordion type="multiple">
         {tabs.map((tab, i) => (
-          <Accordion.Item
-            key={i}
-            title={tab.label}
-            value={tab.label}
-          >
+          <Accordion.Item key={i} title={tab.label} value={tab.label}>
             {tab.component}
           </Accordion.Item>
         ))}

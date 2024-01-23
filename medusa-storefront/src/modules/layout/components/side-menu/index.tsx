@@ -87,7 +87,7 @@ const SideMenu = ({ regions }: { regions: Array<Region> | null }) => {
                   <div className="flex items-center justify-between">
                     {regions && <CountrySelect regions={regions} />}
                   </div>
-                  <Text className="txt-compact-small flex justify-between pb-4">
+                  <Text className="txt-compact-small flex justify-between pb-8">
                     © {new Date().getFullYear()} Mo Web Dev. All rights
                     reserved.
                   </Text>

@@ -30,7 +30,7 @@ export async function getRegion(countryCode: string) {
       : regionMap.get('us');
 
     return region;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     console.log(e.toString());
     return null;

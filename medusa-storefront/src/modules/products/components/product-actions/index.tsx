@@ -154,7 +154,12 @@ export default function ProductActions({
 
         <Button
           onClick={handleAddToCart}
-          disabled={!inStock || !variant || !cheapestPrice?.price_type || isOrdersDisabled}
+          disabled={
+            !inStock ||
+            !variant ||
+            !cheapestPrice?.price_type ||
+            isOrdersDisabled
+          }
           variant="primary"
           className="h-10 w-full"
           isLoading={isAdding}
@@ -162,12 +167,12 @@ export default function ProductActions({
           {!cheapestPrice?.price_type
             ? 'Not currently for sale'
             : isOrdersDisabled
-            ? 'Orders are currently disabled'
-            : !variant
-              ? 'Select variant'
-              : !inStock
-                ? 'Sold'
-                : 'Add to cart'}
+              ? 'Orders are currently disabled'
+              : !variant
+                ? 'Select variant'
+                : !inStock
+                  ? 'Sold'
+                  : 'Add to cart'}
         </Button>
         <MobileActions
           product={product}

@@ -23,10 +23,9 @@ const fetchCart = async () => {
 };
 
 export default async function Checkout() {
-
-  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === "true";
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
   if (isOrdersDisabled) {
-    redirect("/store/cart");
+    redirect('/store/cart');
   }
 
   const cartId = cookies().get('_medusa_cart_id')?.value;

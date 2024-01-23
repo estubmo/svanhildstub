@@ -19,13 +19,13 @@
     "paths": {
       "@lib/*": ["lib/*"],
       "@modules/*": ["modules/*"],
-      "@pages/*": ["pages/*"]
+      "@pages/*": ["pages/*"],
     },
     "plugins": [
       {
-        "name": "next"
-      }
-    ]
+        "name": "next",
+      },
+    ],
   },
   "include": [
     "next-env.d.ts",
@@ -40,7 +40,7 @@
     ".eslintrc.cjs",
     ".prettierrc.mjs",
     "tailwind.config.cjs",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
   ],
   "exclude": [
     "node_modules",
@@ -48,6 +48,6 @@
     ".nyc_output",
     "cypress-coverage",
     "coverage",
-    "jest-coverage"
-  ]
+    "jest-coverage",
+  ],
 }

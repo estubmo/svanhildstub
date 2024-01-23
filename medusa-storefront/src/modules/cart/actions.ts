@@ -119,7 +119,7 @@ export async function updateLineItem({
   try {
     await updateItem({ cartId, lineId, quantity });
     revalidateTag('cart');
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     return e.toString();
   }
