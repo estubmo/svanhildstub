@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     description:
       'Learn about Svanhild Stub and browse my gallery of unique abstract art.',
     images: [
-      { url: `${process.env.NEXT_PUBLIC_BASE_URL}/images/assets/ogImage.jpg` },
+      { url: `${process.env.NEXT_PUBLIC_BASE_URL}/assets/images/ogImage.jpg` },
     ],
   },
   creator: 'Mo Web Dev',
