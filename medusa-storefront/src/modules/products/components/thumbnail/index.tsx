@@ -1,6 +1,7 @@
 import { Image as MedusaImage } from '@medusajs/medusa';
 import { clx, Container } from '@medusajs/ui';
 import PlaceholderImage from '@modules/common/icons/placeholder-image';
+import { imageLoader } from 'loader';
 import Image from 'next/image';
 import React from 'react';
 
@@ -49,6 +50,7 @@ const ImageOrPlaceholder = ({
   return image ? (
     <Image
       src={image}
+      loader={imageLoader}
       alt="Thumbnail"
       className="absolute inset-0 object-cover object-center"
       draggable={false}

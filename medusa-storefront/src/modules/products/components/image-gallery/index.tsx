@@ -1,6 +1,7 @@
 'use client';
 
 import { Image as MedusaImage } from '@medusajs/medusa';
+import { imageLoader } from 'loader';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom';
 
@@ -20,6 +21,7 @@ const GalleryImage = ({ image, index }: GalleryImageProps) => {
     <div className="relative min-h-[400px] w-full small:min-h-[250px] medium:min-h-[400px]">
       <Image
         src={image.url}
+        loader={imageLoader}
         priority={index <= 2 ? true : false}
         alt={`Product image ${index + 1}`}
         className="object-contain"

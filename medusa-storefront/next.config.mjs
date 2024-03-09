@@ -8,8 +8,6 @@ const nextConfig = withStoreConfig({
   features: store.features,
   reactStrictMode: true,
   images: {
-    loader: 'custom',
-    loaderFile: './src/loader.js',
     remotePatterns: [
       {
         protocol: 'http',
