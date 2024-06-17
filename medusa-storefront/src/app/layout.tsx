@@ -20,9 +20,9 @@ export const metadata: Metadata = {
       'Learn about Svanhild Stub and browse my gallery of unique abstract art.',
     images: [
       {
-        url: 'https://www.svanhildstub.com/assets/images/ogImage.jpg', // Must be an absolute URL
-        width: 1001,
-        height: 848,
+        url: 'https://www.svanhildstub.com/assets/images/ogImage.png',
+        width: 1200,
+        height: 630,
       },
     ],
   },
