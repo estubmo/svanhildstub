@@ -1,12 +1,12 @@
 'use client';
 
-import { Order } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import { Button } from '@medusajs/ui';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 
 import OrderCard from '../order-card';
 
-const OrderOverview = ({ orders }: { orders: Array<Order> }) => {
+const OrderOverview = ({ orders }: { orders: Array<HttpTypes.StoreOrder> }) => {
   if (orders?.length) {
     return (
       <div className="flex w-full flex-col gap-y-8">
@@ -23,14 +23,19 @@ const OrderOverview = ({ orders }: { orders: Array<Order> }) => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center gap-y-4">
+    <div
+      className="flex w-full flex-col items-center gap-y-4"
+      data-testid="no-orders-container"
+    >
       <h2 className="text-large-semi">Nothing to see here</h2>
       <p className="text-base-regular">
         You don&apos;t have any orders yet, let us change that {':)'}
       </p>
       <div className="mt-4">
         <LocalizedClientLink href="/" passHref>
-          <Button>Continue shopping</Button>
+          <Button data-testid="continue-shopping-button">
+            Continue shopping
+          </Button>
         </LocalizedClientLink>
       </div>
     </div>

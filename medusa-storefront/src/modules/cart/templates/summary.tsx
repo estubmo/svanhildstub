@@ -1,18 +1,31 @@
 'use client';
 
+import { HttpTypes } from '@medusajs/types';
 import { Button, Heading } from '@medusajs/ui';
 import DiscountCode from '@modules/checkout/components/discount-code';
 import CartTotals from '@modules/common/components/cart-totals';
 import Divider from '@modules/common/components/divider';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
-import { CartWithCheckoutStep } from 'types/global';
 
 type SummaryProps = {
-  cart: CartWithCheckoutStep;
+  cart: HttpTypes.StoreCart & {
+    promotions: Array<HttpTypes.StorePromotion>;
+  };
 };
+
+function getCheckoutStep(cart: HttpTypes.StoreCart) {
+  if (!cart?.shipping_address?.address_1 || !cart.email) {
+    return 'address';
+  } else if (cart?.shipping_methods?.length === 0) {
+    return 'delivery';
+  } else {
+    return 'payment';
+  }
+}
 
 const Summary = ({ cart }: SummaryProps) => {
   const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
+  const step = getCheckoutStep(cart);
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -21,8 +34,12 @@ const Summary = ({ cart }: SummaryProps) => {
       </Heading>
       <DiscountCode cart={cart} />
       <Divider />
-      <CartTotals data={cart} />
-      <LocalizedClientLink href={`/checkout?step=${cart.checkout_step}`}>
+      <CartTotals totals={cart} />
+
+      <LocalizedClientLink
+        href={`/checkout?step=${step}`}
+        data-testid="checkout-button"
+      >
         <Button className="h-10 w-full" disabled={isOrdersDisabled}>
           {isOrdersDisabled
             ? 'Orders are currently disabled'

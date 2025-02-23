@@ -1,49 +1,42 @@
 import { Dialog, Transition } from '@headlessui/react';
 import useToggleState from '@lib/hooks/use-toggle-state';
 import { getProductPrice } from '@lib/util/get-product-price';
-import { Region } from '@medusajs/medusa';
-import {
-  PricedProduct,
-  PricedVariant,
-} from '@medusajs/medusa/dist/types/pricing';
+import { HttpTypes } from '@medusajs/types';
 import { Button, clx } from '@medusajs/ui';
 import ChevronDown from '@modules/common/icons/chevron-down';
 import X from '@modules/common/icons/x';
 import React, { Fragment, useMemo } from 'react';
 
-import OptionSelect from '../option-select';
+import OptionSelect from './option-select';
 
 type MobileActionsProps = {
-  product: PricedProduct;
-  variant?: PricedVariant;
-  region: Region;
-  options: Record<string, string>;
-  updateOptions: (update: Record<string, string>) => void;
+  product: HttpTypes.StoreProduct;
+  variant?: HttpTypes.StoreProductVariant;
+  options: Record<string, string | undefined>;
+  updateOptions: (title: string, value: string) => void;
   inStock?: boolean;
   handleAddToCart: () => void;
   isAdding?: boolean;
   show: boolean;
+  optionsDisabled: boolean;
 };
 
 const MobileActions: React.FC<MobileActionsProps> = ({
   product,
   variant,
-  region,
   options,
   updateOptions,
   inStock,
   handleAddToCart,
   isAdding,
   show,
+  optionsDisabled,
 }) => {
   const { state, open, close } = useToggleState();
-  const isOnlyOneVariant = product.variants.length === 1;
-  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
 
   const price = getProductPrice({
     product: product,
     variantId: variant?.id,
-    region,
   });
 
   const selectedPrice = useMemo(() => {
@@ -72,11 +65,14 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-ui-bg-base p-4">
+          <div
+            className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-white p-4"
+            data-testid="mobile-actions"
+          >
             <div className="flex items-center gap-x-2">
-              <span>{product.title}</span>
-              {selectedPrice?.price_type && <span>—</span>}
-              {selectedPrice?.price_type ? (
+              <span data-testid="mobile-title">{product.title}</span>
+              <span>—</span>
+              {selectedPrice ? (
                 <div className="flex items-end gap-x-2 text-ui-fg-base">
                   {selectedPrice.price_type === 'sale' && (
                     <p>
@@ -85,26 +81,25 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                       </span>
                     </p>
                   )}
-                  {selectedPrice.price_type && (
-                    <span
-                      className={clx({
-                        'text-ui-fg-interactive':
-                          selectedPrice.price_type === 'sale',
-                      })}
-                    >
-                      {selectedPrice.calculated_price}
-                    </span>
-                  )}
+                  <span
+                    className={clx({
+                      'text-ui-fg-interactive':
+                        selectedPrice.price_type === 'sale',
+                    })}
+                  >
+                    {selectedPrice.calculated_price}
+                  </span>
                 </div>
               ) : (
-                <></>
+                <div></div>
               )}
             </div>
             <div className="grid w-full grid-cols-2 gap-x-4">
               <Button
                 onClick={open}
                 variant="secondary"
-                className={clx('w-full', isOnlyOneVariant && 'hidden')}
+                className="w-full"
+                data-testid="mobile-actions-button"
               >
                 <div className="flex w-full items-center justify-between">
                   <span>
@@ -117,24 +112,16 @@ const MobileActions: React.FC<MobileActionsProps> = ({
               </Button>
               <Button
                 onClick={handleAddToCart}
-                disabled={
-                  !inStock ||
-                  !variant ||
-                  !price.cheapestPrice?.price_type ||
-                  isOrdersDisabled
-                }
-                className={clx('w-full', isOnlyOneVariant && 'col-span-2')}
+                disabled={!inStock || !variant}
+                className="w-full"
                 isLoading={isAdding}
+                data-testid="mobile-cart-button"
               >
-                {!price.cheapestPrice?.price_type
-                  ? 'Not currently for sale'
-                  : isOrdersDisabled
-                    ? 'Orders are currently disabled'
-                    : !variant
-                      ? 'Select variant'
-                      : !inStock
-                        ? 'Sold'
-                        : 'Add to cart'}
+                {!variant
+                  ? 'Select variant'
+                  : !inStock
+                    ? 'Out of stock'
+                    : 'Add to cart'}
               </Button>
             </div>
           </div>
@@ -165,26 +152,31 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
               >
-                <Dialog.Panel className="flex h-full w-full transform flex-col gap-y-3 overflow-hidden text-left">
+                <Dialog.Panel
+                  className="flex h-full w-full transform flex-col gap-y-3 overflow-hidden text-left"
+                  data-testid="mobile-actions-modal"
+                >
                   <div className="flex w-full justify-end pr-6">
                     <button
                       onClick={close}
-                      className="flex h-12 w-12 items-center justify-center rounded-full bg-ui-bg-base text-ui-fg-base"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-ui-fg-base"
+                      data-testid="close-modal-button"
                     >
                       <X />
                     </button>
                   </div>
-                  <div className="bg-ui-bg-base px-6 py-12">
-                    {product.variants.length > 1 && (
+                  <div className="bg-white px-6 py-12">
+                    {(product.variants?.length ?? 0) > 1 && (
                       <div className="flex flex-col gap-y-6">
                         {(product.options || []).map((option) => {
                           return (
                             <div key={option.id}>
                               <OptionSelect
                                 option={option}
-                                current={options[option.id]}
+                                current={options[option.title ?? '']}
                                 updateOption={updateOptions}
-                                title={option.title}
+                                title={option.title ?? ''}
+                                disabled={optionsDisabled}
                               />
                             </div>
                           );

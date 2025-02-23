@@ -1,26 +1,15 @@
-import { getCategoriesList, getCollectionsList } from '@lib/data';
+import { listCategories } from '@lib/data/categories';
+import { listCollections } from '@lib/data/collections';
 import { clx, Text } from '@medusajs/ui';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 
 import MedusaCTA from '../../components/medusa-cta';
 
-const fetchCollections = async () => {
-  const { collections } = await getCollectionsList();
-  return collections;
-};
-
-const fetchCategories = async () => {
-  const { product_categories } = await getCategoriesList();
-  return product_categories;
-};
-
 export default async function Footer() {
-  const productCollections = await fetchCollections().then(
-    (collections) => collections,
-  );
-  const productCategories = await fetchCategories().then(
-    (categories) => categories,
-  );
+  const { collections } = await listCollections({
+    fields: '*products',
+  });
+  const productCategories = await listCategories();
   return (
     <footer className="w-full border-t border-ui-border-base">
       <div className="content-container flex w-full flex-col">
@@ -87,7 +76,7 @@ export default async function Footer() {
                 </ul>
               </div>
             )}
-            {productCollections && productCollections.length > 0 && (
+            {collections && collections.length > 0 && (
               <div className="flex flex-col gap-y-2">
                 <span className="txt-ui-fg-base txt-small-plus">
                   Collections
@@ -96,11 +85,11 @@ export default async function Footer() {
                   className={clx(
                     'txt-small grid grid-cols-1 gap-2 text-ui-fg-subtle',
                     {
-                      'grid-cols-2': (productCollections?.length || 0) > 3,
+                      'grid-cols-2': (collections?.length || 0) > 3,
                     },
                   )}
                 >
-                  {productCollections?.slice(0, 6).map((c) => (
+                  {collections?.slice(0, 6).map((c) => (
                     <li key={c.id}>
                       <LocalizedClientLink
                         className="hover:text-ui-fg-base"

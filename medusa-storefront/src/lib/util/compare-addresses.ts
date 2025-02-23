@@ -1,28 +1,28 @@
-import { isEqual } from '@lib/is-equal';
-import { omit } from '@lib/omit';
-import { Address } from '@medusajs/medusa';
+import { isEqual, pick } from 'lodash';
 
-export default function compareAddresses(
-  address1?: Address | null,
-  address2?: Address | null,
-) {
-  if (!address1 || !address2) return false;
+export default function compareAddresses(address1: any, address2: any) {
   return isEqual(
-    omit(address1, [
-      'id',
-      'created_at',
-      'updated_at',
-      'deleted_at',
-      'metadata',
-      'customer_id',
+    pick(address1, [
+      'first_name',
+      'last_name',
+      'address_1',
+      'company',
+      'postal_code',
+      'city',
+      'country_code',
+      'province',
+      'phone',
     ]),
-    omit(address2, [
-      'id',
-      'created_at',
-      'updated_at',
-      'deleted_at',
-      'metadata',
-      'customer_id',
+    pick(address2, [
+      'first_name',
+      'last_name',
+      'address_1',
+      'company',
+      'postal_code',
+      'city',
+      'country_code',
+      'province',
+      'phone',
     ]),
   );
 }

@@ -1,5 +1,5 @@
-import { retrievePricedProductById } from '@lib/data';
-import { Region } from '@medusajs/medusa';
+import { listProducts } from '@lib/data/products';
+import { HttpTypes } from '@medusajs/types';
 import ProductActions from '@modules/products/components/product-actions';
 
 /**
@@ -10,13 +10,22 @@ export default async function ProductActionsWrapper({
   region,
 }: {
   id: string;
-  region: Region;
+  region: HttpTypes.StoreRegion;
 }) {
-  const product = await retrievePricedProductById({ id, regionId: region.id });
-
+  const product = await listProducts({
+    queryParams: { id: [id] },
+    regionId: region.id,
+  }).then(({ response }) => response.products[0]);
+  const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';
   if (!product) {
     return null;
   }
 
-  return <ProductActions product={product} region={region} />;
+  return (
+    <ProductActions
+      product={product}
+      region={region}
+      disabled={isOrdersDisabled}
+    />
+  );
 }

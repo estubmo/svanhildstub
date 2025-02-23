@@ -1,5 +1,4 @@
-import { Region } from '@medusajs/medusa';
-import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { HttpTypes } from '@medusajs/types';
 import ImageGallery from '@modules/products/components/image-gallery';
 import ProductActions from '@modules/products/components/product-actions';
 import ProductOnboardingCta from '@modules/products/components/product-onboarding-cta';
@@ -13,8 +12,8 @@ import React, { Suspense } from 'react';
 import ProductActionsWrapper from './product-actions-wrapper';
 
 type ProductTemplateProps = {
-  product: PricedProduct;
-  region: Region;
+  product: HttpTypes.StoreProduct;
+  region: HttpTypes.StoreRegion;
   countryCode: string;
 };
 
@@ -29,7 +28,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
-      <div className="content-container relative flex flex-col py-6 small:flex-row small:items-start">
+      <div
+        className="content-container relative flex flex-col py-6 small:flex-row small:items-start"
+        data-testid="product-container"
+      >
         <div className="flex w-full flex-col gap-y-6 py-8 small:sticky small:top-48 small:max-w-[300px] small:py-0">
           <ProductInfo product={product} />
           <ProductTabs product={product} />
@@ -37,16 +39,25 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
         <div className="relative block w-full">
           <ImageGallery images={product?.images || []} />
         </div>
-        <div className="z-10 flex w-full flex-col gap-y-12 py-8 small:sticky small:top-48 small:max-w-[300px] small:py-0">
+        <div className="flex w-full flex-col gap-y-12 py-8 small:sticky small:top-48 small:max-w-[300px] small:py-0">
           <ProductOnboardingCta />
           <Suspense
-            fallback={<ProductActions product={product} region={region} />}
+            fallback={
+              <ProductActions
+                disabled={true}
+                product={product}
+                region={region}
+              />
+            }
           >
             <ProductActionsWrapper id={product.id} region={region} />
           </Suspense>
         </div>
       </div>
-      <div className="content-container my-16 small:my-32">
+      <div
+        className="content-container my-16 small:my-32"
+        data-testid="related-products-container"
+      >
         <Suspense fallback={<SkeletonRelatedProducts />}>
           <RelatedProducts product={product} countryCode={countryCode} />
         </Suspense>

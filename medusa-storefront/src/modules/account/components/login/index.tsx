@@ -1,19 +1,22 @@
-import { logCustomerIn } from '@modules/account/actions';
+import { login } from '@lib/data/customer';
 import { LOGIN_VIEW } from '@modules/account/templates/login-template';
 import ErrorMessage from '@modules/checkout/components/error-message';
 import { SubmitButton } from '@modules/checkout/components/submit-button';
 import Input from '@modules/common/components/input';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void;
 };
 
 const Login = ({ setCurrentView }: Props) => {
-  const [message, formAction] = useFormState(logCustomerIn, null);
+  const [message, formAction] = useActionState(login, null);
 
   return (
-    <div className="flex w-full max-w-sm flex-col items-center">
+    <div
+      className="flex w-full max-w-sm flex-col items-center"
+      data-testid="login-page"
+    >
       <h1 className="text-large-semi mb-6 uppercase">Welcome back</h1>
       <p className="text-base-regular mb-8 text-center text-ui-fg-base">
         Sign in to access an enhanced shopping experience.
@@ -27,6 +30,7 @@ const Login = ({ setCurrentView }: Props) => {
             title="Enter a valid email address."
             autoComplete="email"
             required
+            data-testid="email-input"
           />
           <Input
             label="Password"
@@ -34,16 +38,20 @@ const Login = ({ setCurrentView }: Props) => {
             type="password"
             autoComplete="current-password"
             required
+            data-testid="password-input"
           />
         </div>
-        <ErrorMessage error={message} />
-        <SubmitButton className="mt-6 w-full">Sign in</SubmitButton>
+        <ErrorMessage error={message} data-testid="login-error-message" />
+        <SubmitButton data-testid="sign-in-button" className="mt-6 w-full">
+          Sign in
+        </SubmitButton>
       </form>
       <span className="text-small-regular mt-6 text-center text-ui-fg-base">
         Not a member?{' '}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
           className="underline"
+          data-testid="register-button"
         >
           Join us
         </button>

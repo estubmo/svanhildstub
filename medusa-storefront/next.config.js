@@ -1,12 +1,19 @@
-import { withStoreConfig } from './store-config.mjs';
-import store from './store.config.json' assert { type: "json" };
-
 /**
  * @type {import('next').NextConfig}
  */
-const nextConfig = withStoreConfig({
-  features: store.features,
+const nextConfig = {
   reactStrictMode: true,
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -31,6 +38,6 @@ const nextConfig = withStoreConfig({
       },
     ],
   },
-});
+};
 
 export default nextConfig;

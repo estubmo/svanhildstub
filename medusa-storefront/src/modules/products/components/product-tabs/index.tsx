@@ -1,6 +1,6 @@
 'use client';
 
-import { PricedProduct } from '@medusajs/medusa/dist/types/pricing';
+import { HttpTypes } from '@medusajs/types';
 import Back from '@modules/common/icons/back';
 import FastDelivery from '@modules/common/icons/fast-delivery';
 import Refresh from '@modules/common/icons/refresh';
@@ -8,7 +8,7 @@ import Refresh from '@modules/common/icons/refresh';
 import Accordion from './accordion';
 
 type ProductTabsProps = {
-  product: PricedProduct;
+  product: HttpTypes.StoreProduct;
 };
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
@@ -27,7 +27,12 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
     <div className="w-full">
       <Accordion type="multiple">
         {tabs.map((tab, i) => (
-          <Accordion.Item key={i} title={tab.label} value={tab.label}>
+          <Accordion.Item
+            key={i}
+            title={tab.label}
+            headingSize="medium"
+            value={tab.label}
+          >
             {tab.component}
           </Accordion.Item>
         ))}
@@ -69,11 +74,6 @@ const ProductInfoTab = ({ product }: ProductTabsProps) => {
           </div>
         </div>
       </div>
-      {product.tags?.length ? (
-        <div>
-          <span className="font-semibold">Tags</span>
-        </div>
-      ) : null}
     </div>
   );
 };
@@ -97,8 +97,8 @@ const ShippingInfoTab = () => {
           <div>
             <span className="font-semibold">Simple exchanges</span>
             <p className="max-w-sm">
-              Is the fit not quite right? No worries - we&apos;ll exchange your
-              product for a new one.
+              Is the something not quite right? No worries - we&apos;ll exchange
+              your product for a new one.
             </p>
           </div>
         </div>

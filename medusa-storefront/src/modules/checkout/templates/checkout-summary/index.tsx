@@ -1,17 +1,10 @@
 import { Heading } from '@medusajs/ui';
-import { retrieveCart } from '@modules/cart/actions';
 import ItemsPreviewTemplate from '@modules/cart/templates/preview';
 import DiscountCode from '@modules/checkout/components/discount-code';
 import CartTotals from '@modules/common/components/cart-totals';
 import Divider from '@modules/common/components/divider';
 
-const CheckoutSummary = async () => {
-  const cart = await retrieveCart().then((cart) => cart);
-
-  if (!cart) {
-    return null;
-  }
-
+const CheckoutSummary = ({ cart }: { cart: any }) => {
   return (
     <div className="sticky top-0 flex flex-col-reverse gap-y-8 py-8 small:flex-col small:py-0 ">
       <div className="flex w-full flex-col bg-ui-bg-base">
@@ -23,8 +16,8 @@ const CheckoutSummary = async () => {
           In your Cart
         </Heading>
         <Divider className="my-6" />
-        <CartTotals data={cart} />
-        <ItemsPreviewTemplate region={cart?.region} items={cart?.items} />
+        <CartTotals totals={cart} />
+        <ItemsPreviewTemplate cart={cart} />
         <div className="my-6">
           <DiscountCode cart={cart} />
         </div>

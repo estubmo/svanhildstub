@@ -1,4 +1,3 @@
-import { getCollectionsList } from '@lib/data';
 import Hero from '@modules/home/components/hero';
 import BackgroundFader from '@modules/home/components/hero/background-fader';
 import FrontpageFooter from '@modules/home/components/hero/frontpage-footer';
@@ -6,8 +5,6 @@ import MonochromeParallax from '@modules/home/components/hero/monochrome-paralla
 import MoroccoParallax from '@modules/home/components/hero/morocco-parallax';
 
 export default async function Home() {
-  const { collections, count } = await getCollectionsList(0, 3);
-
   return (
     <div className="-mt-16 flex max-h-full w-full flex-col">
       <Hero

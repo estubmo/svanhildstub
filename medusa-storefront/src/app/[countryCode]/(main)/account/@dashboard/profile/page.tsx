@@ -1,4 +1,5 @@
-import { getCustomer, listRegions } from '@lib/data';
+import { retrieveCustomer } from '@lib/data/customer';
+import { listRegions } from '@lib/data/regions';
 import ProfilePhone from '@modules/account//components/profile-phone';
 import ProfileBillingAddress from '@modules/account/components/profile-billing-address';
 import ProfileEmail from '@modules/account/components/profile-email';
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function Profile() {
-  const customer = await getCustomer();
+  const customer = await retrieveCustomer();
   const regions = await listRegions();
 
   if (!customer || !regions) {
@@ -21,7 +22,7 @@ export default async function Profile() {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-testid="profile-page-wrapper">
       <div className="mb-8 flex flex-col gap-y-4">
         <h1 className="text-2xl-semi">Profile</h1>
         <p className="text-base-regular">
@@ -37,8 +38,8 @@ export default async function Profile() {
         <Divider />
         <ProfilePhone customer={customer} />
         <Divider />
-        <ProfilePassword customer={customer} />
-        <Divider />
+        {/* <ProfilePassword customer={customer} />
+        <Divider /> */}
         <ProfileBillingAddress customer={customer} regions={regions} />
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { XMark } from '@medusajs/icons';
-import { Region } from '@medusajs/medusa';
+import { StoreRegion } from '@medusajs/types';
 import { clx, Text } from '@medusajs/ui';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -18,7 +18,7 @@ const SideMenuItems = {
   Cart: '/store/cart',
 };
 
-const SideMenu = ({ regions }: { regions: Array<Region> | null }) => {
+const SideMenu = ({ regions }: { regions: Array<StoreRegion> | null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {

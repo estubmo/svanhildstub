@@ -1,6 +1,7 @@
 'use client';
 
-import { Image as MedusaImage } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
+import { Container } from '@medusajs/ui';
 import { imageLoader } from 'loader';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom';
@@ -8,11 +9,11 @@ import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 
 type ImageGalleryProps = {
-  images: Array<MedusaImage>;
+  images: Array<HttpTypes.StoreProductImage>;
 };
 
 type GalleryImageProps = {
-  image: MedusaImage;
+  image: HttpTypes.StoreProductImage;
   index: number;
 };
 

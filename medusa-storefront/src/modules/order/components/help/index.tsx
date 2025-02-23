@@ -1,5 +1,6 @@
 import { Heading } from '@medusajs/ui';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
+import React from 'react';
 
 const Help = () => {
   return (
@@ -11,7 +12,7 @@ const Help = () => {
             <LocalizedClientLink href="/contact">Contact</LocalizedClientLink>
           </li>
           <li>
-            <LocalizedClientLink href="/returns">
+            <LocalizedClientLink href="/contact">
               Returns & Exchanges
             </LocalizedClientLink>
           </li>

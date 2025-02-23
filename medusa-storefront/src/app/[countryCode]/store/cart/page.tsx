@@ -1,38 +1,22 @@
-import { getCustomer } from '@lib/data';
-import { getCheckoutStep } from '@lib/util/get-checkout-step';
-import { LineItem } from '@medusajs/medusa';
-import { enrichLineItems, retrieveCart } from '@modules/cart/actions';
+import { retrieveCart } from '@lib/data/cart';
+import { retrieveCustomer } from '@lib/data/customer';
 import CartTemplate from '@modules/cart/templates';
 import { Metadata } from 'next';
-import { CartWithCheckoutStep } from 'types/global';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Cart - Svanhild Stub',
   description: 'View your cart',
 };
 
-const fetchCart = async () => {
-  const cart = await retrieveCart().then(
-    (cart) => cart as CartWithCheckoutStep,
-  );
+export default async function Cart() {
+  const cart = await retrieveCart();
+  console.info('DEBUGPRINT[172]: page.tsx:13: cart=', cart);
+  const customer = await retrieveCustomer();
 
   if (!cart) {
-    return null;
+    return notFound();
   }
-
-  if (cart?.items.length) {
-    const enrichedItems = await enrichLineItems(cart?.items, cart?.region_id);
-    cart.items = enrichedItems as Array<LineItem>;
-  }
-
-  cart.checkout_step = cart && getCheckoutStep(cart);
-
-  return cart;
-};
-
-export default async function Cart() {
-  const cart = await fetchCart();
-  const customer = await getCustomer();
 
   return <CartTemplate cart={cart} customer={customer} />;
 }

@@ -1,5 +1,7 @@
-import { listCustomerOrders } from '@lib/data';
+import { listOrders } from '@lib/data/orders';
 import OrderOverview from '@modules/account/components/order-overview';
+import TransferRequestForm from '@modules/account/components/transfer-request-form';
+import Divider from '@modules/common/components/divider';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -9,14 +11,14 @@ export const metadata: Metadata = {
 };
 
 export default async function Orders() {
-  const orders = await listCustomerOrders();
+  const orders = await listOrders();
 
   if (!orders) {
     notFound();
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full" data-testid="orders-page-wrapper">
       <div className="mb-8 flex flex-col gap-y-4">
         <h1 className="text-2xl-semi">Orders</h1>
         <p className="text-base-regular">
@@ -26,6 +28,8 @@ export default async function Orders() {
       </div>
       <div>
         <OrderOverview orders={orders} />
+        <Divider className="my-16" />
+        <TransferRequestForm />
       </div>
     </div>
   );

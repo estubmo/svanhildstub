@@ -1,13 +1,12 @@
-import { Region } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import ProductRail from '@modules/home/components/featured-products/product-rail';
-import { ProductCollectionWithPreviews } from 'types/global';
 
 export default async function FeaturedProducts({
   collections,
   region,
 }: {
-  collections: Array<ProductCollectionWithPreviews>;
-  region: Region;
+  collections: Array<HttpTypes.StoreCollection>;
+  region: HttpTypes.StoreRegion;
 }) {
   return collections.map((collection) => (
     <li key={collection.id}>

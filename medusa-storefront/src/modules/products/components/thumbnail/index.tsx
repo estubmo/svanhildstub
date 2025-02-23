@@ -1,4 +1,3 @@
-import { Image as MedusaImage } from '@medusajs/medusa';
 import { clx, Container } from '@medusajs/ui';
 import PlaceholderImage from '@modules/common/icons/placeholder-image';
 import { imageLoader } from 'loader';
@@ -7,10 +6,12 @@ import React from 'react';
 
 type ThumbnailProps = {
   thumbnail?: string | null;
-  images?: Array<MedusaImage> | null;
+  // TODO: Fix image typings
+  images?: Array<any> | null;
   size?: 'small' | 'medium' | 'large' | 'full' | 'square';
   isFeatured?: boolean;
   className?: string;
+  'data-testid'?: string;
 };
 
 const Thumbnail: React.FC<ThumbnailProps> = ({
@@ -19,6 +20,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   size = 'small',
   isFeatured,
   className,
+  'data-testid': dataTestid,
 }) => {
   const initialImage = thumbnail || images?.[0]?.url;
 
@@ -37,6 +39,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
           'w-full': size === 'full',
         },
       )}
+      data-testid={dataTestid}
     >
       <ImageOrPlaceholder image={initialImage} size={size} />
     </Container>
@@ -50,9 +53,9 @@ const ImageOrPlaceholder = ({
   return image ? (
     <Image
       src={image}
-      loader={imageLoader}
       alt="Thumbnail"
       className="absolute inset-0 object-cover object-center"
+      loader={imageLoader}
       draggable={false}
       quality={50}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"

@@ -1,7 +1,7 @@
-import { listRegions } from '@lib/data';
+import { listRegions } from '@lib/data/regions';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import SideMenu from '@modules/layout/components/side-menu';
-import NavbarSearchContainer from '@modules/search/components/navbar-search-container';
+// import NavbarSearchContainer from '@modules/search/components/navbar-search-container';
 import Image from 'next/image';
 import { Suspense } from 'react';
 
@@ -49,7 +49,8 @@ export default async function Nav() {
 
             <div className="absolute right-0 top-0 flex h-full items-center justify-end gap-x-6 pr-8">
               <div className="hidden small:flex">
-                <NavbarSearchContainer />
+                {/* <NavbarSearchContainer /> */}
+                {/* TODO: Re-enable */}
               </div>
               <div className="hidden h-full items-center gap-x-6 small:flex">
                 <LocalizedClientLink

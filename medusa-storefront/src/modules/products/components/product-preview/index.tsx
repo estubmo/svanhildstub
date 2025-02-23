@@ -1,49 +1,50 @@
-import { retrievePricedProductById } from '@lib/data';
+import { listProducts } from '@lib/data/products';
 import { getProductPrice } from '@lib/util/get-product-price';
-import { Region } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import { Text } from '@medusajs/ui';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
-import { ProductPreviewType } from 'types/global';
 
 import Thumbnail from '../thumbnail';
 import PreviewPrice from './price';
 
 export default async function ProductPreview({
-  productPreview,
+  product,
   isFeatured,
   region,
 }: {
-  productPreview: ProductPreviewType;
+  product: HttpTypes.StoreProduct;
   isFeatured?: boolean;
-  region: Region;
+  region: HttpTypes.StoreRegion;
 }) {
-  const pricedProduct = await retrievePricedProductById({
-    id: productPreview.id,
-    regionId: region.id,
-  }).then((product) => product);
+  // const pricedProduct = await listProducts({
+  //   regionId: region.id,
+  //   queryParams: { id: [product.id!] },
+  // }).then(({ response }) => response.products[0])
 
-  if (!pricedProduct) {
-    return null;
-  }
+  // if (!pricedProduct) {
+  //   return null
+  // }
 
   const { cheapestPrice } = getProductPrice({
-    product: pricedProduct,
-    region,
+    product,
   });
 
   return (
     <LocalizedClientLink
-      href={`/store/products/${productPreview.handle}`}
+      href={`/store/products/${product.handle}`}
       className="group"
     >
-      <div>
+      <div data-testid="product-wrapper">
         <Thumbnail
-          thumbnail={productPreview.thumbnail}
+          thumbnail={product.thumbnail}
+          images={product.images}
           size="full"
           isFeatured={isFeatured}
         />
         <div className="txt-compact-medium mt-4 flex justify-between">
-          <Text className="text-ui-fg-subtle">{productPreview.title}</Text>
+          <Text className="text-ui-fg-subtle" data-testid="product-title">
+            {product.title}
+          </Text>
           <div className="flex items-center gap-x-2">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
           </div>

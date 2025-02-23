@@ -1,10 +1,10 @@
 'use client';
 
+import { updateRegion } from '@lib/data/cart';
 import { ArrowRightMini } from '@medusajs/icons';
-import { Region } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import { clx } from '@medusajs/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
-import { updateRegion } from 'app/actions';
 import { useParams, usePathname } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
@@ -16,7 +16,7 @@ type CountryOption = {
 };
 
 type CountrySelectProps = {
-  regions: Array<Region>;
+  regions: Array<HttpTypes.StoreRegion>;
 };
 
 const CountrySelect = ({ regions }: CountrySelectProps) => {
@@ -28,14 +28,15 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
 
   const options: Array<CountryOption> | undefined = useMemo(() => {
     return regions
-      ?.flatMap((r) => {
-        return r.countries.map((c) => ({
+      ?.map((r) => {
+        return r.countries?.map((c) => ({
           country: c.iso_2,
           region: r.id,
           label: c.display_name,
         }));
       })
-      .sort((a, b) => a.label.localeCompare(b.label));
+      .flat()
+      .sort((a, b) => (a?.label ?? '').localeCompare(b?.label ?? ''));
   }, [regions]);
 
   useEffect(() => {

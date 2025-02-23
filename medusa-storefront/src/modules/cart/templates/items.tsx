@@ -1,14 +1,15 @@
-import { LineItem, Region } from '@medusajs/medusa';
+import repeat from '@lib/util/repeat';
+import { HttpTypes } from '@medusajs/types';
 import { Heading, Table } from '@medusajs/ui';
 import Item from '@modules/cart/components/item';
 import SkeletonLineItem from '@modules/skeletons/components/skeleton-line-item';
 
 type ItemsTemplateProps = {
-  items?: Array<Omit<LineItem, 'beforeInsert'>>;
-  region?: Region;
+  cart?: HttpTypes.StoreCart;
 };
 
-const ItemsTemplate = ({ items, region }: ItemsTemplateProps) => {
+const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
+  const items = cart?.items;
   return (
     <div>
       <div className="flex items-center pb-3">
@@ -17,27 +18,31 @@ const ItemsTemplate = ({ items, region }: ItemsTemplateProps) => {
       <Table>
         <Table.Header className="border-t-0">
           <Table.Row className="txt-medium-plus text-ui-fg-subtle">
-            <Table.HeaderCell className="!pl-0">Item</Table.HeaderCell>
+            <Table.HeaderCell className="">Item</Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
             <Table.HeaderCell>Quantity</Table.HeaderCell>
             <Table.HeaderCell className="hidden small:table-cell">
               Price
             </Table.HeaderCell>
-            <Table.HeaderCell className="!pr-0 text-right">
-              Total
-            </Table.HeaderCell>
+            <Table.HeaderCell className="text-right">Total</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {items && region
+          {items
             ? items
                 .sort((a, b) => {
-                  return a.created_at > b.created_at ? -1 : 1;
+                  return (a.created_at ?? '') > (b.created_at ?? '') ? -1 : 1;
                 })
                 .map((item) => {
-                  return <Item key={item.id} item={item} region={region} />;
+                  return (
+                    <Item
+                      key={item.id}
+                      item={item}
+                      currencyCode={cart?.currency_code}
+                    />
+                  );
                 })
-            : Array.from(Array(5).keys()).map((i) => {
+            : repeat(5).map((i) => {
                 return <SkeletonLineItem key={i} />;
               })}
         </Table.Body>

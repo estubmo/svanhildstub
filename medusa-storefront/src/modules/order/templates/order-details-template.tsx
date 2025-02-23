@@ -1,7 +1,7 @@
 'use client';
 
 import { XMark } from '@medusajs/icons';
-import { Order } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import Help from '@modules/order/components/help';
 import Items from '@modules/order/components/items';
@@ -11,7 +11,7 @@ import ShippingDetails from '@modules/order/components/shipping-details';
 import React from 'react';
 
 type OrderDetailsTemplateProps = {
-  order: Order;
+  order: HttpTypes.StoreOrder;
 };
 
 const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
@@ -24,13 +24,17 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
         <LocalizedClientLink
           href="/account/orders"
           className="flex items-center gap-2 text-ui-fg-subtle hover:text-ui-fg-base"
+          data-testid="back-to-overview-button"
         >
           <XMark /> Back to overview
         </LocalizedClientLink>
       </div>
-      <div className="flex h-full w-full flex-col gap-4 bg-ui-bg-base">
+      <div
+        className="flex h-full w-full flex-col gap-4 bg-white"
+        data-testid="order-details-container"
+      >
         <OrderDetails order={order} showStatus />
-        <Items items={order.items} region={order.region} />
+        <Items order={order} />
         <ShippingDetails order={order} />
         <OrderSummary order={order} />
         <Help />

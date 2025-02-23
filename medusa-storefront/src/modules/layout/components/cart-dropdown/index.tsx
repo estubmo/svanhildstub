@@ -1,8 +1,9 @@
 'use client';
 
-import { formatAmount } from '@lib/util/prices';
+import { updateRegion } from '@lib/data/cart';
+import { convertToLocale } from '@lib/util/money';
 import { ArrowRightMini } from '@medusajs/icons';
-import { Cart, Region } from '@medusajs/medusa';
+import { HttpTypes } from '@medusajs/types';
 import { Button, clx } from '@medusajs/ui';
 import DeleteButton from '@modules/common/components/delete-button';
 import LineItemOptions from '@modules/common/components/line-item-options';
@@ -10,7 +11,6 @@ import LineItemPrice from '@modules/common/components/line-item-price';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 import Thumbnail from '@modules/products/components/thumbnail';
 import * as HoverCard from '@radix-ui/react-hover-card';
-import { updateRegion } from 'app/actions';
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useParams, usePathname } from 'next/navigation';
 import { useMemo, useState } from 'react';
@@ -26,8 +26,8 @@ const CartDropdown = ({
   cart: cartState,
   regions,
 }: {
-  cart?: Omit<Cart, 'beforeInsert' | 'afterLoad'> | null;
-  regions: Array<Region> | null;
+  cart?: HttpTypes.StoreCart | null;
+  regions: Array<HttpTypes.StoreRegion>;
 }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isCountrySelectOpen, setIsCountrySelectOpen] = useState(false);
@@ -42,6 +42,7 @@ const CartDropdown = ({
       return acc + item.quantity;
     }, 0) || 0;
 
+  const subtotal = cartState?.subtotal ?? 0;
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, 'change', () => {
@@ -51,13 +52,23 @@ const CartDropdown = ({
     }
   });
 
-  const options: Array<CountryOption> | undefined = useMemo(() => {
-    return regions?.flatMap((r) => {
-      return r.countries.map((c) => ({
-        country: c.iso_2,
-        region: r.id,
-        label: c.display_name,
-      }));
+  const options: Array<CountryOption> = useMemo(() => {
+    return regions.flatMap((r) => {
+      return (
+        r.countries
+          ?.map((c) => {
+            if (c.iso_2 && r.id && c.display_name) {
+              return {
+                country: c.iso_2,
+                region: r.id,
+                label: c.display_name,
+              };
+            }
+            return undefined;
+          })
+          .filter((option): option is CountryOption => option !== undefined) ||
+        []
+      );
     });
   }, [regions]);
 
@@ -137,7 +148,9 @@ const CartDropdown = ({
                 <div className="no-scrollbar grid max-h-[402px] grid-cols-1 gap-y-8 overflow-y-scroll p-px px-4">
                   {cartState.items
                     .sort((a, b) => {
-                      return a.created_at > b.created_at ? -1 : 1;
+                      const dateA = a.created_at ?? new Date();
+                      const dateB = b.created_at ?? new Date();
+                      return dateA > dateB ? -1 : 1;
                     })
                     .map((item) => (
                       <div
@@ -145,10 +158,14 @@ const CartDropdown = ({
                         key={item.id}
                       >
                         <LocalizedClientLink
-                          href={`/store/products/${item.variant.product.handle}`}
+                          href={`/store/products/${item.product_handle}`}
                           className="w-24"
                         >
-                          <Thumbnail thumbnail={item.thumbnail} size="square" />
+                          <Thumbnail
+                            thumbnail={item.thumbnail}
+                            images={item.variant?.product?.images}
+                            size="square"
+                          />
                         </LocalizedClientLink>
                         <div className="flex flex-1 flex-col justify-between">
                           <div className="flex flex-1 flex-col">
@@ -156,7 +173,7 @@ const CartDropdown = ({
                               <div className="mr-4 flex w-[180px] flex-col whitespace-nowrap">
                                 <h3 className="text-base-regular overflow-hidden text-ellipsis">
                                   <LocalizedClientLink
-                                    href={`/store/products/${item.variant.product.handle}`}
+                                    href={`/store/products/${item.product_handle}`}
                                   >
                                     {item.title}
                                   </LocalizedClientLink>
@@ -166,9 +183,9 @@ const CartDropdown = ({
                               </div>
                               <div className="flex justify-end">
                                 <LineItemPrice
-                                  region={cartState.region}
                                   item={item}
                                   style="tight"
+                                  currencyCode={cartState.currency_code}
                                 />
                               </div>
                             </div>
@@ -187,10 +204,9 @@ const CartDropdown = ({
                       <span className="font-normal">(excl. taxes)</span>
                     </span>
                     <span className="text-large-semi">
-                      {formatAmount({
-                        amount: cartState.subtotal || 0,
-                        region: cartState.region,
-                        includeTaxes: false,
+                      {convertToLocale({
+                        amount: subtotal,
+                        currency_code: cartState.currency_code,
                       })}
                     </span>
                   </div>

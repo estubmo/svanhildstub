@@ -1,25 +1,14 @@
-import { LineItem, Region } from '@medusajs/medusa';
-import { enrichLineItems, retrieveCart } from '@modules/cart/actions';
+import { retrieveCart } from '@lib/data/cart';
+import { HttpTypes } from '@medusajs/types';
 
 import CartDropdown from '../cart-dropdown';
-
-const fetchCart = async () => {
-  const cart = await retrieveCart();
-
-  if (cart?.items.length) {
-    const enrichedItems = await enrichLineItems(cart?.items, cart?.region_id);
-    cart.items = enrichedItems as Array<LineItem>;
-  }
-
-  return cart;
-};
 
 export default async function CartButton({
   regions,
 }: {
-  regions: Array<Region> | null;
+  regions: Array<HttpTypes.StoreRegion>;
 }) {
-  const cart = await fetchCart();
+  const cart = await retrieveCart().catch(() => null);
 
-  return <CartDropdown cart={cart} regions={regions} />;
+  return <CartDropdown regions={regions} cart={cart} />;
 }

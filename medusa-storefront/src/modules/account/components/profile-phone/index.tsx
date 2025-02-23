@@ -1,21 +1,36 @@
 'use client';
 
-import { Customer } from '@medusajs/medusa';
-import { updateCustomerPhone } from '@modules/account/actions';
+import { updateCustomer } from '@lib/data/customer';
+import { HttpTypes } from '@medusajs/types';
 import Input from '@modules/common/components/input';
-import React, { useEffect } from 'react';
-import { useFormState } from 'react-dom';
+import React, { useActionState, useEffect } from 'react';
 
 import AccountInfo from '../account-info';
 
 type MyInformationProps = {
-  customer: Omit<Customer, 'password_hash'>;
+  customer: HttpTypes.StoreCustomer;
 };
 
 const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   const [successState, setSuccessState] = React.useState(false);
 
-  const [state, formAction] = useFormState(updateCustomerPhone, {
+  const updateCustomerPhone = async (
+    _currentState: Record<string, unknown>,
+    formData: FormData,
+  ) => {
+    const customer = {
+      phone: formData.get('phone') as string,
+    };
+
+    try {
+      await updateCustomer(customer);
+      return { success: true, error: null };
+    } catch (error: any) {
+      return { success: false, error: error.toString() };
+    }
+  };
+
+  const [state, formAction] = useActionState(updateCustomerPhone, {
     error: false,
     success: false,
   });
@@ -37,6 +52,7 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
         isError={!!state.error}
         errorMessage={state.error}
         clearState={clearState}
+        data-testid="account-phone-editor"
       >
         <div className="grid grid-cols-1 gap-y-2">
           <Input
@@ -45,7 +61,8 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
             type="phone"
             autoComplete="phone"
             required
-            defaultValue={customer.phone}
+            defaultValue={customer.phone ?? ''}
+            data-testid="phone-input"
           />
         </div>
       </AccountInfo>
