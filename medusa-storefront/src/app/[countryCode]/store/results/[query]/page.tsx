@@ -17,7 +17,7 @@ type Params = {
 };
 
 export default async function SearchResults({ params, searchParams }: Params) {
-  const { query } = params;
+  const { query } = await params;
   const { sortBy, page } = searchParams;
 
   const hits = await search(query).then((data) => data);

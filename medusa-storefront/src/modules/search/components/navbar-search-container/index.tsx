@@ -1,7 +1,7 @@
 'use client';
 
 import { Transition } from '@headlessui/react';
-// import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
+import { SEARCH_INDEX_NAME, searchClient } from '@lib/search-client';
 import { MagnifyingGlassMini } from '@medusajs/icons';
 import { clx } from '@medusajs/ui';
 import Hit from '@modules/search/components/hit';
@@ -44,24 +44,23 @@ const NavbarSearchContainer = () => {
       <div className="flex h-fit flex-col">
         <div className="z-20 flex h-[42px] w-[20vw] items-center gap-x-2 rounded-rounded border bg-gray-950/60 px-4 py-2 focus-within:border-ui-border-interactive focus-within:bg-ui-bg-subtle-pressed hover:bg-ui-bg-field-hover">
           <MagnifyingGlassMini className="flex-shrink-0 text-ui-fg-muted" />
-          {/* TODO: Re-enable */}
-          {/* <InstantSearchNext */}
-          {/*   indexName={SEARCH_INDEX_NAME} */}
-          {/*   searchClient={searchClient} */}
-          {/*   future={{ */}
-          {/*     preserveSharedStateOnUnmount: true, */}
-          {/*   }} */}
-          {/* > */}
-          {/*   <SearchBox onFocus={() => setOpen(true)} onBlur={handleBlur} /> */}
-          {/*   <div */}
-          {/*     className={clx( */}
-          {/*       'fixed left-0 right-0 top-16 mt-2 min-h-full w-full justify-center', */}
-          {/*       isOpen ? 'flex' : 'hidden', */}
-          {/*     )} */}
-          {/*   > */}
-          {/*     <Hits hitComponent={Hit} /> */}
-          {/*   </div> */}
-          {/* </InstantSearchNext> */}
+          <InstantSearchNext
+            indexName={SEARCH_INDEX_NAME}
+            searchClient={searchClient}
+            future={{
+              preserveSharedStateOnUnmount: true,
+            }}
+          >
+            <SearchBox onFocus={() => setOpen(true)} onBlur={handleBlur} />
+            <div
+              className={clx(
+                'fixed left-0 right-0 top-16 mt-2 min-h-full w-full justify-center',
+                isOpen ? 'flex' : 'hidden',
+              )}
+            >
+              <Hits hitComponent={Hit} />
+            </div>
+          </InstantSearchNext>
         </div>
       </div>
     </>

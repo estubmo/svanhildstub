@@ -21,10 +21,13 @@ importers:
         version: 2.5.0(awilix@8.0.1)(ioredis@5.5.0)
       '@medusajs/medusa-js':
         specifier: ^6.1.5
-        version: 6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3)))
+        version: 6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3)))
       '@medusajs/ui':
         specifier: latest
         version: 4.0.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(types-react-dom@19.0.0-rc.1)(types-react@19.0.0-rc.1)(typescript@5.3.3)
+      '@meilisearch/instant-meilisearch':
+        specifier: ^0.13.6
+        version: 0.13.6
       '@radix-ui/react-accordion':
         specifier: ^1.2.1
         version: 1.2.3(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)(types-react-dom@19.0.0-rc.1)(types-react@19.0.0-rc.1)
@@ -634,6 +637,9 @@ packages:
   '@medusajs/workflows-sdk@0.1.8':
     resolution: {integrity: sha512-w6TzVxX1TIIsdQA6oodPsgpV6CCeI9O09zhuARU9O7uSqJWubQ2HIZkb6gkXHyrnHNUptfrSRNienS4Ktt05fw==}
     engines: {node: '>=16'}
+
+  '@meilisearch/instant-meilisearch@0.13.6':
+    resolution: {integrity: sha512-olVCeOXmignmfY+ML8ExgyPCLGkr/XPXcz0n8tajRFr4afDKzomxySGMfQXVok9SoyhB+xeNH/mEMhguxCwklg==}
 
   '@mikro-orm/core@5.9.7':
     resolution: {integrity: sha512-VzbpJPQlwuK6Q/4FkppWNGKvzyYL31Gsw/qskr/GCa/010yLO8u3RQio/Q1EKRi+tNsjhqTPGA1b7OOM+DvpiQ==}
@@ -2994,6 +3000,9 @@ packages:
     engines: {node: '>=4.0'}
     hasBin: true
 
+  cross-fetch@3.2.0:
+    resolution: {integrity: sha512-Q+xVJLoGOeIMXZmbUK4HYk+69cQH6LudR0Vu/pRm2YlU/hDV9CiS0gKUMaWY5f2NeUH9C1nV3bsTlCo0FsTV1Q==}
+
   cross-inspect@1.0.1:
     resolution: {integrity: sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==}
     engines: {node: '>=16.0.0'}
@@ -4279,6 +4288,9 @@ packages:
     resolution: {integrity: sha512-WY/cTFoe9+5I8Ly/n614y2XruOUSX3ViL+KznY0xRaQERl/bnx1XAeJMNNnAXTYWaNvdVYwo6ur5qYKai7w/dA==}
     engines: {node: '>=16'}
 
+  meilisearch@0.35.1:
+    resolution: {integrity: sha512-azI7vA4eCfBpUwngDTaG/VpiuO5zAMM35QrfREVPC+KnuNBKwBrwRaTwV+Dt18JDCgk/OWZJPaONYgBHSISbNQ==}
+
   merge-descriptors@1.0.3:
     resolution: {integrity: sha512-gaNvAS7TZ897/rVaZ0nMtAyxNyi/pdbjbAwUpFQpN70GqnVfOiXpeUUMKRBmzXaSQ8DdTX4/0ms62r2K+hE6mQ==}
 
@@ -4476,6 +4488,15 @@ packages:
 
   node-abort-controller@3.1.1:
     resolution: {integrity: sha512-AGK2yQKIjRuqnc6VkX2Xj5d+QW8xZ87pa1UK6yA6ouUyuxfHuMP6umE5QK7UmTeOAymo+Zx1Fxiuw9rVx8taHQ==}
+
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
 
   node-gyp-build-optional-packages@5.2.2:
     resolution: {integrity: sha512-s+w+rBWnpTMwSFbaE0UXsRlg7hU4FjekKU4eyAih5T8nJuNZT1nNsskXpxmeqSK9UzkBl6UgRlnKc8hz8IEqOw==}
@@ -5661,6 +5682,9 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
+  tr46@0.0.3:
+    resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+
   triple-beam@1.4.1:
     resolution: {integrity: sha512-aZbgViZrg1QNcG+LULa7nhZpJTZSLm/mXnHXnbAbjmN5aSa0y7V+wvv6+4WaBtpISJzThKy+PIPxc1Nq1EJ9mg==}
     engines: {node: '>= 14.0.0'}
@@ -5904,6 +5928,9 @@ packages:
   wcwidth@1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
 
+  webidl-conversions@3.0.1:
+    resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}
+
   webpack-sources@3.2.3:
     resolution: {integrity: sha512-/DyMEOrDgLKKIG0fmvtz+4dUX/3Ghozwgm6iPp8KRhvn+eQf9+Q7GWxVNMk3+uCPWfdXYC4ExGBckIXdFEfH1w==}
     engines: {node: '>=10.13.0'}
@@ -5917,6 +5944,9 @@ packages:
     peerDependenciesMeta:
       webpack-cli:
         optional: true
+
+  whatwg-url@5.0.0:
+    resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==}
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -6544,7 +6574,7 @@ snapshots:
       - ioredis
       - vite
 
-  '@medusajs/link-modules@0.2.12(@mikro-orm/migrations@5.9.7)(@types/node@20.10.4)(pg@8.13.3)':
+  '@medusajs/link-modules@0.2.12(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/node@20.10.4)(pg@8.13.3)':
     dependencies:
       '@medusajs/modules-sdk': 1.12.12(@types/node@20.10.4)
       '@medusajs/types': 1.11.17
@@ -6623,9 +6653,9 @@ snapshots:
       - supports-color
       - tedious
 
-  '@medusajs/medusa-js@6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3)))':
+  '@medusajs/medusa-js@6.1.10(@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3)))':
     dependencies:
-      '@medusajs/medusa': 1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3))
+      '@medusajs/medusa': 1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3))
       axios: 0.24.0
       cross-env: 5.2.1
       qs: 6.14.0
@@ -6634,10 +6664,10 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7)(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3))':
+  '@medusajs/medusa@1.20.11(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/ioredis-mock@8.2.5)(@types/node@20.10.4)(medusa-interfaces@1.3.10)(typeorm@0.3.20(ioredis@5.5.0)(pg@8.13.3))':
     dependencies:
       '@medusajs/core-flows': 0.0.10(@types/node@20.10.4)(pg@8.13.3)
-      '@medusajs/link-modules': 0.2.12(@mikro-orm/migrations@5.9.7)(@types/node@20.10.4)(pg@8.13.3)
+      '@medusajs/link-modules': 0.2.12(@mikro-orm/migrations@5.9.7(@mikro-orm/core@5.9.7)(@types/node@20.10.4)(pg@8.13.3))(@types/node@20.10.4)(pg@8.13.3)
       '@medusajs/medusa-cli': 1.3.23(@types/node@20.10.4)
       '@medusajs/modules-sdk': 1.12.12(@types/node@20.10.4)
       '@medusajs/orchestration': 0.5.8(@types/node@20.10.4)(pg@8.13.3)
@@ -6861,6 +6891,12 @@ snapshots:
       - sqlite3
       - supports-color
       - tedious
+
+  '@meilisearch/instant-meilisearch@0.13.6':
+    dependencies:
+      meilisearch: 0.35.1
+    transitivePeerDependencies:
+      - encoding
 
   '@mikro-orm/core@5.9.7(@mikro-orm/migrations@5.9.7)(@mikro-orm/postgresql@5.9.7)':
     dependencies:
@@ -9856,6 +9892,12 @@ snapshots:
     dependencies:
       cross-spawn: 6.0.6
 
+  cross-fetch@3.2.0:
+    dependencies:
+      node-fetch: 2.7.0
+    transitivePeerDependencies:
+      - encoding
+
   cross-inspect@1.0.1:
     dependencies:
       tslib: 2.8.1
@@ -11330,6 +11372,12 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
+  meilisearch@0.35.1:
+    dependencies:
+      cross-fetch: 3.2.0
+    transitivePeerDependencies:
+      - encoding
+
   merge-descriptors@1.0.3: {}
 
   merge-stream@2.0.0: {}
@@ -11508,6 +11556,10 @@ snapshots:
       tslib: 2.8.1
 
   node-abort-controller@3.1.1: {}
+
+  node-fetch@2.7.0:
+    dependencies:
+      whatwg-url: 5.0.0
 
   node-gyp-build-optional-packages@5.2.2:
     dependencies:
@@ -12799,6 +12851,8 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
+  tr46@0.0.3: {}
+
   triple-beam@1.4.1: {}
 
   ts-api-utils@1.4.3(typescript@5.3.3):
@@ -12999,6 +13053,8 @@ snapshots:
     dependencies:
       defaults: 1.0.4
 
+  webidl-conversions@3.0.1: {}
+
   webpack-sources@3.2.3: {}
 
   webpack@5.98.0:
@@ -13030,6 +13086,11 @@ snapshots:
       - '@swc/core'
       - esbuild
       - uglify-js
+
+  whatwg-url@5.0.0:
+    dependencies:
+      tr46: 0.0.3
+      webidl-conversions: 3.0.1
 
   which-boxed-primitive@1.1.1:
     dependencies:
