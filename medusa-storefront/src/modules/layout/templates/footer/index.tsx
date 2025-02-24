@@ -9,7 +9,12 @@ export default async function Footer() {
   const { collections } = await listCollections({
     fields: '*products',
   });
+  console.info('DEBUGPRINT[177]: index.tsx:9: collections=', collections);
   const productCategories = await listCategories();
+  console.info(
+    'DEBUGPRINT[178]: index.tsx:13: productCategories=',
+    productCategories,
+  );
   return (
     <footer className="w-full border-t border-ui-border-base">
       <div className="content-container flex w-full flex-col">
