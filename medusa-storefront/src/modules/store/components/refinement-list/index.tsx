@@ -21,10 +21,8 @@ const RefinementList = ({
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      console.info('DEBUGPRINT[174]: index.tsx:23: value=', value);
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
-      console.info('DEBUGPRINT[173]: index.tsx:25: params=', params.toString());
 
       return params.toString();
     },

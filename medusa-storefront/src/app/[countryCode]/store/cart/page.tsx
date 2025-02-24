@@ -11,7 +11,6 @@ export const metadata: Metadata = {
 
 export default async function Cart() {
   const cart = await retrieveCart();
-  console.info('DEBUGPRINT[172]: page.tsx:13: cart=', cart);
   const customer = await retrieveCustomer();
 
   if (!cart) {
