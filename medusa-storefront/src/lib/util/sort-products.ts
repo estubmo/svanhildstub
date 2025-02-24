@@ -12,10 +12,10 @@ interface MinPricedProduct extends HttpTypes.StoreProduct {
  * @returns products sorted by price
  */
 export function sortProducts(
-  products: HttpTypes.StoreProduct[],
+  products: Array<HttpTypes.StoreProduct>,
   sortBy: SortOptions,
-): HttpTypes.StoreProduct[] {
-  let sortedProducts = products as MinPricedProduct[];
+): Array<HttpTypes.StoreProduct> {
+  const sortedProducts = products as Array<MinPricedProduct>;
 
   if (['price_asc', 'price_desc'].includes(sortBy)) {
     // Precompute the minimum price for each product
