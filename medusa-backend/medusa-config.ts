@@ -86,7 +86,7 @@ module.exports = defineConfig({
               access_key_id: process.env.MINIO_ACCESS_KEY,
               secret_access_key: process.env.MINIO_SECRET_KEY,
               region: process.env.MINIO_REGION,
-              bucket: process.env.MINIO_PRIVATE_BUCKET,
+              bucket: process.env.MINIO_BUCKET,
               endpoint: process.env.MINIO_ENDPOINT,
               additional_client_config: {
                 forcePathStyle: true,
