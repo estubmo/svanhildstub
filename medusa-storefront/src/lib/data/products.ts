@@ -117,7 +117,6 @@ export const listProductsWithSort = async ({
     },
     countryCode,
   });
-  console.info('DEBUGPRINT[175]: products.ts:111: products=', products);
 
   const sortedProducts = sortProducts(products, sortBy);
 
