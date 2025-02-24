@@ -6,9 +6,11 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 export function Pagination({
   page,
   totalPages,
+  'data-testid': dataTestid,
 }: {
   page: number;
   totalPages: number;
+  'data-testid'?: string;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -106,7 +108,9 @@ export function Pagination({
   // Render the component
   return (
     <div className="mt-12 flex w-full justify-center">
-      <div className="flex items-end gap-3">{renderPageButtons()}</div>
+      <div className="flex items-end gap-3" data-testid={dataTestid}>
+        {renderPageButtons()}
+      </div>
     </div>
   );
 }

@@ -8,17 +8,23 @@ import SortProducts, { SortOptions } from './sort-products';
 type RefinementListProps = {
   sortBy: SortOptions;
   search?: boolean;
+  'data-testid'?: string;
 };
 
-const RefinementList = ({ sortBy }: RefinementListProps) => {
+const RefinementList = ({
+  sortBy,
+  'data-testid': dataTestId,
+}: RefinementListProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
+      console.info('DEBUGPRINT[174]: index.tsx:23: value=', value);
       const params = new URLSearchParams(searchParams);
       params.set(name, value);
+      console.info('DEBUGPRINT[173]: index.tsx:25: params=', params.toString());
 
       return params.toString();
     },
@@ -32,7 +38,11 @@ const RefinementList = ({ sortBy }: RefinementListProps) => {
 
   return (
     <div className="mb-8 flex gap-12 py-4 pl-6 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:px-0">
-      <SortProducts sortBy={sortBy} setQueryParams={setQueryParams} />
+      <SortProducts
+        sortBy={sortBy}
+        setQueryParams={setQueryParams}
+        data-testid={dataTestId}
+      />
     </div>
   );
 };

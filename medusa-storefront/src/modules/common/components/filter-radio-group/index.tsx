@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { EllipseMiniSolid } from '@medusajs/icons';
 import { clx, Label, RadioGroup, Text } from '@medusajs/ui';
-import { ChangeEvent } from 'react';
 
 type FilterRadioGroupProps = {
   title: string;
@@ -11,6 +9,7 @@ type FilterRadioGroupProps = {
   }>;
   value: any;
   handleChange: (...args: Array<any>) => void;
+  'data-testid'?: string;
 };
 
 const FilterRadioGroup = ({
@@ -18,27 +17,22 @@ const FilterRadioGroup = ({
   items,
   value,
   handleChange,
+  'data-testid': dataTestId,
 }: FilterRadioGroupProps) => {
   return (
     <div className="flex flex-col gap-x-3 gap-y-3">
       <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
-      <RadioGroup>
+      <RadioGroup data-testid={dataTestId} onValueChange={handleChange}>
         {items?.map((i) => (
           <div
             key={i.value}
             className={clx('flex items-center gap-x-2', {
-              'ml-[-1.75rem]': i.value === value,
+              'ml-[-23px]': i.value === value,
             })}
           >
             {i.value === value && <EllipseMiniSolid />}
             <RadioGroup.Item
               checked={i.value === value}
-              onClick={(e) =>
-                handleChange(
-                  e as unknown as ChangeEvent<HTMLButtonElement>,
-                  i.value,
-                )
-              }
               className="peer hidden"
               id={i.value}
               value={i.value}
@@ -46,11 +40,13 @@ const FilterRadioGroup = ({
             <Label
               htmlFor={i.value}
               className={clx(
-                'txt-compact-small-plus text-ui-fg-subtle hover:cursor-pointer',
+                '!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer',
                 {
                   'text-ui-fg-base': i.value === value,
                 },
               )}
+              data-testid="radio-label"
+              data-active={i.value === value}
             >
               {i.label}
             </Label>
