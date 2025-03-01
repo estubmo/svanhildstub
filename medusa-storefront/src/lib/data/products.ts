@@ -29,6 +29,7 @@ export const listProducts = async ({
 
   const limit = queryParams?.limit || 12;
   const _pageParam = Math.max(pageParam, 1);
+  // const offset = (_pageParam === 1) ? 0 : (_pageParam - 1) * limit;
   const offset = (_pageParam - 1) * limit;
 
   let region: HttpTypes.StoreRegion | undefined | null;
@@ -69,7 +70,7 @@ export const listProducts = async ({
         },
         headers,
         next,
-        cache: 'force-cache',
+        cache: 'no-store',
       },
     )
     .then(({ products, count }) => {
