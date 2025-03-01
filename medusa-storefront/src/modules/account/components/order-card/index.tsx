@@ -23,7 +23,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
   }, [order]);
 
   return (
-    <div className="flex flex-col bg-white" data-testid="order-card">
+    <div className="flex flex-col bg-ui-bg-base" data-testid="order-card">
       <div className="text-large-semi mb-1 uppercase">
         #<span data-testid="order-display-id">{order.display_id}</span>
       </div>

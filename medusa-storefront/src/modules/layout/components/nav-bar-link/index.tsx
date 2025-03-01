@@ -50,7 +50,7 @@ const NavBarLink = ({ route, active }: NavBarLinkProps) => {
           </motion.div>
           <motion.div
             className={clx(
-              'absolute -bottom-[2px] h-[2px] rounded-xl bg-white will-change-transform',
+              'absolute -bottom-[2px] h-[2px] rounded-xl bg-ui-bg-base will-change-transform',
             )}
             variants={!active ? hoverVariants : undefined}
           />
@@ -61,7 +61,7 @@ const NavBarLink = ({ route, active }: NavBarLinkProps) => {
               variants={activePathVariants}
               initial="initial"
               className={clx(
-                'absolute -bottom-[2px] h-[2px] rounded-xl bg-white',
+                'absolute -bottom-[2px] h-[2px] rounded-xl bg-ui-bg-base',
               )}
               style={{
                 width: '96%',

@@ -66,7 +66,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveTo="opacity-0"
         >
           <div
-            className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-white p-4"
+            className="text-large-regular flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-gray-200 bg-ui-bg-base p-4"
             data-testid="mobile-actions"
           >
             <div className="flex items-center gap-x-2">
@@ -159,13 +159,13 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                   <div className="flex w-full justify-end pr-6">
                     <button
                       onClick={close}
-                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-ui-fg-base"
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-ui-bg-base text-ui-fg-base"
                       data-testid="close-modal-button"
                     >
                       <X />
                     </button>
                   </div>
-                  <div className="bg-white px-6 py-12">
+                  <div className="bg-ui-bg-base px-6 py-12">
                     {(product.variants?.length ?? 0) > 1 && (
                       <div className="flex flex-col gap-y-6">
                         {(product.options || []).map((option) => {
