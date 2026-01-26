@@ -7,17 +7,18 @@ export const metadata: Metadata = {
   description: 'Explore all of our products.',
 };
 
-type Params = {
-  searchParams: {
-    sortBy?: SortOptions;
-    page?: string;
-  };
-  params: {
-    countryCode: string;
-  };
-};
+type Params = Promise<{ countryCode: string }>;
+type SearchParams = Promise<{
+  sortBy?: SortOptions;
+  page?: string;
+}>;
 
-export default async function StorePage({ searchParams, params }: Params) {
+export default async function StorePage(props: {
+  params: Params;
+  searchParams: SearchParams;
+}) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const { sortBy, page } = searchParams;
 
   return (
