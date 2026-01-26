@@ -4,9 +4,10 @@ import ProductTemplate from '@modules/products/templates';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
-type Props = {
+type Props = Promise<{
   params: Promise<{ countryCode: string; handle: string }>;
-};
+  searchParams: Promise<{ v_id?: string }>;
+}>;
 
 export async function generateStaticParams() {
   try {
@@ -18,19 +19,27 @@ export async function generateStaticParams() {
       return [];
     }
 
-    const products = await listProducts({
-      countryCode: 'US',
-      queryParams: { fields: 'handle' },
-    }).then(({ response }) => response.products);
+    const promises = countryCodes.map(async (country) => {
+      const { response } = await listProducts({
+        countryCode: country,
+        queryParams: { limit: 100, fields: 'handle' },
+      });
 
-    return countryCodes
-      .map((countryCode) =>
-        products.map((product) => ({
-          countryCode,
+      return {
+        country,
+        products: response.products,
+      };
+    });
+
+    const countryProducts = await Promise.all(promises);
+
+    return countryProducts
+      .flatMap((countryData) =>
+        countryData.products.map((product) => ({
+          countryCode: countryData.country,
           handle: product.handle,
         })),
       )
-      .flat()
       .filter((param) => param.handle);
   } catch (error) {
     console.error(
@@ -43,16 +52,18 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
-  const params = await props.params;
-  const { handle } = params;
-  const region = await getRegion(params.countryCode);
+  const { params } = await props;
+  const { handle, countryCode } = await params;
+  const region = await getRegion(countryCode);
 
+  console.info('DEBUGPRINT[564]: page.tsx:59: handle=', handle);
   if (!region) {
     notFound();
   }
 
   const product = await listProducts({
-    countryCode: params.countryCode,
+    countryCode: countryCode,
+    // @ts-expect-error handle
     queryParams: { handle },
   }).then(({ response }) => response.products[0]);
 
@@ -72,16 +83,18 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
 }
 
 export default async function ProductPage(props: Props) {
-  const params = await props.params;
-  const region = await getRegion(params.countryCode);
+  const { params } = await props;
+  const { handle, countryCode } = await params;
+  const region = await getRegion(countryCode);
 
   if (!region) {
     notFound();
   }
 
   const pricedProduct = await listProducts({
-    countryCode: params.countryCode,
-    queryParams: { handle: params.handle },
+    countryCode: countryCode,
+    // @ts-expect-error handle
+    queryParams: { handle },
   }).then(({ response }) => response.products[0]);
 
   if (!pricedProduct) {
@@ -92,7 +105,7 @@ export default async function ProductPage(props: Props) {
     <ProductTemplate
       product={pricedProduct}
       region={region}
-      countryCode={params.countryCode}
+      countryCode={countryCode}
     />
   );
 }
