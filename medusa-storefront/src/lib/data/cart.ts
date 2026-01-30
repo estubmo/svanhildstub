@@ -45,7 +45,7 @@ export async function retrieveCart(cartId?: string) {
       },
       headers,
       next,
-      cache: 'no-store',
+      cache: 'force-cache',
     })
     .then(({ cart }) => cart)
     .catch(() => null);
@@ -451,6 +451,6 @@ export async function listCartOptions() {
     query: { cart_id: cartId },
     next,
     headers,
-    cache: 'no-store',
+    cache: 'force-cache',
   });
 }

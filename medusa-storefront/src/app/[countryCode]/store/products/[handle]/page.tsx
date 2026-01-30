@@ -56,7 +56,6 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   const { handle, countryCode } = await params;
   const region = await getRegion(countryCode);
 
-  console.info('DEBUGPRINT[564]: page.tsx:59: handle=', handle);
   if (!region) {
     notFound();
   }
