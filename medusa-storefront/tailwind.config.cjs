@@ -1,10 +1,11 @@
+import medusaPreset from '@medusajs/ui-preset';
 import tailwindTypography from '@tailwindcss/typography';
 import tailwindcssRadix from 'tailwindcss-radix';
 
 /** @type {import('tailwindcss').Config} */
 const config = {
   darkMode: 'class',
-  presets: [require('@medusajs/ui-preset')],
+  presets: [medusaPreset],
   content: [
     './src/app/**/*.{js,ts,jsx,tsx}',
     './src/pages/**/*.{js,ts,jsx,tsx}',

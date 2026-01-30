@@ -5,6 +5,7 @@ import ChevronDown from '@modules/common/icons/chevron-down';
 import {
   forwardRef,
   SelectHTMLAttributes,
+  useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
@@ -20,20 +21,20 @@ type NativeSelectProps = {
 const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   ({ placeholder = 'Select...', className, children, ...props }, ref) => {
     const innerRef = useRef<HTMLSelectElement>(null);
-    const [isPlaceholder, setIsPlaceholder] = useState(false);
+    const [isPlaceholder, setIsPlaceholder] = useState(true);
 
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
       () => innerRef.current,
     );
 
+    const updatePlaceholderState = useCallback(() => {
+      setIsPlaceholder(!innerRef.current?.value);
+    }, []);
+
     useEffect(() => {
-      if (innerRef.current && innerRef.current.value === '') {
-        setIsPlaceholder(true);
-      } else {
-        setIsPlaceholder(false);
-      }
-    }, [innerRef.current?.value]);
+      updatePlaceholderState();
+    }, [updatePlaceholderState]);
 
     return (
       <div>
@@ -51,6 +52,10 @@ const CartItemSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           <select
             ref={innerRef}
             {...props}
+            onChange={(e) => {
+              props.onChange?.(e);
+              updatePlaceholderState();
+            }}
             className="h-16 w-16 cursor-pointer appearance-none items-center justify-center border-none bg-ui-bg-field px-4 transition-colors duration-150 hover:bg-ui-bg-field-hover focus:bg-ui-bg-field-hover"
           >
             <option disabled value="" className="bg-ui-bg-field-hover">

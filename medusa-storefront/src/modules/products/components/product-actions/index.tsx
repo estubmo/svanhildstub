@@ -8,7 +8,7 @@ import Divider from '@modules/common/components/divider';
 import OptionSelect from '@modules/products/components/product-actions/option-select';
 import { isEqual } from 'lodash';
 import { useParams } from 'next/navigation';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import ProductPrice from '../product-price';
 import MobileActions from './mobile-actions';
@@ -28,23 +28,23 @@ const optionsAsKeymap = (
   }, {});
 };
 
+const getInitialOptions = (product: HttpTypes.StoreProduct) => {
+  // If there is only 1 variant, preselect the options
+  if (product.variants?.length === 1) {
+    return optionsAsKeymap(product.variants[0].options) ?? {};
+  }
+  return {};
+};
+
 export default function ProductActions({
   product,
   disabled,
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string | undefined>>(
-    {},
+    () => getInitialOptions(product),
   );
   const [isAdding, setIsAdding] = useState(false);
   const countryCode = useParams().countryCode as string;
-
-  // If there is only 1 variant, preselect the options
-  useEffect(() => {
-    if (product.variants?.length === 1) {
-      const variantOptions = optionsAsKeymap(product.variants[0].options);
-      setOptions(variantOptions ?? {});
-    }
-  }, [product.variants]);
 
   const selectedVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) {

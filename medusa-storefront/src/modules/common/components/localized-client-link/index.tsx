@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import React, { ForwardedRef, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 
 /**
  * Use this component to create a Next.js `<Link />` that persists the current country code in the url,
@@ -14,26 +14,24 @@ type Props = {
   className?: string;
   onClick?: () => void;
   passHref?: true;
-  [x: string]: unknown;
-};
+} & Record<string, unknown>;
 
-function LocalizedClientLink(
-  { children, href, ...props }: Props,
-  ref: ForwardedRef<HTMLAnchorElement>,
-) {
-  const { countryCode } = useParams();
+const LocalizedClientLink = forwardRef<HTMLAnchorElement, Props>(
+  function LocalizedClientLink({ children, href, ...props }, ref) {
+    const { countryCode } = useParams();
 
-  let newHref = `/${countryCode}${href}`;
+    let newHref = `/${countryCode}${href}`;
 
-  if (newHref.includes('undefined/')) {
-    newHref = newHref.replace('undefined/', '');
-  }
+    if (newHref.includes('undefined/')) {
+      newHref = newHref.replace('undefined/', '');
+    }
 
-  return (
-    <Link ref={ref} href={newHref} {...props}>
-      {children}
-    </Link>
-  );
-}
+    return (
+      <Link ref={ref} href={newHref} {...props}>
+        {children as React.ReactNode}
+      </Link>
+    );
+  },
+);
 
-export default forwardRef(LocalizedClientLink);
+export default LocalizedClientLink;

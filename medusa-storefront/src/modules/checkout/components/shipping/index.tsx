@@ -50,15 +50,19 @@ const Shipping: React.FC<ShippingProps> = ({
         Promise.allSettled(promises).then((res) => {
           const pricesMap: Record<string, number> = {};
           res
-            .filter((r) => r.status === 'fulfilled')
-            .forEach((p) => (pricesMap[p.value?.id || ''] = p.value?.amount!));
+            .filter((r): r is PromiseFulfilledResult<HttpTypes.StoreCartShippingOption | null> => r.status === 'fulfilled')
+            .forEach((p) => {
+              if (p.value?.id && p.value?.amount !== undefined) {
+                pricesMap[p.value.id] = p.value.amount;
+              }
+            });
 
           setCalculatedPricesMap(pricesMap);
           setIsLoadingPrices(false);
         });
       }
     }
-  }, [availableShippingMethods]);
+  }, [availableShippingMethods, cart.id]);
 
   const handleEdit = () => {
     router.push(pathname + '?step=delivery', { scroll: false });
@@ -128,7 +132,7 @@ const Shipping: React.FC<ShippingProps> = ({
         <div data-testid="delivery-options-container">
           <div className="pb-8">
             <RadioGroup
-              value={shippingMethodId}
+              value={shippingMethodId ?? undefined}
               onChange={handleSetShippingMethod}
             >
               {availableShippingMethods?.map((option) => {
@@ -207,7 +211,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 <Text className="txt-medium text-ui-fg-subtle">
                   {cart.shipping_methods?.at(-1)?.name}{' '}
                   {convertToLocale({
-                    amount: cart.shipping_methods.at(-1)?.amount!,
+                    amount: cart.shipping_methods?.at(-1)?.amount ?? 0,
                     currency_code: cart?.currency_code,
                   })}
                 </Text>

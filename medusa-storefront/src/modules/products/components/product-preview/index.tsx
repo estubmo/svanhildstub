@@ -1,4 +1,3 @@
-import { listProducts } from '@lib/data/products';
 import { getProductPrice } from '@lib/util/get-product-price';
 import { HttpTypes } from '@medusajs/types';
 import { Text } from '@medusajs/ui';
@@ -10,7 +9,7 @@ import PreviewPrice from './price';
 export default async function ProductPreview({
   product,
   isFeatured,
-  region,
+  region: _region,
 }: {
   product: HttpTypes.StoreProduct;
   isFeatured?: boolean;

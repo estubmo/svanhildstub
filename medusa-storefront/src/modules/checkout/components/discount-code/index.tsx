@@ -2,9 +2,8 @@
 
 import { applyPromotions, submitPromotionForm } from '@lib/data/cart';
 import { convertToLocale } from '@lib/util/money';
-import { InformationCircleSolid } from '@medusajs/icons';
 import { HttpTypes } from '@medusajs/types';
-import { Badge, Heading, Input, Label, Text, Tooltip } from '@medusajs/ui';
+import { Badge, Heading, Input, Label, Text } from '@medusajs/ui';
 import Trash from '@modules/common/icons/trash';
 import React, { useActionState } from 'react';
 
@@ -12,15 +11,13 @@ import ErrorMessage from '../error-message';
 import { SubmitButton } from '../submit-button';
 
 type DiscountCodeProps = {
-  cart: HttpTypes.StoreCart & {
-    promotions: Array<HttpTypes.StorePromotion>;
-  };
+  cart: HttpTypes.StoreCart;
 };
 
 const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const { items = [], promotions = [] } = cart;
+  const { promotions = [] } = cart;
   const removePromotionCode = async (code: string) => {
     const validPromotions = promotions.filter(
       (promotion) => promotion.code !== code,
@@ -51,7 +48,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
     }
   };
 
-  const [message, formAction] = useActionState(submitPromotionForm, null);
+  const [message, _formAction] = useActionState(submitPromotionForm, null);
 
   return (
     <div className="flex w-full flex-col">
@@ -130,7 +127,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                               'percentage'
                                 ? `${promotion.application_method.value}%`
                                 : convertToLocale({
-                                    amount: promotion.application_method.value,
+                                    amount: Number(promotion.application_method.value),
                                     currency_code:
                                       promotion.application_method
                                         .currency_code,

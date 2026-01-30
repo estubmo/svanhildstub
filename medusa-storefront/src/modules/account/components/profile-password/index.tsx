@@ -3,7 +3,7 @@
 import { HttpTypes } from '@medusajs/types';
 import { toast } from '@medusajs/ui';
 import Input from '@modules/common/components/input';
-import React, { useActionState, useEffect } from 'react';
+import React from 'react';
 
 import AccountInfo from '../account-info';
 
@@ -11,7 +11,7 @@ type MyInformationProps = {
   customer: HttpTypes.StoreCustomer;
 };
 
-const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
+const ProfilePassword: React.FC<MyInformationProps> = ({ customer: _customer }) => {
   const [successState, setSuccessState] = React.useState(false);
 
   // TODO: Add support for password updates

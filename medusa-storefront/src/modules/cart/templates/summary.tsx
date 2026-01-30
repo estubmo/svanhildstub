@@ -8,9 +8,7 @@ import Divider from '@modules/common/components/divider';
 import LocalizedClientLink from '@modules/common/components/localized-client-link';
 
 type SummaryProps = {
-  cart: HttpTypes.StoreCart & {
-    promotions: Array<HttpTypes.StorePromotion>;
-  };
+  cart: HttpTypes.StoreCart;
 };
 
 function getCheckoutStep(cart: HttpTypes.StoreCart) {

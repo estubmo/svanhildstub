@@ -13,7 +13,7 @@ export default async function ProductActionsWrapper({
   region: HttpTypes.StoreRegion;
 }) {
   const product = await listProducts({
-    queryParams: { id: [id] },
+    queryParams: { id: [id] } as HttpTypes.FindParams & HttpTypes.StoreProductParams & { id: Array<string> },
     regionId: region.id,
   }).then(({ response }) => response.products[0]);
   const isOrdersDisabled = process.env.NEXT_PUBLIC_DISABLE_ORDERS === 'true';

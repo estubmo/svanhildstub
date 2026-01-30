@@ -7,7 +7,7 @@ import { SubmitButton } from '@modules/checkout/components/submit-button';
 import { useActionState, useEffect, useState } from 'react';
 
 export default function TransferRequestForm() {
-  const [showSuccess, setShowSuccess] = useState(false);
+  const [dismissedOrderId, setDismissedOrderId] = useState<string | null>(null);
 
   const [state, formAction] = useActionState(createTransferRequest, {
     success: false,
@@ -15,11 +15,14 @@ export default function TransferRequestForm() {
     order: null,
   });
 
+  // Reset dismissed state when order ID changes
   useEffect(() => {
-    if (state.success && state.order) {
-      setShowSuccess(true);
+    if (state.order?.id && state.order.id !== dismissedOrderId) {
+      setDismissedOrderId(null);
     }
-  }, [state.success, state.order]);
+  }, [state.order?.id, dismissedOrderId]);
+
+  const showSuccess = state.success && state.order && dismissedOrderId !== state.order.id;
 
   return (
     <div className="flex w-full flex-col gap-y-4">
@@ -69,7 +72,7 @@ export default function TransferRequestForm() {
           <IconButton
             variant="transparent"
             className="h-fit"
-            onClick={() => setShowSuccess(false)}
+            onClick={() => setDismissedOrderId(state.order?.id ?? null)}
           >
             <XCircleSolid className="h-4 w-4 text-neutral-500" />
           </IconButton>

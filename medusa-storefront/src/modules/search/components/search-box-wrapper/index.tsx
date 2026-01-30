@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, RefObject, useEffect, useRef } from 'react';
 import { useSearchBox, UseSearchBoxProps } from 'react-instantsearch';
 
 export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
-  inputRef: RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement | null>;
   onChange(_event: ChangeEvent): void;
   onReset(_event: FormEvent): void;
   onSubmit?(_event: FormEvent): void;
@@ -17,7 +17,7 @@ export type ControlledSearchBoxProps = React.ComponentProps<'div'> & {
 type SearchBoxProps = {
   children: (_state: {
     value: string;
-    inputRef: RefObject<HTMLInputElement>;
+    inputRef: RefObject<HTMLInputElement | null>;
     onChange: (_event: ChangeEvent<HTMLInputElement>) => void;
     onReset: () => void;
     placeholder: string;
@@ -76,6 +76,7 @@ const SearchBoxWrapper = ({
     placeholder,
   };
 
+  // eslint-disable-next-line react-hooks/refs -- Intentionally passing ref to render prop child
   return children(state) as React.ReactElement;
 };
 

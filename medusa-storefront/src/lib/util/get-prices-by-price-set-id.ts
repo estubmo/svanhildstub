@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalculatedPriceSetDTO, IPricingModuleService } from '@medusajs/types';
 
 type Props = {

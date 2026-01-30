@@ -16,8 +16,8 @@ const hoverVariants = {
     opacity: 0,
     transition: {
       duration: 0.3,
-      type: 'tween',
-      ease: 'easeIn',
+      type: 'tween' as const,
+      ease: 'easeIn' as const,
     },
   },
   hover: {
@@ -25,8 +25,8 @@ const hoverVariants = {
     opacity: 1,
     transition: {
       duration: 0.3,
-      type: 'tween',
-      ease: 'easeOut',
+      type: 'tween' as const,
+      ease: 'easeOut' as const,
     },
   },
 };
@@ -50,7 +50,7 @@ const NavBarLink = ({ route, active }: NavBarLinkProps) => {
           </motion.div>
           <motion.div
             className={clx(
-              'absolute -bottom-[2px] h-[2px] rounded-xl bg-ui-bg-base will-change-transform',
+              'absolute -bottom-[2px] h-[2px] rounded-xl bg-gray-50 will-change-transform',
             )}
             variants={!active ? hoverVariants : undefined}
           />
@@ -61,7 +61,7 @@ const NavBarLink = ({ route, active }: NavBarLinkProps) => {
               variants={activePathVariants}
               initial="initial"
               className={clx(
-                'absolute -bottom-[2px] h-[2px] rounded-xl bg-ui-bg-base',
+                'absolute -bottom-[2px] h-[2px] rounded-xl bg-gray-50',
               )}
               style={{
                 width: '96%',

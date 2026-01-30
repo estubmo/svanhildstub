@@ -3,7 +3,7 @@ import 'server-only';
 import { cookies as nextCookies } from 'next/headers';
 
 export const getAuthHeaders = async (): Promise<
-  { authorization: string } | {}
+  { authorization: string } | Record<string, never>
 > => {
   const cookies = await nextCookies();
   const token = cookies.get('_medusa_jwt')?.value;
@@ -32,7 +32,7 @@ export const getCacheTag = async (tag: string): Promise<string> => {
 
 export const getCacheOptions = async (
   tag: string,
-): Promise<{ tags: Array<string> } | {}> => {
+): Promise<{ tags: Array<string> } | Record<string, never>> => {
   if (typeof window !== 'undefined') {
     return {};
   }

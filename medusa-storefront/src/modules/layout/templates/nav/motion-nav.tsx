@@ -13,9 +13,11 @@ export function MotionNav({ children }: { children?: JSX.Element }) {
   const currentPath = usePathname().split(`/${countryCode}`)[1];
 
   function update() {
-    if (scrollY.get() < scrollY.getPrevious()) {
+    const currentY = scrollY.get();
+    const previousY = scrollY.getPrevious() ?? 0;
+    if (currentY < previousY) {
       setHidden(false);
-    } else if (scrollY.get() > 100 && scrollY.get() > scrollY.getPrevious()) {
+    } else if (currentY > 100 && currentY > previousY) {
       setHidden(true);
     }
   }

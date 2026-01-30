@@ -18,9 +18,7 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "types": [
-      "cypress"
-    ],
+    "types": [],
     "baseUrl": "./src",
     "paths": {
       "@lib/*": [

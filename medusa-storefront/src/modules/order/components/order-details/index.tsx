@@ -7,11 +7,11 @@ type OrderDetailsProps = {
 };
 
 const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const formatStatus = (str: string) => {
-    const formatted = str.split('_').join(' ');
-
-    return formatted.slice(0, 1).toUpperCase() + formatted.slice(1);
-  };
+  // TODO: Uncomment when status display is implemented
+  // const formatStatus = (str: string) => {
+  //   const formatted = str.split('_').join(' ');
+  //   return formatted.slice(0, 1).toUpperCase() + formatted.slice(1);
+  // };
 
   return (
     <div>

@@ -16,9 +16,9 @@ export default async function ProductRail({
   } = await listProducts({
     regionId: region.id,
     queryParams: {
-      collection_id: collection.id,
+      collection_id: [collection.id],
       fields: '*variants.calculated_price',
-    },
+    } as HttpTypes.FindParams & HttpTypes.StoreProductParams & { collection_id: Array<string> },
   });
 
   if (!pricedProducts) {

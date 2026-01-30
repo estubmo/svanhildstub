@@ -20,12 +20,12 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
     _currentState: Record<string, unknown>,
     formData: FormData,
   ) => {
-    const customer = {
+    const _customerData = {
       email: formData.get('email') as string,
     };
 
     try {
-      // await updateCustomer(customer)
+      // await updateCustomer(_customerData)
       return { success: true, error: null };
     } catch (error: any) {
       return { success: false, error: error.toString() };

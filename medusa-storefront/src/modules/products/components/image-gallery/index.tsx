@@ -1,7 +1,6 @@
 'use client';
 
 import { HttpTypes } from '@medusajs/types';
-import { Container } from '@medusajs/ui';
 import { imageLoader } from 'loader';
 import Image from 'next/image';
 import Zoom from 'react-medium-image-zoom';

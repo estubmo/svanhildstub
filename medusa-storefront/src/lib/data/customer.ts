@@ -54,7 +54,7 @@ export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
     .catch(medusaError);
 
   const cacheTag = await getCacheTag('customers');
-  revalidateTag(cacheTag);
+  revalidateTag(cacheTag, 'seconds');
 
   return updateRes;
 };
@@ -94,7 +94,7 @@ export async function signup(_currentState: unknown, formData: FormData) {
     await setAuthToken(loginToken as string);
 
     const customerCacheTag = await getCacheTag('customers');
-    revalidateTag(customerCacheTag);
+    revalidateTag(customerCacheTag, 'seconds');
 
     await transferCart();
 
@@ -114,7 +114,7 @@ export async function login(_currentState: unknown, formData: FormData) {
       .then(async (token) => {
         await setAuthToken(token as string);
         const customerCacheTag = await getCacheTag('customers');
-        revalidateTag(customerCacheTag);
+        revalidateTag(customerCacheTag, 'seconds');
       });
   } catch (error: any) {
     return error.toString();
@@ -132,7 +132,7 @@ export async function signout(countryCode: string) {
   removeAuthToken();
 
   const customerCacheTag = await getCacheTag('customers');
-  revalidateTag(customerCacheTag);
+  revalidateTag(customerCacheTag, 'seconds');
 
   redirect(`/${countryCode}/account`);
 }
@@ -149,7 +149,7 @@ export async function transferCart() {
   await sdk.store.cart.transferCart(cartId, {}, headers);
 
   const cartCacheTag = await getCacheTag('carts');
-  revalidateTag(cartCacheTag);
+  revalidateTag(cartCacheTag, 'seconds');
 }
 
 export const addCustomerAddress = async (
@@ -181,9 +181,9 @@ export const addCustomerAddress = async (
 
   return sdk.store.customer
     .createAddress(address, {}, headers)
-    .then(async ({ customer }) => {
+    .then(async () => {
       const customerCacheTag = await getCacheTag('customers');
-      revalidateTag(customerCacheTag);
+      revalidateTag(customerCacheTag, 'seconds');
       return { success: true, error: null };
     })
     .catch((err) => {
@@ -202,7 +202,7 @@ export const deleteCustomerAddress = async (
     .deleteAddress(addressId, headers)
     .then(async () => {
       const customerCacheTag = await getCacheTag('customers');
-      revalidateTag(customerCacheTag);
+      revalidateTag(customerCacheTag, 'seconds');
       return { success: true, error: null };
     })
     .catch((err) => {
@@ -247,7 +247,7 @@ export const updateCustomerAddress = async (
     .updateAddress(addressId, address, {}, headers)
     .then(async () => {
       const customerCacheTag = await getCacheTag('customers');
-      revalidateTag(customerCacheTag);
+      revalidateTag(customerCacheTag, 'seconds');
       return { success: true, error: null };
     })
     .catch((err) => {

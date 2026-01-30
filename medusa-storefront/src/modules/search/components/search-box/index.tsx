@@ -22,7 +22,7 @@ const ControlledSearchBox = ({
 
     if (onSubmit) {
       onSubmit(event);
-      close && close();
+      if (close) close();
     }
 
     if (inputRef.current) {

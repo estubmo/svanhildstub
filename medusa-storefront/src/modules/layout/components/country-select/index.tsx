@@ -6,7 +6,7 @@ import { HttpTypes } from '@medusajs/types';
 import { clx } from '@medusajs/ui';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useParams, usePathname } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import ReactCountryFlag from 'react-country-flag';
 
 type CountryOption = {
@@ -20,30 +20,27 @@ type CountrySelectProps = {
 };
 
 const CountrySelect = ({ regions }: CountrySelectProps) => {
-  const [current, setCurrent] = useState<CountryOption | undefined>(undefined);
   const [isCountrySelectOpen, setIsCountrySelectOpen] = useState(false);
 
   const { countryCode } = useParams();
   const currentPath = usePathname().split(`/${countryCode}`)[1];
 
-  const options: Array<CountryOption> | undefined = useMemo(() => {
+  const options: Array<CountryOption> = useMemo(() => {
     return regions
-      ?.map((r) => {
-        return r.countries?.map((c) => ({
-          country: c.iso_2,
+      ?.flatMap((r) =>
+        r.countries?.map((c) => ({
+          country: c.iso_2 ?? '',
           region: r.id,
-          label: c.display_name,
-        }));
-      })
-      .flat()
-      .sort((a, b) => (a?.label ?? '').localeCompare(b?.label ?? ''));
+          label: c.display_name ?? '',
+        })) ?? []
+      )
+      .filter((o): o is CountryOption => o.country !== '' && o.label !== '')
+      .sort((a, b) => a.label.localeCompare(b.label)) ?? [];
   }, [regions]);
 
-  useEffect(() => {
-    if (countryCode) {
-      const option = options?.find((o) => o.country === countryCode);
-      setCurrent(option);
-    }
+  const current = useMemo(() => {
+    if (!countryCode) return undefined;
+    return options.find((o) => o.country === countryCode);
   }, [options, countryCode]);
 
   const handleChange = (option: CountryOption) => {
