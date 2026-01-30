@@ -3,6 +3,7 @@ import LocalizedClientLink from '@modules/common/components/localized-client-lin
 import RefinementList from '@modules/store/components/refinement-list';
 import { SortOptions } from '@modules/store/components/refinement-list/sort-products';
 import PaginatedProducts from '@modules/store/templates/paginated-products';
+import { Suspense } from 'react';
 
 type SearchResultsTemplateProps = {
   query: string;
@@ -40,7 +41,9 @@ const SearchResultsTemplate = ({
       <div className="flex flex-grow flex-col p-6 small:flex-row small:items-start">
         {ids.length > 0 ? (
           <>
-            <RefinementList sortBy={sortBy || 'created_at'} search />
+            <Suspense fallback={<div className="mb-8 flex gap-12 py-4 pl-6 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:px-0" />}>
+              <RefinementList sortBy={sortBy || 'created_at'} search />
+            </Suspense>
             <div className="content-container">
               <PaginatedProducts
                 productsIds={ids}

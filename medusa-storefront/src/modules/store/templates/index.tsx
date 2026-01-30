@@ -22,7 +22,9 @@ const StoreTemplate = ({
       className="content-container flex flex-col py-6 small:flex-row small:items-start"
       data-testid="category-container"
     >
-      <RefinementList sortBy={sort} />
+      <Suspense fallback={<div className="mb-8 flex gap-12 py-4 pl-6 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:px-0" />}>
+        <RefinementList sortBy={sort} />
+      </Suspense>
       <div className="w-full">
         <div className="text-2xl-semi mb-8">
           <h1 data-testid="store-page-title">All products</h1>

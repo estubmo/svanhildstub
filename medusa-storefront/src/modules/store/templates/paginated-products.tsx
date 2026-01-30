@@ -4,6 +4,7 @@ import { getRegion } from '@lib/data/regions';
 import ProductPreview from '@modules/products/components/product-preview';
 import { Pagination } from '@modules/store/components/pagination';
 import { SortOptions } from '@modules/store/components/refinement-list/sort-products';
+import { Suspense } from 'react';
 
 type PaginatedProductsParams = {
   limit: number;
@@ -80,11 +81,13 @@ export default async function PaginatedProducts({
         })}
       </ul>
       {totalPages > 1 && (
-        <Pagination
-          data-testid="product-pagination"
-          page={page}
-          totalPages={totalPages}
-        />
+        <Suspense fallback={<div className="mt-12 flex w-full justify-center" />}>
+          <Pagination
+            data-testid="product-pagination"
+            page={page}
+            totalPages={totalPages}
+          />
+        </Suspense>
       )}
     </>
   );

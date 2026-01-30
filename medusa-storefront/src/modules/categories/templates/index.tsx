@@ -40,7 +40,9 @@ export default function CategoryTemplate({
       className="content-container flex flex-col py-6 small:flex-row small:items-start"
       data-testid="category-container"
     >
-      <RefinementList sortBy={sort} data-testid="sort-by-container" />
+      <Suspense fallback={<div className="mb-8 flex gap-12 py-4 pl-6 small:ml-[1.675rem] small:min-w-[250px] small:flex-col small:px-0" />}>
+        <RefinementList sortBy={sort} data-testid="sort-by-container" />
+      </Suspense>
       <div className="w-full">
         <div className="text-2xl-semi mb-8 flex flex-row gap-4">
           {parents &&
